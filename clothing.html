@@ -7,9 +7,9 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
 }
 
 header {
@@ -23,43 +23,46 @@ header {
   padding: 15px;
 }
 
-.card {
+.product-card {
   background: #fff;
   border-radius: 10px;
   padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Image slider */
-.slider {
+/* IMAGE SLIDER */
+.image-slider {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 10px;
 }
 
-.slider img {
+.image-slider img {
   width: 100%;
   border-radius: 10px;
   scroll-snap-align: center;
   flex-shrink: 0;
 }
 
-/* Product info */
-h2 {
-  margin: 12px 0 5px;
+/* PRODUCT INFO */
+.product-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 12px;
 }
 
 .price {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
+  margin: 8px 0;
 }
 
 .sizes {
   margin: 10px 0;
 }
 
-.size-box {
+.size {
   display: inline-block;
   border: 1px solid #000;
   padding: 6px 10px;
@@ -68,17 +71,17 @@ h2 {
   font-size: 14px;
 }
 
-/* Order button */
+/* ORDER BUTTON */
 .order-btn {
   display: block;
-  margin-top: 15px;
   background: #000;
   color: #fff;
   text-align: center;
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
   text-decoration: none;
   font-size: 16px;
+  margin-top: 15px;
 }
 
 .description {
@@ -88,12 +91,12 @@ h2 {
 }
 
 footer {
-  margin-top: 20px;
   background: #000;
   color: #fff;
   text-align: center;
   padding: 10px;
   font-size: 13px;
+  margin-top: 20px;
 }
 </style>
 </head>
@@ -107,34 +110,32 @@ footer {
 
 <div class="container">
 
-  <div class="card" id="brown-shirt">
+  <div class="product-card" id="brown-shirt">
 
-    <!-- IMAGE SLIDER -->
-    <div class="slider">
-      <img src="shirt1.jpg" alt="Brown Cotton Shirt Front">
-      <img src="shirt2.jpg" alt="Brown Cotton Shirt Back">
+    <!-- BOTH IMAGES + SWIPE -->
+    <div class="image-slider">
+      <img src="shirt1.jpg" alt="Brown Cotton Shirt - Front View">
+      <img src="shirt2.jpg" alt="Brown Cotton Shirt - Back View">
     </div>
 
-    <!-- PRODUCT DETAILS -->
-    <h2>Brown Cotton Shirt</h2>
+    <div class="product-title">Brown Cotton Shirt</div>
     <div class="price">₹2,199</div>
 
     <div class="sizes">
-      <strong>Available Sizes:</strong><br>
-      <span class="size-box">XS</span>
-      <span class="size-box">S</span>
-      <span class="size-box">M</span>
-      <span class="size-box">L</span>
+      <strong>Sizes:</strong><br>
+      <span class="size">XS</span>
+      <span class="size">S</span>
+      <span class="size">M</span>
+      <span class="size">L</span>
     </div>
 
-    <!-- ORDER BUTTON -->
+    <!-- ORDER → OPENS YOUR INSTAGRAM PROFILE DIRECTLY -->
     <a class="order-btn"
        href="https://www.instagram.com/oneloveonelifestyle/"
        target="_blank">
        Order via Instagram
     </a>
 
-    <!-- DESCRIPTION -->
     <div class="description">
       <p><strong>Description:</strong><br>
       ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day. Designed in a relaxed silhouette with a spread collar, full-length sleeves and a classic button-up front.</p>
