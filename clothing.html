@@ -6,8 +6,8 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
+      font-family: Arial, sans-serif;
       background: #f1f3f6;
     }
 
@@ -25,7 +25,7 @@
     .products {
       padding: 15px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 15px;
     }
 
@@ -33,35 +33,41 @@
       background: #fff;
       border-radius: 8px;
       padding: 10px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .product img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 6px;
     }
 
     .product h3 {
       font-size: 14px;
-      margin: 8px 0 5px;
+      margin: 8px 0 4px;
+    }
+
+    .details {
+      font-size: 13px;
+      color: #555;
     }
 
     .price {
       font-weight: bold;
       font-size: 16px;
+      margin-top: 5px;
     }
 
     .order {
       display: block;
       text-align: center;
+      margin-top: 8px;
+      padding: 8px;
       background: #000;
       color: #fff;
-      padding: 8px;
       text-decoration: none;
       border-radius: 5px;
-      margin-top: 8px;
       font-size: 14px;
     }
   </style>
@@ -70,25 +76,32 @@
 <body>
 
 <header>
-  <img src="logo.jpg" class="logo">
+  <img src="logo.jpg" alt="One Love One Lifestyle" class="logo">
   <h2>Clothing Collection</h2>
 </header>
 
 <div class="products">
 
-  <div class="product" id="shirt1">
-    <img src="shirt1.jpg">
+  <!-- PRODUCT 1 -->
+  <div class="product" id="mens-printed-tshirt">
+    <img src="shirt1.jpg" alt="Men Printed T-Shirt">
     <h3>Men Printed T-Shirt</h3>
+    <div class="details">Premium cotton • Regular fit</div>
     <div class="price">₹499</div>
 
     <a class="order"
-      href="https://ig.me/m/oneloveonelifestyle?text=Hello%20One%20Love%20One%20Lifestyle,%0AI%20would%20like%20to%20order:%0A%0AProduct:%20Men%20Printed%20T-Shirt%0ACategory:%20Clothing%0APrice:%20₹499%0A%0AProduct%20Link:%20https://yourusername.github.io/clothing.html#shirt1%0AImage:%20https://yourusername.github.io/shirt1.jpg"
+      href="https://ig.me/m/oneloveonelifestyle?text=Hello%20One%20Love%20One%20Lifestyle,%0AI%20want%20to%20order%20this%20product:%0Ahttps://YOURUSERNAME.github.io/clothing.html#mens-printed-tshirt"
       target="_blank">
       Order via Instagram
     </a>
   </div>
 
-</div>
+  <!-- PRODUCT 2 -->
+  <div class="product" id="oversized-hoodie">
+    <img src="hoodie1.jpg" alt="Oversized Hoodie">
+    <h3>Oversized Hoodie</h3>
+    <div class="details">Winter wear • Soft fleece</div>
+    <div class="price">₹999</div>
 
-</body>
-</html>
+    <a class="order"
+      href="https://ig.me/m
