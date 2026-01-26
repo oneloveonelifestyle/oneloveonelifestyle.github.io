@@ -1,134 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Clothing | One Love One Lifestyle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Clothing | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f3f6;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
 
-    header {
-      background: #000;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-    }
+header {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
 
-    .logo {
-      height: 50px;
-    }
+.product-card {
+  background: #fff;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
 
-    .products {
-      padding: 15px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 15px;
-    }
+.slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
 
-    .product {
-      background: #fff;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
+.slider img {
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
 
-    .product img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
+.details {
+  padding: 15px;
+}
 
-    .product h3 {
-      font-size: 18px;
-      margin: 10px 0 5px;
-    }
+.details h2 {
+  margin: 0 0 10px;
+}
 
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
 
-    .sizes {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
+.details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
 
-    .description {
-      font-size: 14px;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    .order {
-      display: block;
-      text-align: center;
-      margin-top: 15px;
-      padding: 12px;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-  </style>
+.order-btn {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <img src="logo.jpg" alt="One Love One Lifestyle" class="logo">
-  <h2>Clothing Collection</h2>
+  <h1>Clothing</h1>
+  <p>Swipe images to view more</p>
 </header>
 
-<div class="products">
+<!-- PRODUCT CARD -->
+<div class="product-card" id="brown-shirt">
 
-  <!-- MAIN PRODUCT -->
-  <div class="product" id="brown-shirt">
-    <img src="shirt1.jpg" alt="Brown Cotton Shirt">
-
-    <h3>Shirt</h3>
-    <div class="price">₹2199</div>
-    <div class="sizes"><strong>Sizes:</strong> XS, S, M, L</div>
-
-    <div class="description">
-      <p><strong>Description:</strong> Shirt</p>
-
-      <p><strong>Dimensions:</strong> 36cm</p>
-
-      <p>
-        ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.
-      </p>
-
-      <p><strong>Net Quantity:</strong> 1N</p>
-      <p><strong>Fit:</strong> Relaxed Fit</p>
-      <p><strong>Care Instruction:</strong> Machine Wash</p>
-      <p><strong>Fabric Composition:</strong> 100% Cotton</p>
-      <p><strong>Model Fit:</strong> Model is 6ft 1 inch and wearing a size M</p>
-
-      <p><strong>Manufactured and Marketed By:</strong><br>
-        Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai 400001
-      </p>
-
-      <p><strong>Country Of Origin:</strong> India</p>
-    </div>
-
-    <a class="order"
-      href="https://ig.me/m/oneloveonelifestyle?text=Hello%20One%20Love%20One%20Lifestyle,%0AI%20want%20to%20order%20this%20product:%0Ahttps://YOURUSERNAME.github.io/clothing.html#brown-shirt"
-      target="_blank">
-      Order via Instagram
-    </a>
+  <!-- IMAGE SLIDER -->
+  <div class="slider">
+    <img src="shirt1-1.jpg" alt="Brown Shirt Front">
+    <img src="shirt1-2.jpg" alt="Brown Shirt Back">
   </div>
 
-  <!-- DUMMY PLACEHOLDERS FOR FUTURE -->
-  <div class="product">
-    <h3>More Products Coming Soon</h3>
-    <p>This section will be updated.</p>
+  <!-- PRODUCT DETAILS -->
+  <div class="details">
+    <h2>Brown Cotton Shirt</h2>
+
+    <div class="price">₹2,199</div>
+
+    <p><strong>Sizes:</strong> XS, S, M, L</p>
+    <p><strong>Fit:</strong> Relaxed Fit</p>
+    <p><strong>Fabric:</strong> 100% Cotton</p>
+    <p><strong>Care:</strong> Machine Wash</p>
+    <p><strong>Net Quantity:</strong> 1N</p>
+    <p><strong>Country of Origin:</strong> India</p>
+
+    <p>
+      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich
+      fabric for a soft, natural feel throughout the day. Designed in a relaxed
+      silhouette with spread collar, full-length sleeves and button-up front.
+    </p>
+
+    <!-- ORDER BUTTON -->
+    <a class="order-btn"
+       href="https://www.instagram.com/direct/new/?text=I%20want%20to%20order%20this%20product:%20https://YOURUSERNAME.github.io/clothing.html#brown-shirt"
+       target="_blank">
+       Order via Instagram
+    </a>
   </div>
 
 </div>
