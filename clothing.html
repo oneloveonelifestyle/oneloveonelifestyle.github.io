@@ -18,6 +18,10 @@
       text-align: center;
     }
 
+    .logo {
+      height: 50px;
+    }
+
     .products {
       padding: 15px;
       display: grid;
@@ -45,9 +49,8 @@
     }
 
     .price {
-      font-size: 16px;
       font-weight: bold;
-      color: #000;
+      font-size: 16px;
     }
 
     .order {
@@ -55,19 +58,11 @@
       text-align: center;
       background: #000;
       color: #fff;
-      text-decoration: none;
       padding: 8px;
-      margin-top: 8px;
+      text-decoration: none;
       border-radius: 5px;
+      margin-top: 8px;
       font-size: 14px;
-    }
-
-    footer {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      font-size: 13px;
     }
   </style>
 </head>
@@ -75,46 +70,25 @@
 <body>
 
 <header>
+  <img src="logo.jpg" class="logo">
   <h2>Clothing Collection</h2>
-  <p>One Love One Lifestyle</p>
 </header>
 
 <div class="products">
 
-  <div class="product">
+  <div class="product" id="shirt1">
     <img src="shirt1.jpg">
     <h3>Men Printed T-Shirt</h3>
     <div class="price">₹499</div>
-    <a class="order" href="https://instagram.com/" target="_blank">Order via Instagram</a>
-  </div>
 
-  <div class="product">
-    <img src="shirt2.jpg">
-    <h3>Oversized Hoodie</h3>
-    <div class="price">₹999</div>
-    <a class="order" href="https://instagram.com/" target="_blank">Order via Instagram</a>
-  </div>
-
-  <div class="product">
-    <img src="shirt3.jpg">
-    <h3>Women Kurti</h3>
-    <div class="price">₹799</div>
-    <a class="order" href="https://instagram.com/" target="_blank">Order via Instagram</a>
-  </div>
-
-  <div class="product">
-    <img src="shirt4.jpg">
-    <h3>Denim Jeans</h3>
-    <div class="price">₹1,199</div>
-    <a class="order" href="https://instagram.com/" target="_blank">Order via Instagram</a>
+    <a class="order"
+      href="https://ig.me/m/oneloveonelifestyle?text=Hello%20One%20Love%20One%20Lifestyle,%0AI%20would%20like%20to%20order:%0A%0AProduct:%20Men%20Printed%20T-Shirt%0ACategory:%20Clothing%0APrice:%20₹499%0A%0AProduct%20Link:%20https://yourusername.github.io/clothing.html#shirt1%0AImage:%20https://yourusername.github.io/shirt1.jpg"
+      target="_blank">
+      Order via Instagram
+    </a>
   </div>
 
 </div>
-
-<footer>
-  <p>Delivery across India – FREE</p>
-  <p>No Cash on Delivery</p>
-</footer>
 
 </body>
 </html>
