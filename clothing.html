@@ -12,20 +12,18 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
   text-align: center;
-  padding: 15px 10px;
+  padding: 15px;
 }
 
 header img {
   height: 50px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
-/* PRODUCT CARD */
 .product-card {
   background: #fff;
   margin: 15px;
@@ -34,7 +32,6 @@ header img {
   overflow: hidden;
 }
 
-/* IMAGE SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -43,18 +40,16 @@ header img {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
   scroll-snap-align: center;
+  flex-shrink: 0;
 }
 
-/* DETAILS */
 .details {
   padding: 15px;
 }
 
 .details h2 {
   margin: 0 0 10px;
-  font-size: 20px;
 }
 
 .price {
@@ -66,26 +61,18 @@ header img {
 .details p {
   margin: 6px 0;
   font-size: 14px;
-  color: #333;
 }
 
-/* ORDER BUTTON */
 .order-btn {
   display: block;
-  margin-top: 15px;
-  text-align: center;
   background: #000;
   color: #fff;
+  text-align: center;
   padding: 14px;
+  margin-top: 15px;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-}
-
-.order-note {
-  font-size: 13px;
-  color: #555;
-  margin-top: 8px;
 }
 </style>
 </head>
@@ -93,59 +80,41 @@ header img {
 <body>
 
 <header>
-  <img src="logo.jpg" alt="One Love One Lifestyle Logo">
+  <img src="logo.jpg" alt="One Love One Lifestyle">
   <h1>Clothing</h1>
-  <p>Swipe to view product images</p>
+  <p>Swipe images to view</p>
 </header>
 
-<!-- PRODUCT CARD -->
 <div class="product-card" id="brown-shirt">
 
-  <!-- IMAGE SLIDER -->
   <div class="slider">
     <img src="shirt1-1.jpg" alt="Brown Shirt Front">
     <img src="shirt1-2.jpg" alt="Brown Shirt Back">
   </div>
 
-  <!-- PRODUCT DETAILS -->
   <div class="details">
     <h2>Brown Cotton Shirt</h2>
-
     <div class="price">₹2,199</div>
 
-    <p><strong>Sizes Available:</strong> XS, S, M, L</p>
-    <p><strong>Fit:</strong> Relaxed Fit</p>
-    <p><strong>Fabric:</strong> 100% Cotton</p>
-    <p><strong>Care Instruction:</strong> Machine Wash</p>
-    <p><strong>Net Quantity:</strong> 1N</p>
-    <p><strong>Country of Origin:</strong> India</p>
+    <p><b>Sizes:</b> XS, S, M, L</p>
+    <p><b>Fit:</b> Relaxed Fit</p>
+    <p><b>Fabric:</b> 100% Cotton</p>
+    <p><b>Care:</b> Machine Wash</p>
+    <p><b>Country:</b> India</p>
 
     <p>
-      ETA redefines everyday comfort with this brown shirt, crafted from
-      cotton-rich fabric for a soft, natural feel throughout the day.
-      Designed in a relaxed silhouette with a spread collar, full-length
-      sleeves and a classic button-up front.
+      ETA redefines everyday comfort with this brown shirt,
+      crafted from cotton-rich fabric with a relaxed silhouette.
     </p>
 
-    <p>
-      <strong>Manufactured & Marketed By:</strong><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street,<br>
-      Fort, Mumbai – 400001
-    </p>
-
-    <!-- ORDER BUTTON -->
+    <!-- THIS IS THE IMPORTANT PART -->
     <a class="order-btn"
        href="https://www.instagram.com/oneloveonelifestyle/"
        target="_blank">
        Order via Instagram
     </a>
 
-    <div class="order-note">
-      Please message us with:<br>
-      <b>Brown Cotton Shirt – ₹2,199</b>
-    </div>
   </div>
-
 </div>
 
 </body>
