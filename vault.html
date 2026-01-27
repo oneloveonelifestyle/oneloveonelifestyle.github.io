@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vault | One Love One Lifestyle</title>
+<title>My Vault</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER – PURE BLACK */
 header {
   background: #000;
   color: #fff;
@@ -20,23 +19,14 @@ header {
   text-align: center;
 }
 
-/* GRID – ONE CARD PER ROW */
-.products-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  padding: 15px;
-}
-
-/* CARD */
 .product-card {
   background: #fff;
+  margin: 15px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* IMAGE SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -44,17 +34,10 @@ header {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
-}
-
-.details h2 {
-  font-size: 18px;
-  margin: 0 0 6px;
 }
 
 .price {
@@ -62,29 +45,28 @@ header {
   font-weight: bold;
 }
 
-.short {
-  font-size: 13px;
-  color: #555;
-}
-
-/* DESCRIPTION */
-.full-description {
-  font-size: 14px;
-  margin-top: 10px;
-  line-height: 1.6;
-}
-
-/* ORDER BUTTON – SAME BLACK AS MAIN SITE */
 .order-btn {
   display: block;
   margin-top: 12px;
-  background: #000;          /* FORCE BLACK */
+  background: #000;
   color: #fff;
   text-align: center;
   padding: 14px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+}
+
+.remove-btn {
+  display: block;
+  margin-top: 10px;
+  background: #b71c1c;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -95,58 +77,32 @@ header {
   <h2>My Vault</h2>
 </header>
 
-<div class="products-grid" id="vaultProducts"></div>
+<div id="vaultProducts"></div>
 
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
-const vault = JSON.parse(localStorage.getItem("vault")) || [];
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* SAME PRODUCT DATA AS MAIN PAGE */
 const PRODUCTS = {
   "shirt-1": {
     title: "Nuon Brown Cotton Shirt",
     price: "₹2,199",
-    short: "Relaxed Fit",
-    images: ["shirt1-1.jpg", "shirt1-2.jpg"],
-    description: `
-      <b>Size:</b> XS, S, M, L, XL<br><br>
-      <b>Fit:</b> Relaxed Fit<br>
-      <b>Care:</b> Machine Wash<br>
-      <b>Fabric:</b> 100% Cotton<br><br>
-      <b>Manufactured & Marketed By:</b><br>
-      Trent Limited, Mumbai – 400001<br><br>
-      <b>Country of Origin:</b> India
-    `
+    images: ["shirt1-1.jpg","shirt1-2.jpg"]
   },
   "shirt-2": {
     title: "Nuon Brown Text Design Jacket",
     price: "₹2,199",
-    short: "Relaxed Fit",
-    images: ["shirt1-3.jpg", "shirt1-4.jpg", "shirt1-5.jpg"],
-    description: `
-      <b>Size:</b> XS, S, M, L, XL<br><br>
-      <b>Fit:</b> Relaxed Fit<br>
-      <b>Care:</b> Machine Wash<br>
-      <b>Fabric:</b> 100% Cotton
-    `
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"]
   },
   "jacket-1": {
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
-    short: "Regular Fit",
-    images: ["jacket1-1.jpg", "jacket1-2.jpg", "jacket1-3.jpg"],
-    description: `
-      <b>Size:</b> S, M, L, XL<br><br>
-      <b>Fit:</b> Regular Fit<br>
-      <b>Care:</b> Machine Wash
-    `
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"]
   }
 };
 
-/* RENDER VAULT */
 if (vault.length === 0) {
-  vaultProducts.innerHTML =
-    "<p style='text-align:center;color:#555;'>Your vault is empty.</p>";
+  vaultProducts.innerHTML = "<p style='text-align:center'>Your vault is empty.</p>";
 }
 
 vault.forEach(id => {
@@ -160,21 +116,27 @@ vault.forEach(id => {
     <div class="slider">
       ${p.images.map(img => `<img src="${img}">`).join("")}
     </div>
-
     <div class="details">
-      <h2>${p.title}</h2>
+      <h3>${p.title}</h3>
       <div class="price">${p.price}</div>
-      <div class="short">${p.short}</div>
 
-      <div class="full-description">${p.description}</div>
-
-      <a class="order-btn"
-         href="https://www.instagram.com/oneloveonelifestyle/"
-         target="_blank">
-         Order via Instagram
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
       </a>
+
+      <button class="remove-btn">✕ Remove from Vault</button>
     </div>
   `;
+
+  card.querySelector(".remove-btn").addEventListener("click", () => {
+    vault = vault.filter(v => v !== id);
+    localStorage.setItem("vault", JSON.stringify(vault));
+    card.remove();
+
+    if (vault.length === 0) {
+      vaultProducts.innerHTML = "<p style='text-align:center'>Your vault is empty.</p>";
+    }
+  });
 
   vaultProducts.appendChild(card);
 });
