@@ -19,16 +19,17 @@ header {
   text-align: center;
 }
 
-/* SEARCH */
-.search-bar {
-  padding: 12px;
+/* SEARCH BAR */
+.search-container {
   background: #fff;
+  padding: 12px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.search-bar input {
+.search-container input {
   width: 100%;
   padding: 12px;
   font-size: 15px;
@@ -36,8 +37,8 @@ header {
   border: 1px solid #ccc;
 }
 
-/* EXPANDED PRODUCT VIEW */
-#productView {
+/* BIG PRODUCT VIEW */
+#bigView {
   display: none;
   background: #fff;
   margin: 15px;
@@ -45,29 +46,27 @@ header {
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-#productView .slider {
+#bigView .slider {
   display: flex;
   overflow-x: auto;
 }
 
-#productView img {
+#bigView img {
   width: 100%;
   flex-shrink: 0;
 }
 
-.view-details {
+.big-details {
   padding: 15px;
 }
 
 .close-btn {
   text-align: right;
-  font-size: 14px;
-  cursor: pointer;
-  color: #000;
   font-weight: bold;
+  cursor: pointer;
 }
 
-/* GRID */
+/* PRODUCTS GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -77,9 +76,9 @@ header {
 
 .product-card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
 }
 
@@ -87,13 +86,8 @@ header {
   width: 100%;
 }
 
-.card-info {
-  padding: 10px;
-}
-
-.card-info h3 {
-  font-size: 15px;
-  margin: 5px 0;
+.details {
+  padding: 12px;
 }
 
 .price {
@@ -102,11 +96,11 @@ header {
 
 .order-btn {
   display: block;
+  margin-top: 12px;
   background: #000;
   color: #fff;
   text-align: center;
   padding: 12px;
-  margin-top: 10px;
   border-radius: 8px;
   text-decoration: none;
 }
@@ -125,44 +119,58 @@ header {
   <h2>Clothing</h2>
 </header>
 
-<div class="search-bar">
+<div class="search-container">
   <input type="text" placeholder="Search products…">
 </div>
 
-<!-- EXPANDED PRODUCT -->
-<div id="productView">
-  <div class="close-btn" onclick="closeView()">✖ Close</div>
-  <div class="slider" id="viewImages"></div>
-  <div class="view-details" id="viewDetails"></div>
+<!-- BIG PRODUCT DISPLAY -->
+<div id="bigView">
+  <div class="close-btn" onclick="closeBig()">✖ Close</div>
+  <div class="slider" id="bigImages"></div>
+  <div class="big-details" id="bigDetails"></div>
 </div>
 
-<!-- PRODUCT GRID -->
+<!-- PRODUCTS -->
 <div class="products-grid">
 
   <!-- PRODUCT 1 -->
-  <div class="product-card" onclick="openProduct(
+  <div class="product-card" onclick="openBig(
     'Brown Cotton Shirt',
     '₹2,199',
     ['shirt1-1.jpg','shirt1-2.jpg','shirt1-3.jpg'],
-    'Sizes: XS, S, M, L<br>Fit: Relaxed Fit<br>Fabric: 100% Cotton<br><br>ETA redefines everyday comfort with this brown cotton shirt.'
+    'Sizes: XS, S, M, L<br>Fit: Relaxed Fit<br>Fabric: 100% Cotton'
   )">
     <img src="shirt1-1.jpg">
-    <div class="card-info">
-      <h3>Brown Cotton Shirt</h3>
+    <div class="details">
+      <h4>Brown Cotton Shirt</h4>
       <div class="price">₹2,199</div>
     </div>
   </div>
 
   <!-- PRODUCT 2 -->
-  <div class="product-card" onclick="openProduct(
+  <div class="product-card" onclick="openBig(
+    'Brown Cotton Shirt – Style View',
+    '₹2,199',
+    ['shirt1-4.jpg','shirt1-5.jpg','shirt1-6.jpg'],
+    'Sizes: XS, S, M, L<br>Comfort wear • Daily use'
+  )">
+    <img src="shirt1-4.jpg">
+    <div class="details">
+      <h4>Brown Cotton Shirt</h4>
+      <div class="price">₹2,199</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT 3 -->
+  <div class="product-card" onclick="openBig(
     'Campus Sutra Bomber Jacket',
     '₹1,999',
     ['jacket1-1.jpg','jacket1-2.jpg','jacket1-3.jpg'],
-    'Sizes: S, M, L, XL<br>Fit: Regular Fit<br><br>Stylish zip-front bomber jacket.'
+    'Sizes: S, M, L, XL<br>Fit: Regular Fit<br>Care: Machine Wash'
   )">
     <img src="jacket1-1.jpg">
-    <div class="card-info">
-      <h3>Campus Sutra Bomber Jacket</h3>
+    <div class="details">
+      <h4>Campus Sutra Bomber Jacket</h4>
       <div class="price">₹1,999</div>
     </div>
   </div>
@@ -170,16 +178,16 @@ header {
 </div>
 
 <script>
-function openProduct(name, price, images, description) {
-  document.getElementById("productView").style.display = "block";
+function openBig(name, price, images, description) {
+  document.getElementById("bigView").style.display = "block";
 
   let imgHTML = "";
   images.forEach(img => {
     imgHTML += `<img src="${img}">`;
   });
-  document.getElementById("viewImages").innerHTML = imgHTML;
+  document.getElementById("bigImages").innerHTML = imgHTML;
 
-  document.getElementById("viewDetails").innerHTML = `
+  document.getElementById("bigDetails").innerHTML = `
     <h2>${name}</h2>
     <h3>${price}</h3>
     <p>${description}</p>
@@ -191,8 +199,8 @@ function openProduct(name, price, images, description) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function closeView() {
-  document.getElementById("productView").style.display = "none";
+function closeBig() {
+  document.getElementById("bigView").style.display = "none";
 }
 </script>
 
