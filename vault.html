@@ -19,6 +19,7 @@ header {
   text-align: center;
 }
 
+/* CONTINUE SHOPPING BUTTON */
 .back-btn {
   display: block;
   margin: 15px;
@@ -31,6 +32,7 @@ header {
   font-weight: bold;
 }
 
+/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -38,6 +40,7 @@ header {
   padding: 15px;
 }
 
+/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -63,6 +66,20 @@ header {
   font-size: 18px;
   font-weight: bold;
 }
+
+/* REMOVE BUTTON */
+.remove-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background: #b71c1c;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -72,13 +89,15 @@ header {
   <h2>My Vault</h2>
 </header>
 
-<a href="clothing.html" class="back-btn">← Continue Shopping</a>
+<a href="clothing.html" class="back-btn">
+  ← Continue Shopping
+</a>
 
 <div class="products-grid" id="vaultProducts"></div>
 
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
-const vault = JSON.parse(localStorage.getItem("vault")) || [];
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 const PRODUCTS = {
   "shirt-1": {
@@ -98,6 +117,7 @@ const PRODUCTS = {
   }
 };
 
+/* EMPTY VAULT MESSAGE */
 if (vault.length === 0) {
   vaultProducts.innerHTML = `
     <div style="text-align:center;margin-top:80px;color:#555;">
@@ -107,6 +127,7 @@ if (vault.length === 0) {
   `;
 }
 
+/* RENDER PRODUCTS */
 vault.forEach(id => {
   const p = PRODUCTS[id];
   if (!p) return;
@@ -118,15 +139,35 @@ vault.forEach(id => {
     <div class="slider">
       ${p.images.map(img => `<img src="${img}">`).join("")}
     </div>
+
     <div class="details">
       <h3>${p.title}</h3>
       <div class="price">${p.price}</div>
+      <button class="remove-btn">✕ Remove from Vault</button>
     </div>
   `;
 
+  /* TAP CARD → OPEN IN CLOTHING */
   card.addEventListener("click", () => {
     localStorage.setItem("openProduct", id);
     window.location.href = "clothing.html";
+  });
+
+  /* REMOVE BUTTON */
+  card.querySelector(".remove-btn").addEventListener("click", e => {
+    e.stopPropagation(); // 🔥 VERY IMPORTANT
+    vault = vault.filter(v => v !== id);
+    localStorage.setItem("vault", JSON.stringify(vault));
+    card.remove();
+
+    if (vault.length === 0) {
+      vaultProducts.innerHTML = `
+        <div style="text-align:center;margin-top:80px;color:#555;">
+          <h3>Your vault is empty</h3>
+          <p>Save products you love and find them here anytime.</p>
+        </div>
+      `;
+    }
   });
 
   vaultProducts.appendChild(card);
