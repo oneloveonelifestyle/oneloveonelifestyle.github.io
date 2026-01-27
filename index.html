@@ -90,9 +90,9 @@
   <h2>One Love One Lifestyle</h2>
 </header>
 
-<!-- PROFESSIONAL SEARCH -->
+<!-- GLOBAL SEARCH -->
 <div class="search-wrapper">
-  <form class="search-container" onsubmit="goToSearch(event)">
+  <form class="search-container" onsubmit="globalSearch(event)">
     <input
       type="text"
       id="homeSearch"
@@ -110,14 +110,38 @@
 </div>
 
 <script>
-function goToSearch(e) {
+function globalSearch(e) {
   e.preventDefault();
-  const query = document.getElementById("homeSearch").value.trim();
-  if (query) {
-    window.location.href = "clothing.html?search=" + encodeURIComponent(query);
-  } else {
-    window.location.href = "clothing.html";
+
+  const query = document.getElementById("homeSearch").value.toLowerCase().trim();
+  if (!query) return;
+
+  /* KEYWORDS PER PAGE */
+  const clothingKeywords = [
+    "shirt", "shirts", "jacket", "jackets",
+    "cotton", "clothing", "wear", "top"
+  ];
+
+  const shoesKeywords = ["shoe", "shoes", "sneaker", "footwear"];
+  const accessoriesKeywords = ["bag", "belt", "cap", "accessory"];
+
+  if (clothingKeywords.some(word => query.includes(word))) {
+    window.location.href =
+      "clothing.html?search=" + encodeURIComponent(query);
+    return;
   }
+
+  if (shoesKeywords.some(word => query.includes(word))) {
+    alert("Shoes category is coming soon.");
+    return;
+  }
+
+  if (accessoriesKeywords.some(word => query.includes(word))) {
+    alert("Accessories category is coming soon.");
+    return;
+  }
+
+  alert("No results found. Try searching for clothing items.");
 }
 </script>
 
