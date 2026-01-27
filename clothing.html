@@ -39,23 +39,40 @@ header {
   right: -10px;
 }
 
-/* 🔍 AMAZON-STYLE SEARCH */
+/* ===== PROFESSIONAL SEARCH BAR ===== */
 .search-wrapper {
   background: #fff;
   padding: 12px;
 }
 
 .search-box {
-  width: 100%;
-  padding: 14px 16px;
-  font-size: 15px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
   border: 1px solid #ccc;
-  outline: none;
+  border-radius: 10px;
+  padding: 0 12px;
 }
 
-.search-box:focus {
-  border-color: #000;
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 8px;
+  font-size: 15px;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #777;
+}
+
+/* NO RESULTS MESSAGE */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #555;
+  margin-top: 40px;
+  font-size: 15px;
 }
 
 .products-grid {
@@ -161,17 +178,20 @@ header {
   </div>
 </header>
 
-<!-- 🔍 SEARCH BAR -->
+<!-- 🔍 SEARCH -->
 <div class="search-wrapper">
-  <input type="text" id="searchInput" class="search-box"
-         placeholder="Search by brand, fit, fabric, size…">
+  <div class="search-box">
+    <input type="text" id="searchInput"
+      placeholder="Search jackets, shirts, fabric, fit…">
+    <span class="search-icon">🔍</span>
+  </div>
 </div>
 
 <div class="products-grid" id="products">
 
 <!-- PRODUCT 1 -->
 <div class="product-card" data-id="jacket-1"
-data-search="campus sutra bomber jacket regular fit machine wash s m l xl">
+data-search="campus sutra bomber jacket regular fit s m l xl">
   <div class="slider">
     <img src="jacket1-1.jpg">
     <img src="jacket1-2.jpg">
@@ -197,7 +217,7 @@ data-search="campus sutra bomber jacket regular fit machine wash s m l xl">
 
 <!-- PRODUCT 2 -->
 <div class="product-card" data-id="jacket-2"
-data-search="nuon brown relaxed fit cotton jacket xs s m l xl">
+data-search="nuon brown cotton jacket relaxed fit xs s m l xl">
   <div class="slider">
     <img src="shirt1-3.jpg">
     <img src="shirt1-4.jpg">
@@ -212,10 +232,7 @@ data-search="nuon brown relaxed fit cotton jacket xs s m l xl">
       <b>Size:</b> XS, S, M, L, XL<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
-      <b>Fabric Composition:</b> 100% Cotton<br><br>
-      <b>Manufactured and Marketed By:</b><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-      <b>Country Of Origin:</b> India
+      <b>Fabric Composition:</b> 100% Cotton
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
@@ -227,7 +244,7 @@ data-search="nuon brown relaxed fit cotton jacket xs s m l xl">
 
 <!-- PRODUCT 3 -->
 <div class="product-card" data-id="jacket-3"
-data-search="studiofit dark brown hooded jacket relaxed fit polyester viscose elastane">
+data-search="studiofit hooded jacket dark brown relaxed fit">
   <div class="slider">
     <img src="shirt1-1.jpg">
     <img src="shirt1-2.jpg">
@@ -240,11 +257,7 @@ data-search="studiofit dark brown hooded jacket relaxed fit polyester viscose el
     <div class="full-description">
       <b>Size:</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
-      <b>Care Instruction:</b> Machine Wash<br>
-      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
-      <b>Manufactured and Marketed By:</b><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-      <b>Country Of Origin:</b> India
+      <b>Care Instruction:</b> Machine Wash
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
@@ -268,14 +281,34 @@ vaultCount.textContent = vault.length;
 /* SEARCH LOGIC */
 searchInput.addEventListener("input", () => {
   const value = searchInput.value.toLowerCase();
+  let matchCount = 0;
 
   cards.forEach(card => {
     const text = card.dataset.search.toLowerCase();
-    card.style.display = text.includes(value) ? "" : "none";
-    card.classList.remove("big-product");
+    if (text.includes(value)) {
+      card.style.display = "";
+      matchCount++;
+    } else {
+      card.style.display = "none";
+      card.classList.remove("big-product");
+    }
   });
+
+  const existing = document.querySelector(".no-results");
+  if (existing) existing.remove();
+
+  if (matchCount === 0) {
+    const msg = document.createElement("div");
+    msg.className = "no-results";
+    msg.innerHTML = `
+      <b>No products found</b><br>
+      Try searching with different keywords
+    `;
+    container.appendChild(msg);
+  }
 });
 
+/* VAULT + EXPAND LOGIC (UNCHANGED) */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -327,4 +360,4 @@ if (openProduct) {
 </script>
 
 </body>
-  </html>
+      </html>
