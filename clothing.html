@@ -2,202 +2,259 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One Love One Lifestyle</title>
+<title>Clothing | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f6f6f6;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
-.search-bar {
-  padding: 10px;
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+/* SEARCH */
+.search-container {
   background: #fff;
+  padding: 12px;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-.search-bar input {
-  width: 100%;
+.search-box {
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+}
+
+.search-box input {
+  flex: 1;
   padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
   border: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
 }
 
-.container {
-  padding: 10px;
+.search-box button {
+  padding: 12px 18px;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 0 8px 8px 0;
 }
 
-.grid {
+/* GRID */
+.products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 15px;
+  padding: 15px;
 }
 
-.card {
+/* CARD */
+.product-card {
   background: #fff;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
 }
 
-.card img {
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
   width: 100%;
-  border-radius: 8px;
 }
 
-.card h3 {
-  font-size: 15px;
-  margin: 8px 0 4px;
+.details {
+  padding: 12px;
 }
 
-.card p {
-  margin: 0;
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.price {
+  font-size: 18px;
   font-weight: bold;
 }
 
 .order-btn {
-  margin-top: 8px;
+  display: block;
+  margin-top: 10px;
   background: #000;
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
+  text-decoration: none;
 }
 
-.expanded {
+/* BIG PRODUCT */
+.big {
   grid-column: 1 / -1;
 }
 
-.details {
-  margin-top: 10px;
+.big h2 {
+  font-size: 22px;
+}
+
+.big .price {
+  font-size: 22px;
+}
+
+/* EXTRA DETAILS */
+.extra-details {
   font-size: 14px;
-  line-height: 1.6;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="search-bar">
-  <input type="text" id="search" placeholder="Search clothing..." oninput="render()">
+<header>
+  <h2>Clothing</h2>
+</header>
+
+<!-- SEARCH -->
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search clothing…">
+    <button>🔍</button>
+  </div>
 </div>
 
-<div class="container">
-  <div class="grid" id="grid"></div>
+<div class="products-grid" id="products">
+
+<!-- SHIRT 1 -->
+<div class="product-card"
+     data-category="shirt"
+     data-search="nuon brown cotton shirt">
+  <div class="slider">
+    <img src="shirt1-1.jpg">
+    <img src="shirt1-2.jpg">
+  </div>
+  <div class="details">
+    <h2>Nuon Brown Cotton Shirt</h2>
+    <div class="price">₹2,199</div>
+    <p>Relaxed Fit</p>
+    <div class="extra-details" style="display:none">
+      Size: XS, S, M, L, XL<br>
+      Care: Machine Wash<br>
+      Fabric: 100% Cotton<br>
+      Country: India
+    </div>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Order via Instagram
+    </a>
+  </div>
+</div>
+
+<!-- SHIRT 2 -->
+<div class="product-card"
+     data-category="shirt"
+     data-search="nuon brown cotton shirt">
+  <div class="slider">
+    <img src="shirt1-3.jpg">
+    <img src="shirt1-4.jpg">
+    <img src="shirt1-5.jpg">
+  </div>
+  <div class="details">
+    <h2>Nuon Brown Text Jacket</h2>
+    <div class="price">₹2,199</div>
+    <p>Relaxed Fit</p>
+    <div class="extra-details" style="display:none">
+      Size: XS, S, M, L, XL<br>
+      Care: Machine Wash<br>
+      Fabric: 100% Cotton<br>
+      Manufactured by Trent Limited<br>
+      Country: India
+    </div>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Order via Instagram
+    </a>
+  </div>
+</div>
+
+<!-- JACKET -->
+<div class="product-card"
+     data-category="jacket"
+     data-search="campus sutra bomber jacket">
+  <div class="slider">
+    <img src="jacket1-1.jpg">
+    <img src="jacket1-2.jpg">
+    <img src="jacket1-3.jpg">
+  </div>
+  <div class="details">
+    <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
+    <div class="price">₹1,999</div>
+    <p>Regular Fit</p>
+    <div class="extra-details" style="display:none">
+      Size: S, M, L, XL<br>
+      Care: Machine Wash
+    </div>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Order via Instagram
+    </a>
+  </div>
+</div>
+
 </div>
 
 <script>
-const products = [
-  {
-    id: 1,
-    category: "jacket",
-    name: "Nuon Brown Text Jacket",
-    price: "₹2,199",
-    img: "https://i.imgur.com/0XKzn2L.jpg",
-    details: `
-    <strong>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</strong><br><br>
-    Size: XS, S, M, L, XL<br>
-    Fit: Relaxed Fit<br>
-    Care: Machine Wash<br>
-    Fabric: 100% Cotton<br><br>
-    Manufactured & Marketed By:<br>
-    Trent Limited, Mumbai<br>
-    Country Of Origin: India
-    `
-  },
-  {
-    id: 2,
-    category: "jacket",
-    name: "Campus Sutra Bomber Jacket",
-    price: "₹1,999",
-    img: "https://i.imgur.com/9XJp4ZJ.jpg",
-    details: `
-    <strong>Campus Sutra Zip-Front Bomber Jacket</strong><br><br>
-    Size: S, M, L, XL<br>
-    Fit: Regular Fit<br>
-    Care: Machine Wash
-    `
-  },
-  {
-    id: 3,
-    category: "shirt",
-    name: "Nuon Brown Cotton Shirt",
-    price: "₹2,199",
-    img: "https://i.imgur.com/xP7LZ2L.jpg",
-    details: `
-    <strong>Nuon Brown Cotton Shirt</strong><br><br>
-    Size: S, M, L, XL<br>
-    Fit: Regular Fit<br>
-    Care: Machine Wash
-    `
-  }
-];
+const products = document.querySelectorAll(".product-card");
+const container = document.getElementById("products");
+const searchInput = document.getElementById("searchInput");
 
-let selectedId = null;
+/* CLICK EXPAND */
+products.forEach(card => {
+  card.addEventListener("click", () => {
+    const category = card.dataset.category;
 
-function orderIG() {
-  window.open("https://instagram.com/oneloveonelifestyle", "_blank");
-}
+    products.forEach(p => {
+      p.classList.remove("big");
+      p.querySelector(".extra-details").style.display = "none";
+    });
 
-function render() {
-  const grid = document.getElementById("grid");
-  const q = document.getElementById("search").value.toLowerCase();
+    card.classList.add("big");
+    card.querySelector(".extra-details").style.display = "block";
 
-  let filtered = products.filter(p =>
-    p.name.toLowerCase().includes(q)
-  );
+    const same = [];
+    const others = [];
 
-  let ordered = [];
+    products.forEach(p => {
+      if (p !== card) {
+        (p.dataset.category === category ? same : others).push(p);
+      }
+    });
 
-  if (selectedId) {
-    const selected = products.find(p => p.id === selectedId);
-    ordered.push(selected);
+    container.innerHTML = "";
+    container.append(card);
+    [...same, ...others].forEach(p => container.append(p));
 
-    const sameCat = filtered.filter(
-      p => p.category === selected.category && p.id !== selectedId
-    );
-    const otherCat = filtered.filter(
-      p => p.category !== selected.category
-    );
-
-    ordered = ordered.concat(sameCat, otherCat);
-  } else {
-    ordered = filtered;
-  }
-
-  grid.innerHTML = "";
-
-  ordered.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "card" + (p.id === selectedId ? " expanded" : "");
-    card.onclick = () => {
-      selectedId = p.id;
-      render();
-    };
-
-    card.innerHTML = `
-      <img src="${p.img}">
-      <h3>${p.name}</h3>
-      <p>${p.price}</p>
-
-      ${p.id === selectedId ? `
-        <div class="details">${p.details}</div>
-      ` : ""}
-
-      <div class="order-btn" onclick="event.stopPropagation(); orderIG()">
-        Order via Instagram
-      </div>
-    `;
-    grid.appendChild(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-}
+});
 
-render();
+/* SEARCH ALWAYS WORKS */
+searchInput.addEventListener("keyup", () => {
+  const val = searchInput.value.toLowerCase();
+  products.forEach(p => {
+    p.style.display = p.dataset.search.includes(val) ? "block" : "none";
+  });
+});
 </script>
 
 </body>
