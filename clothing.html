@@ -21,26 +21,6 @@ header {
   position: relative;
 }
 
-/* HOME BUTTON (ADDED ONLY) */
-.home-btn {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.6);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.home-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -201,16 +181,12 @@ header {
 <body>
 
 <header>
-  <!-- HOME BUTTON (ADDED ONLY) -->
-  <button class="home-btn" onclick="goHome()">Home</button>
-
   <h2>Clothing</h2>
   <div class="vault-icon" onclick="openVault()">
     ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
-<!-- SEARCH -->
 <div class="search-bar">
   <input type="text" id="searchInput" class="search-input" placeholder="Search for jackets, shirts, cotton...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
@@ -231,7 +207,10 @@ header {
     <div class="short">Regular Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> S, M, L, XL<br><br>
+      Campus Sutra<br>
+      Zip-Front Bomber Jacket<br><br>
+      ₹1999<br><br>
+      <b>Size :</b> S, M, L, XL<br><br>
       <b>Fit:</b> Regular Fit<br>
       <b>Care Instruction:</b> Machine Wash
     </div>
@@ -256,10 +235,14 @@ header {
     <div class="short">Relaxed Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> XS, S, M, L, XL<br><br>
+      Nuon Brown Text Design Relaxed-Fit Cotton Jacket<br><br>
+      ₹2999<br><br>
+      <b>Size :</b> XS, S, M, L, XL<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
+      <b>Manufactured and Marketed By:</b><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
       <b>Country Of Origin:</b> India
     </div>
 
@@ -282,11 +265,14 @@ header {
     <div class="short">Relaxed Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> XS, S, M, L<br><br>
+      ETA Brown Textured Relaxed-Fit Cotton Shirt<br><br>
+      <b>Price :</b> ₹1799<br><br>
+      <b>Size :</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
-      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day.<br><br>
+      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day.
+      Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.<br><br>
       <b>Country Of Origin:</b> India
     </div>
 
@@ -308,7 +294,6 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* PRODUCT INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -342,7 +327,6 @@ cards.forEach(card => {
   });
 });
 
-/* SEARCH FUNCTION */
 function searchProducts() {
   const query = searchInput.value.toLowerCase().trim();
   let found = 0;
@@ -373,25 +357,17 @@ function searchProducts() {
   }
 }
 
-/* ENTER KEY SEARCH */
 searchInput.addEventListener("keydown", e => {
   if (e.key === "Enter") searchProducts();
 });
 
-/* VAULT */
 function openVault() {
   window.location.href = "vault.html";
 }
 
-/* HOME NAVIGATION (ADDED ONLY) */
-function goHome() {
-  window.location.href = "index.html";
-}
-
-/* AUTO OPEN FROM VAULT */
 const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
-  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  const target = document.querySelector(\`.product-card[data-id="\${openProduct}"]\`);
   if (target) {
     target.classList.add("big-product");
     container.prepend(target);
