@@ -2,134 +2,362 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Clothing</title>
+<title>Clothing | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{margin:0;font-family:Arial;background:#f4f4f4}
-header{background:#000;color:#fff;padding:15px;text-align:center;position:relative}
-.vault-icon{position:absolute;right:15px;top:15px;cursor:pointer}
-.search-wrapper{background:#fff;padding:12px}
-.search-box{display:flex;align-items:center;border:1px solid #ccc;border-radius:10px;padding:0 12px}
-.search-box input{flex:1;border:none;outline:none;padding:14px;font-size:15px}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:15px}
-.product-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);cursor:pointer}
-.slider{display:flex;overflow-x:auto}
-.slider img{width:100%}
-.details{padding:12px}
-.big-product{grid-column:1/-1}
-.full{display:none;font-size:14px;line-height:1.6}
-.big-product .full{display:block}
-.vault-btn{display:none;margin-top:10px;width:100%;padding:10px;border-radius:8px}
-.big-product .vault-btn{display:block}
-.order{display:block;margin-top:10px;background:#000;color:#fff;text-align:center;padding:12px;border-radius:8px;text-decoration:none}
-.no-results{text-align:center;color:#555;grid-column:1/-1;margin-top:40px}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+/* 🔍 SEARCH BAR */
+.search-wrapper {
+  background: #fff;
+  padding: 12px 15px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0 12px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 10px;
+  font-size: 15px;
+}
+
+.search-btn {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+}
+
+.details {
+  padding: 12px;
+}
+
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.short {
+  font-size: 13px;
+  color: #555;
+}
+
+.big-product {
+  grid-column: 1 / -1;
+}
+
+.full-description {
+  display: none;
+  font-size: 14px;
+  margin-top: 12px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.big-product .full-description {
+  display: block;
+}
+
+.vault-btn {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.big-product .vault-btn {
+  display: block;
+}
+
+.vault-btn.remove {
+  background: #f5f5f5;
+}
+
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* NO RESULT MESSAGE */
+.no-result {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #555;
+  padding: 40px 10px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-Clothing
-<div class="vault-icon" onclick="location.href='vault.html'">♡</div>
+  <h2>Clothing</h2>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
+  </div>
 </header>
 
+<!-- 🔍 SEARCH BAR -->
 <div class="search-wrapper">
   <div class="search-box">
-    <input id="searchInput" placeholder="Search jackets, shirts…">
-    🔍
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, brands...">
+    <span class="search-btn" id="searchBtn">🔍</span>
   </div>
 </div>
 
-<div class="products" id="products">
+<div class="products-grid" id="products">
 
-<div class="product-card" data-id="1" data-search="jacket bomber campus sutra">
-  <div class="slider"><img src="j1.jpg"></div>
+<!-- PRODUCT 1 -->
+<div class="product-card" data-id="jacket-1">
+  <div class="slider">
+    <img src="jacket1-1.jpg">
+    <img src="jacket1-2.jpg">
+    <img src="jacket1-3.jpg">
+  </div>
   <div class="details">
-    <h3>Campus Sutra Bomber Jacket</h3>
-    <b>₹1999</b>
-    <div class="full">
-      Size: S, M, L, XL<br>
-      Fit: Regular Fit<br>
-      Care: Machine Wash
+    <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
+    <div class="price">₹1,999</div>
+    <div class="short">Regular Fit</div>
+
+    <div class="full-description">
+      <b>Size:</b> S, M, L, XL<br><br>
+      <b>Fit:</b> Regular Fit<br>
+      <b>Care Instruction:</b> Machine Wash
     </div>
-    <button class="vault-btn">Save to Vault</button>
-    <a class="order" href="#">Buy via Instagram</a>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
-<div class="product-card" data-id="2" data-search="jacket cotton nuon">
-  <div class="slider"><img src="j2.jpg"></div>
+<!-- PRODUCT 2 -->
+<div class="product-card" data-id="jacket-2">
+  <div class="slider">
+    <img src="shirt1-3.jpg">
+    <img src="shirt1-4.jpg">
+    <img src="shirt1-5.jpg">
+  </div>
   <div class="details">
-    <h3>Nuon Cotton Jacket</h3>
-    <b>₹2999</b>
-    <div class="full">
-      Size: XS–XL<br>
-      Fit: Relaxed<br>
-      Fabric: 100% Cotton
+    <h2>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</h2>
+    <div class="price">₹2,999</div>
+    <div class="short">Relaxed Fit</div>
+
+    <div class="full-description">
+      <b>Size:</b> XS, S, M, L, XL<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 100% Cotton<br><br>
+      <b>Manufactured and Marketed By:</b><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+      <b>Country Of Origin:</b> India
     </div>
-    <button class="vault-btn">Save to Vault</button>
-    <a class="order" href="#">Buy via Instagram</a>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
-<div class="product-card" data-id="3" data-search="shirt studiofit hooded">
-  <div class="slider"><img src="s1.jpg"></div>
+<!-- PRODUCT 3 -->
+<div class="product-card" data-id="jacket-3">
+  <div class="slider">
+    <img src="shirt1-1.jpg">
+    <img src="shirt1-2.jpg">
+  </div>
   <div class="details">
-    <h3>Studiofit Hooded Shirt</h3>
-    <b>₹2199</b>
-    <div class="full">
-      Size: XS–L<br>
-      Fit: Relaxed<br>
-      Fabric: Blend
+    <h2>Studiofit Dark Brown Relaxed-Fit Hooded Jacket</h2>
+    <div class="price">₹2,199</div>
+    <div class="short">Relaxed Fit</div>
+
+    <div class="full-description">
+      <b>Size:</b> XS, S, M, L<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+      <b>Manufactured and Marketed By:</b><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+      <b>Country Of Origin:</b> India
     </div>
-    <button class="vault-btn">Save to Vault</button>
-    <a class="order" href="#">Buy via Instagram</a>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
 </div>
 
 <script>
-const products = document.getElementById("products");
+const container = document.getElementById("products");
+const cards = document.querySelectorAll(".product-card");
+const vaultCount = document.getElementById("vaultCount");
 const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
-/* TAP / EXPAND — EVENT DELEGATION */
-products.addEventListener("click", e => {
-  const card = e.target.closest(".product-card");
-  if (!card) return;
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+vaultCount.textContent = vault.length;
 
-  document.querySelectorAll(".product-card").forEach(c=>{
-    if(c!==card) c.classList.remove("big-product");
+cards.forEach(card => {
+  const btn = card.querySelector(".vault-btn");
+  const id = card.dataset.id;
+
+  if (vault.includes(id)) {
+    btn.classList.add("remove");
+    btn.textContent = "✕ Remove from Vault";
+  }
+
+  card.addEventListener("click", e => {
+    if (e.target.classList.contains("vault-btn")) return;
+    cards.forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-  card.classList.toggle("big-product");
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    if (vault.includes(id)) {
+      vault = vault.filter(v => v !== id);
+      btn.classList.remove("remove");
+      btn.textContent = "♡ Save to Vault";
+    } else {
+      vault.push(id);
+      btn.classList.add("remove");
+      btn.textContent = "✕ Remove from Vault";
+    }
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
 });
 
-/* SEARCH — ONLY FILTER */
-searchInput.addEventListener("input", () => {
-  const value = searchInput.value.toLowerCase();
+function openVault() {
+  window.location.href = "vault.html";
+}
+
+/* 🔍 SEARCH LOGIC */
+function runSearch() {
+  const value = searchInput.value.toLowerCase().trim();
   let found = 0;
 
-  document.querySelectorAll(".product-card").forEach(card=>{
-    const text = card.dataset.search;
-    if(text.includes(value)){
-      card.style.display="";
+  document.querySelectorAll(".no-result").forEach(n => n.remove());
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    if (text.includes(value)) {
+      card.style.display = "";
       found++;
-    }else{
-      card.style.display="none";
+    } else {
+      card.style.display = "none";
       card.classList.remove("big-product");
     }
   });
 
-  document.querySelector(".no-results")?.remove();
-
-  if(found===0){
-    const msg=document.createElement("div");
-    msg.className="no-results";
-    msg.innerHTML="<h3>No results found</h3><p>Try different keywords.</p>";
-    products.appendChild(msg);
+  if (found === 0) {
+    const msg = document.createElement("div");
+    msg.className = "no-result";
+    msg.innerHTML = "<h3>No results found</h3><p>Try checking your spelling or use different keywords.</p>";
+    container.appendChild(msg);
   }
-});
+}
+
+searchInput.addEventListener("input", runSearch);
+searchBtn.addEventListener("click", runSearch);
+
+/* AUTO OPEN FROM VAULT */
+const openProduct = localStorage.getItem("openProduct");
+if (openProduct) {
+  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  if (target) {
+    target.classList.add("big-product");
+    container.prepend(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  localStorage.removeItem("openProduct");
+}
 </script>
 
 </body>
