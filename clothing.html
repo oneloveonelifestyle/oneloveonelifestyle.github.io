@@ -9,87 +9,80 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  background: #f2f2f2;
 }
 
 header {
   background: #000;
   color: #fff;
   text-align: center;
-  padding: 15px;
+  padding: 20px 10px;
 }
 
 header img {
-  height: 45px;
-  margin-bottom: 5px;
+  width: 60px;
+  margin-bottom: 10px;
 }
 
-/* GRID LIKE AMAZON */
-.products-grid {
+/* GRID */
+.products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
   padding: 14px;
 }
 
-/* PRODUCT CARD */
-.product-card {
+/* CARD */
+.card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
-/* IMAGE SLIDER */
-.slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
-.slider img {
+/* IMAGE */
+.card img {
   width: 100%;
-  flex-shrink: 0;
-  scroll-snap-align: center;
+  display: block;
 }
 
-/* DETAILS */
-.details {
+/* CONTENT */
+.content {
   padding: 12px;
 }
 
-.details h2 {
-  font-size: 16px;
+.content h3 {
+  font-size: 15px;
   margin: 0 0 6px;
 }
 
 .price {
   font-size: 18px;
   font-weight: bold;
-  margin: 6px 0;
+  margin-bottom: 6px;
 }
 
-.details p {
-  margin: 4px 0;
+.content p {
   font-size: 13px;
+  margin: 3px 0;
 }
 
 /* BUTTON */
-.order-btn {
+.order {
   display: block;
   margin-top: 10px;
   background: #000;
   color: #fff;
   text-align: center;
   padding: 12px;
+  border-radius: 8px;
   text-decoration: none;
-  border-radius: 6px;
   font-weight: bold;
 }
 
-/* VERY SMALL SCREENS */
+/* SMALL SCREEN */
 @media (max-width: 420px) {
-  .products-grid {
+  .products {
     grid-template-columns: 1fr;
   }
 }
@@ -104,22 +97,18 @@ header img {
   <p>Swipe images to view</p>
 </header>
 
-<div class="products-grid">
+<div class="products">
 
   <!-- PRODUCT 1 -->
-  <div class="product-card">
-    <div class="slider">
-      <img src="shirt1-1.jpg">
-      <img src="shirt1-2.jpg">
-    </div>
+  <div class="card">
+    <img src="jacket1-1.jpg" alt="Campus Sutra Jacket">
+    <div class="content">
+      <h3>Campus Sutra Bomber Jacket</h3>
+      <div class="price">₹1,999</div>
+      <p><b>Sizes:</b> S, M, L, XL</p>
+      <p><b>Fit:</b> Regular Fit</p>
 
-    <div class="details">
-      <h2>Brown Cotton Shirt</h2>
-      <div class="price">₹2,199</div>
-      <p><b>Sizes:</b> XS, S, M, L</p>
-      <p><b>Fit:</b> Relaxed Fit</p>
-
-      <a class="order-btn"
+      <a class="order"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
         Order via Instagram
@@ -128,20 +117,15 @@ header img {
   </div>
 
   <!-- PRODUCT 2 -->
-  <div class="product-card">
-    <div class="slider">
-      <img src="shirt1-3.jpg">
-      <img src="shirt1-4.jpg">
-      <img src="shirt1-5.jpg">
-    </div>
-
-    <div class="details">
-      <h2>Brown Cotton Shirt</h2>
+  <div class="card">
+    <img src="shirt1-1.jpg" alt="Brown Cotton Shirt">
+    <div class="content">
+      <h3>Brown Cotton Shirt</h3>
       <div class="price">₹2,199</div>
       <p><b>Sizes:</b> XS, S, M, L</p>
       <p><b>Fit:</b> Relaxed Fit</p>
 
-      <a class="order-btn"
+      <a class="order"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
         Order via Instagram
@@ -150,20 +134,15 @@ header img {
   </div>
 
   <!-- PRODUCT 3 -->
-  <div class="product-card">
-    <div class="slider">
-      <img src="jacket1-1.jpg">
-      <img src="jacket1-2.jpg">
-      <img src="jacket1-3.jpg">
-    </div>
+  <div class="card">
+    <img src="shirt1-2.jpg" alt="Brown Cotton Shirt">
+    <div class="content">
+      <h3>Brown Cotton Shirt</h3>
+      <div class="price">₹2,199</div>
+      <p><b>Sizes:</b> XS, S, M, L</p>
+      <p><b>Fit:</b> Relaxed Fit</p>
 
-    <div class="details">
-      <h2>Campus Sutra Bomber Jacket</h2>
-      <div class="price">₹1,999</div>
-      <p><b>Sizes:</b> S, M, L, XL</p>
-      <p><b>Fit:</b> Regular Fit</p>
-
-      <a class="order-btn"
+      <a class="order"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
         Order via Instagram
