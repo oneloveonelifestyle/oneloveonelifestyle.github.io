@@ -21,6 +21,18 @@ header {
   position: relative;
 }
 
+/* HOME BUTTON */
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -181,6 +193,7 @@ header {
 <body>
 
 <header>
+  <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
   <div class="vault-icon" onclick="openVault()">
     ♡ <span class="vault-count" id="vaultCount">0</span>
@@ -359,7 +372,7 @@ function openVault() {
 
 const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
-  const target = document.querySelector(\`.product-card[data-id="\${openProduct}"]\`);
+  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
   if (target) {
     target.classList.add("big-product");
     container.prepend(target);
