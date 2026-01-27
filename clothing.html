@@ -89,7 +89,7 @@ header {
 .full-description {
   display: none;
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 12px;
   line-height: 1.6;
 }
 
@@ -97,7 +97,6 @@ header {
   display: block;
 }
 
-/* VAULT BUTTON */
 .vault-btn {
   display: none;
   width: 100%;
@@ -119,10 +118,8 @@ header {
 .vault-btn.remove {
   background: #f5f5f5;
   color: #444;
-  border: 1px solid #ccc;
 }
 
-/* ORDER BUTTON */
 .order-btn {
   display: block;
   margin-top: 10px;
@@ -149,56 +146,6 @@ header {
 <div class="products-grid" id="products">
 
 <!-- PRODUCT 1 -->
-<div class="product-card" data-id="shirt-1">
-  <div class="slider">
-    <img src="shirt1-1.jpg">
-    <img src="shirt1-2.jpg">
-  </div>
-  <div class="details">
-    <h2>Nuon Brown Cotton Shirt</h2>
-    <div class="price">₹2,199</div>
-    <div class="short">Relaxed Fit</div>
-
-    <div class="full-description">
-      <b>Size:</b> XS, S, M, L, XL<br><br>
-      <b>Fit:</b> Relaxed Fit<br>
-      <b>Care:</b> Machine Wash<br>
-      <b>Fabric:</b> 100% Cotton
-    </div>
-
-    <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Buy via Instagram
-    </a>
-  </div>
-</div>
-
-<!-- PRODUCT 2 -->
-<div class="product-card" data-id="shirt-2">
-  <div class="slider">
-    <img src="shirt1-3.jpg">
-    <img src="shirt1-4.jpg">
-    <img src="shirt1-5.jpg">
-  </div>
-  <div class="details">
-    <h2>Nuon Brown Text Design Jacket</h2>
-    <div class="price">₹2,199</div>
-    <div class="short">Relaxed Fit</div>
-
-    <div class="full-description">
-      <b>Size:</b> XS, S, M, L, XL<br><br>
-      <b>Fit:</b> Relaxed Fit<br>
-      <b>Care:</b> Machine Wash
-    </div>
-
-    <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Buy via Instagram
-    </a>
-  </div>
-</div>
-
-<!-- PRODUCT 3 -->
 <div class="product-card" data-id="jacket-1">
   <div class="slider">
     <img src="jacket1-1.jpg">
@@ -213,7 +160,74 @@ header {
     <div class="full-description">
       <b>Size:</b> S, M, L, XL<br><br>
       <b>Fit:</b> Regular Fit<br>
-      <b>Care:</b> Machine Wash
+      <b>Care Instruction:</b> Machine Wash<br><br>
+      <a href="https://www.ajio.com/campus-sutra-zip-front-bomber-jacket/p/465324816_tan" target="_blank">
+        View Original Product
+      </a>
+    </div>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
+  </div>
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="product-card" data-id="jacket-2">
+  <div class="slider">
+    <img src="shirt1-3.jpg">
+    <img src="shirt1-4.jpg">
+    <img src="shirt1-5.jpg">
+  </div>
+  <div class="details">
+    <h2>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</h2>
+    <div class="price">₹2,999</div>
+    <div class="short">Relaxed Fit</div>
+
+    <div class="full-description">
+      <b>Size:</b> XS, S, M, L, XL<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 100% Cotton<br><br>
+      <b>Manufactured & Marketed By:</b><br>
+      Trent Limited, Bombay House,<br>
+      24, Homi Mody Street,<br>
+      Fort, Mumbai – 400001<br><br>
+      <b>Country Of Origin:</b> India<br><br>
+      <a href="https://share.google/Q7OmHMqdF6vQ397xP" target="_blank">
+        View Original Product
+      </a>
+    </div>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
+  </div>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="product-card" data-id="jacket-3">
+  <div class="slider">
+    <img src="shirt1-1.jpg">
+    <img src="shirt1-2.jpg">
+  </div>
+  <div class="details">
+    <h2>Studiofit Dark Brown Relaxed-Fit Hooded Jacket</h2>
+    <div class="price">₹2,199</div>
+    <div class="short">Relaxed Fit</div>
+
+    <div class="full-description">
+      <b>Size:</b> XS, S, M, L<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+      <b>Manufactured & Marketed By:</b><br>
+      Trent Limited, Bombay House,<br>
+      24, Homi Mody Street,<br>
+      Fort, Mumbai – 400001<br><br>
+      <b>Country Of Origin:</b> India
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
@@ -231,9 +245,8 @@ const cards = document.querySelectorAll(".product-card");
 const vaultCount = document.getElementById("vaultCount");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
-updateVaultCount();
+vaultCount.textContent = vault.length;
 
-/* CARD INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -266,36 +279,25 @@ cards.forEach(card => {
     }
 
     localStorage.setItem("vault", JSON.stringify(vault));
-    updateVaultCount();
+    vaultCount.textContent = vault.length;
   });
 });
-
-function updateVaultCount() {
-  vaultCount.textContent = vault.length;
-}
 
 function openVault() {
   window.location.href = "vault.html";
 }
 
-/* OPEN PRODUCT FROM VAULT */
+/* OPEN FROM VAULT */
 const openProduct = localStorage.getItem("openProduct");
-
 if (openProduct) {
-  setTimeout(() => {
-    const target = document.querySelector(
-      `.product-card[data-id="${openProduct}"]`
-    );
-
-    if (target) {
-      cards.forEach(c => c.classList.remove("big-product"));
-      target.classList.add("big-product");
-      container.prepend(target);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    localStorage.removeItem("openProduct");
-  }, 0);
+  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  if (target) {
+    cards.forEach(c => c.classList.remove("big-product"));
+    target.classList.add("big-product");
+    container.prepend(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  localStorage.removeItem("openProduct");
 }
 </script>
 
