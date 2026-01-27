@@ -21,22 +21,19 @@ header {
   position: relative;
 }
 
-/* BACK BUTTON */
+/* BACK BUTTON (THEME MATCHED) */
 .back-btn {
   position: absolute;
   left: 15px;
   top: 15px;
   font-size: 22px;
   cursor: pointer;
-  color: #fff;
-  opacity: 0.8;
+  opacity: 0.85;
 }
-
 .back-btn:hover {
   opacity: 1;
 }
 
-/* VAULT ICON */
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -56,12 +53,13 @@ header {
   right: -10px;
 }
 
-/* SEARCH BAR */
+/* SEARCH */
 .search-bar {
   background: #fff;
   padding: 12px;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .search-input {
@@ -70,6 +68,7 @@ header {
   font-size: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  outline: none;
 }
 
 .search-btn {
@@ -98,19 +97,14 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
 }
-
 .slider img {
   width: 100%;
-  scroll-snap-align: start;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -201,14 +195,72 @@ header {
 </header>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search for jackets, shirts, cotton...">
+  <input type="text" id="searchInput" class="search-input" placeholder="Search jackets, shirts, cotton...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
 </div>
 
 <div class="products-grid" id="products">
 
-<!-- PRODUCTS (UNCHANGED STRUCTURE) -->
-<!-- keep your existing product cards exactly as you had -->
+<!-- PRODUCT 1 -->
+<div class="product-card" data-id="jacket-1" data-search="campus sutra jacket bomber regular">
+  <div class="slider">
+    <img src="jacket1-1.jpg">
+    <img src="jacket1-2.jpg">
+    <img src="jacket1-3.jpg">
+  </div>
+  <div class="details">
+    <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
+    <div class="price">₹1,999</div>
+    <div class="short">Regular Fit</div>
+    <div class="full-description">
+      <b>Size:</b> S, M, L, XL<br><br>
+      <b>Fit:</b> Regular Fit<br>
+      <b>Care:</b> Machine Wash
+    </div>
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+  </div>
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="product-card" data-id="jacket-2" data-search="nuon jacket cotton relaxed brown">
+  <div class="slider">
+    <img src="shirt1-3.jpg">
+    <img src="shirt1-4.jpg">
+    <img src="shirt1-5.jpg">
+  </div>
+  <div class="details">
+    <h2>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</h2>
+    <div class="price">₹2,999</div>
+    <div class="short">Relaxed Fit</div>
+    <div class="full-description">
+      <b>Size:</b> XS – XL<br><br>
+      <b>Fabric:</b> 100% Cotton<br>
+      <b>Country:</b> India
+    </div>
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+  </div>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="product-card" data-id="shirt-1" data-search="eta shirt cotton brown relaxed">
+  <div class="slider">
+    <img src="shirt1-1.jpg">
+    <img src="shirt1-2.jpg">
+  </div>
+  <div class="details">
+    <h2>ETA Brown Textured Relaxed-Fit Cotton Shirt</h2>
+    <div class="price">₹1,799</div>
+    <div class="short">Relaxed Fit</div>
+    <div class="full-description">
+      Premium cotton shirt designed for daily comfort.<br><br>
+      <b>Country:</b> India
+    </div>
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+  </div>
+</div>
 
 </div>
 
@@ -221,7 +273,7 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* PRODUCT INTERACTION */
+/* CARD INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -270,12 +322,12 @@ function searchProducts() {
     }
   });
 
-  document.querySelector(".no-results")?.remove();
+  document.querySelectorAll(".no-results").forEach(n => n.remove());
 
   if (found === 0) {
     const msg = document.createElement("div");
     msg.className = "no-results";
-    msg.innerHTML = `<h3>No results found</h3>`;
+    msg.innerHTML = "<h3>No results found</h3><p>Try different or broader keywords.</p>";
     container.appendChild(msg);
   }
 }
@@ -285,14 +337,14 @@ searchInput.addEventListener("keydown", e => {
 });
 
 /* NAVIGATION */
-function openVault() {
-  window.location.href = "vault.html";
-}
-
 function goHome() {
   window.location.href = "index.html";
+}
+
+function openVault() {
+  window.location.href = "vault.html";
 }
 </script>
 
 </body>
-</html>
+      </html>
