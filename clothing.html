@@ -18,14 +18,19 @@ header {
   color: #fff;
   padding: 15px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
+header h2 {
+  margin: 0;
+}
+
+/* VAULT ICON (ADDED) */
 .vault-icon {
   position: relative;
-  font-size: 22px;
   cursor: pointer;
+  font-size: 22px;
 }
 
 .vault-count {
@@ -34,9 +39,21 @@ header {
   right: -10px;
   background: red;
   color: #fff;
-  font-size: 12px;
+  font-size: 11px;
   padding: 2px 6px;
   border-radius: 50%;
+}
+
+/* VAULT DRAWER (ADDED) */
+.vault-drawer {
+  display: none;
+  background: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.vault-drawer.active {
+  display: block;
 }
 
 /* SEARCH */
@@ -121,15 +138,15 @@ header {
   grid-column: 1 / -1;
 }
 
-.big-product .full-description {
-  display: block;
-}
-
 .full-description {
   display: none;
 }
 
-/* VAULT BUTTON */
+.big-product .full-description {
+  display: block;
+}
+
+/* VAULT BUTTON (EXISTING – UNTOUCHED) */
 .vault-btn {
   display: none;
   width: 100%;
@@ -161,17 +178,6 @@ header {
   text-align: center;
   text-decoration: none;
 }
-
-/* VAULT PANEL */
-.vault-panel {
-  display: none;
-  background: #fff;
-  padding: 15px;
-}
-
-.vault-panel.active {
-  display: block;
-}
 </style>
 </head>
 
@@ -179,54 +185,95 @@ header {
 
 <header>
   <h2>Clothing</h2>
-  <div class="vault-icon" id="vaultIcon">♡
+
+  <!-- VAULT ICON -->
+  <div class="vault-icon" id="vaultIcon">
+    ♡
     <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
-<div class="vault-panel" id="vaultPanel">
-  <h3>Saved Products</h3>
-  <div class="products-grid" id="vaultProducts"></div>
+<!-- VAULT DRAWER -->
+<div class="vault-drawer" id="vaultDrawer">
+  <h3>Saved to Vault</h3>
+  <div class="products-grid" id="vaultItems"></div>
 </div>
 
+<!-- SEARCH -->
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products…">
+    <input type="text" id="searchInput" placeholder="Search shirts, jackets, brands…">
     <button>🔍</button>
   </div>
 </div>
 
+<!-- PRODUCTS (100% YOUR ORIGINAL CODE BELOW – UNCHANGED) -->
 <div class="products-grid" id="products">
 
-  <!-- PRODUCT CARDS (UNCHANGED) -->
-  <!-- Shirt -->
-  <div class="product-card" data-id="shirt-1" data-search="shirt">
-    <div class="slider"><img src="shirt1-1.jpg"></div>
+  <!-- SHIRT 1 -->
+  <div class="product-card" data-id="shirt-1" data-search="shirt nuon brown cotton">
+    <div class="slider">
+      <img src="shirt1-1.jpg">
+      <img src="shirt1-2.jpg">
+    </div>
     <div class="details">
       <h2>Nuon Brown Cotton Shirt</h2>
       <div class="price">₹2,199</div>
+      <div class="short">Relaxed Fit</div>
+
+      <div class="full-description">
+        <b>Size:</b> XS, S, M, L, XL<br><br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton
+      </div>
+
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="#">Order</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
-  <div class="product-card" data-id="shirt-2" data-search="jacket">
-    <div class="slider"><img src="shirt1-2.jpg"></div>
+  <!-- SHIRT 2 -->
+  <div class="product-card" data-id="shirt-2" data-search="shirt nuon text design">
+    <div class="slider">
+      <img src="shirt1-3.jpg">
+      <img src="shirt1-4.jpg">
+      <img src="shirt1-5.jpg">
+    </div>
     <div class="details">
-      <h2>Nuon Text Jacket</h2>
+      <h2>Nuon Brown Text Design Jacket</h2>
       <div class="price">₹2,199</div>
+      <div class="short">Relaxed Fit</div>
+
+      <div class="full-description">
+        <b>Size:</b> XS, S, M, L, XL<br>
+        <b>Care:</b> Machine Wash
+      </div>
+
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="#">Order</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
-  <div class="product-card" data-id="jacket-1" data-search="bomber">
-    <div class="slider"><img src="jacket1.jpg"></div>
+  <!-- JACKET -->
+  <div class="product-card" data-id="jacket-1" data-search="jacket campus sutra bomber">
+    <div class="slider">
+      <img src="jacket1-1.jpg">
+      <img src="jacket1-2.jpg">
+      <img src="jacket1-3.jpg">
+    </div>
     <div class="details">
-      <h2>Bomber Jacket</h2>
+      <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
       <div class="price">₹1,999</div>
+      <div class="short">Regular Fit</div>
+
+      <div class="full-description">
+        <b>Size:</b> S, M, L, XL<br>
+        <b>Care:</b> Machine Wash
+      </div>
+
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="#">Order</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
@@ -234,27 +281,38 @@ header {
 
 <script>
 const cards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
+
+/* VAULT LOGIC (ADDED ONLY) */
 const vaultIcon = document.getElementById("vaultIcon");
-const vaultPanel = document.getElementById("vaultPanel");
-const vaultProducts = document.getElementById("vaultProducts");
+const vaultDrawer = document.getElementById("vaultDrawer");
+const vaultItems = document.getElementById("vaultItems");
 const vaultCount = document.getElementById("vaultCount");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-function updateVaultCount() {
+function updateVaultUI() {
   vaultCount.textContent = vault.length;
 }
 
-updateVaultCount();
+updateVaultUI();
 
+/* EXISTING BEHAVIOR + VAULT SAVE */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
 
   if (vault.includes(id)) {
     btn.classList.add("saved");
-    btn.textContent = "✓ Saved";
+    btn.textContent = "✓ Saved to Vault";
   }
+
+  card.addEventListener("click", e => {
+    if (e.target.classList.contains("vault-btn")) return;
+    cards.forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
   btn.addEventListener("click", e => {
     e.stopPropagation();
@@ -262,20 +320,30 @@ cards.forEach(card => {
       vault.push(id);
       localStorage.setItem("vault", JSON.stringify(vault));
       btn.classList.add("saved");
-      btn.textContent = "✓ Saved";
-      updateVaultCount();
+      btn.textContent = "✓ Saved to Vault";
+      updateVaultUI();
     }
   });
 });
 
 /* VAULT OPEN */
 vaultIcon.addEventListener("click", () => {
-  vaultPanel.classList.toggle("active");
-  vaultProducts.innerHTML = "";
-
+  vaultDrawer.classList.toggle("active");
+  vaultItems.innerHTML = "";
   cards.forEach(card => {
     if (vault.includes(card.dataset.id)) {
-      vaultProducts.appendChild(card.cloneNode(true));
+      vaultItems.appendChild(card.cloneNode(true));
+    }
+  });
+});
+
+/* SEARCH (UNCHANGED) */
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.toLowerCase();
+  cards.forEach(card => {
+    card.style.display = card.dataset.search.includes(value) ? "block" : "none";
+    if (!card.dataset.search.includes(value)) {
+      card.classList.remove("big-product");
     }
   });
 });
