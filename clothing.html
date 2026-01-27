@@ -96,7 +96,7 @@ header {
   display: block;
 }
 
-/* ===== PROFESSIONAL VAULT BUTTON ===== */
+/* VAULT BUTTON */
 .vault-btn {
   display: none;
   width: 100%;
@@ -121,7 +121,7 @@ header {
   border: 1px solid #ccc;
 }
 
-/* ===== ORDER BUTTON ===== */
+/* ORDER BUTTON */
 .order-btn {
   display: block;
   margin-top: 10px;
@@ -220,6 +220,7 @@ const vaultCount = document.getElementById("vaultCount");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 updateVaultCount();
 
+/* CARD INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -257,14 +258,34 @@ cards.forEach(card => {
   });
 });
 
+/* VAULT COUNT */
 function updateVaultCount() {
   vaultCount.textContent = vault.length;
 }
 
+/* OPEN VAULT */
 function openVault() {
   window.location.href = "vault.html";
+}
+
+/* ===== OPEN PRODUCT FROM VAULT (FIX) ===== */
+const openProduct = localStorage.getItem("openProduct");
+
+if (openProduct) {
+  const targetCard = document.querySelector(
+    `.product-card[data-id="${openProduct}"]`
+  );
+
+  if (targetCard) {
+    cards.forEach(c => c.classList.remove("big-product"));
+    targetCard.classList.add("big-product");
+    container.prepend(targetCard);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  localStorage.removeItem("openProduct");
 }
 </script>
 
 </body>
-</html>
+  </html>
