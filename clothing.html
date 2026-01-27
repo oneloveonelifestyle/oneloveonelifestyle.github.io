@@ -19,48 +19,55 @@ header {
   text-align: center;
 }
 
-header img {
-  height: 50px;
-  margin-bottom: 8px;
-}
-
-/* SEARCH BAR */
-.search-container {
-  background: #fff;
+/* SEARCH */
+.search-bar {
   padding: 12px;
+  background: #fff;
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
 }
 
-.search-box {
-  display: flex;
-  max-width: 500px;
-  margin: auto;
-}
-
-.search-box input {
-  flex: 1;
+.search-bar input {
+  width: 100%;
   padding: 12px;
   font-size: 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  outline: none;
 }
 
-.search-box button {
-  padding: 12px 18px;
-  font-size: 15px;
-  border: none;
-  background: #000;
-  color: #fff;
-  border-radius: 0 8px 8px 0;
+/* EXPANDED PRODUCT VIEW */
+#productView {
+  display: none;
+  background: #fff;
+  margin: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+#productView .slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+#productView img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.view-details {
+  padding: 15px;
+}
+
+.close-btn {
+  text-align: right;
+  font-size: 14px;
   cursor: pointer;
+  color: #000;
+  font-weight: bold;
 }
 
-/* PRODUCTS */
+/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -70,60 +77,44 @@ header img {
 
 .product-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
-.slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
-.slider img {
+.product-card img {
   width: 100%;
-  flex-shrink: 0;
-  scroll-snap-align: center;
 }
 
-.details {
-  padding: 12px;
+.card-info {
+  padding: 10px;
 }
 
-.details h2 {
-  font-size: 16px;
-  margin: 0 0 6px;
+.card-info h3 {
+  font-size: 15px;
+  margin: 5px 0;
 }
 
 .price {
-  font-size: 18px;
   font-weight: bold;
-}
-
-.details p {
-  font-size: 13px;
-  margin: 4px 0;
 }
 
 .order-btn {
   display: block;
-  margin-top: 10px;
   background: #000;
   color: #fff;
   text-align: center;
   padding: 12px;
+  margin-top: 10px;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
 }
 
-/* NO RESULT */
-.no-result {
-  text-align: center;
-  padding: 30px;
-  display: none;
-  color: #666;
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -131,96 +122,78 @@ header img {
 <body>
 
 <header>
-  <img src="logo.jpg" alt="One Love One Lifestyle">
   <h2>Clothing</h2>
 </header>
 
-<!-- SEARCH -->
-<div class="search-container">
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search for shirts, jackets, brands…">
-    <button>🔍</button>
-  </div>
+<div class="search-bar">
+  <input type="text" placeholder="Search products…">
 </div>
 
-<div class="no-result" id="noResult">No products found</div>
+<!-- EXPANDED PRODUCT -->
+<div id="productView">
+  <div class="close-btn" onclick="closeView()">✖ Close</div>
+  <div class="slider" id="viewImages"></div>
+  <div class="view-details" id="viewDetails"></div>
+</div>
 
-<div class="products-grid" id="productList">
+<!-- PRODUCT GRID -->
+<div class="products-grid">
 
   <!-- PRODUCT 1 -->
-  <div class="product-card" data-search="brown cotton shirt eta shirt">
-    <div class="slider">
-      <img src="shirt1-1.jpg">
-      <img src="shirt1-2.jpg">
-    </div>
-    <div class="details">
-      <h2>Brown Cotton Shirt</h2>
+  <div class="product-card" onclick="openProduct(
+    'Brown Cotton Shirt',
+    '₹2,199',
+    ['shirt1-1.jpg','shirt1-2.jpg','shirt1-3.jpg'],
+    'Sizes: XS, S, M, L<br>Fit: Relaxed Fit<br>Fabric: 100% Cotton<br><br>ETA redefines everyday comfort with this brown cotton shirt.'
+  )">
+    <img src="shirt1-1.jpg">
+    <div class="card-info">
+      <h3>Brown Cotton Shirt</h3>
       <div class="price">₹2,199</div>
-      <p>Relaxed Fit</p>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
     </div>
   </div>
 
   <!-- PRODUCT 2 -->
-  <div class="product-card" data-search="brown shirt cotton casual">
-    <div class="slider">
-      <img src="shirt1-3.jpg">
-      <img src="shirt1-4.jpg">
-      <img src="shirt1-5.jpg">
-    </div>
-    <div class="details">
-      <h2>Brown Cotton Shirt</h2>
-      <div class="price">₹2,199</div>
-      <p>Relaxed Fit</p>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
-    </div>
-  </div>
-
-  <!-- PRODUCT 3 -->
-  <div class="product-card" data-search="campus sutra jacket bomber winter">
-    <div class="slider">
-      <img src="jacket1-1.jpg">
-      <img src="jacket1-2.jpg">
-      <img src="jacket1-3.jpg">
-    </div>
-    <div class="details">
-      <h2>Campus Sutra Bomber Jacket</h2>
+  <div class="product-card" onclick="openProduct(
+    'Campus Sutra Bomber Jacket',
+    '₹1,999',
+    ['jacket1-1.jpg','jacket1-2.jpg','jacket1-3.jpg'],
+    'Sizes: S, M, L, XL<br>Fit: Regular Fit<br><br>Stylish zip-front bomber jacket.'
+  )">
+    <img src="jacket1-1.jpg">
+    <div class="card-info">
+      <h3>Campus Sutra Bomber Jacket</h3>
       <div class="price">₹1,999</div>
-      <p>Regular Fit</p>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
     </div>
   </div>
 
 </div>
 
-<!-- SEARCH SCRIPT -->
 <script>
-const searchInput = document.getElementById("searchInput");
-const products = document.querySelectorAll(".product-card");
-const noResult = document.getElementById("noResult");
+function openProduct(name, price, images, description) {
+  document.getElementById("productView").style.display = "block";
 
-searchInput.addEventListener("keyup", function () {
-  const value = searchInput.value.toLowerCase();
-  let visibleCount = 0;
-
-  products.forEach(product => {
-    const text = product.getAttribute("data-search");
-    if (text.includes(value)) {
-      product.style.display = "block";
-      visibleCount++;
-    } else {
-      product.style.display = "none";
-    }
+  let imgHTML = "";
+  images.forEach(img => {
+    imgHTML += `<img src="${img}">`;
   });
+  document.getElementById("viewImages").innerHTML = imgHTML;
 
-  noResult.style.display = visibleCount === 0 ? "block" : "none";
-});
+  document.getElementById("viewDetails").innerHTML = `
+    <h2>${name}</h2>
+    <h3>${price}</h3>
+    <p>${description}</p>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Order via Instagram
+    </a>
+  `;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function closeView() {
+  document.getElementById("productView").style.display = "none";
+}
 </script>
 
 </body>
