@@ -1,86 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>One Love One Lifestyle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
 
-    header {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 22px 15px 18px;
+}
 
-    header img {
-      width: 90px;
-      border-radius: 50%;
-    }
+header img {
+  width: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
 
-    /* SEARCH */
-    .search-bar {
-      background: #fff;
-      padding: 12px 15px;
-      display: flex;
-      justify-content: center;
-    }
+/* SEARCH BAR */
+.search-wrapper {
+  background: #fff;
+  padding: 12px 15px;
+}
 
-    .search-box {
-      display: flex;
-      width: 100%;
-      max-width: 360px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-    }
+.search-box {
+  display: flex;
+  max-width: 520px;
+  margin: auto;
+  background: #f1f1f1;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-    .search-box input {
-      flex: 1;
-      padding: 10px 12px;
-      font-size: 14px;
-      border: none;
-      outline: none;
-    }
+.search-box input {
+  flex: 1;
+  border: none;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  background: transparent;
+}
 
-    .search-box button {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 0 14px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.search-box button {
+  background: #000;
+  border: none;
+  color: #fff;
+  padding: 0 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-    .container {
-      padding: 20px;
-    }
+/* CONTAINER */
+.container {
+  padding: 18px;
+}
 
-    .category {
-      background: white;
-      padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000;
-      display: block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .no-results {
-      text-align: center;
-      margin-top: 40px;
-      color: #555;
-    }
-  </style>
+/* CATEGORY CARD */
+.category {
+  background: white;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+</style>
 </head>
 
 <body>
@@ -91,64 +89,52 @@
 </header>
 
 <!-- SEARCH -->
-<div class="search-bar">
+<div class="search-wrapper">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search jackets, shirts, clothing">
-    <button onclick="searchHome()">🔍</button>
+    <input type="text" id="searchInput" placeholder="Search jackets, gifts, clothing...">
+    <button onclick="searchCategories()">🔍</button>
   </div>
 </div>
 
-<div class="container" id="container">
+<!-- CATEGORIES -->
+<div class="container" id="categories">
 
-  <!-- CLOTHING CATEGORY -->
-  <a href="clothing.html"
-     id="clothingCategory"
-     class="category">
-     👕 Clothing
+  <a href="clothing.html" class="category" data-search="clothing jacket shirt cotton fashion wear">
+    👕 Clothing
   </a>
 
-  <!-- COMING SOON -->
-  <a href="#" class="category" style="display:none;">👟 Shoes (Coming Soon)</a>
-  <a href="#" class="category" style="display:none;">👜 Accessories (Coming Soon)</a>
+  <a href="#" class="category" data-search="shoes sneakers footwear coming soon">
+    👟 Shoes (Coming Soon)
+  </a>
+
+  <a href="#" class="category" data-search="accessories bags belts watches coming soon">
+    👜 Accessories (Coming Soon)
+  </a>
+
+  <a href="#" class="category" data-search="gifts gift hampers presents special">
+    🎁 Gifts
+  </a>
 
 </div>
 
 <script>
-const clothingKeywords = [
-  "jacket", "jackets", "shirt", "shirts", "cotton",
-  "bomber", "relaxed", "fit", "clothing"
-];
-
-function searchHome() {
+function searchCategories() {
   const query = document.getElementById("searchInput").value.toLowerCase().trim();
-  const clothing = document.getElementById("clothingCategory");
+  const categories = document.querySelectorAll(".category");
 
-  const oldMsg = document.querySelector(".no-results");
-  if (oldMsg) oldMsg.remove();
-
-  if (!query) {
-    clothing.style.display = "block";
-    return;
-  }
-
-  const match = clothingKeywords.some(word => query.includes(word));
-
-  if (match) {
-    clothing.style.display = "block";
-  } else {
-    clothing.style.display = "none";
-    const msg = document.createElement("div");
-    msg.className = "no-results";
-    msg.innerHTML = `
-      <h3>No results found</h3>
-      <p>Try searching for jackets, shirts or clothing.</p>
-    `;
-    document.getElementById("container").appendChild(msg);
-  }
+  categories.forEach(cat => {
+    const keywords = cat.dataset.search;
+    if (!query || keywords.includes(query)) {
+      cat.style.display = "block";
+    } else {
+      cat.style.display = "none";
+    }
+  });
 }
 
+/* ENTER KEY SUPPORT */
 document.getElementById("searchInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") searchHome();
+  if (e.key === "Enter") searchCategories();
 });
 </script>
 
