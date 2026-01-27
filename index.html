@@ -23,19 +23,34 @@
       border-radius: 50%;
     }
 
-    /* SEARCH BAR (ADDED ONLY) */
+    /* SEARCH BAR (PROFESSIONAL ADDITION ONLY) */
     .search-wrapper {
       background: #fff;
       padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .search-container {
+      position: relative;
     }
 
     .search-box {
       width: 100%;
-      padding: 14px;
+      padding: 14px 45px 14px 16px;
       font-size: 16px;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid #ccc;
       outline: none;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #555;
+      pointer-events: none;
     }
 
     .container {
@@ -65,13 +80,16 @@
   <h2>One Love One Lifestyle</h2>
 </header>
 
-<!-- SEARCH BAR (ONLY ADDITION) -->
+<!-- PROFESSIONAL SEARCH BAR -->
 <div class="search-wrapper">
-  <input
-    type="text"
-    class="search-box"
-    placeholder="Search clothing, shoes, accessories..."
-  >
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-box"
+      placeholder="Search clothing, shoes, accessories..."
+    >
+    <span class="search-icon">🔍</span>
+  </div>
 </div>
 
 <div class="container">
