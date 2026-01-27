@@ -66,11 +66,6 @@ header {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: transform .2s;
-}
-
-.product-card:hover {
-  transform: scale(1.01);
 }
 
 .slider {
@@ -102,7 +97,7 @@ header {
   color: #555;
 }
 
-/* BIG PRODUCT */
+/* BIG VIEW */
 .big-product {
   grid-column: 1 / -1;
 }
@@ -126,7 +121,30 @@ header {
   display: block;
 }
 
-/* BUTTON */
+/* VAULT BUTTON */
+.vault-btn {
+  display: none;
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  background: linear-gradient(135deg, #111, #333);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.big-product .vault-btn {
+  display: block;
+}
+
+.vault-btn.saved {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+}
+
+/* ORDER BUTTON */
 .order-btn {
   display: block;
   margin-top: 12px;
@@ -147,19 +165,17 @@ header {
   <h2>Clothing</h2>
 </header>
 
-<!-- SEARCH -->
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search shirts, jackets…">
+    <input type="text" id="searchInput" placeholder="Search shirts, jackets, brands…">
     <button>🔍</button>
   </div>
 </div>
 
-<!-- PRODUCTS -->
 <div class="products-grid" id="products">
 
-  <!-- SHIRT -->
-  <div class="product-card" data-search="shirt nuon cotton">
+  <!-- SHIRT 1 -->
+  <div class="product-card" data-id="shirt-1" data-search="shirt nuon brown cotton">
     <div class="slider">
       <img src="shirt1-1.jpg">
       <img src="shirt1-2.jpg">
@@ -170,57 +186,64 @@ header {
       <div class="short">Relaxed Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> XS, S, M, L, XL<br>
+        <b>Size:</b> XS, S, M, L, XL<br><br>
         <b>Fit:</b> Relaxed Fit<br>
         <b>Care:</b> Machine Wash<br>
-        <b>Fabric:</b> 100% Cotton
+        <b>Fabric:</b> 100% Cotton<br><br>
+        <b>Manufactured & Marketed By:</b><br>
+        Trent Limited, Mumbai – 400001<br><br>
+        <b>Country of Origin:</b> India
       </div>
 
-      <a class="order-btn" href="#" target="_blank">Order via Instagram</a>
+      <button class="vault-btn">♡ Save to Vault</button>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
-  <!-- JACKET 1 -->
-  <div class="product-card" data-search="jacket nuon brown">
+  <!-- SHIRT 2 -->
+  <div class="product-card" data-id="shirt-2" data-search="shirt nuon text design">
     <div class="slider">
       <img src="shirt1-3.jpg">
       <img src="shirt1-4.jpg">
       <img src="shirt1-5.jpg">
     </div>
     <div class="details">
-      <h2>Nuon Brown Text Jacket</h2>
+      <h2>Nuon Brown Text Design Jacket</h2>
       <div class="price">₹2,199</div>
       <div class="short">Relaxed Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> XS–XL<br>
+        <b>Size:</b> XS, S, M, L, XL<br><br>
         <b>Fit:</b> Relaxed Fit<br>
-        <b>Care:</b> Machine Wash
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton
       </div>
 
-      <a class="order-btn" href="#">Order via Instagram</a>
+      <button class="vault-btn">♡ Save to Vault</button>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
-  <!-- JACKET 2 -->
-  <div class="product-card" data-search="jacket campus sutra">
+  <!-- JACKET -->
+  <div class="product-card" data-id="jacket-1" data-search="jacket campus sutra bomber">
     <div class="slider">
       <img src="jacket1-1.jpg">
       <img src="jacket1-2.jpg">
       <img src="jacket1-3.jpg">
     </div>
     <div class="details">
-      <h2>Campus Sutra Bomber Jacket</h2>
+      <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
       <div class="price">₹1,999</div>
       <div class="short">Regular Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> S, M, L, XL<br>
+        <b>Size:</b> S, M, L, XL<br><br>
         <b>Fit:</b> Regular Fit<br>
         <b>Care:</b> Machine Wash
       </div>
 
-      <a class="order-btn" href="#">Order via Instagram</a>
+      <button class="vault-btn">♡ Save to Vault</button>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
@@ -229,13 +252,33 @@ header {
 <script>
 const cards = document.querySelectorAll(".product-card");
 const searchInput = document.getElementById("searchInput");
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* EXPAND CARD */
+/* EXPAND + VAULT */
 cards.forEach(card => {
-  card.addEventListener("click", () => {
+  const btn = card.querySelector(".vault-btn");
+  const id = card.dataset.id;
+
+  if (vault.includes(id)) {
+    btn.classList.add("saved");
+    btn.textContent = "✓ Saved to Vault";
+  }
+
+  card.addEventListener("click", e => {
+    if (e.target.classList.contains("vault-btn")) return;
+
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
     card.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  btn.addEventListener("click", () => {
+    if (!vault.includes(id)) {
+      vault.push(id);
+      localStorage.setItem("vault", JSON.stringify(vault));
+      btn.classList.add("saved");
+      btn.textContent = "✓ Saved to Vault";
+    }
   });
 });
 
@@ -243,9 +286,10 @@ cards.forEach(card => {
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
   cards.forEach(card => {
-    const match = card.dataset.search.includes(value);
-    card.style.display = match ? "block" : "none";
-    if (!match) card.classList.remove("big-product");
+    card.style.display = card.dataset.search.includes(value) ? "block" : "none";
+    if (!card.dataset.search.includes(value)) {
+      card.classList.remove("big-product");
+    }
   });
 });
 </script>
