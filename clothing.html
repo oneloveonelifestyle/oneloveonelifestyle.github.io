@@ -27,6 +27,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .search-box {
@@ -50,23 +51,6 @@ header {
   border-radius: 0 8px 8px 0;
 }
 
-/* VAULT */
-.vault-section {
-  padding: 15px;
-}
-
-.vault-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.vault-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
 /* GRID */
 .products-grid {
   display: grid;
@@ -81,6 +65,12 @@ header {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.product-card:hover {
+  transform: scale(1.01);
 }
 
 .slider {
@@ -90,6 +80,7 @@ header {
 
 .slider img {
   width: 100%;
+  flex-shrink: 0;
 }
 
 .details {
@@ -98,6 +89,7 @@ header {
 
 .details h2 {
   font-size: 16px;
+  margin: 0 0 6px;
 }
 
 .price {
@@ -110,52 +102,41 @@ header {
   color: #555;
 }
 
-/* BIG VIEW */
+/* BIG PRODUCT */
 .big-product {
   grid-column: 1 / -1;
+}
+
+.big-product h2 {
+  font-size: 22px;
+}
+
+.big-product .price {
+  font-size: 22px;
 }
 
 .full-description {
   display: none;
   font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.6;
 }
 
 .big-product .full-description {
   display: block;
 }
 
-/* BUTTONS */
+/* BUTTON */
 .order-btn {
-  margin-top: 10px;
   display: block;
+  margin-top: 12px;
   background: #000;
   color: #fff;
-  padding: 14px;
   text-align: center;
+  padding: 14px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-}
-
-.vault-btn {
-  margin-top: 8px;
-  background: linear-gradient(135deg, #111, #333);
-  color: #fff;
-  padding: 12px;
-  text-align: center;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.remove-btn {
-  background: #999;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  border-radius: 8px;
-  margin-top: 8px;
-  cursor: pointer;
 }
 </style>
 </head>
@@ -166,23 +147,19 @@ header {
   <h2>Clothing</h2>
 </header>
 
+<!-- SEARCH -->
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products…">
+    <input type="text" id="searchInput" placeholder="Search shirts, jackets…">
     <button>🔍</button>
   </div>
-</div>
-
-<!-- VAULT -->
-<div class="vault-section">
-  <div class="vault-title">💎 Your Vault</div>
-  <div class="vault-grid" id="vault"></div>
 </div>
 
 <!-- PRODUCTS -->
 <div class="products-grid" id="products">
 
-  <div class="product-card" data-id="shirt1">
+  <!-- SHIRT -->
+  <div class="product-card" data-search="shirt nuon cotton">
     <div class="slider">
       <img src="shirt1-1.jpg">
       <img src="shirt1-2.jpg">
@@ -193,75 +170,84 @@ header {
       <div class="short">Relaxed Fit</div>
 
       <div class="full-description">
-        100% Cotton · Machine Wash
+        <b>Size:</b> XS, S, M, L, XL<br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton
       </div>
 
-      <div class="vault-btn">Save to Vault</div>
-
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
+      <a class="order-btn" href="#" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
-  <div class="product-card" data-id="jacket1">
+  <!-- JACKET 1 -->
+  <div class="product-card" data-search="jacket nuon brown">
+    <div class="slider">
+      <img src="shirt1-3.jpg">
+      <img src="shirt1-4.jpg">
+      <img src="shirt1-5.jpg">
+    </div>
+    <div class="details">
+      <h2>Nuon Brown Text Jacket</h2>
+      <div class="price">₹2,199</div>
+      <div class="short">Relaxed Fit</div>
+
+      <div class="full-description">
+        <b>Size:</b> XS–XL<br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash
+      </div>
+
+      <a class="order-btn" href="#">Order via Instagram</a>
+    </div>
+  </div>
+
+  <!-- JACKET 2 -->
+  <div class="product-card" data-search="jacket campus sutra">
     <div class="slider">
       <img src="jacket1-1.jpg">
       <img src="jacket1-2.jpg">
+      <img src="jacket1-3.jpg">
     </div>
     <div class="details">
       <h2>Campus Sutra Bomber Jacket</h2>
       <div class="price">₹1,999</div>
       <div class="short">Regular Fit</div>
 
-      <div class="vault-btn">Save to Vault</div>
+      <div class="full-description">
+        <b>Size:</b> S, M, L, XL<br>
+        <b>Fit:</b> Regular Fit<br>
+        <b>Care:</b> Machine Wash
+      </div>
 
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
+      <a class="order-btn" href="#">Order via Instagram</a>
     </div>
   </div>
 
 </div>
 
 <script>
-const vaultContainer = document.getElementById("vault");
-let vaultItems = JSON.parse(localStorage.getItem("vault")) || [];
+const cards = document.querySelectorAll(".product-card");
+const searchInput = document.getElementById("searchInput");
 
-/* LOAD VAULT */
-function loadVault() {
-  vaultContainer.innerHTML = "";
-  vaultItems.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "product-card";
-    div.innerHTML = item.html + `<div class="remove-btn">Remove</div>`;
-    div.querySelector(".remove-btn").onclick = () => removeFromVault(item.id);
-    vaultContainer.appendChild(div);
+/* EXPAND CARD */
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    cards.forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-}
-
-/* SAVE */
-document.querySelectorAll(".vault-btn").forEach(btn => {
-  btn.onclick = e => {
-    const card = e.target.closest(".product-card");
-    const id = card.dataset.id;
-
-    if (vaultItems.some(i => i.id === id)) return;
-
-    vaultItems.push({ id, html: card.innerHTML });
-    localStorage.setItem("vault", JSON.stringify(vaultItems));
-    loadVault();
-  };
 });
 
-/* REMOVE */
-function removeFromVault(id) {
-  vaultItems = vaultItems.filter(i => i.id !== id);
-  localStorage.setItem("vault", JSON.stringify(vaultItems));
-  loadVault();
-}
-
-loadVault();
+/* SEARCH */
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.toLowerCase();
+  cards.forEach(card => {
+    const match = card.dataset.search.includes(value);
+    card.style.display = match ? "block" : "none";
+    if (!match) card.classList.remove("big-product");
+  });
+});
 </script>
 
 </body>
