@@ -23,8 +23,8 @@
       border-radius: 50%;
     }
 
-    /* SEARCH */
-    .search-wrap {
+    /* SEARCH BAR */
+    .search-wrapper {
       background: #fff;
       padding: 12px;
       display: flex;
@@ -38,13 +38,14 @@
       border: 1px solid #ddd;
       border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     .search-box input {
       flex: 1;
       padding: 10px 12px;
-      border: none;
       font-size: 14px;
+      border: none;
       outline: none;
     }
 
@@ -52,7 +53,7 @@
       background: #000;
       color: #fff;
       border: none;
-      padding: 0 14px;
+      padding: 0 16px;
       font-size: 16px;
       cursor: pointer;
     }
@@ -77,8 +78,8 @@
 
     .no-results {
       text-align: center;
-      color: #555;
       margin-top: 40px;
+      color: #555;
     }
   </style>
 </head>
@@ -90,15 +91,15 @@
   <h2>One Love One Lifestyle</h2>
 </header>
 
-<!-- SEARCH BAR -->
-<div class="search-wrap">
+<!-- SEARCH -->
+<div class="search-wrapper">
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Search jackets, shirts, clothing...">
     <button onclick="searchHome()">🔍</button>
   </div>
 </div>
 
-<div class="container" id="categoryContainer">
+<div class="container" id="homeContainer">
 
   <a href="clothing.html"
      class="category"
@@ -115,7 +116,7 @@
 
   <a href="#"
      class="category"
-     data-search="accessories bag wallet"
+     data-search="accessories bag wallet belt"
      style="display:none;">
      👜 Accessories (Coming Soon)
   </a>
@@ -138,8 +139,8 @@ function searchHome() {
     }
   });
 
-  const existing = document.querySelector(".no-results");
-  if (existing) existing.remove();
+  const oldMsg = document.querySelector(".no-results");
+  if (oldMsg) oldMsg.remove();
 
   if (found === 0) {
     const msg = document.createElement("div");
@@ -148,11 +149,10 @@ function searchHome() {
       <h3>No results found</h3>
       <p>Try searching for clothing, jackets, or shirts.</p>
     `;
-    document.getElementById("categoryContainer").appendChild(msg);
+    document.getElementById("homeContainer").appendChild(msg);
   }
 }
 
-/* ENTER KEY SUPPORT */
 document.getElementById("searchInput").addEventListener("keydown", e => {
   if (e.key === "Enter") searchHome();
 });
