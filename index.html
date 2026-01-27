@@ -12,6 +12,7 @@ body {
   background: #f4f4f4;
 }
 
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -32,7 +33,7 @@ header img {
 
 .search-box {
   display: flex;
-  max-width: 480px;
+  max-width: 520px;
   margin: auto;
   background: #f1f1f1;
   border-radius: 10px;
@@ -57,7 +58,7 @@ header img {
   cursor: pointer;
 }
 
-/* CATEGORY */
+/* CATEGORIES */
 .container {
   padding: 20px;
 }
@@ -88,27 +89,35 @@ header img {
 <!-- SEARCH -->
 <div class="search-wrapper">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search jackets, shirts, cotton...">
-    <button onclick="goToClothing()">🔍</button>
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, shoes, gifts...">
+    <button onclick="globalSearch()">🔍</button>
   </div>
 </div>
 
+<!-- CATEGORIES -->
 <div class="container">
   <a href="clothing.html" class="category">👕 Clothing</a>
+  <a href="#" class="category">👟 Shoes (Coming Soon)</a>
+  <a href="#" class="category">👜 Accessories (Coming Soon)</a>
+  <a href="#" class="category">🎁 Gifts (Coming Soon)</a>
 </div>
 
 <script>
-function goToClothing() {
-  const query = document.getElementById("searchInput").value.trim();
-  if (query) {
-    window.location.href = "clothing.html?search=" + encodeURIComponent(query);
-  } else {
-    window.location.href = "clothing.html";
-  }
+function globalSearch() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+
+  if (!query) return;
+
+  /* 
+    Currently products exist in Clothing.
+    Future categories can be added here.
+  */
+  window.location.href = "clothing.html?search=" + encodeURIComponent(query);
 }
 
+/* ENTER KEY SUPPORT */
 document.getElementById("searchInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") goToClothing();
+  if (e.key === "Enter") globalSearch();
 });
 </script>
 
