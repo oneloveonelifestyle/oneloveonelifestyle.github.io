@@ -12,29 +12,27 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
   text-align: center;
-  padding: 22px 15px 18px;
+  padding: 20px;
 }
 
 header img {
   width: 90px;
   border-radius: 50%;
-  margin-bottom: 10px;
 }
 
 /* SEARCH BAR */
 .search-wrapper {
   background: #fff;
-  padding: 12px 15px;
+  padding: 12px 16px;
 }
 
 .search-box {
   display: flex;
-  max-width: 520px;
+  max-width: 480px;
   margin: auto;
   background: #f1f1f1;
   border-radius: 10px;
@@ -59,24 +57,23 @@ header img {
   cursor: pointer;
 }
 
-/* CONTAINER */
+/* CATEGORY */
 .container {
-  padding: 18px;
+  padding: 20px;
 }
 
-/* CATEGORY CARD */
 .category {
   background: white;
-  padding: 18px;
+  padding: 20px;
   margin-bottom: 15px;
-  border-radius: 14px;
+  border-radius: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
   color: #000;
   display: block;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 </style>
 </head>
@@ -91,53 +88,27 @@ header img {
 <!-- SEARCH -->
 <div class="search-wrapper">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search jackets, shirts, gifts...">
-    <button onclick="searchCategories()">🔍</button>
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, cotton...">
+    <button onclick="goToClothing()">🔍</button>
   </div>
 </div>
 
-<!-- CATEGORIES -->
-<div class="container" id="categories">
-
-  <a href="clothing.html?type=jacket" class="category" data-search="jacket jackets winter bomber">
-    🧥 Jackets
-  </a>
-
-  <a href="clothing.html?type=shirt" class="category" data-search="shirt shirts cotton casual">
-    👔 Shirts
-  </a>
-
-  <a href="#" class="category" data-search="shoes footwear sneakers">
-    👟 Shoes (Coming Soon)
-  </a>
-
-  <a href="#" class="category" data-search="accessories bags belts">
-    👜 Accessories (Coming Soon)
-  </a>
-
-  <a href="#" class="category" data-search="gifts gift hampers presents">
-    🎁 Gifts
-  </a>
-
+<div class="container">
+  <a href="clothing.html" class="category">👕 Clothing</a>
 </div>
 
 <script>
-function searchCategories() {
-  const query = document.getElementById("searchInput").value.toLowerCase().trim();
-  const categories = document.querySelectorAll(".category");
-
-  categories.forEach(cat => {
-    const keywords = cat.dataset.search;
-    if (!query || keywords.includes(query)) {
-      cat.style.display = "block";
-    } else {
-      cat.style.display = "none";
-    }
-  });
+function goToClothing() {
+  const query = document.getElementById("searchInput").value.trim();
+  if (query) {
+    window.location.href = "clothing.html?search=" + encodeURIComponent(query);
+  } else {
+    window.location.href = "clothing.html";
+  }
 }
 
 document.getElementById("searchInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") searchCategories();
+  if (e.key === "Enter") goToClothing();
 });
 </script>
 
