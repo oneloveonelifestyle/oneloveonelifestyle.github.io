@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -25,7 +24,6 @@ header img {
   margin-bottom: 8px;
 }
 
-/* GRID — THIS IS THE KEY PART */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -33,7 +31,6 @@ header img {
   padding: 15px;
 }
 
-/* PRODUCT CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -41,7 +38,6 @@ header img {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* IMAGE SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -54,7 +50,6 @@ header img {
   scroll-snap-align: center;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -75,7 +70,6 @@ header img {
   margin: 4px 0;
 }
 
-/* ORDER BUTTON */
 .order-btn {
   display: block;
   margin-top: 10px;
@@ -88,7 +82,6 @@ header img {
   font-weight: bold;
 }
 
-/* MOBILE SAFETY */
 @media (max-width: 500px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -105,7 +98,6 @@ header img {
   <p>Swipe images to view</p>
 </header>
 
-<!-- GRID START -->
 <div class="products-grid">
 
   <!-- PRODUCT 1 -->
@@ -114,17 +106,13 @@ header img {
       <img src="shirt1-1.jpg">
       <img src="shirt1-2.jpg">
     </div>
-
     <div class="details">
       <h2>Brown Cotton Shirt</h2>
       <div class="price">₹2,199</div>
       <p><b>Sizes:</b> XS, S, M, L</p>
       <p><b>Fit:</b> Relaxed Fit</p>
-
-      <a class="order-btn"
-         href="https://www.instagram.com/oneloveonelifestyle/"
-         target="_blank">
-         Order via Instagram
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
       </a>
     </div>
   </div>
@@ -132,27 +120,40 @@ header img {
   <!-- PRODUCT 2 -->
   <div class="product-card">
     <div class="slider">
+      <img src="shirt1-3.jpg">
+      <img src="shirt1-4.jpg">
+      <img src="shirt1-5.jpg">
+    </div>
+    <div class="details">
+      <h2>Brown Cotton Shirt</h2>
+      <div class="price">₹2,199</div>
+      <p><b>Sizes:</b> XS, S, M, L</p>
+      <p><b>Fit:</b> Relaxed Fit</p>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
+      </a>
+    </div>
+  </div>
+
+  <!-- PRODUCT 3 -->
+  <div class="product-card">
+    <div class="slider">
       <img src="jacket1-1.jpg">
       <img src="jacket1-2.jpg">
       <img src="jacket1-3.jpg">
     </div>
-
     <div class="details">
       <h2>Campus Sutra Bomber Jacket</h2>
       <div class="price">₹1,999</div>
       <p><b>Sizes:</b> S, M, L, XL</p>
       <p><b>Fit:</b> Regular Fit</p>
-
-      <a class="order-btn"
-         href="https://www.instagram.com/oneloveonelifestyle/"
-         target="_blank">
-         Order via Instagram
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
       </a>
     </div>
   </div>
 
 </div>
-<!-- GRID END -->
 
 </body>
 </html>
