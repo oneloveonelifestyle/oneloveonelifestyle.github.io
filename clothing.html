@@ -121,7 +121,7 @@ header {
   display: block;
 }
 
-/* VAULT BUTTON (existing, unchanged) */
+/* VAULT BUTTON */
 .vault-btn {
   display: none;
   width: 100%;
@@ -129,7 +129,6 @@ header {
   padding: 14px;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 14px;
   background: linear-gradient(135deg, #111, #333);
   color: #fff;
   border: none;
@@ -157,14 +156,14 @@ header {
   font-weight: bold;
 }
 
-/* ===== ADDED VAULT UI ===== */
+/* VAULT ICON */
 #vaultIcon {
   position: fixed;
   top: 16px;
   right: 16px;
   font-size: 22px;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 999;
 }
 
 #vaultCount {
@@ -176,27 +175,6 @@ header {
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 50%;
-}
-
-#vaultPopup {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 10000;
-}
-
-#vaultBox {
-  background: #fff;
-  width: 90%;
-  max-width: 420px;
-  margin: 15% auto;
-  border-radius: 12px;
-  padding: 15px;
-}
-
-#vaultBox h3 {
-  margin-top: 0;
 }
 </style>
 </head>
@@ -229,13 +207,13 @@ header {
 
       <div class="full-description">
         <b>Size:</b> XS, S, M, L, XL<br><br>
-        <b>Fit:</b> Relaxed Fit<br>
-        <b>Care:</b> Machine Wash<br>
         <b>Fabric:</b> 100% Cotton
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
+      </a>
     </div>
   </div>
 
@@ -256,7 +234,9 @@ header {
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
+      </a>
     </div>
   </div>
 
@@ -277,7 +257,9 @@ header {
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Order via Instagram
+      </a>
     </div>
   </div>
 
@@ -289,20 +271,18 @@ header {
   <span id="vaultCount">0</span>
 </div>
 
-<!-- VAULT POPUP -->
-<div id="vaultPopup">
-  <div id="vaultBox">
-    <h3>Saved in Vault</h3>
-    <div id="vaultList"></div>
-  </div>
-</div>
-
 <script>
 const cards = document.querySelectorAll(".product-card");
 const searchInput = document.getElementById("searchInput");
+
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* EXISTING EXPAND + VAULT SAVE */
+function updateVaultCount() {
+  document.getElementById("vaultCount").textContent = vault.length;
+}
+updateVaultCount();
+
+/* EXPAND + SAVE */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -319,7 +299,8 @@ cards.forEach(card => {
     card.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
     if (!vault.includes(id)) {
       vault.push(id);
       localStorage.setItem("vault", JSON.stringify(vault));
@@ -334,48 +315,15 @@ cards.forEach(card => {
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
   cards.forEach(card => {
-    card.style.display = card.dataset.search.includes(value) ? "block" : "none";
-    if (!card.dataset.search.includes(value)) {
-      card.classList.remove("big-product");
-    }
+    const match = card.dataset.search.includes(value);
+    card.style.display = match ? "block" : "none";
+    if (!match) card.classList.remove("big-product");
   });
 });
 
-/* ===== VAULT DISPLAY (ADDED) ===== */
-const vaultIcon = document.getElementById("vaultIcon");
-const vaultPopup = document.getElementById("vaultPopup");
-const vaultList = document.getElementById("vaultList");
-const vaultCount = document.getElementById("vaultCount");
-
-function updateVaultCount() {
-  vaultCount.textContent = vault.length;
-}
-updateVaultCount();
-
-vaultIcon.addEventListener("click", () => {
-  vaultList.innerHTML = "";
-  if (vault.length === 0) {
-    vaultList.innerHTML = "<p>No products saved.</p>";
-  } else {
-    vault.forEach(id => {
-      const title = document.querySelector(
-        `.product-card[data-id="${id}"] h2`
-      );
-      if (title) {
-        vaultList.innerHTML += `
-          <div style="padding:8px 0;border-bottom:1px solid #eee;">
-            ${title.textContent}
-          </div>`;
-      }
-    });
-  }
-  vaultPopup.style.display = "block";
-});
-
-vaultPopup.addEventListener("click", e => {
-  if (e.target === vaultPopup) {
-    vaultPopup.style.display = "none";
-  }
+/* OPEN VAULT PAGE */
+document.getElementById("vaultIcon").addEventListener("click", () => {
+  window.location.href = "vault.html";
 });
 </script>
 
