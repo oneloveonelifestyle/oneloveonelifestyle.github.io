@@ -90,6 +90,7 @@ header {
   display: none;
   font-size: 14px;
   margin-top: 10px;
+  line-height: 1.6;
 }
 
 .big-product .full-description {
@@ -157,10 +158,14 @@ header {
     <h2>Nuon Brown Cotton Shirt</h2>
     <div class="price">₹2,199</div>
     <div class="short">Relaxed Fit</div>
+
     <div class="full-description">
-      Size: XS, S, M, L, XL<br>
-      Fabric: 100% Cotton
+      <b>Size:</b> XS, S, M, L, XL<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care:</b> Machine Wash<br>
+      <b>Fabric:</b> 100% Cotton
     </div>
+
     <button class="vault-btn">♡ Save to Vault</button>
     <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
       Buy via Instagram
@@ -179,9 +184,13 @@ header {
     <h2>Nuon Brown Text Design Jacket</h2>
     <div class="price">₹2,199</div>
     <div class="short">Relaxed Fit</div>
+
     <div class="full-description">
-      Size: XS, S, M, L, XL
+      <b>Size:</b> XS, S, M, L, XL<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care:</b> Machine Wash
     </div>
+
     <button class="vault-btn">♡ Save to Vault</button>
     <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
       Buy via Instagram
@@ -200,9 +209,13 @@ header {
     <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
     <div class="price">₹1,999</div>
     <div class="short">Regular Fit</div>
+
     <div class="full-description">
-      Size: S, M, L, XL
+      <b>Size:</b> S, M, L, XL<br><br>
+      <b>Fit:</b> Regular Fit<br>
+      <b>Care:</b> Machine Wash
     </div>
+
     <button class="vault-btn">♡ Save to Vault</button>
     <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
       Buy via Instagram
@@ -220,7 +233,7 @@ const vaultCount = document.getElementById("vaultCount");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 updateVaultCount();
 
-/* CARD CLICK + VAULT */
+/* CARD INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -257,17 +270,15 @@ cards.forEach(card => {
   });
 });
 
-/* COUNT */
 function updateVaultCount() {
   vaultCount.textContent = vault.length;
 }
 
-/* OPEN VAULT */
 function openVault() {
   window.location.href = "vault.html";
 }
 
-/* 🔑 OPEN PRODUCT FROM VAULT (GUARANTEED FIX) */
+/* OPEN PRODUCT FROM VAULT */
 const openProduct = localStorage.getItem("openProduct");
 
 if (openProduct) {
