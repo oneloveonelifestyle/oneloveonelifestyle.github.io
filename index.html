@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -23,41 +27,40 @@
       border-radius: 50%;
     }
 
-    /* SUBTLE PREMIUM SEARCH */
+    /* SEARCH BAR */
     .search-wrapper {
       background: #fff;
-      padding: 8px 15px;
+      padding: 10px 15px;
       border-bottom: 1px solid #e5e5e5;
     }
 
     .search-container {
-      position: relative;
       max-width: 420px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      background: #fafafa;
+      overflow: hidden;
     }
 
     .search-box {
-      width: 100%;
-      padding: 9px 34px 9px 12px;
+      flex: 1;
+      padding: 9px 12px;
       font-size: 14px;
-      border-radius: 20px;
-      border: 1px solid #ddd;
+      border: none;
       outline: none;
-      background: #fafafa;
+      background: transparent;
     }
 
-    .search-box::placeholder {
-      color: #999;
-    }
-
-    .search-icon {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: #777;
-      pointer-events: none;
+    .search-btn {
+      border: none;
+      background: transparent;
+      padding: 0 12px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #666;
     }
 
     .container {
@@ -87,16 +90,17 @@
   <h2>One Love One Lifestyle</h2>
 </header>
 
-<!-- SMALL, LUXURY SEARCH BAR -->
+<!-- PROFESSIONAL SEARCH -->
 <div class="search-wrapper">
-  <div class="search-container">
+  <form class="search-container" onsubmit="goToSearch(event)">
     <input
       type="text"
+      id="homeSearch"
       class="search-box"
-      placeholder="Search"
+      placeholder="Search clothing, jackets, shirts..."
     >
-    <span class="search-icon">🔍</span>
-  </div>
+    <button class="search-btn" type="submit">🔍</button>
+  </form>
 </div>
 
 <div class="container">
@@ -104,6 +108,18 @@
   <a href="#" class="category">👟 Shoes (Coming Soon)</a>
   <a href="#" class="category">👜 Accessories (Coming Soon)</a>
 </div>
+
+<script>
+function goToSearch(e) {
+  e.preventDefault();
+  const query = document.getElementById("homeSearch").value.trim();
+  if (query) {
+    window.location.href = "clothing.html?search=" + encodeURIComponent(query);
+  } else {
+    window.location.href = "clothing.html";
+  }
+}
+</script>
 
 </body>
 </html>
