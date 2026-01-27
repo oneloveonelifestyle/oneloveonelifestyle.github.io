@@ -19,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* CONTINUE SHOPPING BUTTON */
 .back-btn {
   display: block;
   margin: 15px;
@@ -32,7 +31,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -40,7 +38,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -67,7 +64,6 @@ header {
   font-weight: bold;
 }
 
-/* REMOVE BUTTON */
 .remove-btn {
   display: block;
   width: 100%;
@@ -117,17 +113,17 @@ const PRODUCTS = {
   }
 };
 
-/* EMPTY VAULT MESSAGE */
+/* EMPTY VAULT STATE */
 if (vault.length === 0) {
   vaultProducts.innerHTML = `
     <div style="text-align:center;margin-top:80px;color:#555;">
       <h3>Your vault is empty</h3>
-      <p>Save products you love and find them here anytime.</p>
+      <p>Save products you love and access them instantly from here.</p>
     </div>
   `;
 }
 
-/* RENDER PRODUCTS */
+/* RENDER VAULT PRODUCTS */
 vault.forEach(id => {
   const p = PRODUCTS[id];
   if (!p) return;
@@ -147,15 +143,15 @@ vault.forEach(id => {
     </div>
   `;
 
-  /* TAP CARD → OPEN IN CLOTHING */
+  /* TAP CARD → OPEN ORIGINAL PRODUCT */
   card.addEventListener("click", () => {
     localStorage.setItem("openProduct", id);
     window.location.href = "clothing.html";
   });
 
-  /* REMOVE BUTTON */
+  /* REMOVE FROM VAULT */
   card.querySelector(".remove-btn").addEventListener("click", e => {
-    e.stopPropagation(); // 🔥 VERY IMPORTANT
+    e.stopPropagation();
     vault = vault.filter(v => v !== id);
     localStorage.setItem("vault", JSON.stringify(vault));
     card.remove();
@@ -164,7 +160,7 @@ vault.forEach(id => {
       vaultProducts.innerHTML = `
         <div style="text-align:center;margin-top:80px;color:#555;">
           <h3>Your vault is empty</h3>
-          <p>Save products you love and find them here anytime.</p>
+          <p>Save products you love and access them instantly from here.</p>
         </div>
       `;
     }
