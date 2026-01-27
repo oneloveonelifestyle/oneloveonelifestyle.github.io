@@ -34,9 +34,9 @@
     .search-box {
       display: flex;
       width: 100%;
-      max-width: 420px;
+      max-width: 380px;
       border: 1px solid #ddd;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
@@ -94,7 +94,7 @@
 <!-- SEARCH -->
 <div class="search-wrapper">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search jackets, shirts, clothing...">
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, clothing">
     <button onclick="searchHome()">🔍</button>
   </div>
 </div>
@@ -103,23 +103,13 @@
 
   <a href="clothing.html"
      class="category"
-     data-search="clothing jacket jackets shirt shirts cotton bomber">
+     data-search="clothing jacket jackets shirt shirts cotton bomber relaxed fit">
      👕 Clothing
   </a>
 
-  <a href="#"
-     class="category"
-     data-search="shoes sneaker sneakers footwear"
-     style="display:none;">
-     👟 Shoes (Coming Soon)
-  </a>
-
-  <a href="#"
-     class="category"
-     data-search="accessories bag wallet belt"
-     style="display:none;">
-     👜 Accessories (Coming Soon)
-  </a>
+  <!-- Coming soon (intentionally hidden) -->
+  <a href="#" class="category" style="display:none;">👟 Shoes (Coming Soon)</a>
+  <a href="#" class="category" style="display:none;">👜 Accessories (Coming Soon)</a>
 
 </div>
 
@@ -130,8 +120,12 @@ function searchHome() {
   let found = 0;
 
   categories.forEach(cat => {
-    const keywords = cat.dataset.search;
-    if (!query || keywords.includes(query)) {
+    const keywords = cat.getAttribute("data-search");
+
+    if (!query) {
+      cat.style.display = "block";
+      found++;
+    } else if (keywords && keywords.includes(query)) {
       cat.style.display = "block";
       found++;
     } else {
@@ -147,14 +141,16 @@ function searchHome() {
     msg.className = "no-results";
     msg.innerHTML = `
       <h3>No results found</h3>
-      <p>Try searching for clothing, jackets, or shirts.</p>
+      <p>Try searching for jackets, shirts, or clothing.</p>
     `;
     document.getElementById("homeContainer").appendChild(msg);
   }
 }
 
-document.getElementById("searchInput").addEventListener("keydown", e => {
-  if (e.key === "Enter") searchHome();
+document.getElementById("searchInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    searchHome();
+  }
 });
 </script>
 
