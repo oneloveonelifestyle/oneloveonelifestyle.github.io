@@ -157,9 +157,7 @@ header {
       Fabric: 100% Cotton
     </div>
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
   </div>
 </div>
 
@@ -175,13 +173,10 @@ header {
     <div class="price">₹2,199</div>
     <div class="short">Relaxed Fit</div>
     <div class="full-description">
-      Size: XS, S, M, L, XL<br>
-      Fabric: Cotton
+      Size: XS, S, M, L, XL
     </div>
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
   </div>
 </div>
 
@@ -197,23 +192,21 @@ header {
     <div class="price">₹1,999</div>
     <div class="short">Regular Fit</div>
     <div class="full-description">
-      Size: S, M, L, XL<br>
-      Fabric: Polyester
+      Size: S, M, L, XL
     </div>
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
   </div>
 </div>
 
 </div>
 
 <script>
+const container = document.getElementById("products");
 const cards = document.querySelectorAll(".product-card");
 const vaultCount = document.getElementById("vaultCount");
-let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 updateVaultCount();
 
 cards.forEach(card => {
@@ -227,12 +220,17 @@ cards.forEach(card => {
 
   card.addEventListener("click", e => {
     if (e.target.classList.contains("vault-btn")) return;
+
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
+
+    container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   btn.addEventListener("click", e => {
     e.stopPropagation();
+
     if (vault.includes(id)) {
       vault = vault.filter(v => v !== id);
       btn.classList.remove("remove");
@@ -242,6 +240,7 @@ cards.forEach(card => {
       btn.classList.add("remove");
       btn.textContent = "✕ Remove from Vault";
     }
+
     localStorage.setItem("vault", JSON.stringify(vault));
     updateVaultCount();
   });
