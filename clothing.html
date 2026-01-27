@@ -11,6 +11,8 @@ body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
 }
+
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -18,6 +20,7 @@ header {
   text-align: center;
   position: relative;
 }
+
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -25,6 +28,7 @@ header {
   font-size: 22px;
   cursor: pointer;
 }
+
 .vault-count {
   background: red;
   color: #fff;
@@ -35,32 +39,43 @@ header {
   top: -8px;
   right: -10px;
 }
+
+/* SEARCH BAR */
 .search-bar {
   background: #fff;
   padding: 12px;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
+
 .search-input {
   flex: 1;
   padding: 12px;
   font-size: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  outline: none;
 }
+
 .search-btn {
   background: #000;
   color: #fff;
   border: none;
   padding: 12px 14px;
   border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
+
+/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   padding: 15px;
 }
+
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -68,50 +83,75 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
 }
+
+/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
 }
+
 .slider img {
   width: 100%;
 }
+
+/* DETAILS */
 .details {
   padding: 12px;
 }
+
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
 .price {
   font-size: 18px;
   font-weight: bold;
 }
+
 .short {
   font-size: 13px;
   color: #555;
 }
+
 .big-product {
   grid-column: 1 / -1;
 }
+
 .full-description {
   display: none;
   font-size: 14px;
   margin-top: 12px;
   line-height: 1.7;
+  color: #333;
 }
+
 .big-product .full-description {
   display: block;
 }
+
+/* BUTTONS */
 .vault-btn {
   display: none;
   width: 100%;
   margin-top: 10px;
   padding: 10px;
   border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #000;
   border: 1px solid #ddd;
+  cursor: pointer;
 }
+
 .big-product .vault-btn {
   display: block;
 }
+
 .vault-btn.remove {
   background: #f5f5f5;
 }
+
 .order-btn {
   display: block;
   margin-top: 10px;
@@ -121,12 +161,19 @@ header {
   padding: 12px;
   border-radius: 8px;
   text-decoration: none;
+  font-weight: bold;
 }
+
+/* NO RESULTS */
 .no-results {
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px 20px;
   color: #555;
+}
+
+.no-results h3 {
+  margin-bottom: 6px;
 }
 </style>
 </head>
@@ -135,20 +182,21 @@ header {
 
 <header>
   <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">♡
-    <span class="vault-count" id="vaultCount">0</span>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
+<!-- SEARCH -->
 <div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search jackets, shirts...">
+  <input type="text" id="searchInput" class="search-input" placeholder="Search for jackets, shirts, cotton...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
 </div>
 
 <div class="products-grid" id="products">
 
 <!-- PRODUCT 1 -->
-<div class="product-card" data-id="jacket-1" data-search="campus sutra bomber jacket">
+<div class="product-card" data-id="jacket-1" data-search="campus sutra jacket bomber regular">
   <div class="slider">
     <img src="jacket1-1.jpg">
     <img src="jacket1-2.jpg">
@@ -160,18 +208,20 @@ header {
     <div class="short">Regular Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> S, M, L, XL<br>
+      <b>Size:</b> S, M, L, XL<br><br>
       <b>Fit:</b> Regular Fit<br>
       <b>Care Instruction:</b> Machine Wash
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
 <!-- PRODUCT 2 -->
-<div class="product-card" data-id="jacket-2" data-search="nuon cotton jacket">
+<div class="product-card" data-id="jacket-2" data-search="nuon jacket cotton relaxed brown">
   <div class="slider">
     <img src="shirt1-3.jpg">
     <img src="shirt1-4.jpg">
@@ -183,24 +233,22 @@ header {
     <div class="short">Relaxed Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> XS, S, M, L, XL<br>
+      <b>Size:</b> XS, S, M, L, XL<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
-
-      <b>Manufactured and Marketed By:</b><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-
       <b>Country Of Origin:</b> India
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
 <!-- PRODUCT 3 -->
-<div class="product-card" data-id="shirt-1" data-search="eta cotton shirt brown">
+<div class="product-card" data-id="shirt-1" data-search="eta shirt cotton brown relaxed">
   <div class="slider">
     <img src="shirt1-1.jpg">
     <img src="shirt1-2.jpg">
@@ -211,19 +259,18 @@ header {
     <div class="short">Relaxed Fit</div>
 
     <div class="full-description">
-      <b>Size:</b> XS, S, M, L<br>
+      <b>Size:</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
-
-      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day.
-      Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.<br><br>
-
+      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day.<br><br>
       <b>Country Of Origin:</b> India
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
+    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+      Buy via Instagram
+    </a>
   </div>
 </div>
 
@@ -233,9 +280,12 @@ header {
 const container = document.getElementById("products");
 const cards = document.querySelectorAll(".product-card");
 const vaultCount = document.getElementById("vaultCount");
+const searchInput = document.getElementById("searchInput");
+
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
+/* PRODUCT INTERACTIONS */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -250,6 +300,7 @@ cards.forEach(card => {
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
     container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   btn.addEventListener("click", e => {
@@ -268,8 +319,57 @@ cards.forEach(card => {
   });
 });
 
+/* SEARCH FUNCTION */
+function searchProducts() {
+  const query = searchInput.value.toLowerCase().trim();
+  let found = 0;
+
+  cards.forEach(card => {
+    const keywords = card.dataset.search;
+    card.classList.remove("big-product");
+
+    if (!query || keywords.includes(query)) {
+      card.style.display = "block";
+      found++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  const existingMsg = document.querySelector(".no-results");
+  if (existingMsg) existingMsg.remove();
+
+  if (found === 0) {
+    const msg = document.createElement("div");
+    msg.className = "no-results";
+    msg.innerHTML = `
+      <h3>No results found</h3>
+      <p>Try checking your spelling or using more general terms.</p>
+    `;
+    container.appendChild(msg);
+  }
+}
+
+/* ENTER KEY SEARCH */
+searchInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") searchProducts();
+});
+
+/* VAULT */
 function openVault() {
   window.location.href = "vault.html";
+}
+
+/* AUTO OPEN FROM VAULT */
+const openProduct = localStorage.getItem("openProduct");
+if (openProduct) {
+  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  if (target) {
+    target.classList.add("big-product");
+    container.prepend(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  localStorage.removeItem("openProduct");
 }
 </script>
 
