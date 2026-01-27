@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -27,40 +23,38 @@
       border-radius: 50%;
     }
 
-    /* SEARCH BAR */
-    .search-wrapper {
+    /* SEARCH */
+    .search-wrap {
       background: #fff;
-      padding: 10px 15px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-
-    .search-container {
-      max-width: 420px;
-      margin: 0 auto;
+      padding: 12px;
       display: flex;
-      align-items: center;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      background: #fafafa;
-      overflow: hidden;
+      justify-content: center;
     }
 
     .search-box {
-      flex: 1;
-      padding: 9px 12px;
-      font-size: 14px;
-      border: none;
-      outline: none;
-      background: transparent;
+      display: flex;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
-    .search-btn {
+    .search-box input {
+      flex: 1;
+      padding: 10px 12px;
       border: none;
-      background: transparent;
-      padding: 0 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-box button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0 14px;
       font-size: 16px;
       cursor: pointer;
-      color: #666;
     }
 
     .container {
@@ -80,6 +74,12 @@
       display: block;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
+    .no-results {
+      text-align: center;
+      color: #555;
+      margin-top: 40px;
+    }
   </style>
 </head>
 
@@ -90,59 +90,72 @@
   <h2>One Love One Lifestyle</h2>
 </header>
 
-<!-- GLOBAL SEARCH -->
-<div class="search-wrapper">
-  <form class="search-container" onsubmit="globalSearch(event)">
-    <input
-      type="text"
-      id="homeSearch"
-      class="search-box"
-      placeholder="Search clothing, jackets, shirts..."
-    >
-    <button class="search-btn" type="submit">🔍</button>
-  </form>
+<!-- SEARCH BAR -->
+<div class="search-wrap">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, clothing...">
+    <button onclick="searchHome()">🔍</button>
+  </div>
 </div>
 
-<div class="container">
-  <a href="clothing.html" class="category">👕 Clothing</a>
-  <a href="#" class="category">👟 Shoes (Coming Soon)</a>
-  <a href="#" class="category">👜 Accessories (Coming Soon)</a>
+<div class="container" id="categoryContainer">
+
+  <a href="clothing.html"
+     class="category"
+     data-search="clothing jacket jackets shirt shirts cotton bomber">
+     👕 Clothing
+  </a>
+
+  <a href="#"
+     class="category"
+     data-search="shoes sneaker sneakers footwear"
+     style="display:none;">
+     👟 Shoes (Coming Soon)
+  </a>
+
+  <a href="#"
+     class="category"
+     data-search="accessories bag wallet"
+     style="display:none;">
+     👜 Accessories (Coming Soon)
+  </a>
+
 </div>
 
 <script>
-function globalSearch(e) {
-  e.preventDefault();
+function searchHome() {
+  const query = document.getElementById("searchInput").value.toLowerCase().trim();
+  const categories = document.querySelectorAll(".category");
+  let found = 0;
 
-  const query = document.getElementById("homeSearch").value.toLowerCase().trim();
-  if (!query) return;
+  categories.forEach(cat => {
+    const keywords = cat.dataset.search;
+    if (!query || keywords.includes(query)) {
+      cat.style.display = "block";
+      found++;
+    } else {
+      cat.style.display = "none";
+    }
+  });
 
-  /* KEYWORDS PER PAGE */
-  const clothingKeywords = [
-    "shirt", "shirts", "jacket", "jackets",
-    "cotton", "clothing", "wear", "top"
-  ];
+  const existing = document.querySelector(".no-results");
+  if (existing) existing.remove();
 
-  const shoesKeywords = ["shoe", "shoes", "sneaker", "footwear"];
-  const accessoriesKeywords = ["bag", "belt", "cap", "accessory"];
-
-  if (clothingKeywords.some(word => query.includes(word))) {
-    window.location.href =
-      "clothing.html?search=" + encodeURIComponent(query);
-    return;
+  if (found === 0) {
+    const msg = document.createElement("div");
+    msg.className = "no-results";
+    msg.innerHTML = `
+      <h3>No results found</h3>
+      <p>Try searching for clothing, jackets, or shirts.</p>
+    `;
+    document.getElementById("categoryContainer").appendChild(msg);
   }
-
-  if (shoesKeywords.some(word => query.includes(word))) {
-    alert("Shoes category is coming soon.");
-    return;
-  }
-
-  if (accessoriesKeywords.some(word => query.includes(word))) {
-    alert("Accessories category is coming soon.");
-    return;
-  }
-
-  alert("No results found. Try searching for clothing items.");
 }
+
+/* ENTER KEY SUPPORT */
+document.getElementById("searchInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") searchHome();
+});
 </script>
 
 </body>
