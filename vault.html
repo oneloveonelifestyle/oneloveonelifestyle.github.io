@@ -63,21 +63,6 @@ header {
   padding: 12px;
 }
 
-.details h2 {
-  font-size: 18px;
-  margin: 0 0 6px;
-}
-
-.price {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.short {
-  font-size: 13px;
-  color: #555;
-}
-
 .actions {
   display: flex;
   gap: 10px;
@@ -85,24 +70,22 @@ header {
 }
 
 .remove-btn {
-  flex: 1;
-  padding: 8px;
+  padding: 8px 10px;
   font-size: 13px;
-  background: #e0e0e0;
+  background: #eee;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .order-btn {
-  flex: 2;
+  flex: 1;
   background: #000;
   color: #fff;
   text-align: center;
   padding: 10px;
   border-radius: 6px;
   text-decoration: none;
-  font-size: 14px;
   font-weight: bold;
 }
 
@@ -110,11 +93,6 @@ header {
   text-align: center;
   margin-top: 80px;
   color: #555;
-}
-
-.empty-vault h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
 }
 </style>
 </head>
@@ -136,47 +114,36 @@ const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 const PRODUCTS = {
-  "shirt-1": {
-    title: "Nuon Brown Cotton Shirt",
-    price: "₹2,199",
-    short: "Relaxed Fit",
-    images: ["shirt1-1.jpg", "shirt1-2.jpg"]
-  },
-  "shirt-2": {
-    title: "Nuon Brown Text Design Jacket",
-    price: "₹2,199",
-    short: "Relaxed Fit",
-    images: ["shirt1-3.jpg", "shirt1-4.jpg", "shirt1-5.jpg"]
-  },
   "jacket-1": {
     title: "Campus Sutra Zip-Front Bomber Jacket",
-    price: "₹1,999",
-    short: "Regular Fit",
-    images: ["jacket1-1.jpg", "jacket1-2.jpg", "jacket1-3.jpg"]
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"]
+  },
+  "jacket-2": {
+    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"]
+  },
+  "jacket-3": {
+    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    images: ["shirt1-1.jpg","shirt1-2.jpg"]
   }
 };
 
-/* EMPTY MESSAGE */
-function showEmptyVault() {
-  vaultProducts.innerHTML = `
-    <div class="empty-vault">
-      <h3>Your vault is empty</h3>
-      <p>You haven’t saved any items yet.<br>
-      Explore the collection and save your favourites.</p>
-    </div>
-  `;
-}
-
-/* RENDER */
 function renderVault() {
   vaultProducts.innerHTML = "";
-  let renderedCount = 0;
+
+  if (vault.length === 0) {
+    vaultProducts.innerHTML = `
+      <div class="empty-vault">
+        <h3>Your vault is empty</h3>
+        <p>Save products you love and find them here anytime.</p>
+      </div>
+    `;
+    return;
+  }
 
   vault.forEach(id => {
     const p = PRODUCTS[id];
     if (!p) return;
-
-    renderedCount++;
 
     const card = document.createElement("div");
     card.className = "product-card";
@@ -190,17 +157,13 @@ function renderVault() {
       <div class="slider">
         ${p.images.map(img => `<img src="${img}">`).join("")}
       </div>
-
       <div class="details">
-        <h2>${p.title}</h2>
-        <div class="price">${p.price}</div>
-        <div class="short">${p.short}</div>
-
+        <h3>${p.title}</h3>
         <div class="actions">
           <button class="remove-btn">Remove</button>
-          <a class="order-btn"
-             href="https://www.instagram.com/oneloveonelifestyle/"
-             target="_blank">Buy via Instagram</a>
+          <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+            Buy via Instagram
+          </a>
         </div>
       </div>
     `;
@@ -214,11 +177,6 @@ function renderVault() {
 
     vaultProducts.appendChild(card);
   });
-
-  /* 🔑 GUARANTEED EMPTY CHECK */
-  if (renderedCount === 0) {
-    showEmptyVault();
-  }
 }
 
 renderVault();
