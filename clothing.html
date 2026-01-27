@@ -21,6 +21,17 @@ header {
   position: relative;
 }
 
+/* HOME BUTTON */
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+}
+
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -171,17 +182,18 @@ header {
   padding: 60px 20px;
   color: #555;
 }
-
-.no-results h3 {
-  margin-bottom: 6px;
-}
 </style>
 </head>
 
 <body>
 
 <header>
+  <!-- HOME -->
+  <a href="index.html" class="home-btn">🏠 Home</a>
+
   <h2>Clothing</h2>
+
+  <!-- VAULT -->
   <div class="vault-icon" onclick="openVault()">
     ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
@@ -285,7 +297,7 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* PRODUCT INTERACTIONS */
+/* PRODUCT TAP */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -319,7 +331,7 @@ cards.forEach(card => {
   });
 });
 
-/* SEARCH FUNCTION */
+/* SEARCH */
 function searchProducts() {
   const query = searchInput.value.toLowerCase().trim();
   let found = 0;
@@ -336,8 +348,8 @@ function searchProducts() {
     }
   });
 
-  const existingMsg = document.querySelector(".no-results");
-  if (existingMsg) existingMsg.remove();
+  const old = document.querySelector(".no-results");
+  if (old) old.remove();
 
   if (found === 0) {
     const msg = document.createElement("div");
@@ -350,7 +362,6 @@ function searchProducts() {
   }
 }
 
-/* ENTER KEY SEARCH */
 searchInput.addEventListener("keydown", e => {
   if (e.key === "Enter") searchProducts();
 });
@@ -363,7 +374,7 @@ function openVault() {
 /* AUTO OPEN FROM VAULT */
 const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
-  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  const target = document.querySelector(\`.product-card[data-id="\${openProduct}"]\`);
   if (target) {
     target.classList.add("big-product");
     container.prepend(target);
