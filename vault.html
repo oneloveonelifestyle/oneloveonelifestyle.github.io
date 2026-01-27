@@ -12,7 +12,7 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
+/* HEADER – PURE BLACK */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +20,7 @@ header {
   text-align: center;
 }
 
-/* GRID – SINGLE CARD PER ROW */
+/* GRID – ONE CARD PER ROW */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -67,18 +67,18 @@ header {
   color: #555;
 }
 
-/* FULL DESCRIPTION ALWAYS VISIBLE IN VAULT */
+/* DESCRIPTION */
 .full-description {
   font-size: 14px;
   margin-top: 10px;
   line-height: 1.6;
 }
 
-/* ORDER BUTTON – SAME AS MAIN SITE */
+/* ORDER BUTTON – SAME BLACK AS MAIN SITE */
 .order-btn {
   display: block;
   margin-top: 12px;
-  background: #000;
+  background: #000;          /* FORCE BLACK */
   color: #fff;
   text-align: center;
   padding: 14px;
@@ -95,15 +95,13 @@ header {
   <h2>My Vault</h2>
 </header>
 
-<div class="products-grid" id="vaultProducts">
-  <!-- Saved products load here -->
-</div>
+<div class="products-grid" id="vaultProducts"></div>
 
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
 const vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* PRODUCT DATA (same IDs as main page) */
+/* SAME PRODUCT DATA AS MAIN PAGE */
 const PRODUCTS = {
   "shirt-1": {
     title: "Nuon Brown Cotton Shirt",
@@ -147,7 +145,8 @@ const PRODUCTS = {
 
 /* RENDER VAULT */
 if (vault.length === 0) {
-  vaultProducts.innerHTML = "<p style='text-align:center;color:#555;'>Your vault is empty.</p>";
+  vaultProducts.innerHTML =
+    "<p style='text-align:center;color:#555;'>Your vault is empty.</p>";
 }
 
 vault.forEach(id => {
@@ -161,6 +160,7 @@ vault.forEach(id => {
     <div class="slider">
       ${p.images.map(img => `<img src="${img}">`).join("")}
     </div>
+
     <div class="details">
       <h2>${p.title}</h2>
       <div class="price">${p.price}</div>
@@ -181,4 +181,4 @@ vault.forEach(id => {
 </script>
 
 </body>
-  </html>
+</html>
