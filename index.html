@@ -91,7 +91,7 @@ header img {
 <!-- SEARCH -->
 <div class="search-wrapper">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search jackets, gifts, clothing...">
+    <input type="text" id="searchInput" placeholder="Search jackets, shirts, gifts...">
     <button onclick="searchCategories()">🔍</button>
   </div>
 </div>
@@ -99,19 +99,23 @@ header img {
 <!-- CATEGORIES -->
 <div class="container" id="categories">
 
-  <a href="clothing.html" class="category" data-search="clothing jacket shirt cotton fashion wear">
-    👕 Clothing
+  <a href="clothing.html?type=jacket" class="category" data-search="jacket jackets winter bomber">
+    🧥 Jackets
   </a>
 
-  <a href="#" class="category" data-search="shoes sneakers footwear coming soon">
+  <a href="clothing.html?type=shirt" class="category" data-search="shirt shirts cotton casual">
+    👔 Shirts
+  </a>
+
+  <a href="#" class="category" data-search="shoes footwear sneakers">
     👟 Shoes (Coming Soon)
   </a>
 
-  <a href="#" class="category" data-search="accessories bags belts watches coming soon">
+  <a href="#" class="category" data-search="accessories bags belts">
     👜 Accessories (Coming Soon)
   </a>
 
-  <a href="#" class="category" data-search="gifts gift hampers presents special">
+  <a href="#" class="category" data-search="gifts gift hampers presents">
     🎁 Gifts
   </a>
 
@@ -132,7 +136,6 @@ function searchCategories() {
   });
 }
 
-/* ENTER KEY SUPPORT */
 document.getElementById("searchInput").addEventListener("keydown", e => {
   if (e.key === "Enter") searchCategories();
 });
