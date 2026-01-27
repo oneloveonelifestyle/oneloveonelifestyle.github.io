@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* BACK BUTTON */
 .back-btn {
   margin: 15px;
   display: block;
@@ -33,15 +31,13 @@ header {
   font-weight: bold;
 }
 
-/* VAULT GRID – SINGLE COLUMN */
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr;   /* 👈 ONE CARD PER ROW */
+  grid-template-columns: 1fr;
   gap: 15px;
   padding: 15px;
 }
 
-/* CARD (same style as main site) */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -56,37 +52,22 @@ header {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
 }
 
 .details {
   padding: 12px;
 }
 
-.details h2 {
-  font-size: 18px;
-  margin: 0 0 6px;
-}
-
-.price {
-  font-size: 18px;
+.order-btn {
+  display: block;
+  margin-top: 12px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 14px;
+  border-radius: 8px;
+  text-decoration: none;
   font-weight: bold;
-}
-
-.short {
-  font-size: 14px;
-  color: #555;
-}
-
-.full-description {
-  font-size: 14px;
-  margin-top: 10px;
-  line-height: 1.6;
-}
-
-/* REMOVE VAULT BUTTON INSIDE VAULT */
-.vault-btn {
-  display: none;
 }
 </style>
 </head>
@@ -103,17 +84,23 @@ header {
 
 <script>
 const vault = JSON.parse(localStorage.getItem("vault")) || [];
-const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
 const container = document.getElementById("vaultProducts");
 
 if (vault.length === 0) {
   container.innerHTML = "<p style='text-align:center;'>No items saved in Vault</p>";
 }
 
-allProducts.forEach(product => {
-  if (vault.includes(product.id)) {
-    container.innerHTML += product.html;
-  }
+vault.forEach(id => {
+  const original = document.querySelector(`.product-card[data-id="${id}"]`);
+  if (!original) return;
+
+  const clone = original.cloneNode(true);
+  clone.classList.remove("big-product");
+
+  const btn = clone.querySelector(".vault-btn");
+  if (btn) btn.remove();
+
+  container.appendChild(clone);
 });
 </script>
 
