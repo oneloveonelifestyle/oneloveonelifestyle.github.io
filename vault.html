@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* CONTINUE SHOPPING */
 .top-action {
   background: #fff;
   padding: 12px;
@@ -37,7 +35,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,7 +42,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -54,7 +50,6 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -62,10 +57,8 @@ header {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -85,14 +78,12 @@ header {
   color: #555;
 }
 
-/* ACTIONS */
 .actions {
   display: flex;
   gap: 10px;
   margin-top: 12px;
 }
 
-/* REMOVE BUTTON */
 .remove-btn {
   flex: 1;
   padding: 8px;
@@ -103,7 +94,6 @@ header {
   cursor: pointer;
 }
 
-/* BUY BUTTON */
 .order-btn {
   flex: 2;
   background: #000;
@@ -134,24 +124,24 @@ header {
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* PRODUCT REFERENCES (ONLY FOR REDIRECT) */
+/* PRODUCT MAP (ID ONLY) */
 const PRODUCTS = {
   "shirt-1": {
-    page: "clothing.html#shirt-1",
+    id: "shirt-1",
     title: "Nuon Brown Cotton Shirt",
     price: "₹2,199",
     short: "Relaxed Fit",
     images: ["shirt1-1.jpg", "shirt1-2.jpg"]
   },
   "shirt-2": {
-    page: "clothing.html#shirt-2",
+    id: "shirt-2",
     title: "Nuon Brown Text Design Jacket",
     price: "₹2,199",
     short: "Relaxed Fit",
     images: ["shirt1-3.jpg", "shirt1-4.jpg", "shirt1-5.jpg"]
   },
   "jacket-1": {
-    page: "clothing.html#jacket-1",
+    id: "jacket-1",
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
     short: "Regular Fit",
@@ -159,12 +149,12 @@ const PRODUCTS = {
   }
 };
 
-/* EMPTY MESSAGE */
+/* EMPTY VAULT MESSAGE */
 function showEmptyMessage() {
   vaultProducts.innerHTML = `
     <div style="text-align:center;margin-top:80px;color:#555;">
       <h3>Your vault is empty</h3>
-      <p>Save items you love while shopping and find them here anytime.</p>
+      <p>Save products you love while shopping and access them here anytime.</p>
     </div>
   `;
 }
@@ -185,8 +175,10 @@ function renderVault() {
     const card = document.createElement("div");
     card.className = "product-card";
 
+    /* 🔑 OPEN REAL PRODUCT IN BIG VIEW */
     card.onclick = () => {
-      window.location.href = p.page;
+      localStorage.setItem("openProduct", id);
+      window.location.href = "clothing.html";
     };
 
     card.innerHTML = `
