@@ -21,6 +21,26 @@ header {
   position: relative;
 }
 
+/* HOME BUTTON (ADDED ONLY) */
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
 .vault-icon {
   position: absolute;
   right: 15px;
@@ -181,6 +201,9 @@ header {
 <body>
 
 <header>
+  <!-- HOME BUTTON (ADDED ONLY) -->
+  <button class="home-btn" onclick="goHome()">Home</button>
+
   <h2>Clothing</h2>
   <div class="vault-icon" onclick="openVault()">
     ♡ <span class="vault-count" id="vaultCount">0</span>
@@ -358,6 +381,11 @@ searchInput.addEventListener("keydown", e => {
 /* VAULT */
 function openVault() {
   window.location.href = "vault.html";
+}
+
+/* HOME NAVIGATION (ADDED ONLY) */
+function goHome() {
+  window.location.href = "index.html";
 }
 
 /* AUTO OPEN FROM VAULT */
