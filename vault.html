@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* CONTINUE SHOPPING BUTTON */
 .back-btn {
   display: block;
   margin: 15px;
@@ -33,25 +31,6 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY MESSAGE */
-.empty-vault {
-  text-align: center;
-  margin-top: 100px;
-  padding: 0 20px;
-}
-
-.empty-vault h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #000;
-}
-
-.empty-vault p {
-  font-size: 14px;
-  color: #666;
-}
-
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -59,12 +38,12 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .slider {
@@ -84,30 +63,6 @@ header {
   font-size: 18px;
   font-weight: bold;
 }
-
-.order-btn {
-  display: block;
-  margin-top: 12px;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.remove-btn {
-  display: block;
-  margin-top: 10px;
-  background: #b71c1c;
-  color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
 </style>
 </head>
 
@@ -117,15 +72,13 @@ header {
   <h2>My Vault</h2>
 </header>
 
-<a href="clothing.html" class="back-btn">
-  ← Continue Shopping
-</a>
+<a href="clothing.html" class="back-btn">← Continue Shopping</a>
 
-<div id="vaultProducts" class="products-grid"></div>
+<div class="products-grid" id="vaultProducts"></div>
 
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
-let vault = JSON.parse(localStorage.getItem("vault")) || [];
+const vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 const PRODUCTS = {
   "shirt-1": {
@@ -145,21 +98,15 @@ const PRODUCTS = {
   }
 };
 
-/* ✅ EMPTY VAULT — STOP EVERYTHING */
 if (vault.length === 0) {
   vaultProducts.innerHTML = `
-    <div class="empty-vault">
+    <div style="text-align:center;margin-top:80px;color:#555;">
       <h3>Your vault is empty</h3>
-      <p>
-        You haven’t saved any products yet.<br>
-        Browse the collection and save items you love to view them here anytime.
-      </p>
+      <p>Save products you love and find them here anytime.</p>
     </div>
   `;
-  return;
 }
 
-/* RENDER PRODUCTS */
 vault.forEach(id => {
   const p = PRODUCTS[id];
   if (!p) return;
@@ -171,25 +118,15 @@ vault.forEach(id => {
     <div class="slider">
       ${p.images.map(img => `<img src="${img}">`).join("")}
     </div>
-
     <div class="details">
       <h3>${p.title}</h3>
       <div class="price">${p.price}</div>
-
-      <a class="order-btn"
-         href="https://www.instagram.com/oneloveonelifestyle/"
-         target="_blank">
-         Order via Instagram
-      </a>
-
-      <button class="remove-btn">✕ Remove from Vault</button>
     </div>
   `;
 
-  card.querySelector(".remove-btn").addEventListener("click", () => {
-    vault = vault.filter(v => v !== id);
-    localStorage.setItem("vault", JSON.stringify(vault));
-    location.reload();
+  card.addEventListener("click", () => {
+    localStorage.setItem("openProduct", id);
+    window.location.href = "clothing.html";
   });
 
   vaultProducts.appendChild(card);
