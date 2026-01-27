@@ -121,7 +121,7 @@ header {
   display: block;
 }
 
-/* VAULT BUTTON */
+/* VAULT BUTTON (existing, unchanged) */
 .vault-btn {
   display: none;
   width: 100%;
@@ -157,7 +157,7 @@ header {
   font-weight: bold;
 }
 
-/* VAULT ICON */
+/* ===== ADDED VAULT UI ===== */
 #vaultIcon {
   position: fixed;
   top: 16px;
@@ -178,7 +178,6 @@ header {
   border-radius: 50%;
 }
 
-/* VAULT POPUP */
 #vaultPopup {
   display: none;
   position: fixed;
@@ -229,18 +228,19 @@ header {
       <div class="short">Relaxed Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> XS, S, M, L, XL
+        <b>Size:</b> XS, S, M, L, XL<br><br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
   <!-- SHIRT 2 -->
-  <div class="product-card" data-id="shirt-2" data-search="shirt nuon text design jacket">
+  <div class="product-card" data-id="shirt-2" data-search="shirt nuon text design">
     <div class="slider">
       <img src="shirt1-3.jpg">
       <img src="shirt1-4.jpg">
@@ -256,9 +256,7 @@ header {
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
@@ -279,9 +277,7 @@ header {
       </div>
 
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-        Order via Instagram
-      </a>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Order via Instagram</a>
     </div>
   </div>
 
@@ -289,7 +285,8 @@ header {
 
 <!-- VAULT ICON -->
 <div id="vaultIcon">
-  🔐 <span id="vaultCount">0</span>
+  🔐
+  <span id="vaultCount">0</span>
 </div>
 
 <!-- VAULT POPUP -->
@@ -305,7 +302,7 @@ const cards = document.querySelectorAll(".product-card");
 const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* EXPAND + SAVE */
+/* EXISTING EXPAND + VAULT SAVE */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -333,21 +330,18 @@ cards.forEach(card => {
   });
 });
 
-/* PERFECT SEARCH (FIXED) */
+/* SEARCH */
 searchInput.addEventListener("keyup", () => {
-  const value = searchInput.value.toLowerCase().trim();
-
+  const value = searchInput.value.toLowerCase();
   cards.forEach(card => {
-    if (card.dataset.search.includes(value)) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
+    card.style.display = card.dataset.search.includes(value) ? "block" : "none";
+    if (!card.dataset.search.includes(value)) {
       card.classList.remove("big-product");
     }
   });
 });
 
-/* VAULT DISPLAY */
+/* ===== VAULT DISPLAY (ADDED) ===== */
 const vaultIcon = document.getElementById("vaultIcon");
 const vaultPopup = document.getElementById("vaultPopup");
 const vaultList = document.getElementById("vaultList");
@@ -360,14 +354,16 @@ updateVaultCount();
 
 vaultIcon.addEventListener("click", () => {
   vaultList.innerHTML = "";
-  if (!vault.length) {
+  if (vault.length === 0) {
     vaultList.innerHTML = "<p>No products saved.</p>";
   } else {
     vault.forEach(id => {
-      const title = document.querySelector(`.product-card[data-id="${id}"] h2`);
+      const title = document.querySelector(
+        `.product-card[data-id="${id}"] h2`
+      );
       if (title) {
         vaultList.innerHTML += `
-          <div style="padding:10px 0;border-bottom:1px solid #eee;">
+          <div style="padding:8px 0;border-bottom:1px solid #eee;">
             ${title.textContent}
           </div>`;
       }
@@ -377,9 +373,11 @@ vaultIcon.addEventListener("click", () => {
 });
 
 vaultPopup.addEventListener("click", e => {
-  if (e.target === vaultPopup) vaultPopup.style.display = "none";
+  if (e.target === vaultPopup) {
+    vaultPopup.style.display = "none";
+  }
 });
 </script>
 
 </body>
-  </html>
+</html>
