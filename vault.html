@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* CONTINUE SHOPPING */
 .top-action {
   background: #fff;
   padding: 12px;
@@ -37,7 +35,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,7 +42,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -54,7 +50,6 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -62,10 +57,8 @@ header {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -85,14 +78,12 @@ header {
   color: #555;
 }
 
-/* ACTIONS */
 .actions {
   display: flex;
   gap: 10px;
   margin-top: 12px;
 }
 
-/* REMOVE */
 .remove-btn {
   flex: 1;
   padding: 8px;
@@ -103,7 +94,6 @@ header {
   cursor: pointer;
 }
 
-/* BUY */
 .order-btn {
   flex: 2;
   background: #000;
@@ -116,7 +106,6 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY MESSAGE */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
@@ -124,8 +113,8 @@ header {
 }
 
 .empty-vault h3 {
-  margin-bottom: 8px;
   font-size: 20px;
+  margin-bottom: 8px;
 }
 </style>
 </head>
@@ -167,13 +156,13 @@ const PRODUCTS = {
   }
 };
 
-/* EMPTY STATE (PROFESSIONAL MESSAGE) */
+/* EMPTY MESSAGE */
 function showEmptyVault() {
   vaultProducts.innerHTML = `
     <div class="empty-vault">
       <h3>Your vault is empty</h3>
-      <p>You haven’t saved any items yet.  
-      Browse the collection and save your favourites to view them here.</p>
+      <p>You haven’t saved any items yet.<br>
+      Explore the collection and save your favourites.</p>
     </div>
   `;
 }
@@ -181,15 +170,13 @@ function showEmptyVault() {
 /* RENDER */
 function renderVault() {
   vaultProducts.innerHTML = "";
-
-  if (vault.length === 0) {
-    showEmptyVault();
-    return;
-  }
+  let renderedCount = 0;
 
   vault.forEach(id => {
     const p = PRODUCTS[id];
     if (!p) return;
+
+    renderedCount++;
 
     const card = document.createElement("div");
     card.className = "product-card";
@@ -227,6 +214,11 @@ function renderVault() {
 
     vaultProducts.appendChild(card);
   });
+
+  /* 🔑 GUARANTEED EMPTY CHECK */
+  if (renderedCount === 0) {
+    showEmptyVault();
+  }
 }
 
 renderVault();
