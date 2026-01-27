@@ -47,20 +47,17 @@ header img {
   border: 1px solid #ccc;
   border-right: none;
   border-radius: 8px 0 0 8px;
-  outline: none;
 }
 
 .search-box button {
   padding: 12px 18px;
-  font-size: 15px;
   border: none;
   background: #000;
   color: #fff;
   border-radius: 0 8px 8px 0;
-  cursor: pointer;
 }
 
-/* PRODUCTS */
+/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -68,11 +65,13 @@ header img {
   padding: 15px;
 }
 
+/* PRODUCT CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .slider {
@@ -83,7 +82,6 @@ header img {
 
 .slider img {
   width: 100%;
-  flex-shrink: 0;
   scroll-snap-align: center;
 }
 
@@ -101,11 +99,6 @@ header img {
   font-weight: bold;
 }
 
-.details p {
-  font-size: 13px;
-  margin: 4px 0;
-}
-
 .order-btn {
   display: block;
   margin-top: 10px;
@@ -118,12 +111,17 @@ header img {
   font-weight: bold;
 }
 
-/* NO RESULT */
-.no-result {
-  text-align: center;
-  padding: 30px;
-  display: none;
-  color: #666;
+/* BIG VIEW MODE */
+.big-view {
+  grid-column: 1 / -1;
+}
+
+.big-view .details h2 {
+  font-size: 22px;
+}
+
+.big-view .price {
+  font-size: 22px;
 }
 </style>
 </head>
@@ -131,24 +129,21 @@ header img {
 <body>
 
 <header>
-  <img src="logo.jpg" alt="One Love One Lifestyle">
+  <img src="logo.jpg">
   <h2>Clothing</h2>
 </header>
 
-<!-- SEARCH -->
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search for shirts, jackets, brands…">
+    <input type="text" placeholder="Search for shirts, jackets, brands…">
     <button>🔍</button>
   </div>
 </div>
 
-<div class="no-result" id="noResult">No products found</div>
-
-<div class="products-grid" id="productList">
+<div class="products-grid" id="productGrid">
 
   <!-- PRODUCT 1 -->
-  <div class="product-card" data-search="brown cotton shirt eta shirt">
+  <div class="product-card">
     <div class="slider">
       <img src="shirt1-1.jpg">
       <img src="shirt1-2.jpg">
@@ -164,7 +159,7 @@ header img {
   </div>
 
   <!-- PRODUCT 2 -->
-  <div class="product-card" data-search="brown shirt cotton casual">
+  <div class="product-card">
     <div class="slider">
       <img src="shirt1-3.jpg">
       <img src="shirt1-4.jpg">
@@ -181,7 +176,7 @@ header img {
   </div>
 
   <!-- PRODUCT 3 -->
-  <div class="product-card" data-search="campus sutra jacket bomber winter">
+  <div class="product-card">
     <div class="slider">
       <img src="jacket1-1.jpg">
       <img src="jacket1-2.jpg">
@@ -199,27 +194,17 @@ header img {
 
 </div>
 
-<!-- SEARCH SCRIPT -->
 <script>
-const searchInput = document.getElementById("searchInput");
-const products = document.querySelectorAll(".product-card");
-const noResult = document.getElementById("noResult");
+const cards = document.querySelectorAll(".product-card");
+const grid = document.getElementById("productGrid");
 
-searchInput.addEventListener("keyup", function () {
-  const value = searchInput.value.toLowerCase();
-  let visibleCount = 0;
-
-  products.forEach(product => {
-    const text = product.getAttribute("data-search");
-    if (text.includes(value)) {
-      product.style.display = "block";
-      visibleCount++;
-    } else {
-      product.style.display = "none";
-    }
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    cards.forEach(c => c.classList.remove("big-view"));
+    grid.prepend(card);
+    card.classList.add("big-view");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-
-  noResult.style.display = visibleCount === 0 ? "block" : "none";
 });
 </script>
 
