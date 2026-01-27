@@ -220,7 +220,7 @@ const vaultCount = document.getElementById("vaultCount");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 updateVaultCount();
 
-/* CARD INTERACTIONS */
+/* CARD CLICK + VAULT */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -235,7 +235,6 @@ cards.forEach(card => {
 
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
-
     container.prepend(card);
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
@@ -258,7 +257,7 @@ cards.forEach(card => {
   });
 });
 
-/* VAULT COUNT */
+/* COUNT */
 function updateVaultCount() {
   vaultCount.textContent = vault.length;
 }
@@ -268,24 +267,26 @@ function openVault() {
   window.location.href = "vault.html";
 }
 
-/* ===== OPEN PRODUCT FROM VAULT (FIX) ===== */
+/* 🔑 OPEN PRODUCT FROM VAULT (GUARANTEED FIX) */
 const openProduct = localStorage.getItem("openProduct");
 
 if (openProduct) {
-  const targetCard = document.querySelector(
-    `.product-card[data-id="${openProduct}"]`
-  );
+  setTimeout(() => {
+    const target = document.querySelector(
+      `.product-card[data-id="${openProduct}"]`
+    );
 
-  if (targetCard) {
-    cards.forEach(c => c.classList.remove("big-product"));
-    targetCard.classList.add("big-product");
-    container.prepend(targetCard);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+    if (target) {
+      cards.forEach(c => c.classList.remove("big-product"));
+      target.classList.add("big-product");
+      container.prepend(target);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-  localStorage.removeItem("openProduct");
+    localStorage.removeItem("openProduct");
+  }, 0);
 }
 </script>
 
 </body>
-  </html>
+</html>
