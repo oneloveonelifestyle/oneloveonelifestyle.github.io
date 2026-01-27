@@ -17,43 +17,28 @@ header {
   background: #000;
   color: #fff;
   padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-header h2 {
-  margin: 0;
-}
-
-/* VAULT ICON (ADDED) */
-.vault-icon {
+  text-align: center;
   position: relative;
-  cursor: pointer;
+}
+
+/* VAULT ICON */
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
   font-size: 22px;
+  cursor: pointer;
 }
 
 .vault-count {
-  position: absolute;
-  top: -6px;
-  right: -10px;
   background: red;
   color: #fff;
-  font-size: 11px;
-  padding: 2px 6px;
+  font-size: 12px;
   border-radius: 50%;
-}
-
-/* VAULT DRAWER (ADDED) */
-.vault-drawer {
-  display: none;
-  background: #fff;
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-.vault-drawer.active {
-  display: block;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
 }
 
 /* SEARCH */
@@ -138,15 +123,26 @@ header h2 {
   grid-column: 1 / -1;
 }
 
+.big-product h2 {
+  font-size: 22px;
+}
+
+.big-product .price {
+  font-size: 22px;
+}
+
 .full-description {
   display: none;
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.6;
 }
 
 .big-product .full-description {
   display: block;
 }
 
-/* VAULT BUTTON (EXISTING – UNTOUCHED) */
+/* VAULT BUTTON */
 .vault-btn {
   display: none;
   width: 100%;
@@ -154,9 +150,11 @@ header h2 {
   padding: 14px;
   border-radius: 10px;
   font-weight: bold;
-  background: #111;
+  font-size: 14px;
+  background: linear-gradient(135deg, #111, #333);
   color: #fff;
   border: none;
+  cursor: pointer;
 }
 
 .big-product .vault-btn {
@@ -164,19 +162,20 @@ header h2 {
 }
 
 .vault-btn.saved {
-  background: #2e7d32;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
 }
 
-/* ORDER */
+/* ORDER BUTTON */
 .order-btn {
   display: block;
   margin-top: 12px;
   background: #000;
   color: #fff;
+  text-align: center;
   padding: 14px;
   border-radius: 8px;
-  text-align: center;
   text-decoration: none;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -185,21 +184,11 @@ header h2 {
 
 <header>
   <h2>Clothing</h2>
-
-  <!-- VAULT ICON -->
-  <div class="vault-icon" id="vaultIcon">
-    ♡
-    <span class="vault-count" id="vaultCount">0</span>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
-<!-- VAULT DRAWER -->
-<div class="vault-drawer" id="vaultDrawer">
-  <h3>Saved to Vault</h3>
-  <div class="products-grid" id="vaultItems"></div>
-</div>
-
-<!-- SEARCH -->
 <div class="search-container">
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Search shirts, jackets, brands…">
@@ -207,7 +196,6 @@ header h2 {
   </div>
 </div>
 
-<!-- PRODUCTS (100% YOUR ORIGINAL CODE BELOW – UNCHANGED) -->
 <div class="products-grid" id="products">
 
   <!-- SHIRT 1 -->
@@ -246,7 +234,8 @@ header h2 {
       <div class="short">Relaxed Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> XS, S, M, L, XL<br>
+        <b>Size:</b> XS, S, M, L, XL<br><br>
+        <b>Fit:</b> Relaxed Fit<br>
         <b>Care:</b> Machine Wash
       </div>
 
@@ -268,7 +257,8 @@ header h2 {
       <div class="short">Regular Fit</div>
 
       <div class="full-description">
-        <b>Size:</b> S, M, L, XL<br>
+        <b>Size:</b> S, M, L, XL<br><br>
+        <b>Fit:</b> Regular Fit<br>
         <b>Care:</b> Machine Wash
       </div>
 
@@ -281,23 +271,21 @@ header h2 {
 
 <script>
 const cards = document.querySelectorAll(".product-card");
+const container = document.getElementById("products");
 const searchInput = document.getElementById("searchInput");
-
-/* VAULT LOGIC (ADDED ONLY) */
-const vaultIcon = document.getElementById("vaultIcon");
-const vaultDrawer = document.getElementById("vaultDrawer");
-const vaultItems = document.getElementById("vaultItems");
 const vaultCount = document.getElementById("vaultCount");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
+updateVaultCount();
 
-function updateVaultUI() {
-  vaultCount.textContent = vault.length;
-}
+/* STORE PRODUCTS FOR VAULT PAGE */
+const allProducts = [];
+cards.forEach(card => {
+  allProducts.push({ id: card.dataset.id, html: card.outerHTML });
+});
+localStorage.setItem("allProducts", JSON.stringify(allProducts));
 
-updateVaultUI();
-
-/* EXISTING BEHAVIOR + VAULT SAVE */
+/* EXPAND + MOVE TO TOP + VAULT */
 cards.forEach(card => {
   const btn = card.querySelector(".vault-btn");
   const id = card.dataset.id;
@@ -311,7 +299,8 @@ cards.forEach(card => {
     if (e.target.classList.contains("vault-btn")) return;
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
-    card.scrollIntoView({ behavior: "smooth", block: "start" });
+    container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   btn.addEventListener("click", e => {
@@ -321,23 +310,12 @@ cards.forEach(card => {
       localStorage.setItem("vault", JSON.stringify(vault));
       btn.classList.add("saved");
       btn.textContent = "✓ Saved to Vault";
-      updateVaultUI();
+      updateVaultCount();
     }
   });
 });
 
-/* VAULT OPEN */
-vaultIcon.addEventListener("click", () => {
-  vaultDrawer.classList.toggle("active");
-  vaultItems.innerHTML = "";
-  cards.forEach(card => {
-    if (vault.includes(card.dataset.id)) {
-      vaultItems.appendChild(card.cloneNode(true));
-    }
-  });
-});
-
-/* SEARCH (UNCHANGED) */
+/* SEARCH */
 searchInput.addEventListener("keyup", () => {
   const value = searchInput.value.toLowerCase();
   cards.forEach(card => {
@@ -347,7 +325,15 @@ searchInput.addEventListener("keyup", () => {
     }
   });
 });
+
+function updateVaultCount() {
+  vaultCount.textContent = vault.length;
+}
+
+function openVault() {
+  window.location.href = "vault.html";
+}
 </script>
 
 </body>
-</html>
+    </html>
