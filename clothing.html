@@ -12,6 +12,7 @@ body {
   background: #f4f4f4;
 }
 
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -26,6 +27,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .search-box {
@@ -39,6 +41,7 @@ header {
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px 0 0 8px;
+  outline: none;
 }
 
 .search-box button {
@@ -57,7 +60,7 @@ header {
   padding: 15px;
 }
 
-/* PRODUCT CARD */
+/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -90,32 +93,17 @@ header {
   font-weight: bold;
 }
 
-.order-btn {
-  display: block;
-  margin-top: 12px;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
+.short {
+  font-size: 13px;
+  color: #555;
 }
 
-/* FULL DESCRIPTION (ONLY BIG VIEW) */
-.full-desc {
-  display: none;
-  font-size: 14px;
-  margin-top: 12px;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* BIG PRODUCT */
+/* BIG VIEW */
 .big-product {
   grid-column: 1 / -1;
 }
 
-.big-product .details h2 {
+.big-product h2 {
   font-size: 22px;
 }
 
@@ -123,8 +111,28 @@ header {
   font-size: 22px;
 }
 
-.big-product .full-desc {
+.full-description {
+  display: none;
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.big-product .full-description {
   display: block;
+}
+
+/* BUTTON */
+.order-btn {
+  display: block;
+  margin-top: 12px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -137,7 +145,7 @@ header {
 
 <div class="search-container">
   <div class="search-box">
-    <input type="text" placeholder="Search clothing…">
+    <input type="text" id="searchInput" placeholder="Search shirts, jackets, brands…">
     <button>🔍</button>
   </div>
 </div>
@@ -151,16 +159,27 @@ header {
       <img src="shirt1-2.jpg">
     </div>
     <div class="details">
-      <h2>Brown Cotton Shirt</h2>
+      <h2>Nuon Brown Cotton Shirt</h2>
       <div class="price">₹2,199</div>
-      <p>Relaxed Fit</p>
+      <div class="short">Relaxed Fit</div>
+
+      <div class="full-description">
+        <b>Size:</b> XS, S, M, L, XL<br><br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton<br><br>
+        <b>Manufactured & Marketed By:</b><br>
+        Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+        <b>Country of Origin:</b> India
+      </div>
+
       <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
         Order via Instagram
       </a>
     </div>
   </div>
 
-  <!-- PRODUCT 2 (NUON – EXACT ORDER) -->
+  <!-- PRODUCT 2 -->
   <div class="product-card">
     <div class="slider">
       <img src="shirt1-3.jpg">
@@ -170,22 +189,16 @@ header {
     <div class="details">
       <h2>Nuon Brown Text Design Jacket</h2>
       <div class="price">₹2,199</div>
+      <div class="short">Relaxed Fit</div>
 
-      <div class="full-desc">
-        <p><strong>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</strong></p>
-
-        <p>Size : XS, S, M, L, XL</p>
-        <p>Fit : Relaxed Fit</p>
-        <p>Care Instruction : Machine Wash</p>
-        <p>Fabric Composition : 100% Cotton</p>
-
-        <p>
-          Manufactured and Marketed By:<br>
-          Trent Limited, Bombay House, 24, Homi Mody Street,<br>
-          Fort, Mumbai – 400001
-        </p>
-
-        <p>Country Of Origin : India</p>
+      <div class="full-description">
+        <b>Size:</b> XS, S, M, L, XL<br><br>
+        <b>Fit:</b> Relaxed Fit<br>
+        <b>Care:</b> Machine Wash<br>
+        <b>Fabric:</b> 100% Cotton<br><br>
+        <b>Manufactured & Marketed By:</b><br>
+        Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+        <b>Country of Origin:</b> India
       </div>
 
       <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
@@ -194,7 +207,7 @@ header {
     </div>
   </div>
 
-  <!-- PRODUCT 3 (CAMPUS SUTRA – EXACT ORDER) -->
+  <!-- PRODUCT 3 -->
   <div class="product-card">
     <div class="slider">
       <img src="jacket1-1.jpg">
@@ -202,16 +215,14 @@ header {
       <img src="jacket1-3.jpg">
     </div>
     <div class="details">
-      <h2>Campus Sutra<br>Zip-Front Bomber Jacket</h2>
+      <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
       <div class="price">₹1,999</div>
+      <div class="short">Regular Fit</div>
 
-      <div class="full-desc">
-        <p><strong>Campus Sutra</strong></p>
-        <p><strong>Zip-Front Bomber Jacket</strong></p>
-
-        <p>Size : S, M, L, XL</p>
-        <p>Fit : Regular Fit</p>
-        <p>Care Instruction : Machine Wash</p>
+      <div class="full-description">
+        <b>Size:</b> S, M, L, XL<br><br>
+        <b>Fit:</b> Regular Fit<br>
+        <b>Care:</b> Machine Wash
       </div>
 
       <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
@@ -225,7 +236,9 @@ header {
 <script>
 const cards = document.querySelectorAll(".product-card");
 const container = document.getElementById("products");
+const searchInput = document.getElementById("searchInput");
 
+/* BIG VIEW */
 cards.forEach(card => {
   card.addEventListener("click", () => {
     cards.forEach(c => c.classList.remove("big-product"));
@@ -233,6 +246,28 @@ cards.forEach(card => {
     container.prepend(card);
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+});
+
+/* SEARCH ALWAYS WORKS */
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.toLowerCase();
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    if (text.includes(value)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+      card.classList.remove("big-product");
+    }
+  });
+
+  if (value === "") {
+    cards.forEach(card => {
+      card.style.display = "block";
+      card.classList.remove("big-product");
+    });
+  }
 });
 </script>
 
