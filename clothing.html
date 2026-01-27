@@ -2,122 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Clothing | One Love One Lifestyle</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clothing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  margin: 0;
+  background: #f5f5f5;
 }
 
-/* HEADER */
 header {
-  background: #000;
-  color: #fff;
-  padding: 15px;
-  text-align: center;
-}
-
-/* SEARCH */
-.search-container {
+  padding: 10px;
   background: #fff;
-  padding: 12px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .search-box {
   display: flex;
-  max-width: 500px;
-  margin: auto;
 }
 
 .search-box input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ccc;
   border-radius: 8px 0 0 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .search-box button {
-  padding: 12px 18px;
+  padding: 12px 16px;
   border: none;
   background: #000;
   color: #fff;
   border-radius: 0 8px 8px 0;
+  font-size: 16px;
 }
 
-/* GRID */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  padding: 15px;
+.container {
+  padding: 12px;
 }
 
-/* CARD */
-.product-card {
+.big-card {
   background: #fff;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
-}
-
-.slider {
-  display: flex;
-  overflow-x: auto;
-}
-
-.slider img {
-  width: 100%;
-}
-
-.details {
   padding: 12px;
+  margin-bottom: 16px;
 }
 
-.details h2 {
-  font-size: 16px;
-  margin: 0 0 6px;
+.big-card img {
+  width: 100%;
+  border-radius: 10px;
 }
 
-.price {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.order-btn {
-  display: block;
-  margin-top: 10px;
+.big-card button,
+.card button {
+  width: 100%;
+  padding: 12px;
   background: #000;
   color: #fff;
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-/* BIG PRODUCT */
-.big {
-  grid-column: 1 / -1;
-}
-
-.big h2 {
-  font-size: 22px;
-}
-
-.big .price {
-  font-size: 22px;
-}
-
-/* EXTRA DETAILS */
-.extra-details {
-  font-size: 14px;
+  border-radius: 10px;
+  border: none;
   margin-top: 10px;
+  font-size: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+h3 {
+  margin: 8px 0 4px;
 }
 </style>
 </head>
@@ -125,136 +92,120 @@ header {
 <body>
 
 <header>
-  <h2>Clothing</h2>
-</header>
-
-<!-- SEARCH -->
-<div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search clothing…">
+    <input id="search" placeholder="Search clothing..." oninput="searchProducts()">
     <button>🔍</button>
   </div>
-</div>
+</header>
 
-<div class="products-grid" id="products">
-
-<!-- SHIRT 1 -->
-<div class="product-card"
-     data-category="shirt"
-     data-search="nuon brown cotton shirt">
-  <div class="slider">
-    <img src="shirt1-1.jpg">
-    <img src="shirt1-2.jpg">
-  </div>
-  <div class="details">
-    <h2>Nuon Brown Cotton Shirt</h2>
-    <div class="price">₹2,199</div>
-    <p>Relaxed Fit</p>
-    <div class="extra-details" style="display:none">
-      Size: XS, S, M, L, XL<br>
-      Care: Machine Wash<br>
-      Fabric: 100% Cotton<br>
-      Country: India
-    </div>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
-  </div>
-</div>
-
-<!-- SHIRT 2 -->
-<div class="product-card"
-     data-category="shirt"
-     data-search="nuon brown cotton shirt">
-  <div class="slider">
-    <img src="shirt1-3.jpg">
-    <img src="shirt1-4.jpg">
-    <img src="shirt1-5.jpg">
-  </div>
-  <div class="details">
-    <h2>Nuon Brown Text Jacket</h2>
-    <div class="price">₹2,199</div>
-    <p>Relaxed Fit</p>
-    <div class="extra-details" style="display:none">
-      Size: XS, S, M, L, XL<br>
-      Care: Machine Wash<br>
-      Fabric: 100% Cotton<br>
-      Manufactured by Trent Limited<br>
-      Country: India
-    </div>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
-  </div>
-</div>
-
-<!-- JACKET -->
-<div class="product-card"
-     data-category="jacket"
-     data-search="campus sutra bomber jacket">
-  <div class="slider">
-    <img src="jacket1-1.jpg">
-    <img src="jacket1-2.jpg">
-    <img src="jacket1-3.jpg">
-  </div>
-  <div class="details">
-    <h2>Campus Sutra Zip-Front Bomber Jacket</h2>
-    <div class="price">₹1,999</div>
-    <p>Regular Fit</p>
-    <div class="extra-details" style="display:none">
-      Size: S, M, L, XL<br>
-      Care: Machine Wash
-    </div>
-    <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-      Order via Instagram
-    </a>
-  </div>
-</div>
-
+<div class="container">
+  <div id="expanded"></div>
+  <div class="grid" id="products"></div>
 </div>
 
 <script>
-const products = document.querySelectorAll(".product-card");
-const container = document.getElementById("products");
-const searchInput = document.getElementById("searchInput");
+const products = [
+  {
+    id: 1,
+    name: "Nuon Brown Text Jacket",
+    price: 2199,
+    category: "jacket",
+    img: "https://i.imgur.com/7yUvePI.jpg",
+    details: `
+    <strong>Nuon Brown Text Design Relaxed-Fit Cotton Jacket</strong><br><br>
+    Size: XS, S, M, L, XL<br>
+    Fit: Relaxed Fit<br>
+    Care: Machine Wash<br>
+    Fabric: 100% Cotton<br>
+    Manufactured by Trent Limited<br>
+    Country: India
+    `
+  },
+  {
+    id: 2,
+    name: "Campus Sutra Zip-Front Bomber Jacket",
+    price: 1999,
+    category: "jacket",
+    img: "https://i.imgur.com/1z9Xz1X.jpg",
+    details: `
+    <strong>Campus Sutra Zip-Front Bomber Jacket</strong><br><br>
+    Size: S, M, L, XL<br>
+    Fit: Regular Fit<br>
+    Care: Machine Wash
+    `
+  },
+  {
+    id: 3,
+    name: "Nuon Brown Cotton Shirt",
+    price: 2199,
+    category: "shirt",
+    img: "https://i.imgur.com/cfN8NQZ.jpg",
+    details: `
+    <strong>Nuon Brown Cotton Shirt</strong><br><br>
+    Size: S, M, L, XL<br>
+    Fit: Relaxed Fit<br>
+    Care: Machine Wash
+    `
+  }
+];
 
-/* CLICK EXPAND */
-products.forEach(card => {
-  card.addEventListener("click", () => {
-    const category = card.dataset.category;
+let currentList = [...products];
 
-    products.forEach(p => {
-      p.classList.remove("big");
-      p.querySelector(".extra-details").style.display = "none";
+function renderProducts(list) {
+  const box = document.getElementById("products");
+  box.innerHTML = "";
+  list.forEach(p => {
+    box.innerHTML += `
+      <div class="card" onclick="expandProduct(${p.id})">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <p>₹${p.price}</p>
+        <button>Order via Instagram</button>
+      </div>
+    `;
+  });
+}
+
+function expandProduct(id) {
+  const selected = products.find(p => p.id === id);
+  const expanded = document.getElementById("expanded");
+
+  expanded.innerHTML = `
+    <div class="big-card">
+      <img src="${selected.img}">
+      <h2>${selected.name}</h2>
+      <h3>₹${selected.price}</h3>
+      <p>${selected.details}</p>
+      <button onclick="order()">Order via Instagram</button>
+    </div>
+  `;
+
+  const sorted = products
+    .filter(p => p.id !== id)
+    .sort((a,b) => {
+      if (a.category === selected.category && b.category !== selected.category) return -1;
+      if (a.category !== selected.category && b.category === selected.category) return 1;
+      return 0;
     });
 
-    card.classList.add("big");
-    card.querySelector(".extra-details").style.display = "block";
+  renderProducts(sorted);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-    const same = [];
-    const others = [];
+function searchProducts() {
+  const value = document.getElementById("search").value.toLowerCase();
+  currentList = products.filter(p =>
+    p.name.toLowerCase().includes(value)
+  );
+  document.getElementById("expanded").innerHTML = "";
+  renderProducts(currentList);
+}
 
-    products.forEach(p => {
-      if (p !== card) {
-        (p.dataset.category === category ? same : others).push(p);
-      }
-    });
+function order() {
+  window.location.href = "https://instagram.com/oneloveonelifestyle";
+}
 
-    container.innerHTML = "";
-    container.append(card);
-    [...same, ...others].forEach(p => container.append(p));
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-});
-
-/* SEARCH ALWAYS WORKS */
-searchInput.addEventListener("keyup", () => {
-  const val = searchInput.value.toLowerCase();
-  products.forEach(p => {
-    p.style.display = p.dataset.search.includes(val) ? "block" : "none";
-  });
-});
+renderProducts(products);
 </script>
 
 </body>
