@@ -2,23 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vault</title>
+<title>Vault | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{margin:0;font-family:Arial;background:#f4f4f4}
-header{background:#000;color:#fff;padding:15px;text-align:center}
-.back-btn{margin:15px;display:block;background:#000;color:#fff;padding:12px;text-align:center;border-radius:8px;text-decoration:none}
-.products-grid{display:grid;grid-template-columns:1fr;gap:15px;padding:15px}
-.product-card{background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.vault-btn{display:none}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  margin: 15px;
+  display: block;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* VAULT GRID – SINGLE COLUMN */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* 👈 ONE CARD PER ROW */
+  gap: 15px;
+  padding: 15px;
+}
+
+/* CARD (same style as main site) */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.details {
+  padding: 12px;
+}
+
+.details h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.short {
+  font-size: 14px;
+  color: #555;
+}
+
+.full-description {
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* REMOVE VAULT BUTTON INSIDE VAULT */
+.vault-btn {
+  display: none;
+}
 </style>
 </head>
 
 <body>
 
-<header>Your Vault</header>
-<a class="back-btn" href="index.html">← Back</a>
+<header>
+  <h2>Your Vault</h2>
+</header>
+
+<a class="back-btn" href="index.html">← Back to Shopping</a>
 
 <div class="products-grid" id="vaultProducts"></div>
 
@@ -27,13 +106,13 @@ const vault = JSON.parse(localStorage.getItem("vault")) || [];
 const allProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
 const container = document.getElementById("vaultProducts");
 
-if(vault.length===0){
-  container.innerHTML="<p style='text-align:center'>No items saved</p>";
+if (vault.length === 0) {
+  container.innerHTML = "<p style='text-align:center;'>No items saved in Vault</p>";
 }
 
-allProducts.forEach(p=>{
-  if(vault.includes(p.id)){
-    container.innerHTML+=p.html;
+allProducts.forEach(product => {
+  if (vault.includes(product.id)) {
+    container.innerHTML += product.html;
   }
 });
 </script>
