@@ -19,6 +19,16 @@ header {
   text-align: center;
 }
 
+.empty-vault {
+  text-align: center;
+  margin-top: 80px;
+  color: #555;
+}
+
+.empty-vault h3 {
+  margin-bottom: 8px;
+}
+
 .product-card {
   background: #fff;
   margin: 15px;
@@ -102,7 +112,12 @@ const PRODUCTS = {
 };
 
 if (vault.length === 0) {
-  vaultProducts.innerHTML = "<p style='text-align:center'>Your vault is empty.</p>";
+  vaultProducts.innerHTML = `
+    <div class="empty-vault">
+      <h3>Your vault is currently empty</h3>
+      <p>Save items you love and find them here anytime.</p>
+    </div>
+  `;
 }
 
 vault.forEach(id => {
@@ -134,7 +149,12 @@ vault.forEach(id => {
     card.remove();
 
     if (vault.length === 0) {
-      vaultProducts.innerHTML = "<p style='text-align:center'>Your vault is empty.</p>";
+      vaultProducts.innerHTML = `
+        <div class="empty-vault">
+          <h3>Your vault is currently empty</h3>
+          <p>Save items you love and find them here anytime.</p>
+        </div>
+      `;
     }
   });
 
