@@ -1,3 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clothing | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+header {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+header img {
+  height: 45px;
+  margin-bottom: 5px;
+}
+
+/* GRID LIKE AMAZON */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 14px;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* IMAGE SLIDER */
+.slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.slider img {
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+/* DETAILS */
+.details {
+  padding: 12px;
+}
+
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+.details p {
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+/* BUTTON */
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* VERY SMALL SCREENS */
+@media (max-width: 420px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
 <body>
 
 <header>
@@ -6,35 +104,31 @@
   <p>Swipe images to view</p>
 </header>
 
-<!-- ✅ GRID START -->
 <div class="products-grid">
 
-  <!-- PRODUCT CARD 1 -->
-  <div class="product-card" id="brown-shirt">
+  <!-- PRODUCT 1 -->
+  <div class="product-card">
     <div class="slider">
-      <img src="shirt1-1.jpg" alt="Brown Shirt Front">
-      <img src="shirt1-2.jpg" alt="Brown Shirt Back">
+      <img src="shirt1-1.jpg">
+      <img src="shirt1-2.jpg">
     </div>
 
     <div class="details">
       <h2>Brown Cotton Shirt</h2>
       <div class="price">₹2,199</div>
-
       <p><b>Sizes:</b> XS, S, M, L</p>
       <p><b>Fit:</b> Relaxed Fit</p>
-      <p><b>Fabric:</b> 100% Cotton</p>
-      <p><b>Care:</b> Machine Wash</p>
 
       <a class="order-btn"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
-         Order via Instagram
+        Order via Instagram
       </a>
     </div>
   </div>
 
-  <!-- PRODUCT CARD 2 -->
-  <div class="product-card" id="brown-shirt-set-2">
+  <!-- PRODUCT 2 -->
+  <div class="product-card">
     <div class="slider">
       <img src="shirt1-3.jpg">
       <img src="shirt1-4.jpg">
@@ -44,22 +138,19 @@
     <div class="details">
       <h2>Brown Cotton Shirt</h2>
       <div class="price">₹2,199</div>
-
-      <p><strong>Sizes:</strong> XS, S, M, L</p>
-      <p><strong>Fit:</strong> Relaxed Fit</p>
-      <p><strong>Fabric:</strong> 100% Cotton</p>
-      <p><strong>Care:</strong> Machine Wash</p>
+      <p><b>Sizes:</b> XS, S, M, L</p>
+      <p><b>Fit:</b> Relaxed Fit</p>
 
       <a class="order-btn"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
-         Order via Instagram
+        Order via Instagram
       </a>
     </div>
   </div>
 
-  <!-- PRODUCT CARD 3 -->
-  <div class="product-card" id="campus-sutra-jacket">
+  <!-- PRODUCT 3 -->
+  <div class="product-card">
     <div class="slider">
       <img src="jacket1-1.jpg">
       <img src="jacket1-2.jpg">
@@ -67,22 +158,20 @@
     </div>
 
     <div class="details">
-      <h2>Campus Sutra<br>Zip-Front Bomber Jacket</h2>
+      <h2>Campus Sutra Bomber Jacket</h2>
       <div class="price">₹1,999</div>
-
-      <p><strong>Sizes:</strong> S, M, L, XL</p>
-      <p><strong>Fit:</strong> Regular Fit</p>
-      <p><strong>Care:</strong> Machine Wash</p>
+      <p><b>Sizes:</b> S, M, L, XL</p>
+      <p><b>Fit:</b> Regular Fit</p>
 
       <a class="order-btn"
          href="https://www.instagram.com/oneloveonelifestyle/"
          target="_blank">
-         Order via Instagram
+        Order via Instagram
       </a>
     </div>
   </div>
 
 </div>
-<!-- ✅ GRID END -->
 
 </body>
+</html>
