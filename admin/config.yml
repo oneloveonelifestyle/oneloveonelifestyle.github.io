@@ -12,6 +12,8 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Product Name", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Category", name: "category", widget: "select", options: ["clothing", "shoes", "accessories", "gifts"] }
+      - { label: "Images", name: "images", widget: "image", multiple: true }
+      - { label: "Description", name: "description", widget: "text" }
