@@ -92,7 +92,7 @@ header{ background:#000; color:#fff; }
   border-radius:10px; margin-bottom:8px;
 }
 
-/* OFFER / SMART DEALS */
+/* OFFER */
 .offer-zone{
   background:linear-gradient(135deg,#0f0f0f,#000);
   border-radius:24px;
@@ -100,25 +100,28 @@ header{ background:#000; color:#fff; }
   margin-bottom:40px;
   color:#fff;
 }
-
 .offer-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-top:18px;
-
-  /* ✅ ONLY FIX — NOTHING ELSE */
-  max-width:100%;
-  overflow:hidden;
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:16px; margin-top:18px;
 }
-
 .offer-card{
   background:#111;
   border-radius:18px;
   padding:22px;
   text-align:center;
+
+  /* ✅ ONLY FIX APPLIED */
+  max-width:100%;
+  overflow:hidden;
+  word-wrap:break-word;
 }
-.offer-card span{ color:var(--accent); font-size:24px; font-weight:bold; }
+.offer-card span{
+  color:var(--accent);
+  font-size:24px;
+  font-weight:bold;
+  display:block;
+  margin-bottom:6px;
+}
 
 /* TRUST */
 .trust{
@@ -128,6 +131,60 @@ header{ background:#000; color:#fff; }
 .trust div{
   background:#fff; padding:18px;
   border-radius:14px; text-align:center;
+}
+
+/* STYLE BANNER */
+.style-banner{
+  background:#fff;
+  border-radius:22px;
+  padding:30px;
+  margin-bottom:40px;
+  text-align:center;
+}
+
+/* POPULAR PICKS */
+.popular-strip{
+  background:#111;
+  color:#fff;
+  padding:26px;
+  border-radius:22px;
+  margin-bottom:40px;
+}
+.popular-strip .product-card{
+  background:#1c1c1c;
+  color:#fff;
+}
+
+/* BRAND VALUES */
+.brand-values{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-bottom:40px;
+}
+.brand-values div{
+  background:#fff;
+  padding:22px;
+  border-radius:18px;
+  text-align:center;
+}
+
+/* NEWSLETTER */
+.newsletter{
+  background:linear-gradient(135deg,#000,#1a1a1a);
+  color:#fff;
+  padding:34px;
+  border-radius:24px;
+  text-align:center;
+  margin-bottom:40px;
+}
+.newsletter input{
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  margin-top:10px;
+  width:80%;
+  max-width:320px;
 }
 
 /* FOOTER */
@@ -142,7 +199,9 @@ footer{
 /* DESKTOP */
 @media(min-width:768px){
   .category-grid,
-  .trust{
+  .offer-grid,
+  .trust,
+  .brand-values{
     grid-template-columns:repeat(4,1fr);
   }
 }
@@ -151,7 +210,111 @@ footer{
 
 <body>
 
-<!-- YOUR ORIGINAL BODY CONTENT REMAINS EXACTLY AS-IS -->
+<header>
+  <div class="top-header">
+    <div class="brand">
+      <img src="logo.jpg">
+      <span>One Love One Lifestyle</span>
+    </div>
+    <div class="search-wrap">
+      <input placeholder="Search products">
+      <button>🔍</button>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <a href="clothing.html">Clothing</a>
+    <a href="#">Shoes</a>
+    <a href="#">Accessories</a>
+    <a href="#">Gifts</a>
+    <a href="#">Vault</a>
+  </div>
+</header>
+
+<div class="hero-wrapper">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide"><h1>Elevate Everyday Comfort</h1></div>
+    <div class="hero-slide"><h1>Minimal • Modern • Timeless</h1></div>
+    <div class="hero-slide"><h1>Designed for India</h1></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section-title">Shop by Category</div>
+  <div class="category-grid">
+    <div class="category-card">👕 Clothing</div>
+    <div class="category-card">👟 Shoes</div>
+    <div class="category-card">👜 Accessories</div>
+    <div class="category-card">🎁 Gifts</div>
+  </div>
+
+  <div class="section-title">Trending Now</div>
+  <div class="product-slider">
+    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
+    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
+    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
+  </div>
+
+  <div class="offer-zone">
+    <h2>Smart Deals For You</h2>
+    <div class="offer-grid">
+      <div class="offer-card"><span>40% OFF</span>Winter Wear</div>
+      <div class="offer-card"><span>BOGO</span>Daily Tees</div>
+      <div class="offer-card"><span>₹500 OFF</span>Jackets</div>
+      <div class="offer-card"><span>Under ₹999</span>Bestsellers</div>
+    </div>
+  </div>
+
+  <div class="section-title">Customer Promise</div>
+  <div class="trust">
+    <div>Premium Fabric</div>
+    <div>Secure Payments</div>
+    <div>Fast Delivery</div>
+    <div>Easy Returns</div>
+  </div>
+
+  <div class="style-banner">
+    <h3>Style That Fits Your Lifestyle</h3>
+    <p>Minimal designs crafted for everyday confidence</p>
+  </div>
+
+  <div class="popular-strip">
+    <div class="section-title">Popular Picks</div>
+    <div class="product-slider">
+      <div class="product-card"><div class="product-img"></div>Black Tee</div>
+      <div class="product-card"><div class="product-img"></div>Zip Hoodie</div>
+      <div class="product-card"><div class="product-img"></div>Cargo Pants</div>
+    </div>
+  </div>
+
+  <div class="brand-values">
+    <div>Designed In-House</div>
+    <div>Quality Checked</div>
+    <div>Minimal Packaging</div>
+    <div>Trusted by Thousands</div>
+  </div>
+
+  <div class="newsletter">
+    <h3>Stay Updated</h3>
+    <p>Get early access to offers & new drops</p>
+    <input placeholder="Enter your email">
+  </div>
+
+</div>
+
+<footer>
+  © 2026 One Love One Lifestyle
+</footer>
+
+<script>
+let index=0;
+const slider=document.getElementById("heroSlider");
+setInterval(()=>{
+  index=(index+1)%3;
+  slider.style.transform=`translateX(-${index*100}vw)`;
+},4000);
+</script>
 
 </body>
-</html>
+      </html>
