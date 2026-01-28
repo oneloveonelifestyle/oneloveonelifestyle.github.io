@@ -20,7 +20,7 @@ body{
   margin:0;
   font-family:Arial, sans-serif;
   background:var(--gray);
-  overflow-x:hidden; /* ✅ IMPORTANT */
+  overflow-x:hidden;
 }
 
 /* ================= HEADER ================= */
@@ -102,14 +102,15 @@ header{
 
 .hero-slider{
   display:flex;
-  width:300vw;                 /* ✅ FIX */
+  width:300vw;
   transition:transform 0.6s ease;
 }
 
 .hero-slide{
-  width:100vw;                 /* ✅ FIX */
-  height:60vh;
-  flex-shrink:0;
+  width:100vw;
+  min-height:38vh;        /* ✅ KEY FIX */
+  max-height:45vh;        /* ✅ KEY FIX */
+  height:auto;
 
   background:linear-gradient(135deg,#000,#2b2b2b);
   color:#fff;
@@ -119,23 +120,23 @@ header{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
+  padding:24px;
 }
 
 .hero-slide h1{
-  font-size:clamp(22px,5vw,32px);
-  margin-bottom:10px;
+  font-size:clamp(20px,4.5vw,30px);
+  margin-bottom:8px;
 }
 
 .hero-slide p{
-  font-size:clamp(14px,4vw,18px);
+  font-size:clamp(14px,3.5vw,17px);
   max-width:520px;
   opacity:0.9;
 }
 
 /* ================= CATEGORIES ================= */
 .container{
-  padding:20px;
+  padding:24px 20px;   /* ✅ sits cleanly below hero */
 }
 
 .categories{
@@ -170,6 +171,11 @@ footer{
 @media(min-width:768px){
   .categories{
     grid-template-columns:repeat(4,1fr);
+  }
+
+  .hero-slide{
+    min-height:32vh;
+    max-height:40vh;
   }
 }
 </style>
@@ -258,4 +264,4 @@ slider.addEventListener("touchend", e => {
 </script>
 
 </body>
-      </html>
+</html>
