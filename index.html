@@ -1,83 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>One Love One Lifestyle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
 
-    header {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 20px 15px 25px;
-    }
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 20px 15px;
+}
 
-    header img {
-      width: 90px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
+header img {
+  width: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
 
-    /* SEARCH BAR */
-    .search-wrapper {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-    }
+/* SEARCH BAR */
+.search-wrapper {
+  background: #000;
+  padding: 10px 15px 20px;
+}
 
-    .search-box {
-      background: #fff;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+.search-bar {
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-    .search-box input {
-      flex: 1;
-      border: none;
-      padding: 12px 15px;
-      font-size: 14px;
-      outline: none;
-    }
+.search-bar input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
 
-    .search-box button {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 0 18px;
-      height: 100%;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.search-bar button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-    .container {
-      padding: 20px;
-    }
+/* CATEGORY CONTAINER */
+.container {
+  padding: 20px;
+}
 
-    .category {
-      background: white;
-      padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000;
-      display: block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-  </style>
+.category {
+  background: #fff;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+</style>
 </head>
 
 <body>
@@ -85,15 +84,17 @@
 <header>
   <img src="logo.jpg">
   <h2>One Love One Lifestyle</h2>
-
-  <div class="search-wrapper">
-    <div class="search-box">
-      <input type="text" id="globalSearch" placeholder="Search jackets, shirts, cotton...">
-      <button onclick="globalSearch()">🔍</button>
-    </div>
-  </div>
 </header>
 
+<!-- SEARCH -->
+<div class="search-wrapper">
+  <div class="search-bar">
+    <input type="text" id="homeSearch" placeholder="Search jackets, shirts, cotton...">
+    <button onclick="searchSite()">🔍</button>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
 <div class="container">
   <a href="clothing.html" class="category">👕 Clothing</a>
   <a href="#" class="category">👟 Shoes (Coming Soon)</a>
@@ -102,18 +103,23 @@
 </div>
 
 <script>
-function globalSearch() {
-  const query = document.getElementById("globalSearch").value.trim().toLowerCase();
+function searchSite() {
+  const query = document.getElementById("homeSearch").value.trim().toLowerCase();
   if (!query) return;
+
+  /*
+    We ONLY have products inside clothing right now.
+    So we redirect to clothing.html with search parameter.
+    clothing.html already knows how to filter correctly.
+  */
   window.location.href = "clothing.html?search=" + encodeURIComponent(query);
 }
 
-document.getElementById("globalSearch").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    globalSearch();
-  }
+/* ENTER KEY SUPPORT */
+document.getElementById("homeSearch").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") searchSite();
 });
 </script>
 
 </body>
-      </html>
+</html>
