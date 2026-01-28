@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px; }
+    .card { border: 1px solid #ddd; padding: 10px; }
+    img { width: 100%; }
+  </style>
+</head>
+<body>
+
+<h2>Products</h2>
+<div class="grid" id="products"></div>
+
+<script>
+fetch('/products')
+  .then(res => res.text())
+  .then(text => {
+    const files = text.match(/href="([^"]+\.md)"/g) || [];
+    files.forEach(file => {
+      fetch('/products/' + file.split('"')[1])
+        .then(res => res.text())
+        .then(md => {
+          const data = {};
+          md.split('---')[1].split('\n').forEach(line => {
+            const [key, ...value] = line.split(':');
+            if (key && value) data[key.trim()] = value.join(':').trim();
+          });
+
+          document.getElementById('products').innerHTML += `
+            <div class="card">
+              <h3>${data.title}</h3>
+              <p>₹${data.price}</p>
+              <p>${data.category}</p>
+              <p>${data.description}</p>
+            </div>
+          `;
+        });
+    });
+  });
+</script>
+
+</body>
+</html>
