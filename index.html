@@ -1,382 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>One Love One Lifestyle</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <style>
+    body { font-family: Arial; }
 
-<style>
-:root {
-  --black: #000;
-  --dark: #111;
-  --gray: #f4f4f4;
-  --soft: #eaeaea;
-  --accent: #f3b23a;
-}
+    .vault-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: black;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--gray);
-  color: #111;
-}
-
-/* ================= HEADER ================= */
-header {
-  background: var(--black);
-  color: #fff;
-}
-
-.top-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.brand img {
-  width: 42px;
-  border-radius: 50%;
-}
-
-.brand span {
-  font-size: 14px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-/* SEARCH */
-.search-wrap {
-  flex: 1;
-  max-width: 520px;
-  display: flex;
-  background: #fff;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.search-wrap input {
-  flex: 1;
-  border: none;
-  padding: 9px 10px;
-  font-size: 14px;
-  outline: none;
-}
-
-.search-wrap button {
-  background: var(--accent);
-  border: none;
-  padding: 0 14px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* ACTIONS */
-.header-actions {
-  display: flex;
-  gap: 14px;
-  font-size: 13px;
-}
-
-.header-actions div {
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-/* ================= NAV BAR ================= */
-.navbar {
-  background: #1b1b1b;
-  display: flex;
-  gap: 16px;
-  padding: 10px 14px;
-  font-size: 14px;
-  overflow-x: auto;
-}
-
-.navbar a {
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* ================= HERO SLIDER ================= */
-.hero-slider {
-  display: flex;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-
-.hero-slide {
-  min-width: 100%;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #000, #2b2b2b);
-  color: #fff;
-}
-
-.hero-slide h1 {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.hero-slide p {
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-/* ================= CONTAINER ================= */
-.container {
-  padding: 20px;
-}
-
-/* ================= CATEGORIES ================= */
-.categories {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 35px;
-}
-
-.category {
-  background: #fff;
-  border-radius: 14px;
-  padding: 26px 18px;
-  text-align: center;
-  font-size: 17px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #000;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-/* ================= SECTION ================= */
-.section-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 14px;
-}
-
-/* ================= PRODUCT SLIDER ================= */
-.product-slider {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  margin-bottom: 35px;
-}
-
-.product-card {
-  min-width: 160px;
-  background: #fff;
-  border-radius: 14px;
-  padding: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.product-img {
-  height: 130px;
-  background: var(--soft);
-  border-radius: 10px;
-  margin-bottom: 8px;
-}
-
-.product-title {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.product-price {
-  font-size: 15px;
-  font-weight: bold;
-  margin-top: 2px;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 11px;
-  background: var(--accent);
-  color: #000;
-  padding: 3px 6px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-}
-
-/* ================= TRUST ================= */
-.trust {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  text-align: center;
-  font-size: 14px;
-}
-
-/* ================= FOOTER ================= */
-footer {
-  background: var(--dark);
-  color: #fff;
-  padding: 30px 16px;
-  font-size: 13px;
-  margin-top: 40px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.footer-grid h4 {
-  margin-bottom: 8px;
-}
-
-footer p {
-  margin-top: 20px;
-  text-align: center;
-  opacity: 0.8;
-}
-
-/* ================= RESPONSIVE ================= */
-@media (min-width: 768px) {
-  .categories {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .trust {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-</style>
+    .vault {
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: #f5f5f5;
+      padding: 15px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="top-header">
-    <div class="brand">
-      <img src="logo.jpg">
-      <span>One Love One Lifestyle</span>
-    </div>
+<h2>Home Page</h2>
 
-    <div class="search-wrap">
-      <input type="text" placeholder="Search jackets, shirts, brands...">
-      <button>🔍</button>
-    </div>
+<div class="vault-btn" onclick="openVault()">Vault</div>
 
-    <div class="header-actions">
-      <div>Vault ❤️</div>
-    </div>
-  </div>
-
-  <div class="navbar">
-    <a href="#">All</a>
-    <a href="clothing.html">Clothing</a>
-    <a href="#">Shoes</a>
-    <a href="#">Accessories</a>
-    <a href="#">Gifts</a>
-    <a href="#">New Arrivals</a>
-    <a href="#">Best Sellers</a>
-  </div>
-</header>
-
-<div class="hero-slider" id="heroSlider">
-  <div class="hero-slide">
-    <h1>Elevate Everyday Comfort</h1>
-    <p>Premium fashion curated for lifestyle & confidence</p>
-  </div>
-  <div class="hero-slide">
-    <h1>Minimal • Modern • Timeless</h1>
-    <p>Discover styles designed to last</p>
-  </div>
+<div class="vault" id="vaultBox">
+  <h3>My Vault</h3>
+  <div id="vaultItems"></div>
 </div>
-
-<div class="container">
-
-  <div class="categories">
-    <a href="clothing.html" class="category">👕 Clothing</a>
-    <a href="#" class="category">👟 Shoes</a>
-    <a href="#" class="category">👜 Accessories</a>
-    <a href="#" class="category">🎁 Gifts</a>
-  </div>
-
-  <div class="section-title">Trending Now</div>
-
-  <div class="product-slider">
-    <div class="product-card">
-      <span class="badge">Best Seller</span>
-      <div class="product-img"></div>
-      <div class="product-title">Bomber Jacket</div>
-      <div class="product-price">₹1,999</div>
-    </div>
-
-    <div class="product-card">
-      <span class="badge">New</span>
-      <div class="product-img"></div>
-      <div class="product-title">Relaxed Shirt</div>
-      <div class="product-price">₹1,799</div>
-    </div>
-
-    <div class="product-card">
-      <span class="badge">Trending</span>
-      <div class="product-img"></div>
-      <div class="product-title">Hooded Jacket</div>
-      <div class="product-price">₹2,999</div>
-    </div>
-  </div>
-
-  <div class="trust">
-    <div>🚚 Fast Delivery</div>
-    <div>✔️ Premium Quality</div>
-    <div>🔒 Secure Shopping</div>
-    <div>📞 24/7 Support</div>
-  </div>
-
-</div>
-
-<footer>
-  <div class="footer-grid">
-    <div>
-      <h4>About</h4>
-      Brand Story<br>Careers<br>Press
-    </div>
-    <div>
-      <h4>Support</h4>
-      Help Center<br>Returns<br>Contact
-    </div>
-    <div>
-      <h4>Explore</h4>
-      Clothing<br>Shoes<br>Accessories
-    </div>
-    <div>
-      <h4>Legal</h4>
-      Privacy Policy<br>Terms
-    </div>
-  </div>
-
-  <p>© 2026 One Love One Lifestyle. All rights reserved.</p>
-</footer>
 
 <script>
-const slider = document.getElementById("heroSlider");
-let index = 0;
+function openVault() {
+  document.getElementById("vaultBox").style.display = "block";
+  loadVault();
+}
 
-setInterval(() => {
-  index = (index + 1) % slider.children.length;
-  slider.scrollTo({
-    left: slider.clientWidth * index,
-    behavior: "smooth"
+function loadVault() {
+  let items = JSON.parse(localStorage.getItem("vault")) || [];
+  let html = "";
+
+  items.forEach(item => {
+    html += `<p>${item.name} - ₹${item.price}</p>`;
   });
-}, 4000);
+
+  document.getElementById("vaultItems").innerHTML = html || "No items saved.";
+}
 </script>
 
 </body>
