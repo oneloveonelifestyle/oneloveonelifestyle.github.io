@@ -108,13 +108,12 @@ header {
 /* ================= HERO SLIDER ================= */
 .hero-slider {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .hero-slide {
   min-width: 100%;
-  scroll-snap-align: start;
   padding: 40px 20px;
   background: linear-gradient(135deg, #000, #2b2b2b);
   color: #fff;
@@ -275,8 +274,6 @@ footer p {
     </div>
 
     <div class="header-actions">
-      <div>Account</div>
-      <div>Orders</div>
       <div>Vault ❤️</div>
     </div>
   </div>
@@ -292,7 +289,7 @@ footer p {
   </div>
 </header>
 
-<div class="hero-slider">
+<div class="hero-slider" id="heroSlider">
   <div class="hero-slide">
     <h1>Elevate Everyday Comfort</h1>
     <p>Premium fashion curated for lifestyle & confidence</p>
@@ -368,6 +365,19 @@ footer p {
 
   <p>© 2026 One Love One Lifestyle. All rights reserved.</p>
 </footer>
+
+<script>
+const slider = document.getElementById("heroSlider");
+let index = 0;
+
+setInterval(() => {
+  index = (index + 1) % slider.children.length;
+  slider.scrollTo({
+    left: slider.clientWidth * index,
+    behavior: "smooth"
+  });
+}, 4000);
+</script>
 
 </body>
 </html>
