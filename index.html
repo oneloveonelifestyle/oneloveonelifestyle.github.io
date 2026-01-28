@@ -108,19 +108,19 @@ header {
 /* ================= HERO SLIDER ================= */
 .hero-slider {
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 
 .hero-slide {
-  min-width: 100%;
-  padding: 40px 20px;
+  min-width: 100vw;   /* ✅ FULL WIDTH FIX */
+  padding: 50px 20px;
   background: linear-gradient(135deg, #000, #2b2b2b);
   color: #fff;
 }
 
 .hero-slide h1 {
-  font-size: 24px;
+  font-size: 26px;
   margin-bottom: 8px;
 }
 
@@ -289,14 +289,21 @@ footer p {
   </div>
 </header>
 
+<!-- HERO SLIDER -->
 <div class="hero-slider" id="heroSlider">
   <div class="hero-slide">
     <h1>Elevate Everyday Comfort</h1>
     <p>Premium fashion curated for lifestyle & confidence</p>
   </div>
+
   <div class="hero-slide">
     <h1>Minimal • Modern • Timeless</h1>
     <p>Discover styles designed to last</p>
+  </div>
+
+  <div class="hero-slide">
+    <h1>Crafted For Real Life</h1>
+    <p>Comfort, quality & style in every piece</p>
   </div>
 </div>
 
@@ -373,11 +380,11 @@ let index = 0;
 setInterval(() => {
   index = (index + 1) % slider.children.length;
   slider.scrollTo({
-    left: slider.clientWidth * index,
+    left: window.innerWidth * index,
     behavior: "smooth"
   });
 }, 4000);
 </script>
 
 </body>
-</html>
+                                 </html>
