@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>One Love One Lifestyle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -9,69 +10,145 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f4f4;
+      color: #111;
     }
 
+    /* HEADER */
     header {
       background: #000;
       color: #fff;
-      padding: 20px 15px 15px;
-      text-align: center;
-      position: relative;
+      padding: 15px;
     }
 
-    header img {
-      width: 90px;
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand img {
+      width: 50px;
       border-radius: 50%;
     }
 
-    .search-wrapper {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
+    .brand h2 {
+      font-size: 16px;
+      margin: 0;
     }
 
     .search-box {
+      flex: 1;
       display: flex;
-      width: 100%;
-      max-width: 320px;
+      max-width: 500px;
       background: #fff;
-      border-radius: 25px;
+      border-radius: 6px;
       overflow: hidden;
     }
 
     .search-box input {
       flex: 1;
       border: none;
-      padding: 10px 14px;
+      padding: 10px;
       font-size: 14px;
       outline: none;
     }
 
     .search-box button {
-      background: #000;
-      color: #fff;
+      background: #febd69;
       border: none;
       padding: 0 16px;
-      cursor: pointer;
       font-size: 16px;
+      cursor: pointer;
     }
 
+    /* MAIN */
     .container {
       padding: 20px;
     }
 
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
     .category {
-      background: white;
-      padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
       text-align: center;
       font-size: 18px;
       font-weight: bold;
       text-decoration: none;
       color: #000;
-      display: block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* FEATURED */
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .product-image {
+      height: 140px;
+      background: #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   </style>
 </head>
@@ -79,32 +156,63 @@
 <body>
 
 <header>
-  <img src="logo.jpg">
-  <h2>One Love One Lifestyle</h2>
+  <div class="header-top">
+    <div class="brand">
+      <img src="logo.jpg" alt="Logo">
+      <h2>One Love One Lifestyle</h2>
+    </div>
 
-  <div class="search-wrapper">
-    <form class="search-box" onsubmit="return goSearch()">
-      <input type="text" id="homeSearch" placeholder="Search jackets, shirts...">
-      <button type="submit">🔍</button>
-    </form>
+    <div class="search-box">
+      <input type="text" placeholder="Search for products, brands and more">
+      <button>🔍</button>
+    </div>
   </div>
 </header>
 
 <div class="container">
-  <a href="clothing.html" class="category">👕 Clothing</a>
-  <a href="#" class="category">👟 Shoes (Coming Soon)</a>
-  <a href="#" class="category">👜 Accessories (Coming Soon)</a>
-  <a href="#" class="category">🎁 Gifts (Coming Soon)</a>
+
+  <!-- CATEGORIES -->
+  <div class="categories">
+    <a href="clothing.html" class="category">👕 Clothing</a>
+    <a href="#" class="category">👟 Shoes</a>
+    <a href="#" class="category">👜 Accessories</a>
+    <a href="#" class="category">🎁 Gifts</a>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="section-title">Featured Products</div>
+
+  <div class="products">
+    <div class="product-card">
+      <div class="product-image"></div>
+      <div class="product-title">Premium Cotton Jacket</div>
+      <div class="product-price">₹2,499</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image"></div>
+      <div class="product-title">Relaxed Fit Shirt</div>
+      <div class="product-price">₹1,799</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image"></div>
+      <div class="product-title">Streetwear Bomber</div>
+      <div class="product-price">₹3,199</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-image"></div>
+      <div class="product-title">Minimal Hoodie</div>
+      <div class="product-price">₹2,299</div>
+    </div>
+  </div>
+
 </div>
 
-<script>
-function goSearch() {
-  const query = document.getElementById("homeSearch").value.trim();
-  if (!query) return false;
-  window.location.href = "clothing.html?search=" + encodeURIComponent(query);
-  return false;
-}
-</script>
+<footer>
+  © 2026 One Love One Lifestyle. All rights reserved.
+</footer>
 
 </body>
 </html>
