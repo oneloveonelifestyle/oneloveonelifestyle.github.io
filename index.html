@@ -91,10 +91,40 @@ header{
   font-size:14px;
 }
 
+/* ================= GLOBAL ================= */
+.container{
+  padding:20px;
+}
+
+.section-title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+/* ================= CATEGORIES ================= */
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-bottom:35px;
+}
+
+.category-card{
+  background:#fff;
+  padding:26px;
+  border-radius:16px;
+  text-align:center;
+  font-weight:bold;
+  font-size:16px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
 /* ================= HERO ================= */
 .hero-wrapper{
   width:100vw;
   overflow:hidden;
+  margin-bottom:35px;
 }
 
 .hero-slider{
@@ -107,51 +137,25 @@ header{
   width:100vw;
   min-height:26vh;
   max-height:32vh;
+  background:linear-gradient(135deg,#000,#2b2b2b);
+  color:#fff;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   padding:20px;
-  color:#fff;
-  background:linear-gradient(135deg,#000,#2b2b2b);
 }
 
 .hero-slide h1{
   font-size:clamp(22px,5vw,32px);
+  margin-bottom:8px;
 }
 
 .hero-slide p{
   max-width:520px;
   opacity:.9;
-}
-
-/* ================= SECTIONS ================= */
-.container{
-  padding:20px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-/* ================= CATEGORY GRID ================= */
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  margin-bottom:35px;
-}
-
-.category-card{
-  background:#fff;
-  padding:24px;
-  border-radius:16px;
-  text-align:center;
-  font-weight:bold;
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 /* ================= PRODUCT SLIDER ================= */
@@ -203,33 +207,29 @@ header{
   font-weight:bold;
 }
 
-/* ================= LIFESTYLE ================= */
-.lifestyle{
-  background:#fff;
-  padding:26px;
-  border-radius:20px;
-  margin-bottom:35px;
-  text-align:center;
-}
-
-.lifestyle h3{
-  margin-bottom:10px;
-}
-
-/* ================= TRUST ================= */
-.trust{
+/* ================= INFO GRID ================= */
+.info-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:14px;
   margin-bottom:35px;
 }
 
-.trust div{
+.info-box{
   background:#fff;
   padding:18px;
   border-radius:14px;
   text-align:center;
   font-size:14px;
+}
+
+/* ================= BRAND STORY ================= */
+.story{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  text-align:center;
+  margin-bottom:35px;
 }
 
 /* ================= FOOTER ================= */
@@ -246,7 +246,7 @@ footer{
   .category-grid{
     grid-template-columns:repeat(4,1fr);
   }
-  .trust{
+  .info-grid{
     grid-template-columns:repeat(4,1fr);
   }
 }
@@ -277,7 +277,20 @@ footer{
   </div>
 </header>
 
-<!-- HERO -->
+<div class="container">
+
+  <!-- CATEGORIES FIRST -->
+  <div class="section-title">Shop by Category</div>
+  <div class="category-grid">
+    <div class="category-card">👕 Clothing</div>
+    <div class="category-card">👟 Shoes</div>
+    <div class="category-card">👜 Accessories</div>
+    <div class="category-card">🎁 Gifts</div>
+  </div>
+
+</div>
+
+<!-- HERO BELOW CATEGORIES -->
 <div class="hero-wrapper">
   <div class="hero-slider" id="heroSlider">
     <div class="hero-slide">
@@ -290,31 +303,23 @@ footer{
     </div>
     <div class="hero-slide">
       <h1>Designed for India</h1>
-      <p>Comfort & durability</p>
+      <p>Comfort & durability in every piece</p>
     </div>
   </div>
 </div>
 
 <div class="container">
 
-  <div class="section-title">Shop by Category</div>
-  <div class="category-grid">
-    <div class="category-card">👕 Clothing</div>
-    <div class="category-card">👟 Shoes</div>
-    <div class="category-card">👜 Accessories</div>
-    <div class="category-card">🎁 Gifts</div>
-  </div>
-
   <div class="section-title">Trending Now</div>
   <div class="product-slider">
-    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
-    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
     <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
+    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
+    <div class="product-card"><div class="product-img"></div>T-Shirt<br><b>₹799</b></div>
   </div>
 
   <div class="deal">
     <h2>Deal of the Day</h2>
-    <p>Up to <span>40% OFF</span> on selected styles</p>
+    <p>Up to <span>40% OFF</span> on best sellers</p>
   </div>
 
   <div class="section-title">Recommended For You</div>
@@ -324,17 +329,17 @@ footer{
     <div class="product-card"><div class="product-img"></div>Track Pant<br><b>₹999</b></div>
   </div>
 
-  <div class="lifestyle">
-    <h3>One Love One Lifestyle</h3>
-    <p>Not just fashion. A lifestyle built on comfort, confidence and minimal design.</p>
+  <div class="section-title">Why Shop With Us</div>
+  <div class="info-grid">
+    <div class="info-box">Premium Fabric</div>
+    <div class="info-box">Modern Fits</div>
+    <div class="info-box">Made for India</div>
+    <div class="info-box">Trusted Brand</div>
   </div>
 
-  <div class="section-title">Why Customers Love Us</div>
-  <div class="trust">
-    <div>Premium Fabric</div>
-    <div>Made for Indian Climate</div>
-    <div>Modern Fits</div>
-    <div>Trusted Brand</div>
+  <div class="story">
+    <h3>One Love One Lifestyle</h3>
+    <p>Not just fashion. A lifestyle built on confidence, comfort and clean design.</p>
   </div>
 
 </div>
