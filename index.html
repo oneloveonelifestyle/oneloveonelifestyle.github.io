@@ -81,7 +81,8 @@ header{ background:#000; color:#fff; }
 .category-card{
   background:#fff; padding:24px;
   border-radius:16px; text-align:center;
-  font-weight:bold; box-shadow:0 6px 16px rgba(0,0,0,.08);
+  font-weight:bold;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 /* ================= PRODUCT SLIDER ================= */
@@ -99,45 +100,68 @@ header{ background:#000; color:#fff; }
   border-radius:10px; margin-bottom:8px;
 }
 
-/* ================= BANNER ================= */
-.banner{
+/* ================= PROMO ================= */
+.promo{
   background:linear-gradient(135deg,#111,#000);
-  color:#fff; padding:30px;
+  color:#fff;
+  padding:30px;
   border-radius:22px;
   text-align:center;
   margin-bottom:40px;
 }
-.banner span{ color:var(--accent); font-weight:bold; }
+.promo span{ color:var(--accent); font-weight:bold; }
 
-/* ================= ICON GRID ================= */
-.icon-grid{
+/* ================= FEATURE GRID ================= */
+.feature-grid{
   display:grid; grid-template-columns:repeat(2,1fr);
-  gap:14px; margin-bottom:40px;
+  gap:16px; margin-bottom:40px;
 }
-.icon-box{
-  background:#fff; padding:18px;
-  border-radius:16px; text-align:center;
-  font-size:14px;
+.feature-box{
+  background:#fff; padding:22px;
+  border-radius:18px; text-align:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
-/* ================= BRAND STRIP ================= */
-.brand-strip{
-  display:flex; gap:14px; overflow-x:auto;
+/* ================= COLLECTION ================= */
+.collection{
+  background:#fff;
+  border-radius:22px;
+  padding:26px;
   margin-bottom:40px;
 }
-.brand-logo{
-  min-width:120px; height:60px;
-  background:#fff; border-radius:12px;
-  display:flex; align-items:center; justify-content:center;
+.collection-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.collection-item{
+  background:var(--soft);
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
   font-weight:bold;
 }
 
-/* ================= FAQ ================= */
-.faq{
-  background:#fff; padding:26px;
-  border-radius:20px; margin-bottom:40px;
+/* ================= TRUST ================= */
+.trust{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:14px; margin-bottom:40px;
 }
-.faq p{ margin:8px 0; font-size:14px; }
+.trust div{
+  background:#fff;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-size:14px;
+}
+
+/* ================= INFO ================= */
+.info{
+  background:#fff;
+  border-radius:22px;
+  padding:28px;
+  margin-bottom:40px;
+}
+.info p{ font-size:14px; line-height:1.6; }
 
 /* ================= FOOTER ================= */
 footer{
@@ -149,7 +173,9 @@ footer{
 /* ================= DESKTOP ================= */
 @media(min-width:768px){
   .category-grid{ grid-template-columns:repeat(4,1fr); }
-  .icon-grid{ grid-template-columns:repeat(4,1fr); }
+  .feature-grid{ grid-template-columns:repeat(4,1fr); }
+  .collection-grid{ grid-template-columns:repeat(4,1fr); }
+  .trust{ grid-template-columns:repeat(4,1fr); }
 }
 </style>
 </head>
@@ -203,32 +229,43 @@ footer{
     <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
   </div>
 
-  <div class="banner">
-    FESTIVE SALE • UP TO <span>50% OFF</span> • LIMITED TIME
+  <div class="promo">
+    LIMITED TIME • UP TO <span>50% OFF</span> • SHOP NOW
   </div>
 
-  <div class="section-title">Top Brands</div>
-  <div class="brand-strip">
-    <div class="brand-logo">ETA</div>
-    <div class="brand-logo">NUON</div>
-    <div class="brand-logo">Campus</div>
-    <div class="brand-logo">WES</div>
-    <div class="brand-logo">Zudio</div>
+  <div class="section-title">Why Choose One Love</div>
+  <div class="feature-grid">
+    <div class="feature-box">Premium Fabrics</div>
+    <div class="feature-box">Modern Fits</div>
+    <div class="feature-box">Indian Climate Ready</div>
+    <div class="feature-box">Quality Assurance</div>
   </div>
 
-  <div class="section-title">Why Choose Us</div>
-  <div class="icon-grid">
-    <div class="icon-box">Premium Fabric</div>
-    <div class="icon-box">Secure Payments</div>
-    <div class="icon-box">Fast Delivery</div>
-    <div class="icon-box">Easy Returns</div>
+  <div class="section-title">Curated Collections</div>
+  <div class="collection">
+    <div class="collection-grid">
+      <div class="collection-item">Winter Wear</div>
+      <div class="collection-item">Everyday Basics</div>
+      <div class="collection-item">Street Style</div>
+      <div class="collection-item">Minimal Classics</div>
+    </div>
   </div>
 
-  <div class="faq">
-    <h3>Customer Questions</h3>
-    <p>✔ Is Cash on Delivery available?</p>
-    <p>✔ Are products returnable?</p>
-    <p>✔ Is this an Indian brand?</p>
+  <div class="section-title">Customer Promise</div>
+  <div class="trust">
+    <div>Fast Delivery</div>
+    <div>Secure Payments</div>
+    <div>Easy Returns</div>
+    <div>Customer Support</div>
+  </div>
+
+  <div class="info">
+    <h3>About One Love One Lifestyle</h3>
+    <p>
+      One Love One Lifestyle is built on simplicity, comfort and confidence.
+      Every product is designed with modern aesthetics, durable materials
+      and everyday wearability in mind.
+    </p>
   </div>
 
 </div>
@@ -247,4 +284,4 @@ setInterval(()=>{
 </script>
 
 </body>
-</html>
+  </html>
