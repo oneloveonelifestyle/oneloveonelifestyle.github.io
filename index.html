@@ -105,14 +105,14 @@ header{
 
 .hero-slide{
   width:100vw;
-  min-height:28vh;
-  max-height:34vh;
+  min-height:26vh;
+  max-height:32vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:22px;
+  padding:20px;
   color:#fff;
   background:linear-gradient(135deg,#000,#2b2b2b);
 }
@@ -126,22 +126,7 @@ header{
   opacity:.9;
 }
 
-/* ================= FEATURE STRIP ================= */
-.features{
-  background:#fff;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  padding:18px;
-  text-align:center;
-  gap:10px;
-}
-
-.feature{
-  font-size:13px;
-  font-weight:bold;
-}
-
-/* ================= SECTION ================= */
+/* ================= SECTIONS ================= */
 .container{
   padding:20px;
 }
@@ -149,7 +134,24 @@ header{
 .section-title{
   font-size:18px;
   font-weight:bold;
-  margin-bottom:14px;
+  margin-bottom:12px;
+}
+
+/* ================= CATEGORY GRID ================= */
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-bottom:35px;
+}
+
+.category-card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  text-align:center;
+  font-weight:bold;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 /* ================= PRODUCT SLIDER ================= */
@@ -158,6 +160,7 @@ header{
   gap:15px;
   overflow-x:auto;
   padding-bottom:10px;
+  margin-bottom:35px;
 }
 
 .product-card{
@@ -185,18 +188,14 @@ header{
   font-weight:bold;
 }
 
-/* ================= DEAL BANNER ================= */
+/* ================= DEAL ================= */
 .deal{
   background:linear-gradient(135deg,#111,#000);
   color:#fff;
-  padding:26px;
-  border-radius:18px;
+  padding:28px;
+  border-radius:20px;
   text-align:center;
-  margin:30px 0;
-}
-
-.deal h2{
-  margin-bottom:8px;
+  margin-bottom:35px;
 }
 
 .deal span{
@@ -204,18 +203,32 @@ header{
   font-weight:bold;
 }
 
+/* ================= LIFESTYLE ================= */
+.lifestyle{
+  background:#fff;
+  padding:26px;
+  border-radius:20px;
+  margin-bottom:35px;
+  text-align:center;
+}
+
+.lifestyle h3{
+  margin-bottom:10px;
+}
+
 /* ================= TRUST ================= */
 .trust{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:14px;
-  text-align:center;
+  margin-bottom:35px;
 }
 
 .trust div{
   background:#fff;
   padding:18px;
   border-radius:14px;
+  text-align:center;
   font-size:14px;
 }
 
@@ -226,13 +239,12 @@ footer{
   padding:30px;
   text-align:center;
   font-size:13px;
-  margin-top:40px;
 }
 
 /* ================= DESKTOP ================= */
 @media(min-width:768px){
-  .features{
-    grid-template-columns:repeat(6,1fr);
+  .category-grid{
+    grid-template-columns:repeat(4,1fr);
   }
   .trust{
     grid-template-columns:repeat(4,1fr);
@@ -270,58 +282,59 @@ footer{
   <div class="hero-slider" id="heroSlider">
     <div class="hero-slide">
       <h1>Elevate Everyday Comfort</h1>
-      <p>Premium fashion curated for lifestyle & confidence</p>
+      <p>Premium fashion curated for confidence</p>
     </div>
     <div class="hero-slide">
       <h1>Minimal • Modern • Timeless</h1>
-      <p>Styles that never go out of fashion</p>
+      <p>Designed to stay relevant</p>
     </div>
     <div class="hero-slide">
       <h1>Designed for India</h1>
-      <p>Comfort, quality & durability</p>
+      <p>Comfort & durability</p>
     </div>
   </div>
-</div>
-
-<!-- FEATURES -->
-<div class="features">
-  <div>🚚 Free Delivery</div>
-  <div>⭐ Premium Quality</div>
-  <div>🔒 Secure Payments</div>
 </div>
 
 <div class="container">
 
+  <div class="section-title">Shop by Category</div>
+  <div class="category-grid">
+    <div class="category-card">👕 Clothing</div>
+    <div class="category-card">👟 Shoes</div>
+    <div class="category-card">👜 Accessories</div>
+    <div class="category-card">🎁 Gifts</div>
+  </div>
+
   <div class="section-title">Trending Now</div>
   <div class="product-slider">
-    <div class="product-card">
-      <div class="product-img"></div>
-      <div class="product-title">Oversized Tee</div>
-      <div class="product-price">₹799</div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"></div>
-      <div class="product-title">Street Hoodie</div>
-      <div class="product-price">₹1,499</div>
-    </div>
-    <div class="product-card">
-      <div class="product-img"></div>
-      <div class="product-title">Minimal Shirt</div>
-      <div class="product-price">₹1,199</div>
-    </div>
+    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
+    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
+    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
   </div>
 
   <div class="deal">
     <h2>Deal of the Day</h2>
-    <p>Flat <span>30% OFF</span> on selected styles</p>
+    <p>Up to <span>40% OFF</span> on selected styles</p>
   </div>
 
-  <div class="section-title">Why Choose Us</div>
+  <div class="section-title">Recommended For You</div>
+  <div class="product-slider">
+    <div class="product-card"><div class="product-img"></div>Shirt<br><b>₹1199</b></div>
+    <div class="product-card"><div class="product-img"></div>Sweatshirt<br><b>₹1399</b></div>
+    <div class="product-card"><div class="product-img"></div>Track Pant<br><b>₹999</b></div>
+  </div>
+
+  <div class="lifestyle">
+    <h3>One Love One Lifestyle</h3>
+    <p>Not just fashion. A lifestyle built on comfort, confidence and minimal design.</p>
+  </div>
+
+  <div class="section-title">Why Customers Love Us</div>
   <div class="trust">
-    <div>Made for Indian Climate</div>
     <div>Premium Fabric</div>
+    <div>Made for Indian Climate</div>
+    <div>Modern Fits</div>
     <div>Trusted Brand</div>
-    <div>Fast Support</div>
   </div>
 
 </div>
