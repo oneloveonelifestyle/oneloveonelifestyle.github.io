@@ -1,59 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Home</title>
-  <style>
-    body { font-family: Arial; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | One Love One Lifestyle</title>
 
-    .vault-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: black;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
+<style>
+/* ---------- BASIC ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    .vault {
-      display: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 300px;
-      height: 100%;
-      background: #f5f5f5;
-      padding: 15px;
-    }
-  </style>
+body {
+  background: #f5f5f5;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  background: #131a22;
+  color: white;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ---------- SLIDER ---------- */
+.slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
+
+.slide:nth-child(1) { background: #232f3e; }
+.slide:nth-child(2) { background: #37475a; }
+.slide:nth-child(3) { background: #131a22; }
+
+/* ---------- VAULT BUTTON ---------- */
+.vault-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ff9900;
+  color: black;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+/* ---------- VAULT PANEL ---------- */
+.vault-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background: white;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+
+.vault-panel.active {
+  right: 0;
+}
+
+.vault-header {
+  background: #131a22;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.vault-items {
+  padding: 15px;
+}
+
+.vault-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.vault-item span {
+  font-size: 14px;
+  color: #555;
+}
+</style>
 </head>
 
 <body>
 
-<h2>Home Page</h2>
+<header>
+  One Love One Lifestyle
+</header>
 
-<div class="vault-btn" onclick="openVault()">Vault</div>
+<!-- SLIDER -->
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide">New Arrivals</div>
+    <div class="slide">Premium Cotton</div>
+    <div class="slide">Made in India 🇮🇳</div>
+  </div>
+</div>
 
-<div class="vault" id="vaultBox">
-  <h3>My Vault</h3>
-  <div id="vaultItems"></div>
+<!-- VAULT BUTTON -->
+<div class="vault-btn" onclick="toggleVault()">Vault</div>
+
+<!-- VAULT PANEL -->
+<div class="vault-panel" id="vaultPanel">
+  <div class="vault-header">My Vault</div>
+  <div class="vault-items" id="vaultItems">
+    <!-- Items appear here -->
+  </div>
 </div>
 
 <script>
-function openVault() {
-  document.getElementById("vaultBox").style.display = "block";
+/* ---------- SLIDER AUTO MOVE ---------- */
+let index = 0;
+const slides = document.getElementById("slides");
+const totalSlides = slides.children.length;
+
+setInterval(() => {
+  index = (index + 1) % totalSlides;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}, 4000);
+
+/* ---------- VAULT ---------- */
+function toggleVault() {
+  document.getElementById("vaultPanel").classList.toggle("active");
   loadVault();
 }
 
 function loadVault() {
-  let items = JSON.parse(localStorage.getItem("vault")) || [];
-  let html = "";
+  const vaultItems = document.getElementById("vaultItems");
+  const vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-  items.forEach(item => {
-    html += `<p>${item.name} - ₹${item.price}</p>`;
+  if (vault.length === 0) {
+    vaultItems.innerHTML = "<p>No items saved.</p>";
+    return;
+  }
+
+  vaultItems.innerHTML = "";
+  vault.forEach(item => {
+    vaultItems.innerHTML += `
+      <div class="vault-item">
+        <strong>${item.name}</strong><br>
+        <span>₹${item.price}</span>
+      </div>
+    `;
   });
-
-  document.getElementById("vaultItems").innerHTML = html || "No items saved.";
 }
 </script>
 
