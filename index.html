@@ -74,6 +74,7 @@ header{ background:#000; color:#fff; }
 .category-link{
   text-decoration:none;
   color:inherit;
+  display:block; /* ✅ REQUIRED FOR MOBILE TAP */
 }
 
 .category-card{
@@ -100,96 +101,6 @@ header{ background:#000; color:#fff; }
   border-radius:10px; margin-bottom:8px;
 }
 
-/* OFFER */
-.offer-zone{
-  background:linear-gradient(135deg,#0f0f0f,#000);
-  border-radius:24px;
-  padding:28px;
-  margin-bottom:40px;
-  color:#fff;
-}
-.offer-grid{
-  display:grid; grid-template-columns:repeat(2,1fr);
-  gap:16px; margin-top:18px;
-}
-.offer-card{
-  background:#111;
-  border-radius:18px;
-  padding:22px;
-  text-align:center;
-  max-width:100%;
-  overflow:hidden;
-  word-wrap:break-word;
-}
-.offer-card span{
-  color:var(--accent);
-  font-size:24px;
-  font-weight:bold;
-  display:block;
-  margin-bottom:6px;
-}
-
-/* TRUST */
-.trust{
-  display:grid; grid-template-columns:repeat(2,1fr);
-  gap:14px; margin-bottom:40px;
-}
-.trust div{
-  background:#fff; padding:18px;
-  border-radius:14px; text-align:center;
-}
-
-/* EXTRA */
-.style-banner{
-  background:#fff;
-  border-radius:22px;
-  padding:30px;
-  margin-bottom:40px;
-  text-align:center;
-}
-
-.popular-strip{
-  background:#111;
-  color:#fff;
-  padding:26px;
-  border-radius:22px;
-  margin-bottom:40px;
-}
-.popular-strip .product-card{
-  background:#1c1c1c;
-  color:#fff;
-}
-
-.brand-values{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-bottom:40px;
-}
-.brand-values div{
-  background:#fff;
-  padding:22px;
-  border-radius:18px;
-  text-align:center;
-}
-
-.newsletter{
-  background:linear-gradient(135deg,#000,#1a1a1a);
-  color:#fff;
-  padding:34px;
-  border-radius:24px;
-  text-align:center;
-  margin-bottom:40px;
-}
-.newsletter input{
-  padding:10px;
-  border:none;
-  border-radius:6px;
-  margin-top:10px;
-  width:80%;
-  max-width:320px;
-}
-
 /* FOOTER */
 footer{
   background:#111;
@@ -197,16 +108,6 @@ footer{
   padding:30px;
   text-align:center;
   font-size:13px;
-}
-
-/* DESKTOP */
-@media(min-width:768px){
-  .category-grid,
-  .offer-grid,
-  .trust,
-  .brand-values{
-    grid-template-columns:repeat(4,1fr);
-  }
 }
 </style>
 </head>
@@ -246,7 +147,7 @@ footer{
 
   <div class="section-title">Shop by Category</div>
   <div class="category-grid">
-    <!-- ✅ WORKING CLOTHING CATEGORY -->
+
     <a href="clothing.html" class="category-link">
       <div class="category-card">👕 Clothing</div>
     </a>
@@ -254,13 +155,7 @@ footer{
     <div class="category-card">👟 Shoes</div>
     <div class="category-card">👜 Accessories</div>
     <div class="category-card">🎁 Gifts</div>
-  </div>
 
-  <div class="section-title">Trending Now</div>
-  <div class="product-slider">
-    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
-    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
-    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
   </div>
 
 </div>
@@ -279,4 +174,4 @@ setInterval(()=>{
 </script>
 
 </body>
-                                </html>
+</html>
