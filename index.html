@@ -24,231 +24,132 @@ body{
 }
 
 /* ================= HEADER ================= */
-header{
-  background:#000;
-  color:#fff;
-}
+header{ background:#000; color:#fff; }
 
 .top-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
+  display:flex; align-items:center; gap:12px; padding:12px;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.brand img{
-  width:40px;
-  border-radius:50%;
-}
-
-.brand span{
-  font-weight:bold;
-  font-size:14px;
-}
+.brand{ display:flex; align-items:center; gap:8px; }
+.brand img{ width:40px; border-radius:50%; }
+.brand span{ font-weight:bold; font-size:14px; }
 
 .search-wrap{
-  flex:1;
-  display:flex;
-  max-width:520px;
-  background:#fff;
-  border-radius:6px;
-  overflow:hidden;
+  flex:1; display:flex; max-width:520px;
+  background:#fff; border-radius:6px; overflow:hidden;
 }
-
-.search-wrap input{
-  flex:1;
-  border:none;
-  padding:10px;
-  font-size:14px;
-}
-
-.search-wrap button{
-  border:none;
-  background:var(--accent);
-  padding:0 14px;
-  font-size:16px;
-}
+.search-wrap input{ flex:1; border:none; padding:10px; font-size:14px; }
+.search-wrap button{ border:none; background:var(--accent); padding:0 14px; font-size:16px; }
 
 /* NAV */
 .navbar{
-  display:flex;
-  gap:16px;
-  padding:10px 14px;
-  background:#1b1b1b;
-  overflow-x:auto;
+  display:flex; gap:16px; padding:10px 14px;
+  background:#1b1b1b; overflow-x:auto;
 }
-
-.navbar a{
-  color:#fff;
-  text-decoration:none;
-  white-space:nowrap;
-  font-size:14px;
-}
-
-/* ================= GLOBAL ================= */
-.container{
-  padding:20px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-/* ================= CATEGORIES ================= */
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  margin-bottom:35px;
-}
-
-.category-card{
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  text-align:center;
-  font-weight:bold;
-  font-size:16px;
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
+.navbar a{ color:#fff; text-decoration:none; white-space:nowrap; font-size:14px; }
 
 /* ================= HERO ================= */
-.hero-wrapper{
-  width:100vw;
-  overflow:hidden;
-  margin-bottom:35px;
-}
-
-.hero-slider{
-  display:flex;
-  width:300vw;
-  transition:transform .6s ease;
-}
+.hero-wrapper{ width:100vw; overflow:hidden; }
+.hero-slider{ display:flex; width:300vw; transition:.6s ease; }
 
 .hero-slide{
   width:100vw;
   min-height:26vh;
   max-height:32vh;
-  background:linear-gradient(135deg,#000,#2b2b2b);
-  color:#fff;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   padding:20px;
+  color:#fff;
+  background:linear-gradient(135deg,#000,#2b2b2b);
 }
 
-.hero-slide h1{
-  font-size:clamp(22px,5vw,32px);
-  margin-bottom:8px;
-}
+.hero-slide h1{ font-size:clamp(22px,5vw,32px); }
+.hero-slide p{ max-width:520px; opacity:.9; }
 
-.hero-slide p{
-  max-width:520px;
-  opacity:.9;
+/* ================= COMMON ================= */
+.container{ padding:20px; }
+.section-title{ font-size:18px; font-weight:bold; margin-bottom:12px; }
+
+/* ================= CATEGORY GRID ================= */
+.category-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:15px; margin-bottom:35px;
+}
+.category-card{
+  background:#fff; padding:24px;
+  border-radius:16px; text-align:center;
+  font-weight:bold; box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 /* ================= PRODUCT SLIDER ================= */
 .product-slider{
-  display:flex;
-  gap:15px;
-  overflow-x:auto;
-  padding-bottom:10px;
-  margin-bottom:35px;
+  display:flex; gap:15px; overflow-x:auto;
+  padding-bottom:10px; margin-bottom:35px;
 }
-
 .product-card{
-  min-width:160px;
-  background:#fff;
-  border-radius:14px;
-  padding:12px;
+  min-width:160px; background:#fff;
+  border-radius:14px; padding:12px;
   box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
-
 .product-img{
-  height:130px;
-  background:var(--soft);
-  border-radius:10px;
-  margin-bottom:8px;
+  height:130px; background:var(--soft);
+  border-radius:10px; margin-bottom:8px;
 }
 
-.product-title{
-  font-size:14px;
-  font-weight:bold;
-}
-
-.product-price{
-  font-size:15px;
-  font-weight:bold;
-}
-
-/* ================= DEAL ================= */
-.deal{
+/* ================= BANNER ================= */
+.banner{
   background:linear-gradient(135deg,#111,#000);
-  color:#fff;
-  padding:28px;
-  border-radius:20px;
+  color:#fff; padding:30px;
+  border-radius:22px;
   text-align:center;
-  margin-bottom:35px;
+  margin-bottom:40px;
 }
+.banner span{ color:var(--accent); font-weight:bold; }
 
-.deal span{
-  color:var(--accent);
-  font-weight:bold;
+/* ================= ICON GRID ================= */
+.icon-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:14px; margin-bottom:40px;
 }
-
-/* ================= INFO GRID ================= */
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-bottom:35px;
-}
-
-.info-box{
-  background:#fff;
-  padding:18px;
-  border-radius:14px;
-  text-align:center;
+.icon-box{
+  background:#fff; padding:18px;
+  border-radius:16px; text-align:center;
   font-size:14px;
 }
 
-/* ================= BRAND STORY ================= */
-.story{
-  background:#fff;
-  padding:26px;
-  border-radius:20px;
-  text-align:center;
-  margin-bottom:35px;
+/* ================= BRAND STRIP ================= */
+.brand-strip{
+  display:flex; gap:14px; overflow-x:auto;
+  margin-bottom:40px;
 }
+.brand-logo{
+  min-width:120px; height:60px;
+  background:#fff; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:bold;
+}
+
+/* ================= FAQ ================= */
+.faq{
+  background:#fff; padding:26px;
+  border-radius:20px; margin-bottom:40px;
+}
+.faq p{ margin:8px 0; font-size:14px; }
 
 /* ================= FOOTER ================= */
 footer{
-  background:#111;
-  color:#fff;
-  padding:30px;
-  text-align:center;
+  background:#111; color:#fff;
+  padding:30px; text-align:center;
   font-size:13px;
 }
 
 /* ================= DESKTOP ================= */
 @media(min-width:768px){
-  .category-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-  .info-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
+  .category-grid{ grid-template-columns:repeat(4,1fr); }
+  .icon-grid{ grid-template-columns:repeat(4,1fr); }
 }
 </style>
 </head>
@@ -261,7 +162,6 @@ footer{
       <img src="logo.jpg">
       <span>One Love One Lifestyle</span>
     </div>
-
     <div class="search-wrap">
       <input placeholder="Search products">
       <button>🔍</button>
@@ -277,9 +177,17 @@ footer{
   </div>
 </header>
 
+<!-- HERO -->
+<div class="hero-wrapper">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide"><h1>Elevate Everyday Comfort</h1><p>Premium fashion curated for confidence</p></div>
+    <div class="hero-slide"><h1>Minimal • Modern • Timeless</h1><p>Designed to stay relevant</p></div>
+    <div class="hero-slide"><h1>Designed for India</h1><p>Comfort & durability</p></div>
+  </div>
+</div>
+
 <div class="container">
 
-  <!-- CATEGORIES FIRST -->
   <div class="section-title">Shop by Category</div>
   <div class="category-grid">
     <div class="category-card">👕 Clothing</div>
@@ -288,58 +196,39 @@ footer{
     <div class="category-card">🎁 Gifts</div>
   </div>
 
-</div>
-
-<!-- HERO BELOW CATEGORIES -->
-<div class="hero-wrapper">
-  <div class="hero-slider" id="heroSlider">
-    <div class="hero-slide">
-      <h1>Elevate Everyday Comfort</h1>
-      <p>Premium fashion curated for confidence</p>
-    </div>
-    <div class="hero-slide">
-      <h1>Minimal • Modern • Timeless</h1>
-      <p>Designed to stay relevant</p>
-    </div>
-    <div class="hero-slide">
-      <h1>Designed for India</h1>
-      <p>Comfort & durability in every piece</p>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-
   <div class="section-title">Trending Now</div>
   <div class="product-slider">
-    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
+    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
     <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
-    <div class="product-card"><div class="product-img"></div>T-Shirt<br><b>₹799</b></div>
+    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
   </div>
 
-  <div class="deal">
-    <h2>Deal of the Day</h2>
-    <p>Up to <span>40% OFF</span> on best sellers</p>
+  <div class="banner">
+    FESTIVE SALE • UP TO <span>50% OFF</span> • LIMITED TIME
   </div>
 
-  <div class="section-title">Recommended For You</div>
-  <div class="product-slider">
-    <div class="product-card"><div class="product-img"></div>Shirt<br><b>₹1199</b></div>
-    <div class="product-card"><div class="product-img"></div>Sweatshirt<br><b>₹1399</b></div>
-    <div class="product-card"><div class="product-img"></div>Track Pant<br><b>₹999</b></div>
+  <div class="section-title">Top Brands</div>
+  <div class="brand-strip">
+    <div class="brand-logo">ETA</div>
+    <div class="brand-logo">NUON</div>
+    <div class="brand-logo">Campus</div>
+    <div class="brand-logo">WES</div>
+    <div class="brand-logo">Zudio</div>
   </div>
 
-  <div class="section-title">Why Shop With Us</div>
-  <div class="info-grid">
-    <div class="info-box">Premium Fabric</div>
-    <div class="info-box">Modern Fits</div>
-    <div class="info-box">Made for India</div>
-    <div class="info-box">Trusted Brand</div>
+  <div class="section-title">Why Choose Us</div>
+  <div class="icon-grid">
+    <div class="icon-box">Premium Fabric</div>
+    <div class="icon-box">Secure Payments</div>
+    <div class="icon-box">Fast Delivery</div>
+    <div class="icon-box">Easy Returns</div>
   </div>
 
-  <div class="story">
-    <h3>One Love One Lifestyle</h3>
-    <p>Not just fashion. A lifestyle built on confidence, comfort and clean design.</p>
+  <div class="faq">
+    <h3>Customer Questions</h3>
+    <p>✔ Is Cash on Delivery available?</p>
+    <p>✔ Are products returnable?</p>
+    <p>✔ Is this an Indian brand?</p>
   </div>
 
 </div>
