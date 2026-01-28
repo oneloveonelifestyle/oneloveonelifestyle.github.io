@@ -2,173 +2,160 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | One Love One Lifestyle</title>
+<title>One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* ---------- BASIC ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
 body {
-  background: #f5f5f5;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
-/* ---------- HEADER ---------- */
+/* HEADER */
 header {
-  background: #131a22;
-  color: white;
-  padding: 15px 20px;
-  font-size: 20px;
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  width: 55px;
+  border-radius: 50%;
+}
+
+.header-title {
+  font-size: 18px;
   font-weight: bold;
 }
 
-/* ---------- SLIDER ---------- */
-.slider {
-  width: 100%;
-  overflow: hidden;
+.vault-icon {
+  font-size: 22px;
+  cursor: pointer;
 }
 
-.slides {
+/* SEARCH */
+.search-bar {
+  background: #fff;
+  padding: 12px;
   display: flex;
-  transition: transform 0.8s ease-in-out;
+  gap: 8px;
+  align-items: center;
 }
 
-.slide {
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.search-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* HERO SLIDER */
+.hero-wrapper {
+  overflow: hidden;
+  background: #fff;
+}
+
+.hero-slider {
+  display: flex;
+  scroll-behavior: smooth;
+}
+
+.hero-slide {
   min-width: 100%;
-  height: 350px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
-  color: white;
+  color: #fff;
 }
 
-.slide:nth-child(1) { background: #232f3e; }
-.slide:nth-child(2) { background: #37475a; }
-.slide:nth-child(3) { background: #131a22; }
+.slide1 { background: #000; }
+.slide2 { background: #333; }
+.slide3 { background: #555; }
 
-/* ---------- VAULT BUTTON ---------- */
-.vault-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #ff9900;
-  color: black;
-  padding: 10px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1000;
+/* CATEGORIES */
+.container {
+  padding: 20px;
 }
 
-/* ---------- VAULT PANEL ---------- */
-.vault-panel {
-  position: fixed;
-  top: 0;
-  right: -350px;
-  width: 320px;
-  height: 100%;
-  background: white;
-  box-shadow: -4px 0 15px rgba(0,0,0,0.2);
-  transition: right 0.4s ease;
-  z-index: 999;
-}
-
-.vault-panel.active {
-  right: 0;
-}
-
-.vault-header {
-  background: #131a22;
-  color: white;
-  padding: 15px;
+.category {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  text-align: center;
   font-size: 18px;
-}
-
-.vault-items {
-  padding: 15px;
-}
-
-.vault-item {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.vault-item span {
-  font-size: 14px;
-  color: #555;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-  One Love One Lifestyle
+  <img src="logo.jpg">
+  <div class="header-title">One Love One Lifestyle</div>
+  <div class="vault-icon">♡</div>
 </header>
 
-<!-- SLIDER -->
-<div class="slider">
-  <div class="slides" id="slides">
-    <div class="slide">New Arrivals</div>
-    <div class="slide">Premium Cotton</div>
-    <div class="slide">Made in India 🇮🇳</div>
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <input type="text" class="search-input" placeholder="Search for jackets, shirts, gifts...">
+  <button class="search-btn">🔍</button>
+</div>
+
+<!-- HERO SLIDER -->
+<div class="hero-wrapper">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide slide1">Premium Clothing Collection</div>
+    <div class="hero-slide slide2">Style That Speaks You</div>
+    <div class="hero-slide slide3">Discover Your Lifestyle</div>
   </div>
 </div>
 
-<!-- VAULT BUTTON -->
-<div class="vault-btn" onclick="toggleVault()">Vault</div>
-
-<!-- VAULT PANEL -->
-<div class="vault-panel" id="vaultPanel">
-  <div class="vault-header">My Vault</div>
-  <div class="vault-items" id="vaultItems">
-    <!-- Items appear here -->
-  </div>
+<!-- CATEGORIES -->
+<div class="container">
+  <a href="clothing.html" class="category">👕 Clothing</a>
+  <a href="#" class="category">👟 Shoes</a>
+  <a href="#" class="category">👜 Accessories</a>
+  <a href="#" class="category">🎁 Gifts</a>
 </div>
 
+<!-- SLIDER SCRIPT (FULL SLIDE FIXED) -->
 <script>
-/* ---------- SLIDER AUTO MOVE ---------- */
+const slider = document.getElementById("heroSlider");
+const slides = slider.querySelectorAll(".hero-slide");
 let index = 0;
-const slides = document.getElementById("slides");
-const totalSlides = slides.children.length;
 
 setInterval(() => {
-  index = (index + 1) % totalSlides;
-  slides.style.transform = `translateX(-${index * 100}%)`;
-}, 4000);
-
-/* ---------- VAULT ---------- */
-function toggleVault() {
-  document.getElementById("vaultPanel").classList.toggle("active");
-  loadVault();
-}
-
-function loadVault() {
-  const vaultItems = document.getElementById("vaultItems");
-  const vault = JSON.parse(localStorage.getItem("vault")) || [];
-
-  if (vault.length === 0) {
-    vaultItems.innerHTML = "<p>No items saved.</p>";
-    return;
-  }
-
-  vaultItems.innerHTML = "";
-  vault.forEach(item => {
-    vaultItems.innerHTML += `
-      <div class="vault-item">
-        <strong>${item.name}</strong><br>
-        <span>₹${item.price}</span>
-      </div>
-    `;
+  index = (index + 1) % slides.length;
+  slides[index].scrollIntoView({
+    behavior: "smooth",
+    inline: "start"
   });
-}
+}, 4000);
 </script>
 
 </body>
