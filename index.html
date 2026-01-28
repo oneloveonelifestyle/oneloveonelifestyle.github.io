@@ -14,14 +14,13 @@
   --accent:#f3b23a;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:var(--gray);
+  overflow-x:hidden; /* ✅ IMPORTANT */
 }
 
 /* ================= HEADER ================= */
@@ -97,20 +96,21 @@ header{
 
 /* ================= HERO SLIDER ================= */
 .hero-wrapper{
-  width:100%;
+  width:100vw;
   overflow:hidden;
 }
 
 .hero-slider{
   display:flex;
-  width:300%;                /* ✅ 3 slides */
+  width:300vw;                 /* ✅ FIX */
   transition:transform 0.6s ease;
 }
 
 .hero-slide{
-  width:100%;
+  width:100vw;                 /* ✅ FIX */
   height:60vh;
   flex-shrink:0;
+
   background:linear-gradient(135deg,#000,#2b2b2b);
   color:#fff;
 
@@ -238,10 +238,10 @@ const totalSlides = slider.children.length;
 /* AUTO SLIDE */
 setInterval(() => {
   index = (index + 1) % totalSlides;
-  slider.style.transform = `translateX(-${index * 100}%)`;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
 }, 4000);
 
-/* SWIPE SUPPORT */
+/* SWIPE */
 let startX = 0;
 
 slider.addEventListener("touchstart", e => {
@@ -253,9 +253,9 @@ slider.addEventListener("touchend", e => {
   if (startX - endX > 50) index++;
   if (endX - startX > 50) index--;
   index = Math.max(0, Math.min(index, totalSlides - 1));
-  slider.style.transform = `translateX(-${index * 100}%)`;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
 });
 </script>
 
 </body>
-</html>
+      </html>
