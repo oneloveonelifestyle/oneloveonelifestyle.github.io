@@ -14,9 +14,7 @@
   --accent:#f3b23a;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -54,7 +52,6 @@ header{
   font-size:14px;
 }
 
-/* SEARCH */
 .search-wrap{
   flex:1;
   display:flex;
@@ -69,7 +66,6 @@ header{
   border:none;
   padding:10px;
   font-size:14px;
-  outline:none;
 }
 
 .search-wrap button{
@@ -77,7 +73,6 @@ header{
   background:var(--accent);
   padding:0 14px;
   font-size:16px;
-  cursor:pointer;
 }
 
 /* NAV */
@@ -96,7 +91,7 @@ header{
   font-size:14px;
 }
 
-/* ================= HERO SLIDER ================= */
+/* ================= HERO ================= */
 .hero-wrapper{
   width:100vw;
   overflow:hidden;
@@ -105,80 +100,142 @@ header{
 .hero-slider{
   display:flex;
   width:300vw;
-  transition:transform 0.6s ease;
+  transition:transform .6s ease;
 }
 
 .hero-slide{
   width:100vw;
-  min-height:30vh;     /* ✅ professional height */
-  max-height:36vh;
-  height:auto;
-  flex-shrink:0;
-
-  background:linear-gradient(135deg,#000,#2b2b2b);
-  color:#fff;
-
+  min-height:28vh;
+  max-height:34vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   padding:22px;
+  color:#fff;
+  background:linear-gradient(135deg,#000,#2b2b2b);
 }
 
 .hero-slide h1{
   font-size:clamp(22px,5vw,32px);
-  margin-bottom:10px;
 }
 
 .hero-slide p{
-  font-size:clamp(14px,4vw,18px);
   max-width:520px;
-  opacity:0.9;
+  opacity:.9;
 }
 
-/* ================= CATEGORIES ================= */
+/* ================= FEATURE STRIP ================= */
+.features{
+  background:#fff;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  padding:18px;
+  text-align:center;
+  gap:10px;
+}
+
+.feature{
+  font-size:13px;
+  font-weight:bold;
+}
+
+/* ================= SECTION ================= */
 .container{
   padding:20px;
 }
 
-.categories{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+.section-title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:14px;
 }
 
-.category{
+/* ================= PRODUCT SLIDER ================= */
+.product-slider{
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding-bottom:10px;
+}
+
+.product-card{
+  min-width:160px;
   background:#fff;
-  padding:26px 18px;
   border-radius:14px;
-  text-align:center;
+  padding:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.product-img{
+  height:130px;
+  background:var(--soft);
+  border-radius:10px;
+  margin-bottom:8px;
+}
+
+.product-title{
+  font-size:14px;
   font-weight:bold;
-  text-decoration:none;
-  color:#000;
-  box-shadow:0 6px 16px rgba(0,0,0,0.08);
-  font-size:17px;
+}
+
+.product-price{
+  font-size:15px;
+  font-weight:bold;
+}
+
+/* ================= DEAL BANNER ================= */
+.deal{
+  background:linear-gradient(135deg,#111,#000);
+  color:#fff;
+  padding:26px;
+  border-radius:18px;
+  text-align:center;
+  margin:30px 0;
+}
+
+.deal h2{
+  margin-bottom:8px;
+}
+
+.deal span{
+  color:var(--accent);
+  font-weight:bold;
+}
+
+/* ================= TRUST ================= */
+.trust{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  text-align:center;
+}
+
+.trust div{
+  background:#fff;
+  padding:18px;
+  border-radius:14px;
+  font-size:14px;
 }
 
 /* ================= FOOTER ================= */
 footer{
   background:#111;
   color:#fff;
-  padding:30px 16px;
-  margin-top:40px;
-  font-size:13px;
+  padding:30px;
   text-align:center;
+  font-size:13px;
+  margin-top:40px;
 }
 
 /* ================= DESKTOP ================= */
 @media(min-width:768px){
-  .categories{
-    grid-template-columns:repeat(4,1fr);
+  .features{
+    grid-template-columns:repeat(6,1fr);
   }
-
-  .hero-slide{
-    min-height:26vh;
-    max-height:32vh;
+  .trust{
+    grid-template-columns:repeat(4,1fr);
   }
 }
 </style>
@@ -194,7 +251,7 @@ footer{
     </div>
 
     <div class="search-wrap">
-      <input type="text" placeholder="Search products">
+      <input placeholder="Search products">
       <button>🔍</button>
     </div>
   </div>
@@ -208,33 +265,65 @@ footer{
   </div>
 </header>
 
-<!-- HERO SLIDER -->
+<!-- HERO -->
 <div class="hero-wrapper">
   <div class="hero-slider" id="heroSlider">
     <div class="hero-slide">
       <h1>Elevate Everyday Comfort</h1>
       <p>Premium fashion curated for lifestyle & confidence</p>
     </div>
-
     <div class="hero-slide">
       <h1>Minimal • Modern • Timeless</h1>
       <p>Styles that never go out of fashion</p>
     </div>
-
     <div class="hero-slide">
       <h1>Designed for India</h1>
-      <p>Comfort, quality & durability in every piece</p>
+      <p>Comfort, quality & durability</p>
     </div>
   </div>
 </div>
 
+<!-- FEATURES -->
+<div class="features">
+  <div>🚚 Free Delivery</div>
+  <div>⭐ Premium Quality</div>
+  <div>🔒 Secure Payments</div>
+</div>
+
 <div class="container">
-  <div class="categories">
-    <a href="clothing.html" class="category">👕 Clothing</a>
-    <a href="#" class="category">👟 Shoes</a>
-    <a href="#" class="category">👜 Accessories</a>
-    <a href="#" class="category">🎁 Gifts</a>
+
+  <div class="section-title">Trending Now</div>
+  <div class="product-slider">
+    <div class="product-card">
+      <div class="product-img"></div>
+      <div class="product-title">Oversized Tee</div>
+      <div class="product-price">₹799</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"></div>
+      <div class="product-title">Street Hoodie</div>
+      <div class="product-price">₹1,499</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img"></div>
+      <div class="product-title">Minimal Shirt</div>
+      <div class="product-price">₹1,199</div>
+    </div>
   </div>
+
+  <div class="deal">
+    <h2>Deal of the Day</h2>
+    <p>Flat <span>30% OFF</span> on selected styles</p>
+  </div>
+
+  <div class="section-title">Why Choose Us</div>
+  <div class="trust">
+    <div>Made for Indian Climate</div>
+    <div>Premium Fabric</div>
+    <div>Trusted Brand</div>
+    <div>Fast Support</div>
+  </div>
+
 </div>
 
 <footer>
@@ -242,32 +331,12 @@ footer{
 </footer>
 
 <script>
-let index = 0;
-const slider = document.getElementById("heroSlider");
-const totalSlides = slider.children.length;
-
-/* AUTO SLIDE */
-setInterval(() => {
-  index = (index + 1) % totalSlides;
-  slider.style.transform = `translateX(-${index * 100}vw)`;
-}, 4000);
-
-/* SWIPE SUPPORT */
-let startX = 0;
-
-slider.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-slider.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-
-  if(startX - endX > 50) index++;
-  if(endX - startX > 50) index--;
-
-  index = Math.max(0, Math.min(index, totalSlides - 1));
-  slider.style.transform = `translateX(-${index * 100}vw)`;
-});
+let index=0;
+const slider=document.getElementById("heroSlider");
+setInterval(()=>{
+  index=(index+1)%3;
+  slider.style.transform=`translateX(-${index*100}vw)`;
+},4000);
 </script>
 
 </body>
