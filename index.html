@@ -6,214 +6,254 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root {
+  --black: #000;
+  --dark: #111;
+  --gray: #f4f4f4;
+  --soft: #eaeaea;
+  --accent: #f3b23a;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  background: var(--gray);
   color: #111;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header {
-  background: #000;
+  background: var(--black);
   color: #fff;
 }
 
-.header-top {
+.top-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px;
+  padding: 12px 14px;
 }
 
-.logo {
+.brand {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.logo img {
-  width: 45px;
+.brand img {
+  width: 42px;
   border-radius: 50%;
 }
 
-.logo span {
-  font-size: 15px;
+.brand span {
+  font-size: 14px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
-.search-box {
+/* SEARCH */
+.search-wrap {
   flex: 1;
+  max-width: 520px;
   display: flex;
   background: #fff;
   border-radius: 6px;
   overflow: hidden;
-  max-width: 600px;
 }
 
-.search-box input {
+.search-wrap input {
   flex: 1;
   border: none;
-  padding: 10px;
+  padding: 9px 10px;
   font-size: 14px;
   outline: none;
 }
 
-.search-box button {
-  background: #febd69;
+.search-wrap button {
+  background: var(--accent);
   border: none;
-  padding: 0 16px;
+  padding: 0 14px;
   font-size: 16px;
   cursor: pointer;
 }
 
+/* ACTIONS */
 .header-actions {
   display: flex;
   gap: 14px;
   font-size: 13px;
 }
 
-/* NAV BAR */
-.nav-bar {
-  background: #232f3e;
-  padding: 10px;
+.header-actions div {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ================= NAV BAR ================= */
+.navbar {
+  background: #1b1b1b;
   display: flex;
-  gap: 14px;
+  gap: 16px;
+  padding: 10px 14px;
   font-size: 14px;
   overflow-x: auto;
 }
 
-.nav-bar a {
+.navbar a {
   color: #fff;
   text-decoration: none;
   white-space: nowrap;
 }
 
-/* HERO */
-.hero {
-  background: linear-gradient(135deg, #000, #333);
+/* ================= HERO SLIDER ================= */
+.hero-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.hero-slide {
+  min-width: 100%;
+  scroll-snap-align: start;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #000, #2b2b2b);
   color: #fff;
-  padding: 30px 20px;
-  text-align: center;
 }
 
-.hero h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
+.hero-slide h1 {
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
-.hero p {
+.hero-slide p {
   font-size: 14px;
   opacity: 0.9;
 }
 
-/* CONTAINER */
+/* ================= CONTAINER ================= */
 .container {
   padding: 20px;
 }
 
-/* CATEGORIES */
+/* ================= CATEGORIES ================= */
 .categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .category {
   background: #fff;
-  padding: 25px;
-  border-radius: 12px;
+  border-radius: 14px;
+  padding: 26px 18px;
   text-align: center;
   font-size: 17px;
   font-weight: bold;
   text-decoration: none;
   color: #000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-/* SECTION TITLE */
+/* ================= SECTION ================= */
 .section-title {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
-/* PRODUCTS */
-.products {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* ================= PRODUCT SLIDER ================= */
+.product-slider {
+  display: flex;
   gap: 15px;
+  overflow-x: auto;
+  margin-bottom: 35px;
 }
 
 .product-card {
+  min-width: 160px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.product-image {
-  height: 140px;
-  background: #ddd;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.product-img {
+  height: 130px;
+  background: var(--soft);
+  border-radius: 10px;
+  margin-bottom: 8px;
 }
 
 .product-title {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 4px;
 }
 
 .product-price {
   font-size: 15px;
   font-weight: bold;
+  margin-top: 2px;
 }
 
 .badge {
   display: inline-block;
-  background: #e47911;
-  color: #fff;
   font-size: 11px;
+  background: var(--accent);
+  color: #000;
   padding: 3px 6px;
   border-radius: 4px;
   margin-bottom: 6px;
 }
 
-/* TRUST */
+/* ================= TRUST ================= */
 .trust {
-  margin-top: 40px;
   background: #fff;
+  border-radius: 14px;
   padding: 20px;
-  border-radius: 12px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 16px;
   text-align: center;
   font-size: 14px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer {
-  background: #000;
+  background: var(--dark);
   color: #fff;
-  text-align: center;
-  padding: 25px 15px;
+  padding: 30px 16px;
   font-size: 13px;
   margin-top: 40px;
 }
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.footer-grid h4 {
+  margin-bottom: 8px;
+}
+
+footer p {
+  margin-top: 20px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (min-width: 768px) {
   .categories {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .products {
+  .trust {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .trust {
+  .footer-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -223,25 +263,25 @@ footer {
 <body>
 
 <header>
-  <div class="header-top">
-    <div class="logo">
+  <div class="top-header">
+    <div class="brand">
       <img src="logo.jpg">
       <span>One Love One Lifestyle</span>
     </div>
 
-    <div class="search-box">
-      <input type="text" placeholder="Search for jackets, shirts, brands...">
+    <div class="search-wrap">
+      <input type="text" placeholder="Search jackets, shirts, brands...">
       <button>🔍</button>
     </div>
 
     <div class="header-actions">
       <div>Account</div>
       <div>Orders</div>
-      <div>Cart</div>
+      <div>Vault ❤️</div>
     </div>
   </div>
 
-  <div class="nav-bar">
+  <div class="navbar">
     <a href="#">All</a>
     <a href="clothing.html">Clothing</a>
     <a href="#">Shoes</a>
@@ -252,9 +292,15 @@ footer {
   </div>
 </header>
 
-<div class="hero">
-  <h1>Elevate Your Everyday Style</h1>
-  <p>Premium clothing curated for comfort, quality & lifestyle</p>
+<div class="hero-slider">
+  <div class="hero-slide">
+    <h1>Elevate Everyday Comfort</h1>
+    <p>Premium fashion curated for lifestyle & confidence</p>
+  </div>
+  <div class="hero-slide">
+    <h1>Minimal • Modern • Timeless</h1>
+    <p>Discover styles designed to last</p>
+  </div>
 </div>
 
 <div class="container">
@@ -266,34 +312,27 @@ footer {
     <a href="#" class="category">🎁 Gifts</a>
   </div>
 
-  <div class="section-title">Deals & Highlights</div>
+  <div class="section-title">Trending Now</div>
 
-  <div class="products">
+  <div class="product-slider">
     <div class="product-card">
       <span class="badge">Best Seller</span>
-      <div class="product-image"></div>
+      <div class="product-img"></div>
       <div class="product-title">Bomber Jacket</div>
       <div class="product-price">₹1,999</div>
     </div>
 
     <div class="product-card">
       <span class="badge">New</span>
-      <div class="product-image"></div>
-      <div class="product-title">Relaxed Fit Shirt</div>
+      <div class="product-img"></div>
+      <div class="product-title">Relaxed Shirt</div>
       <div class="product-price">₹1,799</div>
     </div>
 
     <div class="product-card">
       <span class="badge">Trending</span>
-      <div class="product-image"></div>
-      <div class="product-title">Streetwear Hoodie</div>
-      <div class="product-price">₹2,499</div>
-    </div>
-
-    <div class="product-card">
-      <span class="badge">Limited</span>
-      <div class="product-image"></div>
-      <div class="product-title">Minimal Jacket</div>
+      <div class="product-img"></div>
+      <div class="product-title">Hooded Jacket</div>
       <div class="product-price">₹2,999</div>
     </div>
   </div>
@@ -308,8 +347,27 @@ footer {
 </div>
 
 <footer>
-  © 2026 One Love One Lifestyle · Crafted with care
+  <div class="footer-grid">
+    <div>
+      <h4>About</h4>
+      Brand Story<br>Careers<br>Press
+    </div>
+    <div>
+      <h4>Support</h4>
+      Help Center<br>Returns<br>Contact
+    </div>
+    <div>
+      <h4>Explore</h4>
+      Clothing<br>Shoes<br>Accessories
+    </div>
+    <div>
+      <h4>Legal</h4>
+      Privacy Policy<br>Terms
+    </div>
+  </div>
+
+  <p>© 2026 One Love One Lifestyle. All rights reserved.</p>
 </footer>
 
 </body>
-  </html>
+</html>
