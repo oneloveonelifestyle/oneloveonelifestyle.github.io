@@ -109,6 +109,9 @@ header{ background:#000; color:#fff; }
   border-radius:18px;
   padding:22px;
   text-align:center;
+  max-width:100%;
+  overflow:hidden;
+  word-wrap:break-word;
 }
 .offer-card span{
   color:var(--accent);
@@ -238,18 +241,63 @@ footer{
 
   <div class="section-title">Shop by Category</div>
   <div class="category-grid">
-
-    <!-- ✅ ONLY CHANGE IS HERE -->
-    <a href="clothing.html" style="text-decoration:none;color:inherit;">
-      <div class="category-card">👕 Clothing</div>
-    </a>
-
+    <div class="category-card">👕 Clothing</div>
     <div class="category-card">👟 Shoes</div>
     <div class="category-card">👜 Accessories</div>
     <div class="category-card">🎁 Gifts</div>
   </div>
 
-  <!-- EVERYTHING BELOW IS UNTOUCHED -->
+  <div class="section-title">Trending Now</div>
+  <div class="product-slider">
+    <div class="product-card"><div class="product-img"></div>Oversized Tee<br><b>₹799</b></div>
+    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
+    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
+  </div>
+
+  <div class="offer-zone">
+    <h2>Smart Deals For You</h2>
+    <div class="offer-grid">
+      <div class="offer-card"><span>40% OFF</span>Winter Wear</div>
+      <div class="offer-card"><span>BOGO</span>Daily Tees</div>
+      <div class="offer-card"><span>₹500 OFF</span>Jackets</div>
+      <div class="offer-card"><span>Under ₹999</span>Bestsellers</div>
+    </div>
+  </div>
+
+  <div class="section-title">Customer Promise</div>
+  <div class="trust">
+    <div>Premium Fabric</div>
+    <div>Secure Payments</div>
+    <div>Fast Delivery</div>
+    <div>Easy Returns</div>
+  </div>
+
+  <div class="style-banner">
+    <h3>Style That Fits Your Lifestyle</h3>
+    <p>Minimal designs crafted for everyday confidence</p>
+  </div>
+
+  <div class="popular-strip">
+    <div class="section-title">Popular Picks</div>
+    <div class="product-slider">
+      <div class="product-card"><div class="product-img"></div>Black Tee</div>
+      <div class="product-card"><div class="product-img"></div>Zip Hoodie</div>
+      <div class="product-card"><div class="product-img"></div>Cargo Pants</div>
+    </div>
+  </div>
+
+  <div class="brand-values">
+    <div>Designed In-House</div>
+    <div>Quality Checked</div>
+    <div>Minimal Packaging</div>
+    <div>Trusted by Thousands</div>
+  </div>
+
+  <div class="newsletter">
+    <h3>Stay Updated</h3>
+    <p>Get early access to offers & new drops</p>
+    <input placeholder="Enter your email">
+  </div>
 
 </div>
 
@@ -262,20 +310,36 @@ let index = 0;
 const slider = document.getElementById("heroSlider");
 const totalSlides = 3;
 
+/* AUTO SLIDE */
 setInterval(() => {
   index = (index + 1) % totalSlides;
   slider.style.transform = `translateX(-${index * 100}vw)`;
 }, 4000);
 
+/* TOUCH / SWIPE */
 let startX = 0;
-slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+let endX = 0;
+
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
 slider.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-  if(startX - endX > 50) index = (index + 1) % totalSlides;
-  if(endX - startX > 50) index = (index - 1 + totalSlides) % totalSlides;
+  endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) {
+    index = (index + 1) % totalSlides;
+  } else if (endX - startX > 50) {
+    index = (index - 1 + totalSlides) % totalSlides;
+  }
   slider.style.transform = `translateX(-${index * 100}vw)`;
 });
+
+/* ✅ ONLY ADDITION: MAKE CLOTHING CATEGORY WORK */
+document.querySelectorAll('.category-card')[0]
+  .addEventListener('click', () => {
+    window.location.href = 'clothing.html';
+  });
 </script>
 
 </body>
-</html>
+  </html>
