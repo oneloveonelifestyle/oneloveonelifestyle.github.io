@@ -300,6 +300,28 @@ function renderProducts(list){
 
 renderProducts(shoeProducts);
 
+const openProductId = localStorage.getItem("openProduct");
+
+if (openProductId) {
+  setTimeout(() => {
+    const card = document.querySelector(
+      `.product-card[data-id="${openProductId}"]`
+    );
+
+    if (card) {
+      document.querySelectorAll(".product-card")
+        .forEach(c => c.classList.remove("big-product"));
+
+      card.classList.add("big-product");
+      container.prepend(card);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    localStorage.removeItem("openProduct");
+  }, 100);
+}
+  
 function searchProducts(){
   const q = searchInput.value.toLowerCase().trim();
   renderProducts(
