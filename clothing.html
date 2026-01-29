@@ -91,7 +91,6 @@ header {
   grid-column: 1 / -1;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -101,36 +100,18 @@ header {
   width: 100%;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
 
-.details h2 {
-  margin: 0 0 6px;
-  font-size: 14px;            /* 👈 small & professional like Amazon */
-  font-weight: 600;
-}
-
-.big-product .details h2 {
-  font-size: 18px;
-}
-
 .price {
   font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.out-of-stock {
   color: #b00020;
-  font-weight: bold;
 }
 
-/* DESCRIPTION */
 .full-description {
   display: none;
   font-size: 14px;
-  margin-top: 8px;
 }
 
 .big-product .full-description {
@@ -160,16 +141,11 @@ header {
   text-align: center;
   padding: 12px;
   border-radius: 8px;
-  text-decoration: none;
-}
-
-.out-of-stock-btn {
   opacity: 0.6;
   pointer-events: none;
-  cursor: not-allowed;
 }
 
-/* ONLY SHOW VAULT BTN ON BIG CARD */
+/* VAULT BUTTON VISIBILITY */
 .product-card .vault-btn {
   display: none;
 }
@@ -180,14 +156,12 @@ header {
 </style>
 </head>
 
-<body data-category="clothing">
+<body>
 
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">
-    ♡ <span class="vault-count" id="vaultCount">0</span>
-  </div>
+  <div class="vault-icon" onclick="openVault()">♡ <span class="vault-count" id="vaultCount">0</span></div>
 </header>
 
 <div class="search-bar">
@@ -197,9 +171,82 @@ header {
 
 <div class="products-grid" id="products"></div>
 
-<!-- IMPORTANT: SCRIPT ORDER -->
 <script src="products.js"></script>
-<script src="render-products.js"></script>
+
+<script>
+const container = document.getElementById("products");
+const vaultCount = document.getElementById("vaultCount");
+
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+vaultCount.textContent = vault.length;
+
+/* RENDER CLOTHING */
+const clothingProducts = PRODUCTS.filter(p => p.category === "clothing");
+
+clothingProducts.forEach(product => {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.dataset.id = product.id;
+  card.dataset.search = product.search;
+
+  card.innerHTML = `
+    <div class="slider">
+      ${product.images.map(img => `<img src="${img}">`).join("")}
+    </div>
+
+    <div class="details">
+      <h2>${product.title}</h2>
+      <div class="price">${product.price}</div>
+
+      <div class="full-description">${product.description}</div>
+
+      <button class="vault-btn">♡ Save to Vault</button>
+      <a class="order-btn">Out of Stock</a>
+    </div>
+  `;
+
+  const btn = card.querySelector(".vault-btn");
+
+  if (vault.includes(product.id)) {
+    btn.classList.add("remove");
+    btn.textContent = "✕ Remove from Vault";
+  }
+
+  card.addEventListener("click", e => {
+    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+
+    document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+
+    /* ✅ AUTO SCROLL TO TOP (ONLY ADDITION) */
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+
+    if (vault.includes(product.id)) {
+      vault = vault.filter(v => v !== product.id);
+      btn.textContent = "♡ Save to Vault";
+      btn.classList.remove("remove");
+    } else {
+      vault.push(product.id);
+      btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
+    }
+
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
+
+  container.appendChild(card);
+});
+
+function openVault() {
+  window.location.href = "vault.html";
+}
+</script>
 
 </body>
 </html>
