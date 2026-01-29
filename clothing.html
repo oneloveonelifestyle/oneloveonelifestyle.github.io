@@ -187,15 +187,29 @@ header {
   height:100%;
 }
 
-/* price stays just above order button */
-.product-card .price{
-  margin-top:auto;
+/* PROFESSIONAL CARD ALIGNMENT – TIGHT & CLEAN */
+.product-card{
+  display:flex;
+  flex-direction:column;
 }
 
-/* order button always at bottom */
+.product-card .details{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+/* controlled spacing instead of auto push */
+.product-card .price{
+  margin-top:12px;
+}
+
+/* button sits at bottom with normal gap */
 .product-card .order-btn{
-  margin-top:8px;
-    }
+  margin-top:auto;
+  padding:6px 0;
+  font-size:13px;
+}
 </style>
 </head>
 
