@@ -1,28 +1,36 @@
-function initVault(){
-  document.querySelectorAll(".product-card").forEach(card=>{
-    const id=card.dataset.id;
-    const btn=card.querySelector(".vault-btn");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vault</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 
-    if(vault.includes(id)){
-      btn.classList.add("remove");
-      btn.textContent="✕ Remove from Vault";
-    }
+<h2>My Vault</h2>
+<div id="vaultProducts"></div>
 
-    card.onclick=e=>{
-      if(e.target.closest(".vault-btn"))return;
-      document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
-      card.classList.add("big-product");
-    };
+<script src="products.js"></script>
+<script>
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+const wrap = document.getElementById("vaultProducts");
 
-    btn.onclick=e=>{
-      e.stopPropagation();
-      vault.includes(id)?vault=vault.filter(v=>v!==id):vault.push(id);
-      localStorage.setItem("vault",JSON.stringify(vault));
-      location.reload();
-    };
-  });
+if(vault.length===0){
+  wrap.innerHTML="<p>Your vault is empty</p>";
 }
 
-function openVault(){
-  window.location.href="vault.html";
-}
+vault.forEach(id=>{
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+
+  const div=document.createElement("div");
+  div.innerHTML=`
+    <h3>${p.title}</h3>
+    ${p.images.map(i=>`<img src="${i}">`).join("")}
+  `;
+  wrap.appendChild(div);
+});
+</script>
+
+</body>
+</html>
