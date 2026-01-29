@@ -1,10 +1,13 @@
+<script>
 const container = document.getElementById("products");
 const vaultCount = document.getElementById("vaultCount");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* RENDER PRODUCTS */
+/* ===============================
+   RENDER PRODUCTS
+================================ */
 function renderProducts(category) {
   container.innerHTML = "";
 
@@ -22,27 +25,30 @@ function renderProducts(category) {
 
       <div class="details">
         <h3>${product.title}</h3>
-        <div class="short">${product.short}</div>
 
-        <div class="price ${product.outOfStock ? 'out-of-stock' : ''}">
-          ${product.outOfStock ? "Currently Out of Stock" : product.price}
+        <!-- PRICE (ONLY ONCE) -->
+        <div class="price">
+          ${product.price}
         </div>
 
+        <!-- FULL DETAILS (ONLY VISIBLE WHEN BIG) -->
         <div class="full-description">
-          ${product.description}
+          ${product.details || ""}
         </div>
 
-        <button class="vault-btn ${isSaved ? 'remove' : ''}">
+        <button class="vault-btn ${isSaved ? "remove" : ""}">
           ${isSaved ? "✕ Remove from Vault" : "♡ Save to Vault"}
         </button>
 
-        <a class="order-btn ${product.outOfStock ? 'out-of-stock-btn' : ''}">
-          ${product.outOfStock ? "Out of Stock" : "Order via Instagram"}
+        <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+          Buy via Instagram
         </a>
       </div>
     `;
 
-    /* CARD CLICK → EXPAND */
+    /* ===============================
+       CARD CLICK → EXPAND
+    ================================ */
     card.addEventListener("click", e => {
       if (
         e.target.closest(".vault-btn") ||
@@ -56,11 +62,12 @@ function renderProducts(category) {
       card.classList.add("big-product");
       container.prepend(card);
 
-      /* AUTO SCROLL TO TOP */
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    /* VAULT BUTTON */
+    /* ===============================
+       VAULT BUTTON
+    ================================ */
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e => {
       e.stopPropagation();
@@ -82,7 +89,9 @@ function renderProducts(category) {
     container.appendChild(card);
   });
 
-  /* RESTORE BIG CARD FROM VAULT */
+  /* ===============================
+     OPEN FROM VAULT
+  ================================ */
   const openProduct = localStorage.getItem("openProduct");
   if (openProduct) {
     const target = document.querySelector(`[data-id="${openProduct}"]`);
@@ -94,3 +103,4 @@ function renderProducts(category) {
     localStorage.removeItem("openProduct");
   }
 }
+</script>
