@@ -26,8 +26,7 @@ const PRODUCTS = [
     images: ["shirt1-3.jpg", "shirt1-4.jpg", "shirt1-5.jpg"],
     description: `
       <b>Size:</b> XS, S, M, L, XL<br>
-      <b>Fit:</b> Relaxed Fit<br>
-      <b>Fabric:</b> 100% Cotton
+      <b>Fit:</b> Relaxed Fit
     `
   },
 
@@ -61,49 +60,3 @@ const PRODUCTS = [
     `
   }
 ];
-
-/* ================= RENDER FUNCTION ================= */
-
-function renderProducts(category) {
-  const container = document.getElementById("products");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  PRODUCTS.filter(p => p.category === category).forEach(product => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    card.dataset.id = product.id;
-    card.dataset.search = product.search;
-
-    card.innerHTML = `
-      <div class="slider">
-        ${product.images.map(img => `<img src="${img}">`).join("")}
-      </div>
-
-      <div class="details">
-        <h2>${product.title}</h2>
-
-        ${
-          product.stock
-            ? `<div class="price">${product.price}</div>`
-            : `<div class="price out-of-stock">Currently Out of Stock</div>`
-        }
-
-        <div class="full-description">
-          ${product.description}
-        </div>
-
-        <button class="vault-btn">♡ Save to Vault</button>
-
-        ${
-          product.stock
-            ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
-            : `<a class="order-btn out-of-stock-btn">Out of Stock</a>`
-        }
-      </div>
-    `;
-
-    container.appendChild(card);
-  });
-}
