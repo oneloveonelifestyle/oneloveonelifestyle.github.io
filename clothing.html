@@ -315,9 +315,9 @@ function renderProducts(list) {
 
 renderProducts(clothingProducts);
 
-window.addEventListener("load", () => {
+/* ===== OPEN FROM VAULT – WORKING & STABLE ===== */
+function openProductFromVault() {
   const openProductId = localStorage.getItem("openProduct");
-
   if (!openProductId) return;
 
   const interval = setInterval(() => {
@@ -333,25 +333,23 @@ window.addEventListener("load", () => {
 
       card.classList.add("big-product");
       container.prepend(card);
-
       window.scrollTo({ top: 0, behavior: "smooth" });
 
       localStorage.removeItem("openProduct");
     }
   }, 50);
-});
-  
+}
+
+window.addEventListener("load", openProductFromVault);
+
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
   renderProducts(
     clothingProducts.filter(p => p.search.toLowerCase().includes(q))
   );
+  openProductFromVault();
 }
 
 function openVault() {
   window.location.href = "vault.html";
-}
-</script>
-
-</body>
-</html>
+          }
