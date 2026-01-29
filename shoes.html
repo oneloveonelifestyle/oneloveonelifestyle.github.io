@@ -240,9 +240,13 @@ function renderProducts(list){
       </div>
     `;
 
-    /* CARD CLICK */
+    /* CARD CLICK — FIXED */
     card.addEventListener("click", e=>{
-      if(e.target.closest(".vault-btn")) return;
+      if (
+        e.target.closest(".vault-btn") ||
+        e.target.closest(".order-btn")
+      ) return;
+
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
@@ -253,6 +257,7 @@ function renderProducts(list){
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
       e.stopPropagation();
+
       if(vault.includes(product.id)){
         vault = vault.filter(v=>v!==product.id);
         vaultBtn.textContent = "♡ Save to Vault";
@@ -260,6 +265,7 @@ function renderProducts(list){
         vault.push(product.id);
         vaultBtn.textContent = "✕ Remove from Vault";
       }
+
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
     });
@@ -272,8 +278,8 @@ renderProducts(shoeProducts);
 
 /* ================= SEARCH ================= */
 function searchProducts(){
-  const q = searchInput.value.toLowerCase();
-  const filtered = shoeProducts.filter(p=>p.search.includes(q));
+  const q = searchInput.value.toLowerCase().trim();
+  const filtered = shoeProducts.filter(p => p.search.toLowerCase().includes(q));
   renderProducts(filtered);
 }
 
@@ -287,7 +293,9 @@ const openId = localStorage.getItem("openProduct");
 if(openId){
   const card = document.querySelector(`[data-id="${openId}"]`);
   if(card){
-    card.click();
+    card.classList.add("big-product");
+    container.prepend(card);
+    window.scrollTo({top:0, behavior:"smooth"});
   }
   localStorage.removeItem("openProduct");
 }
