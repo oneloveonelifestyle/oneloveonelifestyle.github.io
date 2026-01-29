@@ -22,8 +22,8 @@ header{
 
 /* SEARCH */
 .search-box{
-  padding:12px;
   background:#fff;
+  padding:12px;
 }
 .search-box input{
   width:100%;
@@ -69,7 +69,7 @@ header{
   font-size:16px;
 }
 
-/* STOCK TEXT */
+/* STOCK */
 .stock-text{
   color:red;
   font-size:13px;
@@ -109,14 +109,17 @@ header{
 
 <div class="products-grid" id="shoeGrid"></div>
 
+<!-- ✅ LOAD CENTRAL PRODUCT SOURCE -->
 <script src="products.js"></script>
+
 <script>
 const shoeGrid = document.getElementById("shoeGrid");
 const searchInput = document.getElementById("searchInput");
 
-/* LOAD ONLY SHOES FROM products.js */
-let shoes = PRODUCTS.filter(p => p.category === "shoe");
+/* ✅ FILTER ONLY SHOES FROM products.js */
+const shoes = PRODUCTS.filter(p => p.category === "shoe");
 
+/* RENDER */
 function renderShoes(list){
   shoeGrid.innerHTML = "";
 
@@ -124,22 +127,23 @@ function renderShoes(list){
     const card = document.createElement("div");
     card.className = "product-card";
 
-    /* 🔴 ONLY REQUIRED CHANGE — SCROLL TO TOP */
+    /* ONLY BEHAVIOUR YOU ASKED */
     card.addEventListener("click", ()=>{
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     card.innerHTML = `
       <div class="slider">
-        ${product.images.map(img=>`<img src="${img}">`).join("")}
+        ${product.images.map(img => `<img src="${img}">`).join("")}
       </div>
 
       <div class="details">
         <h3>${product.title}</h3>
 
-        ${!product.inStock
+        ${
+          !product.inStock
           ? `<div class="stock-text">Currently unavailable</div>`
-          : ""
+          : ``
         }
 
         ${
@@ -160,7 +164,7 @@ renderShoes(shoes);
 searchInput.addEventListener("input", ()=>{
   const value = searchInput.value.toLowerCase();
   renderShoes(
-    shoes.filter(p=>p.title.toLowerCase().includes(value))
+    shoes.filter(p => p.title.toLowerCase().includes(value))
   );
 });
 </script>
