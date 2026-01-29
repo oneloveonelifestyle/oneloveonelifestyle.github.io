@@ -49,21 +49,9 @@ header {
   right: -8px;
 }
 
-/* BIG PRODUCT BUTTONS */
-.big-product .order-btn,
-.big-product .vault-btn {
-  width: 100%;
-  padding: 14px;
-  font-size: 15px;
-  border-radius: 10px;
-}
-
-.big-product .vault-btn {
-  margin-top: 12px;
-}
-
-.big-product .order-btn {
-  margin-top: 14px;
+/* BIG PRODUCT */
+.big-product {
+  grid-column: 1 / -1;
 }
 
 /* SEARCH */
@@ -102,14 +90,8 @@ header {
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-}
-
-.big-product {
-  grid-column: 1 / -1;
 }
 
 /* SLIDER */
@@ -121,22 +103,22 @@ header {
 .slider img {
   width: 100%;
   display: block;
-  object-fit: cover;
 }
 
 /* DETAILS */
 .details {
-  padding: 8px 10px;
+  padding: 10px;
 }
 
 .details h2 {
   font-size: 14px;
   margin: 0 0 4px;
+  line-height: 1.3;
 }
 
 .price {
-  font-size: 13px;
   font-weight: bold;
+  font-size: 13px;
 }
 
 .unavailable {
@@ -145,10 +127,11 @@ header {
   margin-top: 4px;
 }
 
+/* DESCRIPTION */
 .full-description {
   display: none;
-  margin-top: 8px;
   font-size: 13px;
+  margin-top: 8px;
   line-height: 1.5;
 }
 
@@ -156,9 +139,10 @@ header {
   display: block;
 }
 
-/* BUTTONS */
+/* BUTTONS — EXACTLY SAME AS ACCESSORIES */
 .vault-btn {
   display: none;
+  width: 100%;
   margin-top: 8px;
   padding: 8px;
   border-radius: 6px;
@@ -173,21 +157,34 @@ header {
 }
 
 .order-btn {
-  display: inline-block;
+  display: block;
   margin-top: 8px;
   background: #000;
   color: #fff;
-  padding: 8px 10px;
   text-align: center;
+  padding: 8px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .order-btn.disabled {
   background: #999;
   pointer-events: none;
+}
+
+/* SMALL CARD TEXT */
+.product-card:not(.big-product) .details h2 {
+  font-size: 12px;
+}
+
+.product-card:not(.big-product) .price {
+  font-size: 12px;
+}
+
+.product-card:not(.big-product) .details {
+  padding: 9px;
 }
 </style>
 </head>
@@ -197,8 +194,8 @@ header {
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">
-    ♡ <span class="vault-count" id="vaultCount">0</span>
+  <div class="vault-icon" onclick="openVault()">♡
+    <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
@@ -221,17 +218,6 @@ vaultCount.textContent = vault.length;
 
 const clothingProducts = PRODUCTS.filter(p => p.category === "clothing");
 
-/* BACK BUTTON COLLAPSE ONLY */
-function collapseBigProduct() {
-  const active = document.querySelector(".product-card.big-product");
-  if (active) {
-    active.classList.remove("big-product");
-    history.replaceState(null, "", location.pathname);
-  }
-}
-
-window.addEventListener("popstate", collapseBigProduct);
-
 function renderProducts(list) {
   container.innerHTML = "";
 
@@ -249,9 +235,9 @@ function renderProducts(list) {
         <h2>${product.title}</h2>
         <div class="price">${product.price}</div>
 
-        ${product.stock === false ? `<div class="unavailable">Currently unavailable</div>` : ``}
+        ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
-        <div class="full-description">${product.description}</div>
+        <div class="full-description">${product.description || ""}</div>
 
         <button class="vault-btn">
           ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
@@ -259,22 +245,17 @@ function renderProducts(list) {
 
         ${
           product.stock
-            ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
-            : `<div class="order-btn disabled">Out of Stock</div>`
+          ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+          : `<div class="order-btn disabled">Out of Stock</div>`
         }
       </div>
     `;
 
     card.addEventListener("click", e => {
       if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
-      if (card.classList.contains("big-product")) return;
-
-      document.querySelectorAll(".product-card")
-        .forEach(c => c.classList.remove("big-product"));
-
+      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
-      history.pushState({ expanded: true }, "");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -300,9 +281,7 @@ renderProducts(clothingProducts);
 
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
-  renderProducts(
-    clothingProducts.filter(p => p.search.toLowerCase().includes(q))
-  );
+  renderProducts(clothingProducts.filter(p => p.search.includes(q)));
 }
 
 function openVault() {
