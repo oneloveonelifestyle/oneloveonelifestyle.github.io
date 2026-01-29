@@ -3,18 +3,16 @@ const PRODUCTS = [
   /* ===================== CLOTHING ===================== */
 
   {
-    id: "eta-brown-shirt",
+    id: "cloth-1",
     category: "clothing",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    price: "₹1,999",
+    price: "₹1999",
     stock: true,
+    search: "eta brown textured relaxed fit cotton shirt",
     images: [
-      "eta-shirt-1.jpg",
-      "eta-shirt-2.jpg"
+      "images/eta-shirt-1.jpg"
     ],
-    search: "eta brown cotton shirt",
-    description: `
-ETA Brown Textured Relaxed-Fit Cotton Shirt
+    description: `ETA Brown Textured Relaxed-Fit Cotton Shirt
 
 Size : XS, S, M, L
 
@@ -26,46 +24,40 @@ Fabric Composition: 100% Cotton
 
 ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.
 
-Country Of Origin: India
-`
+Country Of Origin: India`
   },
 
   {
-    id: "campus-sutra-bomber",
+    id: "cloth-2",
     category: "clothing",
     title: "Campus Sutra Zip-Front Bomber Jacket",
-    price: "₹2,499",
+    price: "₹2999",
     stock: true,
+    search: "campus sutra zip front bomber jacket",
     images: [
-      "campus-bomber-1.jpg",
-      "campus-bomber-2.jpg"
+      "images/campus-bomber-1.jpg"
     ],
-    search: "campus sutra bomber jacket",
-    description: `
-Campus Sutra
+    description: `Campus Sutra
 Zip-Front Bomber Jacket
 
 Size : S, M, L, XL
 
 Fit: Regular Fit
 
-Care Instruction: Machine Wash
-`
+Care Instruction: Machine Wash`
   },
 
   {
-    id: "nuon-brown-jacket",
+    id: "cloth-3",
     category: "clothing",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    price: "₹3,299",
+    price: "₹3499",
     stock: true,
+    search: "nuon brown text design relaxed fit cotton jacket",
     images: [
-      "nuon-jacket-1.jpg",
-      "nuon-jacket-2.jpg"
+      "images/nuon-jacket-1.jpg"
     ],
-    search: "nuon brown cotton jacket",
-    description: `
-Nuon Brown Text Design Relaxed-Fit Cotton Jacket
+    description: `Nuon Brown Text Design Relaxed-Fit Cotton Jacket
 
 Size : XS, S, M, L, XL
 
@@ -78,23 +70,20 @@ Fabric Composition: 100% Cotton
 Manufactured and Marketed By:
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001
 
-Country Of Origin: India
-`
+Country Of Origin: India`
   },
 
   {
-    id: "studiofit-hooded-jacket",
+    id: "cloth-4",
     category: "clothing",
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    price: "₹3,799",
+    price: "₹3999",
     stock: true,
+    search: "studiofit dark brown relaxed fit hooded jacket",
     images: [
-      "studiofit-jacket-1.jpg",
-      "studiofit-jacket-2.jpg"
+      "images/studiofit-hooded-1.jpg"
     ],
-    search: "studiofit hooded jacket brown",
-    description: `
-Studiofit Dark Brown Relaxed-Fit Hooded Jacket
+    description: `Studiofit Dark Brown Relaxed-Fit Hooded Jacket
 
 Size : XS, S, M, ,L
 
@@ -107,92 +96,48 @@ Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane
 Manufactured and Marketed By:
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001
 
-Country Of Origin: India
-`
-  },
-
-  /* ===================== SHOES ===================== */
-
-  {
-    id: "shoe-brown-sneaker",
-    category: "shoe",
-    title: "Men’s Brown Suede Sneakers",
-    price: "₹2,999",
-    stock: false,
-    images: [
-      "shoe-brown-1.jpg",
-      "shoe-brown-2.jpg"
-    ],
-    search: "brown suede sneakers",
-    description: `
-Men’s Brown Suede Sneakers
-
-Premium suede sneakers for everyday comfort.
-`
-  },
-
-  {
-    id: "shoe-black-sneaker",
-    category: "shoe",
-    title: "Men’s Black Leather Sneakers",
-    price: "₹3,499",
-    stock: false,
-    images: [
-      "shoe-black-1.jpg",
-      "shoe-black-2.jpg"
-    ],
-    search: "black leather sneakers",
-    description: `
-Men’s Black Leather Sneakers
-
-Classic black leather sneakers with premium finish.
-`
+Country Of Origin: India`
   },
 
   /* ===================== ACCESSORIES ===================== */
 
   {
-    id: "leather-wallet",
+    id: "acc-1",
     category: "accessories",
-    title: "Men’s Genuine Leather Wallet",
-    price: "₹1,299",
+    title: "Men’s Chronograph Stainless Steel Watch",
+    price: "₹3999",
     stock: true,
+    search: "mens chronograph stainless steel watch",
     images: [
-      "wallet-1.jpg",
-      "wallet-2.jpg"
+      "images/watch-1.jpg"
     ],
-    search: "leather wallet men",
-    description: `
-Men’s Genuine Leather Wallet
+    description: `Men’s Chronograph Stainless Steel Watch
+₹3999
 
-Material: Genuine Leather
+A bold, precision-engineered timepiece crafted for modern sophistication.
 
-Care Instruction: Wipe with dry cloth
-
-Country Of Origin: India
-`
+🚚 Free Shipping All Over India`
   },
 
+  /* ===================== SHOES ===================== */
+
   {
-    id: "brown-belt",
-    category: "accessories",
-    title: "Classic Brown Leather Belt",
-    price: "₹999",
+    id: "shoe-1",
+    category: "shoe",
+    title: "Brown Casual Sneakers",
+    price: "₹2499",
     stock: true,
+    search: "brown casual sneakers",
     images: [
-      "belt-1.jpg",
-      "belt-2.jpg"
+      "images/shoe-1.jpg"
     ],
-    search: "brown leather belt",
-    description: `
-Classic Brown Leather Belt
+    description: `Brown Casual Sneakers
 
-Material: Leather
+Size : UK 6, 7, 8, 9, 10
 
-Care Instruction: Do not wash
+Fit: Regular
 
-Country Of Origin: India
-`
+Care Instruction: Wipe with dry cloth`
   }
 
 ];
