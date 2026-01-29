@@ -12,6 +12,7 @@ body {
   background: #f4f4f4;
 }
 
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +21,7 @@ header {
   position: relative;
 }
 
-.back-btn {
+.home-btn {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -29,9 +30,49 @@ header {
   font-weight: bold;
 }
 
-/* DO NOT STYLE PRODUCT CARDS HERE */
-.vault-grid {
+/* GRID */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   padding: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+  display: block;
+}
+
+.details {
+  padding: 12px;
+}
+
+.details h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.short {
+  font-size: 12px;
+  color: #666;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 6px;
 }
 
 .empty-vault {
@@ -45,16 +86,11 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="back-btn">← Home</a>
+  <a href="index.html" class="home-btn">← Home</a>
   <h2>Your Vault</h2>
 </header>
 
-<!-- vault.js will inject cards here -->
-<div id="vaultContainer" class="vault-grid"></div>
-
-<div id="emptyVault" class="empty-vault" style="display:none;">
-  Your vault is empty 🤍
-</div>
+<div id="vaultContainer" class="products-grid"></div>
 
 <script src="products.js"></script>
 <script src="vault.js"></script>
