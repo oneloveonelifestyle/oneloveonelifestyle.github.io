@@ -1,115 +1,114 @@
-/* =========================================================
-   MASTER PRODUCTS DATABASE
-   PRODUCT DETAILS ONLY
-   ========================================================= */
-
 const PRODUCTS = [
 
-  /* ===================== SHOES ===================== */
+/* =========================
+   CLOTHING PRODUCTS
+========================= */
 
-  {
-    id: "shoe-1",
-    category: "shoe",
-    title: "Men’s Brown Suede Sneakers",
-    price: "₹2,999",
-    images: [
-      "shoe1-1.jpg",
-      "shoe1-2.jpg",
-      "shoe1-3.jpg"
-    ],
-    stock: false,
-    search: "mens brown suede sneakers leather lace up",
-    description: "Premium suede sneakers for everyday comfort."
-  },
+{
+  id: "cloth-eta-brown-shirt",
+  category: "clothing",
+  title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+  price: "₹1999",
+  stock: true,
+  search: "eta brown cotton shirt relaxed fit",
+  images: [
+    "images/eta-shirt-1.jpg"
+  ],
+  description: `
+    <strong>Product Details</strong><br><br>
 
-  {
-    id: "shoe-2",
-    category: "shoe",
-    title: "Men’s Black Leather Sneakers",
-    price: "₹3,499",
-    images: [
-      "shoe2-1.jpg",
-      "shoe2-2.jpg"
-    ],
-    stock: false,
-    search: "mens black leather sneakers premium",
-    description: "Classic black leather sneakers with premium finish."
-  },
+    <strong>Size:</strong> XS, S, M, L<br>
+    <strong>Fit:</strong> Relaxed Fit<br>
+    <strong>Care Instructions:</strong> Machine Wash<br>
+    <strong>Fabric Composition:</strong> 100% Cotton<br><br>
 
-  /* ===================== CLOTHING ===================== */
+    ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day.
+    Designed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front,
+    making it ideal for both casual and smart styling.<br><br>
 
-  {
-    id: "jacket-1",
-    category: "clothing",
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    price: "₹1,999",
-    images: [
-      "jacket1-1.jpg",
-      "jacket1-2.jpg",
-      "jacket1-3.jpg"
-    ],
-    stock: true,
-    search: "campus sutra bomber jacket zip front",
-    description: "Regular-fit bomber jacket with zip-front design."
-  },
+    <strong>Country of Origin:</strong> India
+  `
+},
 
-  {
-    id: "jacket-2",
-    category: "clothing",
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    price: "₹2,299",
-    images: [
-      "jacket2-1.jpg",
-      "jacket2-2.jpg",
-      "jacket2-3.jpg"
-    ],
-    stock: true,
-    search: "nuon brown relaxed fit cotton jacket",
-    description: "Relaxed-fit cotton jacket with textured brown design."
-  },
+{
+  id: "cloth-campus-bomber-jacket",
+  category: "clothing",
+  title: "Campus Sutra Zip-Front Bomber Jacket",
+  price: "₹2999",
+  stock: true,
+  search: "campus sutra bomber jacket zip front",
+  images: [
+    "images/campus-bomber-1.jpg"
+  ],
+  description: `
+    <strong>Product Details</strong><br><br>
 
-  {
-    id: "jacket-3",
-    category: "clothing",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    price: "₹2,199",
-    images: [
-      "jacket3-1.jpg",
-      "jacket3-2.jpg",
-      "jacket3-3.jpg"
-    ],
-    stock: true,
-    search: "studiofit dark brown hooded jacket",
-    description: "Hooded jacket with relaxed fit and stretch fabric."
-  },
+    <strong>Size:</strong> S, M, L, XL<br>
+    <strong>Fit:</strong> Regular Fit<br>
+    <strong>Care Instructions:</strong> Machine Wash<br><br>
 
-  {
-    id: "shirt-1",
-    category: "clothing",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    price: "₹1,499",
-    images: [
-      "shirt1-1.jpg",
-      "shirt1-2.jpg"
-    ],
-    stock: true,
-    search: "eta brown textured cotton shirt",
-    description: "Comfort-focused cotton shirt with textured finish."
-  },
+    Elevate your outerwear collection with this zip-front bomber jacket from Campus Sutra.
+    Designed for everyday versatility, it features a clean silhouette, easy zip closure,
+    and a comfortable regular fit that layers effortlessly over casual outfits.
+  `
+},
 
-  /* ===================== ACCESSORIES ===================== */
+{
+  id: "cloth-nuon-brown-jacket",
+  category: "clothing",
+  title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+  price: "₹3499",
+  stock: true,
+  search: "nuon brown cotton jacket relaxed fit",
+  images: [
+    "images/nuon-jacket-1.jpg"
+  ],
+  description: `
+    <strong>Product Details</strong><br><br>
 
-  {
-    id: "watch-1",
-    category: "accessories",
-    title: "Men’s Chronograph Stainless Steel Watch",
-    price: "₹3,999",
-    images: [
-      "watch1.jpg"
-    ],
-    stock: true,
-    search: "mens chronograph stainless steel watch",
-    description: "A bold, precision-engineered timepiece crafted for modern sophistication."
-  }
+    <strong>Size:</strong> XS, S, M, L, XL<br>
+    <strong>Fit:</strong> Relaxed Fit<br>
+    <strong>Care Instructions:</strong> Machine Wash<br>
+    <strong>Fabric Composition:</strong> 100% Cotton<br><br>
+
+    Crafted from pure cotton, this brown jacket by Nuon features a contemporary text design
+    and a relaxed fit for all-day comfort. Ideal for layering during transitional weather,
+    it blends modern style with functional ease.<br><br>
+
+    <strong>Manufactured and Marketed By:</strong><br>
+    Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+
+    <strong>Country of Origin:</strong> India
+  `
+},
+
+{
+  id: "cloth-studiofit-hooded-jacket",
+  category: "clothing",
+  title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+  price: "₹3999",
+  stock: true,
+  search: "studiofit dark brown hooded jacket relaxed fit",
+  images: [
+    "images/studiofit-hooded-1.jpg"
+  ],
+  description: `
+    <strong>Product Details</strong><br><br>
+
+    <strong>Size:</strong> XS, S, M, L<br>
+    <strong>Fit:</strong> Relaxed Fit<br>
+    <strong>Care Instructions:</strong> Machine Wash<br>
+    <strong>Fabric Composition:</strong> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+
+    Designed for contemporary comfort, this dark brown hooded jacket from Studiofit
+    features a relaxed fit and a soft stretch fabric blend. Ideal for casual wear,
+    it offers warmth without compromising on style.<br><br>
+
+    <strong>Manufactured and Marketed By:</strong><br>
+    Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+
+    <strong>Country of Origin:</strong> India
+  `
+}
 
 ];
