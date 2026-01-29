@@ -116,7 +116,14 @@ const PRODUCTS = [
   images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
   stock: true,
   search: "wild orchid pink corduroy boxy fit crop shirt corduroy",
-  description: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt\n\nSize : L, XL, XXL\n\nFit : Boxy Fit\n\nCare Instruction : Machine Wash\n\nFabric Composition : Corduroy Cotton\n\nThis wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits.\n\nCountry Of Origin : India"
+  description:
+    "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt<br><br>" +
+    "Size : L, XL, XXL<br><br>" +
+    "Fit : Boxy Fit<br><br>" +
+    "Care Instruction : Machine Wash<br><br>" +
+    "Fabric Composition : Corduroy Cotton<br><br>" +
+    "This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits<br><br>" +
+    'Country Of Origin : India"
 },
  
   /* ===================== ACCESSORIES ===================== */
