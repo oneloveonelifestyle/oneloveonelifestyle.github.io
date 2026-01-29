@@ -1,33 +1,32 @@
+/* =========================================================
+   MASTER PRODUCTS DATABASE
+   PRODUCT DETAILS ONLY
+   ========================================================= */
+
 const PRODUCTS = [
 
-/* =========================================================
-   SHOES
-   ========================================================= */
+/* ===================== SHOES ===================== */
 
 {
   id: "shoe-1",
   category: "shoe",
   title: "Men’s Brown Suede Sneakers",
   price: "₹2,999",
+  images: [
+    "shoe1-1.jpg",
+    "shoe1-2.jpg",
+    "shoe1-3.jpg"
+  ],
   stock: false,
   search: "mens brown suede sneakers leather lace up",
-  images: [
-    "images/shoe1-1.jpg",
-    "images/shoe1-2.jpg",
-    "images/shoe1-3.jpg"
-  ],
   description: `
-<b>Product Details</b><br>
-Type: Sneakers<br><br>
-
-<b>Material</b><br>
-Premium Suede Leather<br><br>
-
-<b>Closure</b><br>
-Lace-Up<br><br>
+<b>Product Details</b><br><br>
+Type: Sneakers<br>
+Material: Premium Suede Leather<br>
+Closure: Lace-Up<br><br>
 
 <b>Description</b><br>
-Designed for everyday wear, these brown suede sneakers combine refined craftsmanship with long-lasting comfort. The premium suede upper ensures durability while offering a stylish, versatile finish suitable for casual and semi-casual outfits.
+Designed for everyday comfort, these brown suede sneakers combine refined craftsmanship with durability. The premium suede upper provides a sophisticated look while ensuring long-lasting wear.
 `
 },
 
@@ -36,45 +35,39 @@ Designed for everyday wear, these brown suede sneakers combine refined craftsman
   category: "shoe",
   title: "Men’s Black Leather Sneakers",
   price: "₹3,499",
+  images: [
+    "shoe2-1.jpg",
+    "shoe2-2.jpg"
+  ],
   stock: false,
   search: "mens black leather sneakers premium",
-  images: [
-    "images/shoe2-1.jpg",
-    "images/shoe2-2.jpg"
-  ],
   description: `
-<b>Product Details</b><br>
-Type: Sneakers<br><br>
-
-<b>Material</b><br>
-Genuine Leather<br><br>
-
-<b>Closure</b><br>
-Lace-Up<br><br>
+<b>Product Details</b><br><br>
+Type: Sneakers<br>
+Material: Genuine Leather<br>
+Closure: Lace-Up<br><br>
 
 <b>Description</b><br>
-These black leather sneakers feature a clean, minimal design crafted for durability and timeless appeal. Perfect for everyday styling with a premium finish.
+Classic black leather sneakers crafted for versatility and everyday use. Designed with a premium finish for timeless styling.
 `
 },
 
-/* =========================================================
-   CLOTHING
-   ========================================================= */
+/* ===================== CLOTHING ===================== */
 
 {
-  id: "eta-brown-shirt",
+  id: "shirt-1",
   category: "clothing",
   title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
   price: "₹1,499",
-  stock: true,
-  search: "eta brown textured cotton shirt relaxed fit",
   images: [
-    "images/eta-shirt-1.jpg",
-    "images/eta-shirt-2.jpg"
+    "shirt1-1.jpg",
+    "shirt1-2.jpg"
   ],
+  stock: true,
+  search: "eta brown textured cotton shirt",
   description: `
-<b>Product Details</b><br>
-Brand: ETA<br><br>
+<b>Brand</b><br>
+ETA<br><br>
 
 <b>Size</b><br>
 XS, S, M, L<br><br>
@@ -97,19 +90,20 @@ India
 },
 
 {
-  id: "campus-sutra-bomber",
+  id: "jacket-1",
   category: "clothing",
   title: "Campus Sutra Zip-Front Bomber Jacket",
-  price: "₹2,199",
+  price: "₹1,999",
+  images: [
+    "jacket1-1.jpg",
+    "jacket1-2.jpg",
+    "jacket1-3.jpg"
+  ],
   stock: true,
   search: "campus sutra bomber jacket zip front",
-  images: [
-    "images/campus-bomber-1.jpg",
-    "images/campus-bomber-2.jpg"
-  ],
   description: `
-<b>Product Details</b><br>
-Brand: Campus Sutra<br><br>
+<b>Brand</b><br>
+Campus Sutra<br><br>
 
 <b>Size</b><br>
 S, M, L, XL<br><br>
@@ -121,24 +115,25 @@ Regular Fit<br><br>
 Machine Wash<br><br>
 
 <b>Description</b><br>
-A contemporary zip-front bomber jacket designed for comfort and everyday wear, offering warmth with a clean, modern silhouette.
+A modern zip-front bomber jacket designed for daily comfort and casual styling, offering a clean silhouette and effortless wear.
 `
 },
 
 {
-  id: "nuon-brown-jacket",
+  id: "jacket-2",
   category: "clothing",
   title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-  price: "₹2,799",
-  stock: true,
-  search: "nuon brown text design cotton jacket relaxed fit",
+  price: "₹2,299",
   images: [
-    "images/nuon-jacket-1.jpg",
-    "images/nuon-jacket-2.jpg"
+    "jacket2-1.jpg",
+    "jacket2-2.jpg",
+    "jacket2-3.jpg"
   ],
+  stock: true,
+  search: "nuon brown relaxed fit cotton jacket",
   description: `
-<b>Product Details</b><br>
-Brand: Nuon<br><br>
+<b>Brand</b><br>
+Nuon<br><br>
 
 <b>Size</b><br>
 XS, S, M, L, XL<br><br>
@@ -153,7 +148,7 @@ Relaxed Fit<br><br>
 Machine Wash<br><br>
 
 <b>Description</b><br>
-A modern cotton jacket featuring a bold text design with a relaxed silhouette for effortless everyday styling.<br><br>
+A relaxed-fit cotton jacket featuring a bold text design, perfect for contemporary casual wear.<br><br>
 
 <b>Manufactured & Marketed By</b><br>
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
@@ -164,19 +159,20 @@ India
 },
 
 {
-  id: "studiofit-hooded-jacket",
+  id: "jacket-3",
   category: "clothing",
   title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-  price: "₹2,499",
-  stock: true,
-  search: "studiofit dark brown hooded jacket relaxed fit",
+  price: "₹2,199",
   images: [
-    "images/studiofit-jacket-1.jpg",
-    "images/studiofit-jacket-2.jpg"
+    "jacket3-1.jpg",
+    "jacket3-2.jpg",
+    "jacket3-3.jpg"
   ],
+  stock: true,
+  search: "studiofit dark brown hooded jacket",
   description: `
-<b>Product Details</b><br>
-Brand: Studiofit<br><br>
+<b>Brand</b><br>
+Studiofit<br><br>
 
 <b>Size</b><br>
 XS, S, M, L<br><br>
@@ -191,7 +187,7 @@ Relaxed Fit<br><br>
 Machine Wash<br><br>
 
 <b>Description</b><br>
-This hooded jacket combines stretch comfort with a relaxed fit, making it ideal for casual layering and daily wear.<br><br>
+A hooded jacket designed with stretch comfort and a relaxed silhouette, ideal for everyday layering.<br><br>
 
 <b>Manufactured & Marketed By</b><br>
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
@@ -201,29 +197,25 @@ India
 `
 },
 
-/* =========================================================
-   ACCESSORIES
-   ========================================================= */
+/* ===================== ACCESSORIES ===================== */
 
 {
   id: "watch-1",
   category: "accessories",
   title: "Men’s Chronograph Stainless Steel Watch",
   price: "₹3,999",
+  images: [
+    "watch1.jpg"
+  ],
   stock: true,
   search: "mens chronograph stainless steel watch",
-  images: [
-    "images/watch1.jpg"
-  ],
   description: `
-<b>Product Details</b><br>
-Type: Chronograph Watch<br><br>
-
-<b>Material</b><br>
-Stainless Steel<br><br>
+<b>Product Details</b><br><br>
+Type: Chronograph Watch<br>
+Material: Stainless Steel<br><br>
 
 <b>Description</b><br>
-A precision-engineered chronograph watch featuring a bold stainless steel build, designed for durability and timeless sophistication.
+A precision-engineered chronograph watch featuring a bold stainless steel build, crafted for durability and modern sophistication.
 `
 }
 
