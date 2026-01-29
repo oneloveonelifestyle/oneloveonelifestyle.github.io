@@ -5,8 +5,6 @@
 <title>Shoes | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
 <style>
 body{
   margin:0;
@@ -170,6 +168,23 @@ header{
   background:#999;
   pointer-events:none;
 }
+
+/* =====================================================
+   ONLY CHANGE — SHORT CAPTION FOR SMALL CARDS
+   ===================================================== */
+
+.product-card:not(.big-product) .details h2{
+  font-size:12px;
+  line-height:1.25;
+}
+
+.product-card:not(.big-product) .price{
+  font-size:12px;
+}
+
+.product-card:not(.big-product) .details{
+  padding:10px;
+}
 </style>
 </head>
 
@@ -190,7 +205,6 @@ header{
 
 <div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -201,10 +215,7 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* LOAD SHOES — SAME AS CLOTHING LOGIC */
 const shoeProducts = PRODUCTS.filter(p => p.category === "shoe");
-
-let expandedCard = null;
 
 function renderProducts(list){
   container.innerHTML = "";
@@ -247,14 +258,11 @@ function renderProducts(list){
       card.classList.add("big-product");
       container.prepend(card);
       window.scrollTo({top:0, behavior:"smooth"});
-      history.pushState({ expanded:true }, "");
-      expandedCard = card;
     });
 
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
       e.stopPropagation();
-
       if(vault.includes(product.id)){
         vault = vault.filter(v=>v!==product.id);
         vaultBtn.textContent = "♡ Save to Vault";
@@ -262,7 +270,6 @@ function renderProducts(list){
         vault.push(product.id);
         vaultBtn.textContent = "✕ Remove from Vault";
       }
-
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
     });
@@ -273,7 +280,6 @@ function renderProducts(list){
 
 renderProducts(shoeProducts);
 
-/* SEARCH */
 function searchProducts(){
   const q = searchInput.value.toLowerCase();
   renderProducts(
@@ -281,28 +287,9 @@ function searchProducts(){
   );
 }
 
-/* VAULT */
 function openVault(){
   window.location.href = "vault.html";
 }
-
-/* OPEN FROM VAULT */
-const openId = localStorage.getItem("openProduct");
-if(openId){
-  const card = document.querySelector(`[data-id="${openId}"]`);
-  if(card){
-    card.click();
-  }
-  localStorage.removeItem("openProduct");
-}
-
-/* BACK BUTTON → COLLAPSE ONLY */
-window.addEventListener("popstate", function(){
-  if(expandedCard){
-    expandedCard.classList.remove("big-product");
-    expandedCard = null;
-  }
-});
 </script>
 
 </body>
