@@ -114,44 +114,19 @@ header {
 
 <div class="products-grid" id="vaultProducts"></div>
 
+<!-- MUST LOAD PRODUCT DATA -->
+<script src="Product.js"></script>
+
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
-
-const PRODUCTS = {
-  "jacket-1": {
-    page: "clothing.html",
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"]
-  },
-  "jacket-2": {
-    page: "clothing.html",
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"]
-  },
-  "jacket-4": {
-    page: "clothing.html",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"]
-  },
-  "shirt-1": {
-    page: "clothing.html",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    images: ["shirt1-1.jpg","shirt1-2.jpg"]
-  },
-  "shoe-1": {
-    page: "shoes.html",
-    title: "Men’s Brown Suede Sneakers",
-    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"]
-  }
-};
 
 function renderVault() {
   vaultProducts.innerHTML = "";
   let rendered = 0;
 
   vault.forEach(id => {
-    const product = PRODUCTS[id];
+    const product = PRODUCTS.find(p => p.id === id);
     if (!product) return;
 
     rendered++;
@@ -161,7 +136,10 @@ function renderVault() {
 
     card.addEventListener("click", () => {
       localStorage.setItem("openProduct", id);
-      window.location.href = product.page;
+      window.location.href =
+        product.category === "clothing"
+          ? "clothing.html"
+          : "shoes.html";
     });
 
     card.innerHTML = `
@@ -194,7 +172,6 @@ function renderVault() {
     vaultProducts.appendChild(card);
   });
 
-  /* ✅ EMPTY STATE — NOW 100% RELIABLE */
   if (rendered === 0) {
     vaultProducts.innerHTML = `
       <div class="empty-vault">
