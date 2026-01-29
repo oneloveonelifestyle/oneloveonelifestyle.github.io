@@ -312,7 +312,7 @@ searchInput.addEventListener("keydown", e => {
 function openVault() {
   window.location.href = "vault.html";
 }
-  const openProduct = localStorage.getItem("openProduct");
+const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
   const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
   if (target) {
@@ -322,6 +322,7 @@ if (openProduct) {
   }
   localStorage.removeItem("openProduct");
 }
+  
 </script>
 
 </body>
