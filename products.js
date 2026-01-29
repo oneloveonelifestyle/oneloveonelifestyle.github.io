@@ -1,7 +1,16 @@
-const PRODUCTS = [
-  {
-    id: "jacket-1",
+/* ===============================
+   PRODUCTS DATABASE
+   One Love One Lifestyle
+   =============================== */
+
+const PRODUCTS = {
+  /* ===============================
+     CLOTHING
+     =============================== */
+
+  "jacket-1": {
     category: "clothing",
+    page: "clothing.html",
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
     short: "Regular Fit",
@@ -13,9 +22,10 @@ const PRODUCTS = [
       <b>Care Instruction:</b> Machine Wash
     `
   },
-  {
-    id: "jacket-2",
+
+  "jacket-2": {
     category: "clothing",
+    page: "clothing.html",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
     price: "₹2,999",
     short: "Relaxed Fit",
@@ -26,12 +36,15 @@ const PRODUCTS = [
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
+      <b>Manufactured and Marketed By:</b><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
       <b>Country Of Origin:</b> India
     `
   },
-  {
-    id: "shirt-1",
+
+  "shirt-1": {
     category: "clothing",
+    page: "clothing.html",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
     price: "₹1,799",
     short: "Relaxed Fit",
@@ -41,12 +54,15 @@ const PRODUCTS = [
       <b>Size :</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
-      <b>Fabric Composition:</b> 100% Cotton
+      <b>Fabric Composition:</b> 100% Cotton<br><br>
+      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day.<br><br>
+      <b>Country Of Origin:</b> India
     `
   },
-  {
-    id: "jacket-4",
+
+  "jacket-4": {
     category: "clothing",
+    page: "clothing.html",
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
     price: "₹2,199",
     short: "Relaxed Fit",
@@ -55,29 +71,29 @@ const PRODUCTS = [
     description: `
       <b>Size :</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
-      <b>Care Instruction:</b> Machine Wash
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+      <b>Manufactured and Marketed By:</b><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+      <b>Country Of Origin:</b> India
+    `
+  },
+
+  /* ===============================
+     SHOES
+     =============================== */
+
+  "shoe-1": {
+    category: "shoes",
+    page: "shoes.html",
+    title: "Men’s Brown Suede Sneakers",
+    price: "Currently Out of Stock",
+    short: "Leather Sneakers",
+    search: "mens brown suede sneakers leather",
+    images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
+    description: `
+      <b>Size:</b> 6, 7, 8, 9, 10<br>
+      <b>Material:</b> Leather
     `
   }
-  /* ================================
-   PRODUCTS DATABASE (SINGLE SOURCE)
-   ================================ */
-
-const PRODUCTS = {
-  shoes: [
-    {
-      id: "shoe-1",
-      search: "mens brown suede sneakers leather",
-      title: "Men’s Brown Suede Sneakers",
-      price: "Currently Out of Stock",
-      images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
-      description: `
-        <b>Size:</b> 6,7,8,9,10<br>
-        <b>Material:</b> Leather
-      `,
-      orderText: "Out of Stock"
-    }
-
-    /* 🔹 ADD NEW SHOES HERE IN FUTURE — NOTHING ELSE */
-  ]
 };
-];
