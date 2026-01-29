@@ -19,15 +19,15 @@ const PRODUCTS = [
   ],
   stock: false,
   search: "mens brown suede sneakers leather lace up",
-  description: `
-<b>Product Details</b><br><br>
-Type: Sneakers<br>
-Material: Premium Suede Leather<br>
-Closure: Lace-Up<br><br>
+  description:
+`PRODUCT DETAILS
 
-<b>Description</b><br>
-Designed for everyday comfort, these brown suede sneakers combine refined craftsmanship with durability. The premium suede upper provides a sophisticated look while ensuring long-lasting wear.
-`
+Type: Sneakers
+Material: Premium Suede Leather
+Closure: Lace-Up
+
+DESCRIPTION
+Designed for everyday comfort, these brown suede sneakers combine refined craftsmanship with durability. The premium suede upper provides a sophisticated look while ensuring long-lasting wear.`
 },
 
 {
@@ -41,15 +41,15 @@ Designed for everyday comfort, these brown suede sneakers combine refined crafts
   ],
   stock: false,
   search: "mens black leather sneakers premium",
-  description: `
-<b>Product Details</b><br><br>
-Type: Sneakers<br>
-Material: Genuine Leather<br>
-Closure: Lace-Up<br><br>
+  description:
+`PRODUCT DETAILS
 
-<b>Description</b><br>
-Classic black leather sneakers crafted for versatility and everyday use. Designed with a premium finish for timeless styling.
-`
+Type: Sneakers
+Material: Genuine Leather
+Closure: Lace-Up
+
+DESCRIPTION
+Classic black leather sneakers crafted for versatility and everyday use with a premium finish.`
 },
 
 /* ===================== CLOTHING ===================== */
@@ -65,28 +65,27 @@ Classic black leather sneakers crafted for versatility and everyday use. Designe
   ],
   stock: true,
   search: "eta brown textured cotton shirt",
-  description: `
-<b>Brand</b><br>
-ETA<br><br>
+  description:
+`BRAND
+ETA
 
-<b>Size</b><br>
-XS, S, M, L<br><br>
+SIZE
+XS, S, M, L
 
-<b>Fit</b><br>
-Relaxed Fit<br><br>
+FIT
+Relaxed Fit
 
-<b>Fabric Composition</b><br>
-100% Cotton<br><br>
+FABRIC COMPOSITION
+100% Cotton
 
-<b>Care Instructions</b><br>
-Machine Wash<br><br>
+CARE INSTRUCTIONS
+Machine Wash
 
-<b>Description</b><br>
-ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.<br><br>
+DESCRIPTION
+ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.
 
-<b>Country of Origin</b><br>
-India
-`
+COUNTRY OF ORIGIN
+India`
 },
 
 {
@@ -101,22 +100,21 @@ India
   ],
   stock: true,
   search: "campus sutra bomber jacket zip front",
-  description: `
-<b>Brand</b><br>
-Campus Sutra<br><br>
+  description:
+`BRAND
+Campus Sutra
 
-<b>Size</b><br>
-S, M, L, XL<br><br>
+SIZE
+S, M, L, XL
 
-<b>Fit</b><br>
-Regular Fit<br><br>
+FIT
+Regular Fit
 
-<b>Care Instructions</b><br>
-Machine Wash<br><br>
+CARE INSTRUCTIONS
+Machine Wash
 
-<b>Description</b><br>
-A modern zip-front bomber jacket designed for daily comfort and casual styling, offering a clean silhouette and effortless wear.
-`
+DESCRIPTION
+A modern zip-front bomber jacket designed for daily comfort and casual styling, offering a clean silhouette and effortless wear.`
 },
 
 {
@@ -131,31 +129,30 @@ A modern zip-front bomber jacket designed for daily comfort and casual styling, 
   ],
   stock: true,
   search: "nuon brown relaxed fit cotton jacket",
-  description: `
-<b>Brand</b><br>
-Nuon<br><br>
+  description:
+`BRAND
+Nuon
 
-<b>Size</b><br>
-XS, S, M, L, XL<br><br>
+SIZE
+XS, S, M, L, XL
 
-<b>Fit</b><br>
-Relaxed Fit<br><br>
+FIT
+Relaxed Fit
 
-<b>Fabric Composition</b><br>
-100% Cotton<br><br>
+FABRIC COMPOSITION
+100% Cotton
 
-<b>Care Instructions</b><br>
-Machine Wash<br><br>
+CARE INSTRUCTIONS
+Machine Wash
 
-<b>Description</b><br>
-A relaxed-fit cotton jacket featuring a bold text design, perfect for contemporary casual wear.<br><br>
+DESCRIPTION
+A relaxed-fit cotton jacket featuring a bold text design, perfect for contemporary casual wear.
 
-<b>Manufactured & Marketed By</b><br>
-Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+MANUFACTURED & MARKETED BY
+Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001
 
-<b>Country of Origin</b><br>
-India
-`
+COUNTRY OF ORIGIN
+India`
 },
 
 {
@@ -170,31 +167,30 @@ India
   ],
   stock: true,
   search: "studiofit dark brown hooded jacket",
-  description: `
-<b>Brand</b><br>
-Studiofit<br><br>
+  description:
+`BRAND
+Studiofit
 
-<b>Size</b><br>
-XS, S, M, L<br><br>
+SIZE
+XS, S, M, L
 
-<b>Fit</b><br>
-Relaxed Fit<br><br>
+FIT
+Relaxed Fit
 
-<b>Fabric Composition</b><br>
-79% Polyester, 18% Viscose, 3% Elastane<br><br>
+FABRIC COMPOSITION
+79% Polyester, 18% Viscose, 3% Elastane
 
-<b>Care Instructions</b><br>
-Machine Wash<br><br>
+CARE INSTRUCTIONS
+Machine Wash
 
-<b>Description</b><br>
-A hooded jacket designed with stretch comfort and a relaxed silhouette, ideal for everyday layering.<br><br>
+DESCRIPTION
+A hooded jacket designed with stretch comfort and a relaxed silhouette, ideal for everyday layering.
 
-<b>Manufactured & Marketed By</b><br>
-Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+MANUFACTURED & MARKETED BY
+Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001
 
-<b>Country of Origin</b><br>
-India
-`
+COUNTRY OF ORIGIN
+India`
 },
 
 /* ===================== ACCESSORIES ===================== */
@@ -209,14 +205,14 @@ India
   ],
   stock: true,
   search: "mens chronograph stainless steel watch",
-  description: `
-<b>Product Details</b><br><br>
-Type: Chronograph Watch<br>
-Material: Stainless Steel<br><br>
+  description:
+`PRODUCT DETAILS
 
-<b>Description</b><br>
-A precision-engineered chronograph watch featuring a bold stainless steel build, crafted for durability and modern sophistication.
-`
+Type: Chronograph Watch
+Material: Stainless Steel
+
+DESCRIPTION
+A precision-engineered chronograph watch featuring a bold stainless steel build, crafted for durability and modern sophistication.`
 }
 
 ];
