@@ -21,15 +21,12 @@ header {
   position: relative;
 }
 
-/* HOME BUTTON */
 .home-btn {
   position: absolute;
   left: 15px;
   top: 15px;
-  font-size: 16px;
-  cursor: pointer;
-  text-decoration: none;
   color: #fff;
+  text-decoration: none;
   font-weight: bold;
 }
 
@@ -37,7 +34,6 @@ header {
   position: absolute;
   right: 15px;
   top: 15px;
-  font-size: 22px;
   cursor: pointer;
 }
 
@@ -52,32 +48,27 @@ header {
   right: -10px;
 }
 
-/* SEARCH BAR */
+/* SEARCH */
 .search-bar {
   background: #fff;
   padding: 12px;
   display: flex;
   gap: 10px;
-  align-items: center;
 }
 
 .search-input {
   flex: 1;
-  padding: 12px;
-  font-size: 15px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  outline: none;
 }
 
 .search-btn {
   background: #000;
   color: #fff;
   border: none;
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 /* GRID */
@@ -96,7 +87,10 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
+.big-product {
+  grid-column: 1 / -1;
+}
+
 .slider {
   display: flex;
   overflow-x: auto;
@@ -106,37 +100,18 @@ header {
   width: 100%;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
 
-.details h2 {
-  font-size: 16px;
-  margin: 0 0 6px;
-}
-
 .price {
-  font-size: 16px;
   font-weight: bold;
   color: #b00020;
-}
-
-.short {
-  font-size: 13px;
-  color: #555;
-}
-
-.big-product {
-  grid-column: 1 / -1;
 }
 
 .full-description {
   display: none;
   font-size: 14px;
-  margin-top: 12px;
-  line-height: 1.7;
-  color: #333;
 }
 
 .big-product .full-description {
@@ -145,20 +120,13 @@ header {
 
 /* BUTTONS */
 .vault-btn {
-  display: none;
   width: 100%;
   margin-top: 10px;
   padding: 10px;
   border-radius: 8px;
-  font-size: 14px;
-  background: #fff;
-  color: #000;
   border: 1px solid #ddd;
+  background: #fff;
   cursor: pointer;
-}
-
-.big-product .vault-btn {
-  display: block;
 }
 
 .vault-btn.remove {
@@ -173,18 +141,8 @@ header {
   text-align: center;
   padding: 12px;
   border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
   opacity: 0.6;
   pointer-events: none;
-}
-
-/* NO RESULTS */
-.no-results {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  color: #555;
 }
 </style>
 </head>
@@ -194,20 +152,17 @@ header {
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Shoes</h2>
-  <div class="vault-icon" onclick="openVault()">
-    ♡ <span class="vault-count" id="vaultCount">0</span>
-  </div>
+  <div class="vault-icon" onclick="openVault()">♡ <span class="vault-count" id="vaultCount">0</span></div>
 </header>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search for sneakers, suede, leather...">
+  <input class="search-input" id="searchInput" placeholder="Search shoes...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
 </div>
 
 <div class="products-grid" id="products">
 
-<!-- SHOE PRODUCT -->
-<div class="product-card" data-id="shoe-1" data-search="mens brown suede sneakers leather lace up">
+<div class="product-card" data-id="shoe-1" data-search="mens brown suede sneakers leather">
   <div class="slider">
     <img src="shoe1-1.jpg">
     <img src="shoe1-2.jpg">
@@ -217,13 +172,10 @@ header {
   <div class="details">
     <h2>Men’s Brown Suede Sneakers</h2>
     <div class="price">Currently Out of Stock</div>
-    <div class="short">Premium Leather · Lace-Up</div>
 
     <div class="full-description">
-      <b>Size :</b> 6, 7, 8, 9, 10<br><br>
-      <b>Material :</b> Leather<br>
-      <b>Weight :</b> 2 kg<br>
-      <b>Closure :</b> Lace-Up
+      <b>Size:</b> 6,7,8,9,10<br>
+      <b>Material:</b> Leather
     </div>
 
     <button class="vault-btn">♡ Save to Vault</button>
@@ -237,7 +189,6 @@ header {
 const container = document.getElementById("products");
 const cards = document.querySelectorAll(".product-card");
 const vaultCount = document.getElementById("vaultCount");
-const searchInput = document.getElementById("searchInput");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
@@ -252,78 +203,44 @@ cards.forEach(card => {
   }
 
   card.addEventListener("click", e => {
-    if (e.target.closest(".vault-btn")) return;
+    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
     cards.forEach(c => c.classList.remove("big-product"));
     card.classList.add("big-product");
     container.prepend(card);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   btn.addEventListener("click", e => {
     e.stopPropagation();
+
     if (vault.includes(id)) {
       vault = vault.filter(v => v !== id);
-      btn.classList.remove("remove");
       btn.textContent = "♡ Save to Vault";
+      btn.classList.remove("remove");
     } else {
-      vault.push({ id, page: "shoes.html" });
-      btn.classList.add("remove");
+      vault.push(id);
       btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
     }
+
     localStorage.setItem("vault", JSON.stringify(vault));
     vaultCount.textContent = vault.length;
   });
 });
 
-function searchProducts() {
-  const query = searchInput.value.toLowerCase().trim();
-  let found = 0;
-
-  cards.forEach(card => {
-    const keywords = card.dataset.search;
-    card.classList.remove("big-product");
-
-    if (!query || keywords.includes(query)) {
-      card.style.display = "block";
-      found++;
-    } else {
-      card.style.display = "none";
-    }
-  });
-
-  const existingMsg = document.querySelector(".no-results");
-  if (existingMsg) existingMsg.remove();
-
-  if (found === 0) {
-    const msg = document.createElement("div");
-    msg.className = "no-results";
-    msg.innerHTML = `
-      <h3>No results found</h3>
-      <p>Try searching for different keywords.</p>
-    `;
-    container.appendChild(msg);
-  }
-}
-
-searchInput.addEventListener("keydown", e => {
-  if (e.key === "Enter") searchProducts();
-});
-
 function openVault() {
   window.location.href = "vault.html";
 }
+
 const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
-  const target = document.querySelector(`.product-card[data-id="${openProduct}"]`);
+  const target = document.querySelector(`[data-id="${openProduct}"]`);
   if (target) {
     target.classList.add("big-product");
     container.prepend(target);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
   localStorage.removeItem("openProduct");
 }
-  
 </script>
 
 </body>
-  </html>
+</html>
