@@ -58,7 +58,8 @@ header {
 
 .search-input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
+  font-size: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
@@ -67,7 +68,7 @@ header {
   background: #000;
   color: #fff;
   border: none;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 8px;
 }
 
@@ -106,19 +107,25 @@ header {
   padding: 12px;
 }
 
+.details h2 {
+  font-size: 16px; /* SAME AS CLOTHING */
+  margin: 0 0 6px;
+}
+
 .price {
+  font-size: 15px;
   font-weight: bold;
 }
 
 .out-of-stock {
   color: #b00020;
-  font-weight: bold;
 }
 
 .full-description {
   display: none;
   font-size: 14px;
   margin-top: 10px;
+  line-height: 1.6;
 }
 
 .big-product .full-description {
@@ -132,8 +139,9 @@ header {
   margin-top: 10px;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  font-size: 14px;
   background: #fff;
+  border: 1px solid #ddd;
   cursor: pointer;
 }
 
@@ -181,7 +189,7 @@ header {
 <div class="products-grid" id="products">
 
 <!-- SHOE 1 -->
-<div class="product-card" data-id="shoe-1" data-search="mens brown suede sneakers leather">
+<div class="product-card" data-id="shoe-1" data-search="brown suede sneakers leather">
   <div class="slider">
     <img src="shoe1-1.jpg">
     <img src="shoe1-2.jpg">
@@ -203,7 +211,7 @@ header {
 </div>
 
 <!-- SHOE 2 -->
-<div class="product-card" data-id="shoe-2" data-search="mens olive suede sneakers leather">
+<div class="product-card" data-id="shoe-2" data-search="olive suede sneakers leather">
   <div class="slider">
     <img src="shoe2-1.jpg">
     <img src="shoe2-2.jpg">
@@ -271,13 +279,10 @@ cards.forEach(card => {
 });
 
 function searchProducts() {
-  const query = document.getElementById("searchInput").value.toLowerCase().trim();
-
+  const q = document.getElementById("searchInput").value.toLowerCase().trim();
   cards.forEach(card => {
     card.classList.remove("big-product");
-    card.style.display = !query || card.dataset.search.includes(query)
-      ? "block"
-      : "none";
+    card.style.display = !q || card.dataset.search.includes(q) ? "block" : "none";
   });
 }
 
@@ -298,4 +303,4 @@ if (openProduct) {
 </script>
 
 </body>
-      </html>
+</html>
