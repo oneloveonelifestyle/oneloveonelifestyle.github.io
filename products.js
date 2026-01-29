@@ -74,19 +74,22 @@ const PRODUCTS = [
   /* ================= SHOES ================= */
 
   {
-    id: "shoe-1",
-    category: "shoes",
-    title: "Men’s Brown Suede Sneakers",
-    price: "Currently Out of Stock",
-    status: "outofstock",
-    short: "Suede Leather",
-    search: "mens brown suede sneakers leather",
-    images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
-    description: `
-      <b>Size:</b> 6, 7, 8, 9, 10<br><br>
-      <b>Material:</b> Suede Leather
-    `
-  },
+  id: "shoe-2",
+  category: "shoes",
+  title: "Men’s Olive Suede Sneakers",
+  price: "Currently Out of Stock",
+  short: "Suede Leather",
+  search: "mens olive suede sneakers leather olive",
+  images: [
+    "shoe2-1.jpg",
+    "shoe2-2.jpg"
+  ],
+  description: `
+    <b>Size:</b> 6, 7, 8, 9, 10<br><br>
+    <b>Material:</b> Suede Leather
+  `,
+  outOfStock: true
+  }
 
   {
     id: "shoe-2",
