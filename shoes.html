@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f4f4f4;
 }
 
@@ -18,88 +18,117 @@ header{
   color:#fff;
   padding:15px;
   text-align:center;
+  position:relative;
+}
+
+.home-btn{
+  position:absolute;
+  left:15px;
+  top:15px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.vault-icon{
+  position:absolute;
+  right:15px;
+  top:15px;
+  cursor:pointer;
+  font-size:22px;
+}
+
+.vault-count{
+  background:red;
+  color:#fff;
+  font-size:12px;
+  border-radius:50%;
+  padding:2px 6px;
+  position:absolute;
+  top:-8px;
+  right:-10px;
 }
 
 /* GRID */
 .products-grid{
   display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-  padding:16px;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  padding:15px;
 }
 
-/* CARD */
 .product-card{
   background:#fff;
-  border-radius:14px;
+  border-radius:12px;
   overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
-  position:relative;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  cursor:pointer;
+}
+
+.big-product{
+  grid-column:1 / -1;
 }
 
 /* SLIDER */
 .slider{
   display:flex;
   overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-.slider img{
-  width:100%;
-  scroll-snap-align:center;
 }
 
-/* OUT OF STOCK BADGE */
-.out-badge{
-  position:absolute;
-  top:12px;
-  left:12px;
-  background:#111;
-  color:#fff;
-  padding:6px 10px;
-  font-size:12px;
-  border-radius:6px;
-  font-weight:bold;
+.slider img{
+  width:100%;
 }
 
 /* DETAILS */
 .details{
-  padding:14px;
-}
-.details h3{
-  margin:0 0 10px;
-  font-size:16px;
+  padding:12px;
 }
 
-/* ACTIONS */
+.details h2{
+  font-size:16px;
+  margin:0 0 6px;
+}
+
+.price{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.out-stock{
+  color:#b00020;
+}
+
 .actions{
-  display:flex;
-  gap:10px;
-  margin-top:12px;
+  margin-top:10px;
 }
 
 .vault-btn{
-  flex:1;
-  background:#eee;
-  border:none;
-  border-radius:8px;
+  width:100%;
   padding:10px;
-  font-weight:bold;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#fff;
   cursor:pointer;
+  margin-bottom:8px;
+}
+
+.vault-btn.saved{
+  background:#f5f5f5;
 }
 
 .order-btn{
-  flex:1;
+  display:block;
+  text-align:center;
+  padding:12px;
+  border-radius:8px;
   background:#000;
   color:#fff;
-  text-align:center;
-  padding:10px;
-  border-radius:8px;
   text-decoration:none;
   font-weight:bold;
 }
 
 .order-btn.disabled{
-  background:#999;
+  background:#9a9a9a;
   pointer-events:none;
 }
 </style>
@@ -108,79 +137,107 @@ header{
 <body>
 
 <header>
+  <a href="index.html" class="home-btn">← Home</a>
   <h2>Shoes</h2>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
+  </div>
 </header>
 
-<div class="products-grid" id="shoeGrid"></div>
+<div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS DATABASE -->
+<!-- PRODUCTS SOURCE -->
 <script src="products.js"></script>
 
 <script>
-/* ===============================
-   VAULT
-================================ */
+const container = document.getElementById("products");
+const vaultCount = document.getElementById("vaultCount");
+
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
-const grid = document.getElementById("shoeGrid");
+vaultCount.textContent = vault.length;
 
-/* ===============================
-   RENDER SHOES
-================================ */
-function renderShoes(){
-  grid.innerHTML = "";
+/* COMMON ACTION LOGIC */
+function getActionButtons(product, saved){
+  if(product.stock === 0){
+    return `
+      <button class="vault-btn ${saved ? "saved" : ""}">
+        ${saved ? "✓ Saved" : "♡ Save to Vault"}
+      </button>
+      <div class="order-btn disabled">
+        Currently Out of Stock
+      </div>
+    `;
+  }
 
-  PRODUCTS
-    .filter(p => p.category === "shoe")
-    .forEach(product => {
-
-      const saved = vault.includes(product.id);
-
-      const card = document.createElement("div");
-      card.className = "product-card";
-
-      card.innerHTML = `
-        ${product.stock === 0 ? `<div class="out-badge">Out of Stock</div>` : ""}
-
-        <div class="slider">
-          ${product.images.map(img => `<img src="${img}">`).join("")}
-        </div>
-
-        <div class="details">
-          <h3>${product.title}</h3>
-
-          <div class="actions">
-            <button class="vault-btn">
-              ${saved ? "✓ Saved" : "♡ Save to Vault"}
-            </button>
-
-            ${
-              product.stock === 1
-              ? `<a class="order-btn" href="${product.orderLink}" target="_blank">Buy</a>`
-              : `<div class="order-btn disabled">Unavailable</div>`
-            }
-          </div>
-        </div>
-      `;
-
-      /* SAVE / REMOVE VAULT */
-      card.querySelector(".vault-btn").addEventListener("click", e=>{
-        e.stopPropagation();
-
-        if(saved){
-          vault = vault.filter(v => v !== product.id);
-        }else{
-          vault.push(product.id);
-        }
-
-        localStorage.setItem("vault", JSON.stringify(vault));
-        renderShoes();
-      });
-
-      grid.appendChild(card);
-    });
+  return `
+    <button class="vault-btn ${saved ? "saved" : ""}">
+      ${saved ? "✓ Saved" : "♡ Save to Vault"}
+    </button>
+    <a class="order-btn" href="${product.orderLink}" target="_blank">
+      Buy via Instagram
+    </a>
+  `;
 }
 
-renderShoes();
+/* RENDER SHOES */
+PRODUCTS
+  .filter(p => p.category === "shoe")
+  .forEach(product => {
+
+    const saved = vault.includes(product.id);
+
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.dataset.id = product.id;
+
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(img => `<img src="${img}">`).join("")}
+      </div>
+
+      <div class="details">
+        <h2>${product.title}</h2>
+
+        <div class="price ${product.stock === 0 ? "out-stock" : ""}">
+          ${product.stock === 0 ? "Out of Stock" : "Available"}
+        </div>
+
+        <div class="actions">
+          ${getActionButtons(product, saved)}
+        </div>
+      </div>
+    `;
+
+    /* CARD OPEN */
+    card.addEventListener("click", e => {
+      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+
+    /* VAULT BUTTON */
+    card.querySelector(".vault-btn").addEventListener("click", e => {
+      e.stopPropagation();
+
+      if(vault.includes(product.id)){
+        vault = vault.filter(v => v !== product.id);
+      }else{
+        vault.push(product.id);
+      }
+
+      localStorage.setItem("vault", JSON.stringify(vault));
+      vaultCount.textContent = vault.length;
+      location.reload();
+    });
+
+    container.appendChild(card);
+  });
+
+function openVault(){
+  window.location.href = "vault.html";
+}
 </script>
 
 </body>
