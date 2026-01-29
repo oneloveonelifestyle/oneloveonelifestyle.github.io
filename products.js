@@ -108,6 +108,16 @@ const PRODUCTS = [
       "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
       "Country Of Origin: India"
   },
+  {
+  id: "shirt-2",
+  category: "clothing",
+  title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
+  price: "₹1,399",
+  images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
+  stock: true,
+  search: "wild orchid pink corduroy boxy fit crop shirt women",
+  description: "Wild orchid pink corduroy boxy fit crop shirt available in sizes L, XL, and XXL. Designed for a modern, relaxed look with premium corduroy fabric."
+},
 
   /* ===================== ACCESSORIES ===================== */
 
