@@ -58,4 +58,26 @@ const PRODUCTS = [
       <b>Care Instruction:</b> Machine Wash
     `
   }
+  /* ================================
+   PRODUCTS DATABASE (SINGLE SOURCE)
+   ================================ */
+
+const PRODUCTS = {
+  shoes: [
+    {
+      id: "shoe-1",
+      search: "mens brown suede sneakers leather",
+      title: "Men’s Brown Suede Sneakers",
+      price: "Currently Out of Stock",
+      images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
+      description: `
+        <b>Size:</b> 6,7,8,9,10<br>
+        <b>Material:</b> Leather
+      `,
+      orderText: "Out of Stock"
+    }
+
+    /* 🔹 ADD NEW SHOES HERE IN FUTURE — NOTHING ELSE */
+  ]
+};
 ];
