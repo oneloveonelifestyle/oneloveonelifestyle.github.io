@@ -19,13 +19,9 @@ const PRODUCTS = [
     ],
     stock: false,
     search: "mens brown suede sneakers leather lace up",
-    details: `
-      Premium suede sneakers designed for everyday wear.<br><br>
-      Upper Material: Suede<br>
-      Sole Material: Rubber<br>
-      Closure: Lace-Up<br>
-      Style: Casual<br><br>
-      Country Of Origin: India
+    description: `
+      Premium suede sneakers designed for everyday comfort and durability.
+      Features a lace-up closure, cushioned insole, and anti-slip sole.
     `
   },
 
@@ -40,12 +36,36 @@ const PRODUCTS = [
     ],
     stock: false,
     search: "mens black leather sneakers premium",
-    details: `
-      Crafted with premium leather for a refined everyday look.<br><br>
-      Upper Material: Genuine Leather<br>
-      Sole Material: Rubber<br>
-      Closure: Lace-Up<br>
-      Style: Casual<br><br>
+    description: `
+      Crafted from premium leather with a minimalist silhouette.
+      Ideal for casual and semi-formal wear.
+    `
+  },
+
+  /* ===================== SHIRTS ===================== */
+
+  {
+    id: "shirt-1",
+    category: "clothing",
+    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+    price: "₹1,499",
+    images: [
+      "shirt1-1.jpg",
+      "shirt1-2.jpg"
+    ],
+    stock: true,
+    search: "eta brown textured cotton shirt relaxed",
+    description: `
+      Size : XS, S, M, L<br>
+      Fit: Relaxed Fit<br>
+      Care Instruction: Machine Wash<br>
+      Fabric Composition: 100% Cotton<br><br>
+
+      ETA redefines everyday comfort with this brown shirt, crafted from
+      cotton-rich fabric, for a soft, natural feel throughout the day.
+      Framed in a relaxed silhouette, it features a spread collar,
+      full-length sleeves and a classic button-up front.<br><br>
+
       Country Of Origin: India
     `
   },
@@ -64,11 +84,10 @@ const PRODUCTS = [
     ],
     stock: true,
     search: "campus sutra bomber jacket zip front",
-    details: `
-      Size: S, M, L, XL<br>
+    description: `
+      Size : S, M, L, XL<br>
       Fit: Regular Fit<br>
-      Care Instruction: Machine Wash<br><br>
-      A versatile zip-front bomber jacket suitable for everyday wear.
+      Care Instruction: Machine Wash
     `
   },
 
@@ -76,7 +95,7 @@ const PRODUCTS = [
     id: "jacket-2",
     category: "clothing",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    price: "₹2,999",
+    price: "₹2,299",
     images: [
       "jacket2-1.jpg",
       "jacket2-2.jpg",
@@ -84,13 +103,16 @@ const PRODUCTS = [
     ],
     stock: true,
     search: "nuon brown relaxed fit jacket",
-    details: `
-      Size: XS, S, M, L, XL<br>
+    description: `
+      Size : XS, S, M, L, XL<br>
       Fit: Relaxed Fit<br>
       Care Instruction: Machine Wash<br>
       Fabric Composition: 100% Cotton<br><br>
+
       Manufactured and Marketed By:<br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
+      Trent Limited, Bombay House, 24, Homi Mody Street,
+      Fort, Mumbai – 400001<br><br>
+
       Country Of Origin: India
     `
   },
@@ -107,38 +129,16 @@ const PRODUCTS = [
     ],
     stock: true,
     search: "studiofit dark brown hooded jacket relaxed",
-    details: `
-      Size: XS, S, M, L<br>
+    description: `
+      Size : XS, S, M, L<br>
       Fit: Relaxed Fit<br>
       Care Instruction: Machine Wash<br>
       Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+
       Manufactured and Marketed By:<br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-      Country Of Origin: India
-    `
-  },
+      Trent Limited, Bombay House, 24, Homi Mody Street,
+      Fort, Mumbai – 400001<br><br>
 
-  /* ===================== SHIRTS ===================== */
-
-  {
-    id: "shirt-1",
-    category: "clothing",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    price: "₹1,499",
-    images: [
-      "shirt1-1.jpg",
-      "shirt1-2.jpg"
-    ],
-    stock: true,
-    search: "eta brown textured cotton shirt relaxed",
-    details: `
-      Size: XS, S, M, L<br>
-      Fit: Relaxed Fit<br>
-      Care Instruction: Machine Wash<br>
-      Fabric Composition: 100% Cotton<br><br>
-      ETA redefines everyday comfort with this brown shirt, crafted from
-      cotton-rich fabric for a soft, natural feel. Designed with a spread
-      collar, full-length sleeves and a classic button-up front.<br><br>
       Country Of Origin: India
     `
   }
