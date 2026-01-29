@@ -13,11 +13,11 @@
   }
 
   if (typeof PRODUCTS === "undefined") {
-    console.error("PRODUCTS not loaded. Check products.js");
+    console.error("PRODUCTS not loaded. Check script order");
     return;
   }
 
-  const category = container.dataset.category;
+  const category = container.getAttribute("data-category");
 
   if (!category) {
     console.error("data-category attribute missing on productsContainer");
@@ -29,11 +29,7 @@
   );
 
   if (filteredProducts.length === 0) {
-    container.innerHTML = `
-      <p style="padding:20px;text-align:center;">
-        No products found
-      </p>
-    `;
+    container.innerHTML = "<p>No products found</p>";
     return;
   }
 
@@ -41,9 +37,9 @@
     <div class="product-card" data-id="${product.id}">
 
       <div class="slider">
-        ${product.images.map(img => `
-          <img src="${img}" alt="${product.title}">
-        `).join("")}
+        ${product.images.map(img =>
+          `<img src="${img}" alt="${product.title}">`
+        ).join("")}
       </div>
 
       <div class="details">
@@ -51,9 +47,9 @@
 
         <div class="price">${product.price}</div>
 
-        ${!product.stock ? `
-          <div class="unavailable">Out of Stock</div>
-        ` : ``}
+        ${product.stock === false
+          ? `<div class="unavailable">Out of Stock</div>`
+          : ``}
 
         <div class="full-description">
           ${product.description}
