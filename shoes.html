@@ -190,6 +190,7 @@ header{
 
 <div class="products-grid" id="products"></div>
 
+<!-- LOAD PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -210,7 +211,7 @@ function renderProducts(list){
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
-    card.dataset.search = product.search.toLowerCase();
+    card.dataset.search = product.search;
 
     card.innerHTML = `
       <div class="slider">
@@ -224,7 +225,7 @@ function renderProducts(list){
         ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
         <div class="full-description">
-          ${product.description}
+          Premium quality footwear crafted for everyday comfort.
         </div>
 
         <button class="vault-btn">
@@ -241,7 +242,7 @@ function renderProducts(list){
 
     /* CARD CLICK */
     card.addEventListener("click", e=>{
-      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      if(e.target.closest(".vault-btn")) return;
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
@@ -252,7 +253,6 @@ function renderProducts(list){
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
       e.stopPropagation();
-
       if(vault.includes(product.id)){
         vault = vault.filter(v=>v!==product.id);
         vaultBtn.textContent = "♡ Save to Vault";
@@ -260,7 +260,6 @@ function renderProducts(list){
         vault.push(product.id);
         vaultBtn.textContent = "✕ Remove from Vault";
       }
-
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
     });
@@ -273,8 +272,8 @@ renderProducts(shoeProducts);
 
 /* ================= SEARCH ================= */
 function searchProducts(){
-  const q = searchInput.value.toLowerCase().trim();
-  const filtered = shoeProducts.filter(p => p.search.toLowerCase().includes(q));
+  const q = searchInput.value.toLowerCase();
+  const filtered = shoeProducts.filter(p=>p.search.includes(q));
   renderProducts(filtered);
 }
 
@@ -286,19 +285,13 @@ function openVault(){
 /* ================= OPEN FROM VAULT ================= */
 const openId = localStorage.getItem("openProduct");
 if(openId){
-  const target = shoeProducts.find(p => p.id === openId);
-  if(target){
-    renderProducts(shoeProducts);
-    const card = document.querySelector(`[data-id="${openId}"]`);
-    if(card){
-      card.classList.add("big-product");
-      container.prepend(card);
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
+  const card = document.querySelector(`[data-id="${openId}"]`);
+  if(card){
+    card.click();
   }
   localStorage.removeItem("openProduct");
 }
 </script>
 
 </body>
-  </html>
+</html>
