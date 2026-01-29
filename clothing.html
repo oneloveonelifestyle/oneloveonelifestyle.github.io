@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clothing | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="home-btn">← Home</a>
+  <h2>Clothing</h2>
+  <div class="vault-icon" onclick="openVault()">♡ <span id="vaultCount">0</span></div>
+</header>
+
+<div class="search-bar">
+  <input id="searchInput" placeholder="Search clothing...">
+  <button onclick="searchProducts()">🔍</button>
+</div>
+
+<div class="products-grid" id="products"></div>
+
 <script src="products.js"></script>
 <script>
 const container = document.getElementById("products");
@@ -9,64 +33,66 @@ vaultCount.textContent = vault.length;
 
 function renderProducts() {
   container.innerHTML = "";
-
-  PRODUCTS.filter(p => p.category === "clothing").forEach(product => {
+  PRODUCTS.filter(p => p.category === "clothing").forEach(p => {
     const card = document.createElement("div");
     card.className = "product-card";
-    card.dataset.id = product.id;
-    card.dataset.search = product.search;
+    card.dataset.id = p.id;
+    card.dataset.search = p.search;
 
     card.innerHTML = `
-      <div class="slider">
-        ${product.images.map(i => `<img src="${i}">`).join("")}
-      </div>
+      <div class="slider">${p.images.map(i=>`<img src="${i}">`).join("")}</div>
       <div class="details">
-        <h2>${product.title}</h2>
-        <div class="price">${product.price}</div>
-        <div class="short">${product.short}</div>
-        <div class="full-description">${product.description}</div>
+        <h2>${p.title}</h2>
+        <div class="price">${p.price}</div>
+        <div class="short">${p.short}</div>
+        <div class="full-description">${p.description}</div>
         <button class="vault-btn">♡ Save to Vault</button>
-        <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-          Buy via Instagram
-        </a>
+        <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>
       </div>
     `;
 
-    setupCard(card, product.id);
+    card.onclick = e => {
+      if (e.target.tagName === "BUTTON" || e.target.tagName === "A") return;
+      document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+    };
+
+    const btn = card.querySelector(".vault-btn");
+    if (vault.includes(p.id)) {
+      btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
+    }
+
+    btn.onclick = e => {
+      e.stopPropagation();
+      if (vault.includes(p.id)) {
+        vault = vault.filter(v=>v!==p.id);
+        btn.textContent = "♡ Save to Vault";
+        btn.classList.remove("remove");
+      } else {
+        vault.push(p.id);
+        btn.textContent = "✕ Remove from Vault";
+        btn.classList.add("remove");
+      }
+      localStorage.setItem("vault", JSON.stringify(vault));
+      vaultCount.textContent = vault.length;
+    };
+
     container.appendChild(card);
   });
 }
 
-function setupCard(card, id) {
-  const btn = card.querySelector(".vault-btn");
-
-  if (vault.includes(id)) {
-    btn.classList.add("remove");
-    btn.textContent = "✕ Remove from Vault";
-  }
-
-  card.addEventListener("click", e => {
-    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
-    document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
-    card.classList.add("big-product");
-    container.prepend(card);
-  });
-
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-    if (vault.includes(id)) {
-      vault = vault.filter(v => v !== id);
-      btn.textContent = "♡ Save to Vault";
-      btn.classList.remove("remove");
-    } else {
-      vault.push(id);
-      btn.textContent = "✕ Remove from Vault";
-      btn.classList.add("remove");
-    }
-    localStorage.setItem("vault", JSON.stringify(vault));
-    vaultCount.textContent = vault.length;
+function searchProducts() {
+  const q = searchInput.value.toLowerCase();
+  document.querySelectorAll(".product-card").forEach(card=>{
+    card.style.display = card.dataset.search.includes(q) ? "block" : "none";
   });
 }
 
+function openVault(){ location.href="vault.html"; }
+
 renderProducts();
 </script>
+</body>
+</html>
