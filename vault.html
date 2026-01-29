@@ -154,7 +154,7 @@ const PRODUCTS = {
   },
   "jacket-4": {
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    image: "jacket3-1.jpg"
+    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"]
   },
   "shirt-1": {
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
@@ -163,7 +163,7 @@ const PRODUCTS = {
 };
 
 /* ===============================
-   RENDER VAULT (SAFE & VERIFIED)
+   RENDER VAULT
 ================================ */
 function renderVault() {
   vaultProducts.innerHTML = "";
@@ -171,14 +171,13 @@ function renderVault() {
 
   vault.forEach(id => {
     const product = PRODUCTS[id];
-    if (!product) return; // ignore invalid IDs safely
+    if (!product) return;
 
     renderedCount++;
 
     const card = document.createElement("div");
     card.className = "product-card";
 
-    /* OPEN ORIGINAL PRODUCT PAGE */
     card.addEventListener("click", () => {
       localStorage.setItem("openProduct", id);
       window.location.href = "clothing.html";
@@ -203,7 +202,6 @@ function renderVault() {
       </div>
     `;
 
-    /* REMOVE BUTTON (NO NAVIGATION) */
     card.querySelector(".remove-btn").addEventListener("click", e => {
       e.stopPropagation();
       vault = vault.filter(v => v !== id);
@@ -211,7 +209,6 @@ function renderVault() {
       renderVault();
     });
 
-    /* PREVENT BUY BUTTON FROM TRIGGERING CARD CLICK */
     card.querySelector(".order-btn").addEventListener("click", e => {
       e.stopPropagation();
     });
@@ -219,9 +216,6 @@ function renderVault() {
     vaultProducts.appendChild(card);
   });
 
-  /* ===============================
-     EMPTY VAULT MESSAGE (GUARANTEED)
-  ================================ */
   if (renderedCount === 0) {
     vaultProducts.innerHTML = `
       <div class="empty-vault">
@@ -232,7 +226,6 @@ function renderVault() {
   }
 }
 
-/* INITIAL LOAD */
 renderVault();
 </script>
 
