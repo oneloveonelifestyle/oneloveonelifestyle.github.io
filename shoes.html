@@ -204,6 +204,8 @@ vaultCount.textContent = vault.length;
 /* LOAD SHOES — SAME AS CLOTHING LOGIC */
 const shoeProducts = PRODUCTS.filter(p => p.category === "shoe");
 
+let expandedCard = null;
+
 function renderProducts(list){
   container.innerHTML = "";
 
@@ -245,6 +247,8 @@ function renderProducts(list){
       card.classList.add("big-product");
       container.prepend(card);
       window.scrollTo({top:0, behavior:"smooth"});
+      history.pushState({ expanded:true }, "");
+      expandedCard = card;
     });
 
     const vaultBtn = card.querySelector(".vault-btn");
@@ -291,6 +295,14 @@ if(openId){
   }
   localStorage.removeItem("openProduct");
 }
+
+/* BACK BUTTON → COLLAPSE ONLY */
+window.addEventListener("popstate", function(){
+  if(expandedCard){
+    expandedCard.classList.remove("big-product");
+    expandedCard = null;
+  }
+});
 </script>
 
 </body>
