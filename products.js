@@ -8,7 +8,7 @@ const PRODUCTS = [
     title: "Men’s Brown Suede Sneakers",
     price: "₹2,999",
     images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
-    stock: false,
+    stock: true,
     search: "mens brown suede sneakers leather lace up",
     description: "Premium suede sneakers for everyday comfort."
   },
@@ -19,7 +19,7 @@ const PRODUCTS = [
     title: "Men’s Black Leather Sneakers",
     price: "₹3,499",
     images: ["shoe2-1.jpg","shoe2-2.jpg"],
-    stock: false,
+    stock: true,
     search: "mens black leather sneakers premium",
     description: "Classic black leather sneakers with premium finish."
   },
