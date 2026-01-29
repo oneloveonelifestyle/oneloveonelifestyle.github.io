@@ -7,25 +7,26 @@ const PRODUCTS = [
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
     stock: true,
-    search: "campus sutra jacket bomber regular",
+    search: "campus sutra bomber jacket",
     images: ["jacket1-1.jpg", "jacket1-2.jpg", "jacket1-3.jpg"],
     description: `
-      <b>Size :</b> S, M, L, XL<br><br>
+      <b>Size:</b> S, M, L, XL<br>
       <b>Fit:</b> Regular Fit<br>
       <b>Care:</b> Machine Wash
     `
   },
 
   {
-    id: "shirt-1",
+    id: "jacket-2",
     category: "clothing",
-    title: "ETA Brown Textured Cotton Shirt",
-    price: "₹1,799",
+    title: "Nuon Brown Relaxed-Fit Cotton Jacket",
+    price: "₹2,199",
     stock: true,
-    search: "eta shirt cotton brown relaxed",
-    images: ["shirt1-1.jpg", "shirt1-2.jpg"],
+    search: "nuon brown cotton jacket",
+    images: ["shirt1-3.jpg", "shirt1-4.jpg", "shirt1-5.jpg"],
     description: `
-      <b>Size :</b> XS, S, M, L<br><br>
+      <b>Size:</b> XS, S, M, L, XL<br>
+      <b>Fit:</b> Relaxed Fit<br>
       <b>Fabric:</b> 100% Cotton
     `
   },
@@ -38,30 +39,30 @@ const PRODUCTS = [
     title: "Men’s Brown Suede Sneakers",
     price: "Currently Out of Stock",
     stock: false,
-    search: "mens brown suede sneakers leather",
+    search: "brown suede sneakers men",
     images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
     description: `
-      <b>Size:</b> 6,7,8,9,10<br>
-      <b>Material:</b> Leather
+      <b>Size:</b> 6, 7, 8, 9, 10<br>
+      <b>Material:</b> Suede Leather
     `
   },
 
   {
     id: "shoe-2",
     category: "shoes",
-    title: "Men’s Black Leather Casual Shoes",
-    price: "₹3,499",
+    title: "Olive Suede Rowan Leather",
+    price: "₹3,599",
     stock: true,
-    search: "mens black leather casual shoes",
+    search: "olive suede rowan leather shoes",
     images: ["shoe2-1.jpg", "shoe2-2.jpg"],
     description: `
-      <b>Size:</b> 7,8,9,10<br>
+      <b>Size:</b> 7, 8, 9, 10<br>
       <b>Material:</b> Leather
     `
   }
 ];
 
-/* ================= RENDER ENGINE ================= */
+/* ================= RENDER FUNCTION ================= */
 
 function renderProducts(category) {
   const container = document.getElementById("products");
@@ -69,66 +70,40 @@ function renderProducts(category) {
 
   container.innerHTML = "";
 
-  const vault = JSON.parse(localStorage.getItem("vault")) || [];
-
-  PRODUCTS.filter(p => p.category === category).forEach(p => {
+  PRODUCTS.filter(p => p.category === category).forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
-    card.dataset.id = p.id;
+    card.dataset.id = product.id;
+    card.dataset.search = product.search;
 
     card.innerHTML = `
       <div class="slider">
-        ${p.images.map(img => `<img src="${img}">`).join("")}
+        ${product.images.map(img => `<img src="${img}">`).join("")}
       </div>
 
       <div class="details">
-        <h2>${p.title}</h2>
+        <h2>${product.title}</h2>
 
-        <div class="price ${!p.stock ? "out-of-stock" : ""}">
-          ${p.price}
-        </div>
+        ${
+          product.stock
+            ? `<div class="price">${product.price}</div>`
+            : `<div class="price out-of-stock">Currently Out of Stock</div>`
+        }
 
         <div class="full-description">
-          ${p.description}
+          ${product.description}
         </div>
 
-        <button class="vault-btn">
-          ${vault.includes(p.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
-        </button>
+        <button class="vault-btn">♡ Save to Vault</button>
 
-        <a class="order-btn ${!p.stock ? "out-of-stock-btn" : ""}">
-          ${p.stock ? "Buy via Instagram" : "Out of Stock"}
-        </a>
+        ${
+          product.stock
+            ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+            : `<a class="order-btn out-of-stock-btn">Out of Stock</a>`
+        }
       </div>
     `;
 
     container.appendChild(card);
-
-    const btn = card.querySelector(".vault-btn");
-
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      let v = JSON.parse(localStorage.getItem("vault")) || [];
-
-      if (v.includes(p.id)) {
-        v = v.filter(x => x !== p.id);
-        btn.textContent = "♡ Save to Vault";
-      } else {
-        v.push(p.id);
-        btn.textContent = "✕ Remove from Vault";
-      }
-
-      localStorage.setItem("vault", JSON.stringify(v));
-      document.getElementById("vaultCount").textContent = v.length;
-    });
-
-    card.addEventListener("click", e => {
-      if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
-      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
-      card.classList.add("big-product");
-      container.prepend(card);
-    });
   });
-
-  document.getElementById("vaultCount").textContent = vault.length;
 }
