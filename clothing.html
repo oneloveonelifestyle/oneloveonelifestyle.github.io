@@ -181,6 +181,65 @@ header {
 .product-card:not(.big-product) .details {
   padding: 10px;
 }
+
+/* =====================================================
+   PROFESSIONAL ALIGNMENT & POLISH (CSS ONLY)
+   ===================================================== */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.slider {
+  scroll-snap-type: x mandatory;
+}
+
+.slider img {
+  scroll-snap-align: start;
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-card:not(.big-product) .details {
+  min-height: 110px;
+  justify-content: space-between;
+}
+
+.product-card:not(.big-product) h2 {
+  font-weight: 600;
+  color: #111;
+}
+
+.product-card:not(.big-product) .price {
+  color: #000;
+}
+
+.product-card:not(.big-product) {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:not(.big-product):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.big-product {
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+.order-btn {
+  letter-spacing: 0.3px;
+}
+
+.vault-btn {
+  font-weight: 600;
+}
 </style>
 </head>
 
