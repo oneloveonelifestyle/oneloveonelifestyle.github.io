@@ -96,7 +96,7 @@ const PRODUCTS = [
     status: "outofstock",
     short: "Olive Suede",
     search: "mens olive suede sneakers",
-    images: ["shoe2-1.jpg", "shoe2-2.jpg", "shoe2-3.jpg"],
+    images: ["shoe2-1.jpg", "shoe2-2.jpg"],
     description: `
       <b>Size:</b> 6, 7, 8, 9, 10<br><br>
       <b>Material:</b> Suede Leather
