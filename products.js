@@ -1,17 +1,17 @@
-/* ============================
-   MASTER PRODUCTS DATABASE
-============================ */
-
 const PRODUCTS = [
 
-  /* ========== SHOES ========== */
+  /* ================= SHOES ================= */
 
   {
     id: "shoe-1",
     category: "shoe",
     title: "Men’s Brown Suede Sneakers",
     price: "₹2,999",
-    images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
+    images: [
+      "images/shoes/shoe1-1.jpg",
+      "images/shoes/shoe1-2.jpg",
+      "images/shoes/shoe1-3.jpg"
+    ],
     stock: false,
     search: "mens brown suede sneakers",
     short: "Suede casual sneakers",
@@ -31,7 +31,10 @@ Country Of Origin: India
     category: "shoe",
     title: "Men’s Black Leather Sneakers",
     price: "₹3,499",
-    images: ["shoe2-1.jpg", "shoe2-2.jpg"],
+    images: [
+      "images/shoes/shoe2-1.jpg",
+      "images/shoes/shoe2-2.jpg"
+    ],
     stock: true,
     search: "mens black leather sneakers",
     short: "Premium leather sneakers",
@@ -46,14 +49,17 @@ Country Of Origin: India
 `
   },
 
-  /* ========== CLOTHING ========== */
+  /* ================= CLOTHING ================= */
 
   {
     id: "shirt-1",
     category: "clothing",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
     price: "₹1,499",
-    images: ["shirt1-1.jpg", "shirt1-2.jpg"],
+    images: [
+      "images/clothing/shirt1-1.jpg",
+      "images/clothing/shirt1-2.jpg"
+    ],
     stock: true,
     search: "eta brown textured cotton shirt",
     short: "Relaxed-fit cotton shirt",
@@ -74,7 +80,10 @@ Country Of Origin: India
     category: "clothing",
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
-    images: ["jacket1-1.jpg", "jacket1-2.jpg"],
+    images: [
+      "images/clothing/jacket1-1.jpg",
+      "images/clothing/jacket1-2.jpg"
+    ],
     stock: true,
     search: "campus sutra bomber jacket",
     short: "Zip-front bomber jacket",
@@ -86,5 +95,4 @@ Care Instruction: Machine Wash
 Country Of Origin: India
 `
   }
-
 ];
