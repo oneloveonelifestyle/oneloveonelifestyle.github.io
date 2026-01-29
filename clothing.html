@@ -278,7 +278,15 @@ function renderProducts(list) {
 }
 
 renderProducts(clothingProducts);
-
+/* BACK BUTTON — COLLAPSE BIG PRODUCT ONLY */
+window.addEventListener("popstate", function () {
+  const active = document.querySelector(".product-card.big-product");
+  if (active) {
+    active.classList.remove("big-product");
+    history.replaceState(null, "", location.pathname);
+  }
+});
+  
 /* OPEN FROM VAULT — AUTO EXPAND & SCROLL */
 window.addEventListener("load", () => {
   const openProductId = localStorage.getItem("openProduct");
