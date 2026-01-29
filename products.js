@@ -1,14 +1,10 @@
-/* ===============================
-   PRODUCTS DATABASE
-   One Love One Lifestyle
-   =============================== */
-
-const PRODUCTS = {
+const PRODUCTS = [
   /* ===============================
      CLOTHING
      =============================== */
 
-  "jacket-1": {
+  {
+    id: "jacket-1",
     category: "clothing",
     page: "clothing.html",
     title: "Campus Sutra Zip-Front Bomber Jacket",
@@ -23,7 +19,8 @@ const PRODUCTS = {
     `
   },
 
-  "jacket-2": {
+  {
+    id: "jacket-2",
     category: "clothing",
     page: "clothing.html",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
@@ -36,13 +33,12 @@ const PRODUCTS = {
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
-      <b>Manufactured and Marketed By:</b><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
       <b>Country Of Origin:</b> India
     `
   },
 
-  "shirt-1": {
+  {
+    id: "shirt-1",
     category: "clothing",
     page: "clothing.html",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
@@ -55,12 +51,12 @@ const PRODUCTS = {
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
       <b>Fabric Composition:</b> 100% Cotton<br><br>
-      ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day.<br><br>
       <b>Country Of Origin:</b> India
     `
   },
 
-  "jacket-4": {
+  {
+    id: "jacket-4",
     category: "clothing",
     page: "clothing.html",
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
@@ -72,9 +68,6 @@ const PRODUCTS = {
       <b>Size :</b> XS, S, M, L<br><br>
       <b>Fit:</b> Relaxed Fit<br>
       <b>Care Instruction:</b> Machine Wash<br>
-      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
-      <b>Manufactured and Marketed By:</b><br>
-      Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
       <b>Country Of Origin:</b> India
     `
   },
@@ -83,7 +76,8 @@ const PRODUCTS = {
      SHOES
      =============================== */
 
-  "shoe-1": {
+  {
+    id: "shoe-1",
     category: "shoes",
     page: "shoes.html",
     title: "Men’s Brown Suede Sneakers",
@@ -96,4 +90,4 @@ const PRODUCTS = {
       <b>Material:</b> Leather
     `
   }
-};
+];
