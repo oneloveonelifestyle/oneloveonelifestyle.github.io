@@ -20,7 +20,7 @@ header {
   position: relative;
 }
 
-.back-btn {
+.home-btn {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -30,37 +30,44 @@ header {
 }
 
 .vault-grid {
-  padding: 15px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
+  padding: 15px;
 }
 
 .vault-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   cursor: pointer;
 }
 
 .vault-card img {
   width: 100%;
+  display: block;
 }
 
-.details {
+.vault-details {
   padding: 10px;
 }
 
-.details h3 {
-  font-size: 15px;
+.vault-details h4 {
   margin: 0;
+  font-size: 14px;
+}
+
+.vault-details .price {
+  color: #b00020;
+  font-weight: bold;
+  margin-top: 4px;
 }
 
 .empty {
-  padding: 40px;
   text-align: center;
-  color: #666;
+  padding: 50px;
+  color: #777;
 }
 </style>
 </head>
@@ -68,12 +75,16 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="back-btn">← Home</a>
+  <a href="index.html" class="home-btn">← Home</a>
   <h2>Your Vault</h2>
 </header>
 
-<div id="vault" class="vault-grid"></div>
+<div id="vaultContainer" class="vault-grid"></div>
+<div id="emptyVault" class="empty" style="display:none;">
+  Your vault is empty 🤍
+</div>
 
+<script src="products.js"></script>
 <script src="vault.js"></script>
 </body>
 </html>
