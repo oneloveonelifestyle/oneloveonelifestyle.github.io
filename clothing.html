@@ -12,6 +12,7 @@ body {
   background: #f4f4f4;
 }
 
+/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +21,7 @@ header {
   position: relative;
 }
 
-.back-btn {
+.home-btn {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -29,9 +30,131 @@ header {
   font-weight: bold;
 }
 
-/* IMPORTANT: do NOT redefine card styles here */
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+/* GRID */
 .products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   padding: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.big-product {
+  grid-column: 1 / -1;
+}
+
+/* SLIDER */
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+  display: block;
+}
+
+/* DETAILS */
+.details {
+  padding: 12px;
+}
+
+.details h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.short {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.full-description {
+  display: none;
+  font-size: 13px;
+}
+
+.big-product .full-description {
+  display: block;
+}
+
+/* OUT OF STOCK */
+.out-of-stock {
+  color: #b00020;
+  font-weight: bold;
+}
+
+.out-of-stock-btn {
+  background: #000;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* BUTTONS */
+.vault-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.vault-btn.remove {
+  background: #f5f5f5;
+}
+
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* SHOW VAULT BUTTON ONLY ON BIG CARD */
+.product-card .vault-btn {
+  display: none;
+}
+
+.big-product .vault-btn {
+  display: block;
 }
 </style>
 </head>
@@ -39,29 +162,21 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="back-btn">← Home</a>
+  <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
+  <div class="vault-icon" onclick="openVault()">♡</div>
 </header>
 
-<!-- render-products.js will inject cards here -->
-<div id="productsContainer" class="products-grid"></div>
+<div class="products-grid" id="productsContainer"></div>
 
 <script src="products.js"></script>
 <script src="render-products.js"></script>
 
 <script>
-/* Vault → open product as BIG card */
-const openProduct = localStorage.getItem("openProduct");
+renderProducts("clothing");
 
-if (openProduct) {
-  setTimeout(() => {
-    const target = document.querySelector('[data-id="' + openProduct + '"]');
-    if (target) {
-      target.classList.add("big-product");
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    localStorage.removeItem("openProduct");
-  }, 100);
+function openVault() {
+  window.location.href = "vault.html";
 }
 </script>
 
