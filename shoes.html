@@ -203,13 +203,19 @@ vaultCount.textContent = vault.length;
 /* ================= LOAD SHOES ================= */
 const shoeProducts = PRODUCTS.filter(p => p.category === "shoe");
 
+function getVaultId(product){
+  return product.id === "shoe-2" ? "shoe-2-black" : product.id;
+}
+
 function renderProducts(list){
   container.innerHTML = "";
 
   list.forEach(product=>{
+    const vaultId = getVaultId(product);
+
     const card = document.createElement("div");
     card.className = "product-card";
-    card.dataset.id = product.id;
+    card.dataset.id = vaultId;
     card.dataset.search = product.search.toLowerCase();
 
     card.innerHTML = `
@@ -228,7 +234,7 @@ function renderProducts(list){
         </div>
 
         <button class="vault-btn">
-          ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
+          ${vault.includes(vaultId) ? "✕ Remove from Vault" : "♡ Save to Vault"}
         </button>
 
         ${
@@ -252,17 +258,17 @@ function renderProducts(list){
       window.scrollTo({top:0, behavior:"smooth"});
     });
 
-    /* VAULT — FIXED */
+    /* VAULT */
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
       e.preventDefault();
       e.stopImmediatePropagation();
 
-      if(vault.includes(product.id)){
-        vault = vault.filter(v=>v!==product.id);
+      if(vault.includes(vaultId)){
+        vault = vault.filter(v=>v!==vaultId);
         vaultBtn.textContent = "♡ Save to Vault";
       }else{
-        vault.push(product.id);
+        vault.push(vaultId);
         vaultBtn.textContent = "✕ Remove from Vault";
       }
 
@@ -286,18 +292,6 @@ function searchProducts(){
 /* ================= VAULT OPEN ================= */
 function openVault(){
   window.location.href = "vault.html";
-}
-
-/* ================= OPEN FROM VAULT ================= */
-const openId = localStorage.getItem("openProduct");
-if(openId){
-  const card = document.querySelector(`[data-id="${openId}"]`);
-  if(card){
-    card.classList.add("big-product");
-    container.prepend(card);
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
-  localStorage.removeItem("openProduct");
 }
 </script>
 
