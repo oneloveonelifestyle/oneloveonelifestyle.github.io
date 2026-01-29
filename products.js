@@ -38,7 +38,7 @@ Country Of Origin: India
 },
 
 {
-  id: "shoe-2",
+  id: "shoe-2",        // MUST be unique
   category: "shoes",
   title: "Men’s Black Leather Sneakers",
   price: "₹3,499",
@@ -47,24 +47,8 @@ Country Of Origin: India
     "shoe2-2.jpg"
   ],
   stock: false,
-  search: "mens black leather sneakers premium",
-  description: `
-Size : 7, 8, 9, 10, 11
-
-Upper Material: Genuine Leather
-
-Sole: Rubber
-
-Closure: Lace-Up
-
-Care Instruction: Clean with a soft damp cloth
-
-Crafted from premium leather, these black sneakers offer a sleek, modern profile suitable for both casual and smart-casual looks. Built for durability, comfort, and long-lasting wear.
-
-Country Of Origin: India
-`
+  search: "mens black leather sneakers premium"
 }
-
   /* ===================== SHIRTS ===================== */
 
   {
