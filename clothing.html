@@ -218,6 +218,33 @@ header {
   height:320px;
   object-fit:cover;
 }
+/* ================= IMAGE FIX ================= */
+
+/* slider must not add extra space */
+.product-card .slider{
+  margin:0;
+  padding:0;
+}
+
+/* SMALL CARD — Amazon-like image size */
+.product-card .slider img{
+  display:block;
+  width:100%;
+  height:190px;
+  object-fit:cover;
+}
+
+/* BIG CARD — FULL COVER, NO GAP */
+.product-card.big-product .slider img{
+  height:100vh;
+  max-height:420px;
+  object-fit:cover;
+}
+
+/* remove gap between image and details in big card */
+.product-card.big-product .details{
+  padding-top:10px;
+  }
 </style>
 </head>
 
