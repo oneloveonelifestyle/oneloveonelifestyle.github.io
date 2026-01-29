@@ -1,3 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vault | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.top-action {
+  background: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.continue-btn {
+  background: #000;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+}
+
+.details {
+  padding: 12px;
+}
+
+.details h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.remove-btn {
+  padding: 8px 10px;
+  font-size: 13px;
+  background: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.order-btn {
+  flex: 1;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.out-stock {
+  flex: 1;
+  background: #ccc;
+  color: #666;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.empty-vault {
+  text-align: center;
+  margin-top: 80px;
+  color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>My Vault</h2>
+</header>
+
+<div class="top-action">
+  <a href="index.html" class="continue-btn">← Continue Shopping</a>
+</div>
+
+<div class="products-grid" id="vaultProducts"></div>
+
+<!-- MASTER PRODUCTS -->
 <script src="products.js"></script>
 
 <script>
@@ -36,9 +163,9 @@ function renderVault() {
 
           ${
             product.stock
-              ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-                   Buy via Instagram
-                 </a>`
+              ? `<a class="order-btn"
+                   href="https://www.instagram.com/oneloveonelifestyle/"
+                   target="_blank">Buy via Instagram</a>`
               : `<div class="out-stock">Out of Stock</div>`
           }
         </div>
@@ -67,3 +194,6 @@ function renderVault() {
 
 renderVault();
 </script>
+
+</body>
+</html>
