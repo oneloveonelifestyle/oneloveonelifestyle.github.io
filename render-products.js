@@ -1,4 +1,3 @@
-<script>
 const container = document.getElementById("products");
 const vaultCount = document.getElementById("vaultCount");
 
@@ -6,7 +5,7 @@ let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
 /* ===============================
-   RENDER PRODUCTS
+   RENDER PRODUCTS BY CATEGORY
 ================================ */
 function renderProducts(category) {
   container.innerHTML = "";
@@ -15,6 +14,7 @@ function renderProducts(category) {
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
+    card.dataset.search = product.search.toLowerCase();
 
     const isSaved = vault.includes(product.id);
 
@@ -24,30 +24,32 @@ function renderProducts(category) {
       </div>
 
       <div class="details">
-        <h3>${product.title}</h3>
+        <h2>${product.title}</h2>
 
-        <!-- PRICE (ONLY ONCE) -->
-        <div class="price">
-          ${product.price}
+        <div class="price ${product.stock === false ? 'out-of-stock' : ''}">
+          ${product.stock === false ? "Currently Out of Stock" : product.price}
         </div>
 
-        <!-- FULL DETAILS (ONLY VISIBLE WHEN BIG) -->
         <div class="full-description">
-          ${product.details || ""}
+          ${product.description || ""}
         </div>
 
-        <button class="vault-btn ${isSaved ? "remove" : ""}">
+        <button class="vault-btn ${isSaved ? 'remove' : ''}">
           ${isSaved ? "✕ Remove from Vault" : "♡ Save to Vault"}
         </button>
 
-        <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-          Buy via Instagram
-        </a>
+        ${
+          product.stock === false
+            ? `<div class="order-btn disabled">Out of Stock</div>`
+            : `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+                 Buy via Instagram
+               </a>`
+        }
       </div>
     `;
 
     /* ===============================
-       CARD CLICK → EXPAND
+       CARD CLICK → EXPAND / COLLAPSE
     ================================ */
     card.addEventListener("click", e => {
       if (
@@ -55,14 +57,17 @@ function renderProducts(category) {
         e.target.closest(".order-btn")
       ) return;
 
+      const alreadyBig = card.classList.contains("big-product");
+
       document.querySelectorAll(".product-card").forEach(c =>
         c.classList.remove("big-product")
       );
 
-      card.classList.add("big-product");
-      container.prepend(card);
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!alreadyBig) {
+        card.classList.add("big-product");
+        container.prepend(card);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     });
 
     /* ===============================
@@ -90,7 +95,7 @@ function renderProducts(category) {
   });
 
   /* ===============================
-     OPEN FROM VAULT
+     OPEN PRODUCT FROM VAULT
   ================================ */
   const openProduct = localStorage.getItem("openProduct");
   if (openProduct) {
@@ -103,4 +108,3 @@ function renderProducts(category) {
     localStorage.removeItem("openProduct");
   }
 }
-</script>
