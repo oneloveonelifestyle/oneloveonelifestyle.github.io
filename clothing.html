@@ -5,169 +5,165 @@
 <title>Clothing | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f4f4f4;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
 /* HEADER */
-header{
-  background:#000;
-  color:#fff;
-  padding:15px;
-  text-align:center;
-  position:relative;
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  position: relative;
 }
 
-.home-btn{
-  position:absolute;
-  left:15px;
-  top:15px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.vault-icon{
-  position:absolute;
-  right:15px;
-  top:15px;
-  font-size:22px;
-  cursor:pointer;
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
 }
 
-.vault-count{
-  background:red;
-  color:#fff;
-  font-size:12px;
-  border-radius:50%;
-  padding:2px 6px;
-  position:absolute;
-  top:-8px;
-  right:-10px;
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
 }
 
 /* SEARCH */
-.search-bar{
-  background:#fff;
-  padding:12px;
-  display:flex;
-  gap:10px;
+.search-bar {
+  background: #fff;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
 }
 
-.search-input{
-  flex:1;
-  padding:12px;
-  font-size:15px;
-  border-radius:8px;
-  border:1px solid #ccc;
+.search-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
-.search-btn{
-  background:#000;
-  color:#fff;
-  border:none;
-  padding:12px 14px;
-  border-radius:8px;
-  cursor:pointer;
+.search-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* GRID */
-.products-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  padding:15px;
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
 }
 
-.product-card{
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-  cursor:pointer;
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 /* SLIDER */
-.slider{
-  display:flex;
-  overflow-x:auto;
+.slider {
+  display: flex;
+  overflow-x: auto;
 }
 
-.slider img{
-  width:100%;
+.slider img {
+  width: 100%;
 }
 
 /* DETAILS */
-.details{
-  padding:12px;
+.details {
+  padding: 12px;
 }
 
-.details h2{
-  font-size:16px;
-  margin:0 0 6px;
+.details h2 {
+  font-size: 14px;
+  margin: 0 0 6px;
 }
 
-.price{
-  font-weight:bold;
+.price {
+  font-weight: bold;
 }
 
-.unavailable{
-  color:#b00020;
-  font-size:14px;
-  margin-top:6px;
+.unavailable {
+  color: #b00020;
+  font-size: 14px;
+  margin-top: 6px;
 }
 
-.big-product{
-  grid-column:1 / -1;
+.big-product {
+  grid-column: 1 / -1;
 }
 
-.full-description{
-  display:none;
-  font-size:14px;
-  margin-top:10px;
-  line-height:1.6;
+.full-description {
+  display: none;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-line;
 }
 
-.big-product .full-description{
-  display:block;
+.big-product .full-description {
+  display: block;
 }
 
 /* BUTTONS */
-.vault-btn{
-  display:none;
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  background:#fff;
-  cursor:pointer;
+.vault-btn {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
 }
 
-.big-product .vault-btn{
-  display:block;
+.big-product .vault-btn {
+  display: block;
 }
 
-.order-btn{
-  display:block;
-  margin-top:10px;
-  background:#000;
-  color:#fff;
-  text-align:center;
-  padding:12px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.order-btn.disabled{
-  background:#999;
-  pointer-events:none;
+.order-btn.disabled {
+  background: #999;
+  pointer-events: none;
 }
 </style>
 </head>
@@ -177,13 +173,13 @@ header{
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">♡
-    <span class="vault-count" id="vaultCount">0</span>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search clothing...">
+  <input id="searchInput" class="search-input" placeholder="Search clothing...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
 </div>
 
@@ -200,13 +196,16 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
+/* IMPORTANT: BASE HISTORY STATE */
+history.replaceState({ page: "clothing" }, "");
+
 /* LOAD CLOTHING */
 const clothingProducts = PRODUCTS.filter(p => p.category === "clothing");
 
-function renderProducts(list){
+function renderProducts(list) {
   container.innerHTML = "";
 
-  list.forEach(product=>{
+  list.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
@@ -214,18 +213,16 @@ function renderProducts(list){
 
     card.innerHTML = `
       <div class="slider">
-        ${product.images.map(img=>`<img src="${img}">`).join("")}
+        ${product.images.map(img => `<img src="${img}">`).join("")}
       </div>
 
       <div class="details">
         <h2>${product.title}</h2>
         <div class="price">${product.price}</div>
 
-        ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
+        ${product.stock === false ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
-        <div class="full-description">
-${product.description}
-        </div>
+        <div class="full-description">${product.description || ""}</div>
 
         <button class="vault-btn">
           ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
@@ -239,34 +236,28 @@ ${product.description}
       </div>
     `;
 
-    card.addEventListener("click", e=>{
-      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+    card.addEventListener("click", e => {
+      if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
 
-      const isOpen = card.classList.contains("big-product");
+      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
 
-      document.querySelectorAll(".product-card")
-        .forEach(c=>c.classList.remove("big-product"));
+      history.pushState({ product: product.id }, "");
 
-      if(!isOpen){
-        card.classList.add("big-product");
-        container.prepend(card);
-        history.pushState({ expanded:true }, "");
-        window.scrollTo({top:0, behavior:"smooth"});
-      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    const vaultBtn = card.querySelector(".vault-btn");
-    vaultBtn.addEventListener("click", e=>{
+    const btn = card.querySelector(".vault-btn");
+    btn.addEventListener("click", e => {
       e.stopPropagation();
-
-      if(vault.includes(product.id)){
-        vault = vault.filter(v=>v!==product.id);
-        vaultBtn.textContent = "♡ Save to Vault";
-      }else{
+      if (vault.includes(product.id)) {
+        vault = vault.filter(v => v !== product.id);
+        btn.textContent = "♡ Save to Vault";
+      } else {
         vault.push(product.id);
-        vaultBtn.textContent = "✕ Remove from Vault";
+        btn.textContent = "✕ Remove from Vault";
       }
-
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
     });
@@ -278,29 +269,32 @@ ${product.description}
 renderProducts(clothingProducts);
 
 /* SEARCH */
-function searchProducts(){
+function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
-  renderProducts(
-    clothingProducts.filter(p=>p.search.toLowerCase().includes(q))
-  );
+  renderProducts(clothingProducts.filter(p => p.search.toLowerCase().includes(q)));
 }
 
 /* VAULT */
-function openVault(){
+function openVault() {
   window.location.href = "vault.html";
 }
 
-/* BACK BUTTON COLLAPSE */
-window.addEventListener("popstate", ()=>{
+/* BACK BUTTON — COLLAPSE CARD */
+window.addEventListener("popstate", () => {
   document.querySelectorAll(".product-card")
-    .forEach(c=>c.classList.remove("big-product"));
+    .forEach(c => c.classList.remove("big-product"));
 });
 
 /* OPEN FROM VAULT */
 const openId = localStorage.getItem("openProduct");
-if(openId){
+if (openId) {
   const card = document.querySelector(`[data-id="${openId}"]`);
-  if(card) card.click();
+  if (card) {
+    card.classList.add("big-product");
+    container.prepend(card);
+    history.pushState({ product: openId }, "");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   localStorage.removeItem("openProduct");
 }
 </script>
