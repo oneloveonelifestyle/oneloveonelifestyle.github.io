@@ -1,6 +1,6 @@
 /* =========================================================
    MASTER PRODUCTS DATABASE
-   This file is the ONLY place where products are defined
+   SINGLE SOURCE OF TRUTH
    ========================================================= */
 
 const PRODUCTS = [
@@ -9,15 +9,16 @@ const PRODUCTS = [
 
   {
     id: "shoe-1",
-    category: "shoes",
+    category: "shoe",
     title: "Men’s Brown Suede Sneakers",
+    short: "Premium suede lace-up sneakers",
     price: "₹2,999",
     images: [
       "shoe1-1.jpg",
       "shoe1-2.jpg",
       "shoe1-3.jpg"
     ],
-    stock: false,
+    outOfStock: true,
     search: "mens brown suede sneakers leather lace up",
     description: `
       Size: UK 6, 7, 8, 9, 10<br>
@@ -26,21 +27,21 @@ const PRODUCTS = [
       Closure: Lace-Up<br><br>
 
       Crafted for everyday wear, these brown suede sneakers combine timeless
-      style with all-day comfort. Designed with a soft inner lining and durable
-      outsole, they are perfect for casual and smart-casual looks.
+      style with long-lasting comfort and durability.
     `
   },
 
   {
     id: "shoe-2",
-    category: "shoes",
+    category: "shoe",
     title: "Men’s Black Leather Sneakers",
+    short: "Premium leather everyday sneakers",
     price: "₹3,499",
     images: [
       "shoe2-1.jpg",
       "shoe2-2.jpg"
     ],
-    stock: false,
+    outOfStock: true,
     search: "mens black leather sneakers premium",
     description: `
       Size: UK 6, 7, 8, 9, 10<br>
@@ -48,8 +49,8 @@ const PRODUCTS = [
       Sole: Rubber<br>
       Closure: Lace-Up<br><br>
 
-      Designed for a sleek urban look, these premium black leather sneakers
-      offer durability, comfort, and a polished finish suitable for everyday wear.
+      Designed for a clean urban look, these black leather sneakers
+      offer premium comfort with a polished finish.
     `
   },
 
@@ -59,12 +60,13 @@ const PRODUCTS = [
     id: "shirt-1",
     category: "clothing",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+    short: "Relaxed-fit cotton shirt",
     price: "₹1,499",
     images: [
       "shirt1-1.jpg",
       "shirt1-2.jpg"
     ],
-    stock: true,
+    outOfStock: false,
     search: "eta brown textured cotton shirt relaxed",
     description: `
       Size: XS, S, M, L<br>
@@ -73,9 +75,8 @@ const PRODUCTS = [
       Fabric Composition: 100% Cotton<br><br>
 
       ETA redefines everyday comfort with this brown shirt, crafted from
-      cotton-rich fabric for a soft, natural feel throughout the day.
-      Framed in a relaxed silhouette, it features a spread collar,
-      full-length sleeves, and a classic button-up front.<br><br>
+      cotton-rich fabric for a soft, breathable feel throughout the day.
+      Designed with a spread collar and full-length sleeves.<br><br>
 
       Country Of Origin: India
     `
@@ -85,21 +86,22 @@ const PRODUCTS = [
     id: "jacket-1",
     category: "clothing",
     title: "Campus Sutra Zip-Front Bomber Jacket",
+    short: "Classic zip-front bomber jacket",
     price: "₹1,999",
     images: [
       "jacket1-1.jpg",
       "jacket1-2.jpg",
       "jacket1-3.jpg"
     ],
-    stock: true,
+    outOfStock: false,
     search: "campus sutra bomber jacket zip front",
     description: `
       Size: S, M, L, XL<br>
       Fit: Regular Fit<br>
       Care Instruction: Machine Wash<br><br>
 
-      A versatile bomber jacket designed for everyday wear,
-      featuring a zip-front closure and a clean, structured silhouette.
+      A versatile bomber jacket with a structured silhouette,
+      suitable for everyday casual wear.
     `
   },
 
@@ -107,13 +109,14 @@ const PRODUCTS = [
     id: "jacket-2",
     category: "clothing",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+    short: "Relaxed-fit cotton jacket",
     price: "₹2,299",
     images: [
       "jacket2-1.jpg",
       "jacket2-2.jpg",
       "jacket2-3.jpg"
     ],
-    stock: true,
+    outOfStock: false,
     search: "nuon brown relaxed fit jacket",
     description: `
       Size: XS, S, M, L, XL<br>
@@ -133,13 +136,14 @@ const PRODUCTS = [
     id: "jacket-3",
     category: "clothing",
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    short: "Relaxed-fit hooded jacket",
     price: "₹2,199",
     images: [
       "jacket3-1.jpg",
       "jacket3-2.jpg",
       "jacket3-3.jpg"
     ],
-    stock: true,
+    outOfStock: false,
     search: "studiofit dark brown hooded jacket relaxed",
     description: `
       Size: XS, S, M, L<br>
