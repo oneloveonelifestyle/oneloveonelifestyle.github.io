@@ -248,6 +248,8 @@ function renderProducts(list){
       card.classList.add("big-product");
       container.prepend(card);
       window.scrollTo({top:0, behavior:"smooth"});
+      history.pushState({ expanded:true }, "");
+      expandedCard = card;
     });
 
     /* VAULT */
@@ -290,6 +292,17 @@ if(openId){
   if(card) card.click();
   localStorage.removeItem("openProduct");
 }
+
+/* ===== BACK BUTTON COLLAPSE ONLY ===== */
+
+let expandedCard = null;
+
+window.addEventListener("popstate", function(){
+  if(expandedCard){
+    expandedCard.classList.remove("big-product");
+    expandedCard = null;
+  }
+});
 </script>
 
 </body>
