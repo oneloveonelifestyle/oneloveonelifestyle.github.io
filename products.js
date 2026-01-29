@@ -1,6 +1,6 @@
 /* =========================================================
    MASTER PRODUCTS DATABASE
-   SINGLE SOURCE OF TRUTH
+   DO NOT CHANGE FIELD NAMES
    ========================================================= */
 
 const PRODUCTS = [
@@ -11,50 +11,30 @@ const PRODUCTS = [
     id: "shoe-1",
     category: "shoe",
     title: "Men’s Brown Suede Sneakers",
-    short: "Premium suede lace-up sneakers",
     price: "₹2,999",
     images: [
       "shoe1-1.jpg",
       "shoe1-2.jpg",
       "shoe1-3.jpg"
     ],
-    outOfStock: true,
-    search: "mens brown suede sneakers leather lace up",
-    description: `
-      Size: UK 6, 7, 8, 9, 10<br>
-      Material: Premium Suede Leather<br>
-      Sole: Rubber<br>
-      Closure: Lace-Up<br><br>
-
-      Crafted for everyday wear, these brown suede sneakers combine timeless
-      style with long-lasting comfort and durability.
-    `
+    stock: false,
+    search: "mens brown suede sneakers leather lace up"
   },
 
   {
     id: "shoe-2",
     category: "shoe",
     title: "Men’s Black Leather Sneakers",
-    short: "Premium leather everyday sneakers",
     price: "₹3,499",
     images: [
       "shoe2-1.jpg",
       "shoe2-2.jpg"
     ],
-    outOfStock: true,
-    search: "mens black leather sneakers premium",
-    description: `
-      Size: UK 6, 7, 8, 9, 10<br>
-      Material: Genuine Leather<br>
-      Sole: Rubber<br>
-      Closure: Lace-Up<br><br>
-
-      Designed for a clean urban look, these black leather sneakers
-      offer premium comfort with a polished finish.
-    `
+    stock: false,
+    search: "mens black leather sneakers premium"
   },
 
-  /* ===================== CLOTHING ===================== */
+  /* ===================== SHIRTS ===================== */
 
   {
     id: "shirt-1",
@@ -66,21 +46,24 @@ const PRODUCTS = [
       "shirt1-1.jpg",
       "shirt1-2.jpg"
     ],
-    outOfStock: false,
+    stock: true,
     search: "eta brown textured cotton shirt relaxed",
     description: `
-      Size: XS, S, M, L<br>
-      Fit: Relaxed Fit<br>
-      Care Instruction: Machine Wash<br>
-      Fabric Composition: 100% Cotton<br><br>
+      <strong>Size:</strong> XS, S, M, L<br>
+      <strong>Fit:</strong> Relaxed Fit<br>
+      <strong>Care Instruction:</strong> Machine Wash<br>
+      <strong>Fabric Composition:</strong> 100% Cotton<br><br>
 
       ETA redefines everyday comfort with this brown shirt, crafted from
-      cotton-rich fabric for a soft, breathable feel throughout the day.
-      Designed with a spread collar and full-length sleeves.<br><br>
+      cotton-rich fabric for a soft, natural feel throughout the day.
+      Designed with a spread collar, full-length sleeves and a
+      classic button-up front.<br><br>
 
-      Country Of Origin: India
+      <strong>Country Of Origin:</strong> India
     `
   },
+
+  /* ===================== JACKETS ===================== */
 
   {
     id: "jacket-1",
@@ -93,15 +76,12 @@ const PRODUCTS = [
       "jacket1-2.jpg",
       "jacket1-3.jpg"
     ],
-    outOfStock: false,
+    stock: true,
     search: "campus sutra bomber jacket zip front",
     description: `
-      Size: S, M, L, XL<br>
-      Fit: Regular Fit<br>
-      Care Instruction: Machine Wash<br><br>
-
-      A versatile bomber jacket with a structured silhouette,
-      suitable for everyday casual wear.
+      <strong>Size:</strong> S, M, L, XL<br>
+      <strong>Fit:</strong> Regular Fit<br>
+      <strong>Care Instruction:</strong> Machine Wash
     `
   },
 
@@ -116,19 +96,19 @@ const PRODUCTS = [
       "jacket2-2.jpg",
       "jacket2-3.jpg"
     ],
-    outOfStock: false,
+    stock: true,
     search: "nuon brown relaxed fit jacket",
     description: `
-      Size: XS, S, M, L, XL<br>
-      Fit: Relaxed Fit<br>
-      Care Instruction: Machine Wash<br>
-      Fabric Composition: 100% Cotton<br><br>
+      <strong>Size:</strong> XS, S, M, L, XL<br>
+      <strong>Fit:</strong> Relaxed Fit<br>
+      <strong>Care Instruction:</strong> Machine Wash<br>
+      <strong>Fabric Composition:</strong> 100% Cotton<br><br>
 
-      Manufactured and Marketed By:<br>
+      <strong>Manufactured and Marketed By:</strong><br>
       Trent Limited, Bombay House, 24, Homi Mody Street,
       Fort, Mumbai – 400001<br><br>
 
-      Country Of Origin: India
+      <strong>Country Of Origin:</strong> India
     `
   },
 
@@ -143,19 +123,20 @@ const PRODUCTS = [
       "jacket3-2.jpg",
       "jacket3-3.jpg"
     ],
-    outOfStock: false,
+    stock: true,
     search: "studiofit dark brown hooded jacket relaxed",
     description: `
-      Size: XS, S, M, L<br>
-      Fit: Relaxed Fit<br>
-      Care Instruction: Machine Wash<br>
-      Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane<br><br>
+      <strong>Size:</strong> XS, S, M, L<br>
+      <strong>Fit:</strong> Relaxed Fit<br>
+      <strong>Care Instruction:</strong> Machine Wash<br>
+      <strong>Fabric Composition:</strong>
+      79% Polyester, 18% Viscose, 3% Elastane<br><br>
 
-      Manufactured and Marketed By:<br>
+      <strong>Manufactured and Marketed By:</strong><br>
       Trent Limited, Bombay House, 24, Homi Mody Street,
       Fort, Mumbai – 400001<br><br>
 
-      Country Of Origin: India
+      <strong>Country Of Origin:</strong> India
     `
   }
 
