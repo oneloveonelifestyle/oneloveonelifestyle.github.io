@@ -86,15 +86,14 @@ header {
   margin: 0 0 6px;
 }
 
-.status {
+/* STATUS TEXT */
+.stock-text {
   font-size: 14px;
   font-weight: bold;
-  color: #b00020;
 }
 
-.unavailable {
+.unavailable-text {
   color: #555;
-  font-size: 14px;
 }
 
 /* BIG CARD */
@@ -114,7 +113,7 @@ header {
   display: block;
 }
 
-/* VAULT BUTTON */
+/* BUTTONS */
 .vault-btn {
   display: none;
   width: 100%;
@@ -134,6 +133,24 @@ header {
 .vault-btn.remove {
   background: #f5f5f5;
 }
+
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.order-btn.disabled {
+  background: #e0e0e0;
+  color: #555;
+  pointer-events: none;
+}
 </style>
 </head>
 
@@ -149,7 +166,7 @@ header {
 
 <div class="products-grid" id="products"></div>
 
-<!-- LOAD PRODUCTS -->
+<!-- PRODUCTS SOURCE -->
 <script src="products.js"></script>
 
 <script>
@@ -159,72 +176,84 @@ const vaultCount = document.getElementById("vaultCount");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* ===============================
-   LOAD SHOES FROM products.js
-================================ */
-const shoes = PRODUCTS.filter(p => p.category === "shoes");
+/* LOAD SHOES ONLY */
+PRODUCTS
+  .filter(p => p.category === "shoes")
+  .forEach(product => {
 
-shoes.forEach(product => {
-  const card = document.createElement("div");
-  card.className = "product-card";
-  card.dataset.id = product.id;
+    const saved = vault.includes(product.id);
+    const card = document.createElement("div");
+    card.className = "product-card";
 
-  const saved = vault.includes(product.id);
-
-  card.innerHTML = `
-    <div class="slider">
-      ${product.images.map(img => `<img src="${img}">`).join("")}
-    </div>
-
-    <div class="details">
-      <h2>${product.title}</h2>
-
-      ${
-        product.inStock
-        ? `<div class="status">In stock</div>`
-        : `<div class="unavailable">Currently unavailable</div>`
-      }
-
-      <div class="full-description">
-        Premium quality footwear crafted for everyday comfort.
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(img => `<img src="${img}">`).join("")}
       </div>
 
-      <button class="vault-btn ${saved ? "remove" : ""}">
-        ${saved ? "✕ Remove from Vault" : "♡ Save to Vault"}
-      </button>
-    </div>
-  `;
+      <div class="details">
+        <h2>${product.title}</h2>
 
-  /* BIG CARD BEHAVIOR */
-  card.addEventListener("click", e => {
-    if (e.target.closest(".vault-btn")) return;
-    document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
-    card.classList.add("big-product");
-    container.prepend(card);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+        ${
+          product.inStock
+          ? `<div class="stock-text">In stock</div>`
+          : `<div class="stock-text unavailable-text">
+               This item is currently unavailable
+             </div>`
+        }
+
+        <div class="full-description">
+          High-quality footwear designed for comfort and durability.
+        </div>
+
+        <button class="vault-btn ${saved ? "remove" : ""}">
+          ${saved ? "✕ Remove from Vault" : "♡ Save to Vault"}
+        </button>
+
+        ${
+          product.inStock
+          ? `<a class="order-btn"
+               href="https://www.instagram.com/oneloveonelifestyle/"
+               target="_blank">
+               Buy via Instagram
+             </a>`
+          : `<div class="order-btn disabled">
+               Temporarily out of stock
+             </div>`
+        }
+      </div>
+    `;
+
+    /* BIG CARD */
+    card.addEventListener("click", e => {
+      if (e.target.closest(".vault-btn")) return;
+      document.querySelectorAll(".product-card")
+        .forEach(c => c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    /* VAULT */
+    const btn = card.querySelector(".vault-btn");
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      if (vault.includes(product.id)) {
+        vault = vault.filter(v => v !== product.id);
+        btn.textContent = "♡ Save to Vault";
+        btn.classList.remove("remove");
+      } else {
+        vault.push(product.id);
+        btn.textContent = "✕ Remove from Vault";
+        btn.classList.add("remove");
+      }
+
+      localStorage.setItem("vault", JSON.stringify(vault));
+      vaultCount.textContent = vault.length;
+    });
+
+    container.appendChild(card);
   });
-
-  /* VAULT SAVE / REMOVE */
-  const btn = card.querySelector(".vault-btn");
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-
-    if (vault.includes(product.id)) {
-      vault = vault.filter(v => v !== product.id);
-      btn.textContent = "♡ Save to Vault";
-      btn.classList.remove("remove");
-    } else {
-      vault.push(product.id);
-      btn.textContent = "✕ Remove from Vault";
-      btn.classList.add("remove");
-    }
-
-    localStorage.setItem("vault", JSON.stringify(vault));
-    vaultCount.textContent = vault.length;
-  });
-
-  container.appendChild(card);
-});
 
 function openVault() {
   window.location.href = "vault.html";
