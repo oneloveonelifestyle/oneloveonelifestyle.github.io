@@ -124,7 +124,6 @@ header {
   display: none;
   margin-top: 12px;
   font-size: 14px;
-  white-space: pre-line;
 }
 
 .big-product .full-description {
@@ -209,8 +208,9 @@ PRODUCTS.forEach(product => {
     <div class="details">
       <h2>${product.title}</h2>
       <div class="price">${product.price}</div>
+      <div class="short">${product.short}</div>
 
-      <div class="full-description">${product.details}</div>
+      <div class="full-description">${product.description}</div>
 
       <button class="vault-btn">♡ Save to Vault</button>
       <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
