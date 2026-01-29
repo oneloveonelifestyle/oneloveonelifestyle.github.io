@@ -25,15 +25,15 @@ const PRODUCTS = [
   },
 
   {
-  id: "shoe-3",
-  category: "shoe",
-  title: "Navy Knit Textured",
-  price: "₹1,199",
-  images: ["shoe-navy-1.jpg", "shoe-navy-2.jpg", "shoe-navy-3.jpg"],
-  stock: true,
-  search: "navy knit textured shoes men casual breathable",
-  description: "Lightweight navy knit textured shoes designed for everyday comfort and breathability."
-},
+    id: "shoe-3",
+    category: "shoe",
+    title: "Navy Knit Textured",
+    price: "₹1,199",
+    images: ["shoe-navy-1.jpg", "shoe-navy-2.jpg", "shoe-navy-3.jpg"],
+    stock: true,
+    search: "navy knit textured shoes men casual breathable",
+    description: "Lightweight navy knit textured shoes designed for everyday comfort and breathability."
+  },
 
   /* ===================== CLOTHING ===================== */
 
@@ -108,24 +108,25 @@ const PRODUCTS = [
       "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
       "Country Of Origin: India"
   },
+
   {
-  id: "shirt-orchid-1",
-  category: "clothing",
-  title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
-  price: "₹1,399",
-  images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
-  stock: true,
-  search: "wild orchid pink corduroy boxy fit crop shirt corduroy",
-  description:
-    "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt<br><br>" +
-    "Size : L, XL, XXL<br><br>" +
-    "Fit : Boxy Fit<br><br>" +
-    "Care Instruction : Machine Wash<br><br>" +
-    "Fabric Composition : Corduroy Cotton<br><br>" +
-    "This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits<br><br>" +
-    'Country Of Origin : India"
-},
- 
+    id: "shirt-orchid-1",
+    category: "clothing",
+    title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
+    price: "₹1,399",
+    images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
+    stock: true,
+    search: "wild orchid pink corduroy boxy fit crop shirt corduroy",
+    description:
+      "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt<br><br>" +
+      "Size : L, XL, XXL<br><br>" +
+      "Fit : Boxy Fit<br><br>" +
+      "Care Instruction : Machine Wash<br><br>" +
+      "Fabric Composition : Corduroy Cotton<br><br>" +
+      "This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits<br><br>" +
+      "Country Of Origin : India"
+  },
+
   /* ===================== ACCESSORIES ===================== */
 
   {
