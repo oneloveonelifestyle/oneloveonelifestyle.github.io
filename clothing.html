@@ -2,117 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Clothing | One Love One Lifestyle</title>
+<title>Clothing | Vault</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  background: #fff;
 }
 
-/* HEADER */
 header {
-  background: #000;
-  color: #fff;
   padding: 15px;
-  text-align: center;
-  position: relative;
-}
-
-.home-btn {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  color: #fff;
-  text-decoration: none;
   font-weight: bold;
 }
 
-.vault-icon {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  cursor: pointer;
-}
-
-.vault-count {
-  background: red;
-  color: #fff;
-  font-size: 12px;
-  border-radius: 50%;
-  padding: 2px 6px;
-  position: absolute;
-  top: -8px;
-  right: -10px;
-}
-
-/* GRID */
-.products-grid {
+#products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 15px;
   padding: 15px;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid #eee;
+  padding: 10px;
   cursor: pointer;
 }
 
-.big-product {
-  grid-column: 1 / -1;
-}
-
-/* SLIDER */
-.slider {
-  display: flex;
-  overflow-x: auto;
-}
-
-.slider img {
+.product-card img {
   width: 100%;
   display: block;
 }
 
-/* DETAILS */
-.details {
-  padding: 12px;
-}
-
 .details h3 {
-  margin: 0 0 4px;
   font-size: 14px;
+  margin: 8px 0 4px;
 }
 
 .short {
   font-size: 12px;
-  color: #666;
-  margin-bottom: 4px;
+  color: #555;
 }
 
 .price {
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.out-of-stock {
+  color: #b00020;
   font-weight: bold;
-  margin-bottom: 6px;
 }
 
 .full-description {
   display: none;
   font-size: 13px;
+  margin-top: 10px;
 }
 
-.big-product .full-description {
+.vault-btn,
+.order-btn {
   display: block;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 12px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
 }
 
-/* OUT OF STOCK */
-.out-of-stock {
-  color: #b00020;
-  font-weight: bold;
+.vault-btn {
+  background: #eee;
+}
+
+.vault-btn.remove {
+  background: #000;
+  color: #fff;
+}
+
+.order-btn {
+  background: #000;
+  color: #fff;
+  text-decoration: none;
 }
 
 .out-of-stock-btn {
@@ -122,38 +94,12 @@ header {
   cursor: not-allowed;
 }
 
-/* BUTTONS */
-.vault-btn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #fff;
-  cursor: pointer;
+/* BIG CARD */
+.big-product {
+  grid-column: 1 / -1;
 }
 
-.vault-btn.remove {
-  background: #f5f5f5;
-}
-
-.order-btn {
-  display: block;
-  margin-top: 10px;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-/* SHOW VAULT BUTTON ONLY ON BIG CARD */
-.product-card .vault-btn {
-  display: none;
-}
-
-.big-product .vault-btn {
+.big-product .full-description {
   display: block;
 }
 </style>
@@ -162,22 +108,16 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="home-btn">← Home</a>
-  <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">♡</div>
+  Clothing
+  <span style="float:right;">Vault (<span id="vaultCount">0</span>)</span>
 </header>
 
-<div class="products-grid" id="productsContainer"></div>
+<div id="products"></div>
 
 <script src="products.js"></script>
 <script src="render-products.js"></script>
-
 <script>
-renderProducts("clothing");
-
-function openVault() {
-  window.location.href = "vault.html";
-}
+  renderProducts("clothing");
 </script>
 
 </body>
