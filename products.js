@@ -116,7 +116,6 @@ header {
   color: #555;
 }
 
-/* BIG CARD */
 .big-product {
   grid-column: 1 / -1;
 }
@@ -125,7 +124,6 @@ header {
   display: none;
   margin-top: 12px;
   font-size: 14px;
-  line-height: 1.6;
 }
 
 .big-product .full-description {
@@ -144,6 +142,10 @@ header {
 
 .big-product .vault-btn {
   display: block;
+}
+
+.vault-btn.remove {
+  background: #f5f5f5;
 }
 
 .order-btn {
@@ -176,6 +178,7 @@ header {
 
 <div class="products-grid" id="products"></div>
 
+<!-- PRODUCTS SOURCE -->
 <script src="products.js"></script>
 
 <script>
@@ -186,15 +189,9 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* AMAZON-STYLE SHORT CAPTIONS (SMALL CARD ONLY) */
-const SHORT_CAPTIONS = {
-  "shirt-1": "Relaxed-fit cotton shirt with textured finish",
-  "jacket-1": "Zip-front bomber jacket with regular fit",
-  "jacket-2": "Cotton jacket with relaxed fit and text design",
-  "jacket-3": "Hooded jacket with relaxed fit and stretch fabric"
-};
-
-/* LOAD CLOTHING */
+/* ===============================
+   LOAD CLOTHING PRODUCTS
+================================ */
 PRODUCTS.forEach(product => {
   if (product.category !== "clothing") return;
 
@@ -211,14 +208,9 @@ PRODUCTS.forEach(product => {
     <div class="details">
       <h2>${product.title}</h2>
       <div class="price">${product.price}</div>
+      <div class="short">${product.short}</div>
 
-      <!-- SMALL CARD CAPTION -->
-      <div class="short">${SHORT_CAPTIONS[product.id] || ""}</div>
-
-      <!-- BIG CARD FULL DETAILS -->
-      <div class="full-description">
-        ${product.description || ""}
-      </div>
+      <div class="full-description">${product.description}</div>
 
       <button class="vault-btn">♡ Save to Vault</button>
       <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
@@ -230,6 +222,7 @@ PRODUCTS.forEach(product => {
   const btn = card.querySelector(".vault-btn");
 
   if (vault.includes(product.id)) {
+    btn.classList.add("remove");
     btn.textContent = "✕ Remove from Vault";
   }
 
@@ -246,9 +239,11 @@ PRODUCTS.forEach(product => {
     if (vault.includes(product.id)) {
       vault = vault.filter(v => v !== product.id);
       btn.textContent = "♡ Save to Vault";
+      btn.classList.remove("remove");
     } else {
       vault.push(product.id);
       btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
     }
     localStorage.setItem("vault", JSON.stringify(vault));
     vaultCount.textContent = vault.length;
@@ -257,7 +252,9 @@ PRODUCTS.forEach(product => {
   container.appendChild(card);
 });
 
-/* SEARCH */
+/* ===============================
+   SEARCH
+================================ */
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
   document.querySelectorAll(".product-card").forEach(card => {
@@ -270,7 +267,9 @@ function openVault() {
   window.location.href = "vault.html";
 }
 
-/* OPEN FROM VAULT */
+/* ===============================
+   OPEN FROM VAULT
+================================ */
 const openId = localStorage.getItem("openProduct");
 if (openId) {
   const target = document.querySelector(`[data-id="${openId}"]`);
