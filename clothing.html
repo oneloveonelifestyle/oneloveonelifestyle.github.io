@@ -139,7 +139,7 @@ header {
   display: block;
 }
 
-/* BUTTONS — EXACTLY SAME AS ACCESSORIES */
+/* BUTTONS */
 .vault-btn {
   display: none;
   width: 100%;
@@ -253,9 +253,16 @@ function renderProducts(list) {
 
     card.addEventListener("click", e => {
       if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
-      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+
+      if (card.classList.contains("big-product")) return;
+
+      document.querySelectorAll(".product-card")
+        .forEach(c => c.classList.remove("big-product"));
+
       card.classList.add("big-product");
       container.prepend(card);
+
+      history.pushState({ expanded: true }, "");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -278,15 +285,15 @@ function renderProducts(list) {
 }
 
 renderProducts(clothingProducts);
-/* BACK BUTTON — COLLAPSE BIG PRODUCT ONLY */
-window.addEventListener("popstate", function () {
+
+/* BACK BUTTON — COLLAPSE ONLY */
+window.addEventListener("popstate", () => {
   const active = document.querySelector(".product-card.big-product");
   if (active) {
     active.classList.remove("big-product");
-    history.replaceState(null, "", location.pathname);
   }
 });
-  
+
 /* OPEN FROM VAULT — AUTO EXPAND & SCROLL */
 window.addEventListener("load", () => {
   const openProductId = localStorage.getItem("openProduct");
@@ -305,7 +312,6 @@ window.addEventListener("load", () => {
 
       card.classList.add("big-product");
       container.prepend(card);
-
       window.scrollTo({ top: 0, behavior: "smooth" });
 
       localStorage.removeItem("openProduct");
