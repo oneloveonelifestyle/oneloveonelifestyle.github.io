@@ -1,48 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Products</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: Arial; padding: 20px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px; }
-    .card { border: 1px solid #ddd; padding: 10px; }
-    img { width: 100%; }
-  </style>
-</head>
-<body>
+const PRODUCTS = {
+  "jacket-1": {
+    page: "clothing",
+    title: "Campus Sutra Zip-Front Bomber Jacket",
+    price: 1999,
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"],
+    short: "Regular Fit",
+    description: `
+      <b>Size :</b> S, M, L, XL<br><br>
+      <b>Fit:</b> Regular Fit<br>
+      <b>Care Instruction:</b> Machine Wash
+    `
+  },
 
-<h2>Products</h2>
-<div class="grid" id="products"></div>
+  "jacket-2": {
+    page: "clothing",
+    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+    price: 2999,
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"],
+    short: "Relaxed Fit",
+    description: `
+      <b>Size :</b> XS, S, M, L, XL<br><br>
+      <b>Fit:</b> Relaxed Fit<br>
+      <b>Care Instruction:</b> Machine Wash<br>
+      <b>Fabric Composition:</b> 100% Cotton<br><br>
+      <b>Country Of Origin:</b> India
+    `
+  },
 
-<script>
-fetch('/products')
-  .then(res => res.text())
-  .then(text => {
-    const files = text.match(/href="([^"]+\.md)"/g) || [];
-    files.forEach(file => {
-      fetch('/products/' + file.split('"')[1])
-        .then(res => res.text())
-        .then(md => {
-          const data = {};
-          md.split('---')[1].split('\n').forEach(line => {
-            const [key, ...value] = line.split(':');
-            if (key && value) data[key.trim()] = value.join(':').trim();
-          });
+  "shirt-1": {
+    page: "clothing",
+    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+    price: 1799,
+    images: ["shirt1-1.jpg","shirt1-2.jpg"],
+    short: "Relaxed Fit",
+    description: `
+      <b>Size :</b> XS, S, M, L<br><br>
+      <b>Fabric Composition:</b> 100% Cotton<br>
+      <b>Country Of Origin:</b> India
+    `
+  },
 
-          document.getElementById('products').innerHTML += `
-            <div class="card">
-              <h3>${data.title}</h3>
-              <p>₹${data.price}</p>
-              <p>${data.category}</p>
-              <p>${data.description}</p>
-            </div>
-          `;
-        });
-    });
-  });
-</script>
+  "jacket-4": {
+    page: "clothing",
+    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    price: 2199,
+    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
+    short: "Relaxed Fit",
+    description: `
+      <b>Size :</b> XS, S, M, L<br><br>
+      <b>Fabric Composition:</b> 79% Polyester, 18% Viscose, 3% Elastane<br>
+      <b>Country Of Origin:</b> India
+    `
+  },
 
-</body>
-</html>
+  "shoe-1": {
+    page: "shoes",
+    title: "Men’s Brown Suede Sneakers",
+    price: null,
+    stock: "out",
+    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
+    description: `
+      <b>Size:</b> 6,7,8,9,10<br>
+      <b>Material:</b> Leather
+    `
+  }
+};
