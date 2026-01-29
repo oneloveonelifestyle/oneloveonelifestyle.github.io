@@ -30,12 +30,12 @@ header {
   font-weight: bold;
 }
 
-.vault-icon{
-  position:absolute;
-  right:12px;
-  top:12px;
-  font-size:22px;
-  cursor:pointer;
+.vault-icon {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .vault-count {
@@ -49,8 +49,7 @@ header {
   right: -8px;
 }
 
-/* ===== BIG PRODUCT – PROFESSIONAL BUTTON WIDTH ===== */
-
+/* BIG PRODUCT BUTTONS */
 .big-product .order-btn,
 .big-product .vault-btn {
   width: 100%;
@@ -66,7 +65,7 @@ header {
 .big-product .order-btn {
   margin-top: 14px;
 }
-  
+
 /* SEARCH */
 .search-bar {
   background: #fff;
@@ -109,6 +108,10 @@ header {
   flex-direction: column;
 }
 
+.big-product {
+  grid-column: 1 / -1;
+}
+
 /* SLIDER */
 .slider {
   display: flex;
@@ -129,7 +132,6 @@ header {
 .details h2 {
   font-size: 14px;
   margin: 0 0 4px;
-  line-height: 1.25;
 }
 
 .price {
@@ -141,10 +143,6 @@ header {
   color: #b00020;
   font-size: 12px;
   margin-top: 4px;
-}
-
-.big-product {
-  grid-column: 1 / -1;
 }
 
 .full-description {
@@ -174,36 +172,22 @@ header {
   display: block;
 }
 
-/* ✅ BUY BUTTON — SMALL & PROFESSIONAL */
 .order-btn {
   display: inline-block;
   margin-top: 8px;
   background: #000;
   color: #fff;
-  padding: 8px 10px;        /* reduced */
+  padding: 8px 10px;
   text-align: center;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 12px;          /* reduced */
+  font-size: 12px;
 }
 
 .order-btn.disabled {
   background: #999;
   pointer-events: none;
-}
-
-/* SMALL CARD TIGHT STYLE */
-.product-card:not(.big-product) .details {
-  padding: 8px;
-}
-
-.product-card:not(.big-product) h2 {
-  font-size: 13px;
-}
-
-.product-card:not(.big-product) .price {
-  font-size: 12px;
 }
 </style>
 </head>
@@ -237,14 +221,13 @@ vaultCount.textContent = vault.length;
 
 const clothingProducts = PRODUCTS.filter(p => p.category === "clothing");
 
+/* BACK BUTTON COLLAPSE ONLY */
 function collapseBigProduct() {
   const active = document.querySelector(".product-card.big-product");
   if (active) {
     active.classList.remove("big-product");
     history.replaceState(null, "", location.pathname);
-    return true;
   }
-  return false;
 }
 
 window.addEventListener("popstate", collapseBigProduct);
@@ -255,6 +238,7 @@ function renderProducts(list) {
   list.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
+    card.dataset.id = product.id;
 
     card.innerHTML = `
       <div class="slider">
@@ -281,33 +265,29 @@ function renderProducts(list) {
       </div>
     `;
 
+    /* EXPAND ONLY — NEVER TOGGLE */
     card.addEventListener("click", e => {
-  if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      if (card.classList.contains("big-product")) return;
 
-  // 🚫 If already big, do nothing
-  if (card.classList.contains("big-product")) return;
+      document.querySelectorAll(".product-card")
+        .forEach(c => c.classList.remove("big-product"));
 
-  // ✅ Collapse others
-  document.querySelectorAll(".product-card")
-    .forEach(c => c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+      history.pushState({ expanded: true }, "");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-  // ✅ Expand only once
-  card.classList.add("big-product");
-  container.prepend(card);
-
-  history.pushState({ expanded: true }, "");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-    const btn = card.querySelector(".vault-btn");
-    btn.addEventListener("click", e => {
+    const vaultBtn = card.querySelector(".vault-btn");
+    vaultBtn.addEventListener("click", e => {
       e.stopPropagation();
       if (vault.includes(product.id)) {
         vault = vault.filter(v => v !== product.id);
-        btn.textContent = "♡ Save to Vault";
+        vaultBtn.textContent = "♡ Save to Vault";
       } else {
         vault.push(product.id);
-        btn.textContent = "✕ Remove from Vault";
+        vaultBtn.textContent = "✕ Remove from Vault";
       }
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
@@ -319,8 +299,8 @@ function renderProducts(list) {
 
 renderProducts(clothingProducts);
 
-/* ===== OPEN FROM VAULT – WORKING & STABLE ===== */
-function openProductFromVault() {
+/* OPEN FROM VAULT */
+window.addEventListener("load", () => {
   const openProductId = localStorage.getItem("openProduct");
   if (!openProductId) return;
 
@@ -342,18 +322,19 @@ function openProductFromVault() {
       localStorage.removeItem("openProduct");
     }
   }, 50);
-}
-
-window.addEventListener("load", openProductFromVault);
+});
 
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
   renderProducts(
     clothingProducts.filter(p => p.search.toLowerCase().includes(q))
   );
-  openProductFromVault();
 }
 
 function openVault() {
   window.location.href = "vault.html";
-          }
+}
+</script>
+
+</body>
+</html>
