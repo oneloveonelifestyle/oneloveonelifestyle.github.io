@@ -108,7 +108,7 @@ const PRODUCTS = [
       "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
       "Country Of Origin: India"
   },
-{
+  {
   id: "shirt-orchid-1",
   category: "clothing",
   title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
