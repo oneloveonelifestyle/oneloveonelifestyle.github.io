@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Clothing | One Love One Lifestyle</title>
+<title>Clothing</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -12,67 +12,13 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
   padding: 15px;
   text-align: center;
-  position: relative;
 }
 
-.home-btn {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.vault-icon {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  cursor: pointer;
-}
-
-.vault-count {
-  background: red;
-  color: #fff;
-  font-size: 12px;
-  border-radius: 50%;
-  padding: 2px 6px;
-  position: absolute;
-  top: -8px;
-  right: -10px;
-}
-
-/* SEARCH */
-.search-bar {
-  background: #fff;
-  padding: 12px;
-  display: flex;
-  gap: 10px;
-}
-
-.search-input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.search-btn {
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -85,96 +31,36 @@ header {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
 }
 
-/* SLIDER */
-.slider {
-  display: flex;
-  overflow-x: auto;
-}
-
-.slider img {
+.product-card img {
   width: 100%;
-  display: block;
+  height: 220px;
+  object-fit: cover;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
 
 .details h3 {
-  margin: 0 0 6px;
   font-size: 15px;
-  font-weight: bold;
-}
-
-.short {
-  font-size: 13px;
-  color: #555;
+  margin: 0 0 6px;
 }
 
 .price {
   font-weight: bold;
-  margin-top: 6px;
+  margin: 8px 0;
 }
 
-.out-of-stock {
-  color: #b00020;
-}
-
-/* BIG CARD */
-.big-product {
-  grid-column: 1 / -1;
-}
-
-.full-description {
-  display: none;
-  margin-top: 12px;
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.big-product .full-description {
-  display: block;
-}
-
-/* BUTTONS */
-.vault-btn {
-  display: none;
-  margin-top: 12px;
+.buy-btn {
+  width: 100%;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #fff;
-  cursor: pointer;
-}
-
-.big-product .vault-btn {
-  display: block;
-}
-
-.vault-btn.remove {
-  background: #f5f5f5;
-}
-
-.order-btn {
-  display: block;
-  margin-top: 10px;
   background: #000;
   color: #fff;
-  padding: 12px;
-  text-align: center;
+  border: none;
   border-radius: 8px;
-  text-decoration: none;
   font-weight: bold;
-}
-
-.order-btn.disabled {
-  background: #999;
-  pointer-events: none;
 }
 </style>
 </head>
@@ -182,44 +68,13 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="home-btn">← Home</a>
   <h2>Clothing</h2>
-  <div class="vault-icon" onclick="openVault()">
-    ♡ <span class="vault-count" id="vaultCount">0</span>
-  </div>
 </header>
 
-<div class="search-bar">
-  <input id="searchInput" class="search-input" placeholder="Search jackets, shirts...">
-  <button class="search-btn" onclick="searchProducts()">🔍</button>
-</div>
+<div class="products-grid" id="productsContainer"></div>
 
-<div class="products-grid" id="products"></div>
-
-<!-- MASTER DATA -->
 <script src="products.js"></script>
-
-<!-- RENDER ENGINE -->
 <script src="render-products.js"></script>
-
-<script>
-renderProducts("clothing");
-
-/* SEARCH */
-function searchProducts() {
-  const q = document.getElementById("searchInput").value.toLowerCase().trim();
-  document.querySelectorAll(".product-card").forEach(card => {
-    const product = PRODUCTS.find(p => p.id === card.dataset.id);
-    card.style.display = !q || product.search.includes(q) ? "block" : "none";
-    card.classList.remove("big-product");
-  });
-}
-
-/* VAULT */
-function openVault() {
-  window.location.href = "vault.html";
-}
-</script>
 
 </body>
 </html>
