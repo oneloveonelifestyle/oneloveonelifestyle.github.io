@@ -25,7 +25,7 @@ const PRODUCTS = [
   },
 
   {
-    id: "shoe-2",
+    id: "shoe-3",
     category: "shoe",
     title: "Navy Knit Textured",
     price: "₹1,199",
