@@ -58,10 +58,12 @@ header {
 .slider {
   display: flex;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .slider img {
   width: 100%;
+  scroll-snap-align: center;
 }
 
 /* DETAILS */
@@ -101,11 +103,15 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY */
+/* EMPTY STATE */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
   color: #555;
+}
+
+.empty-vault h3 {
+  margin-bottom: 6px;
 }
 </style>
 </head>
@@ -124,14 +130,13 @@ header {
 
 <script>
 /* ===============================
-   LOAD VAULT
+   VAULT DATA
 ================================ */
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 /* ===============================
-   MASTER PRODUCT DATABASE
-   IDs MUST MATCH PRODUCT PAGES
+   MASTER PRODUCT MAP
 ================================ */
 const PRODUCTS = {
   "jacket-1": {
@@ -167,11 +172,11 @@ const PRODUCTS = {
 function renderVault() {
   vaultProducts.innerHTML = "";
 
-  if (vault.length === 0) {
+  if (!vault.length) {
     vaultProducts.innerHTML = `
       <div class="empty-vault">
         <h3>Your vault is empty</h3>
-        <p>Save products you love ❤️</p>
+        <p>Save products you love and find them here anytime.</p>
       </div>
     `;
     return;
@@ -219,6 +224,7 @@ function renderVault() {
   });
 }
 
+/* INITIAL LOAD */
 renderVault();
 </script>
 
