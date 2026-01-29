@@ -292,6 +292,10 @@ function searchProducts(){
 function openVault(){
   window.location.href = "vault.html";
 }
+window.addEventListener("popstate", () => {
+  document.querySelectorAll(".product-card")
+    .forEach(c => c.classList.remove("big-product"));
+});
 </script>
 
 </body>
