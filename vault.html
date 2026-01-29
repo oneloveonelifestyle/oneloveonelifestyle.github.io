@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* TOP ACTION */
 .top-action {
   background: #fff;
   padding: 12px;
@@ -37,7 +35,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,7 +42,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -54,7 +50,6 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -64,7 +59,6 @@ header {
   width: 100%;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -74,7 +68,6 @@ header {
   font-size: 16px;
 }
 
-/* ACTIONS */
 .actions {
   display: flex;
   gap: 10px;
@@ -101,7 +94,6 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY STATE */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
@@ -123,16 +115,9 @@ header {
 <div class="products-grid" id="vaultProducts"></div>
 
 <script>
-/* ===============================
-   VAULT STORAGE
-================================ */
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* ===============================
-   MASTER PRODUCT MAP
-   (IDs MUST MATCH product pages)
-================================ */
 const PRODUCTS = {
   "jacket-1": {
     page: "clothing.html",
@@ -161,25 +146,15 @@ const PRODUCTS = {
   }
 };
 
-/* ===============================
-   RENDER VAULT
-================================ */
 function renderVault() {
   vaultProducts.innerHTML = "";
-
-  if (vault.length === 0) {
-    vaultProducts.innerHTML = `
-      <div class="empty-vault">
-        <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here anytime.</p>
-      </div>
-    `;
-    return;
-  }
+  let rendered = 0;
 
   vault.forEach(id => {
     const product = PRODUCTS[id];
     if (!product) return;
+
+    rendered++;
 
     const card = document.createElement("div");
     card.className = "product-card";
@@ -218,6 +193,16 @@ function renderVault() {
 
     vaultProducts.appendChild(card);
   });
+
+  /* ✅ EMPTY STATE — NOW 100% RELIABLE */
+  if (rendered === 0) {
+    vaultProducts.innerHTML = `
+      <div class="empty-vault">
+        <h3>Your vault is empty</h3>
+        <p>Save products you love and find them here anytime.</p>
+      </div>
+    `;
+  }
 }
 
 renderVault();
