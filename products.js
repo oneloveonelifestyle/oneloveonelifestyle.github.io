@@ -6,40 +6,64 @@ const PRODUCTS = [
 
   /* ===================== SHOES ===================== */
 
-  {
-    id: "shoe-1",
-    category: "shoe",
-    title: "Men’s Brown Suede Sneakers",
-    price: "₹2,999",
-    images: ["shoe1-1.jpg", "shoe1-2.jpg", "shoe1-3.jpg"],
-    outOfStock: true,
-    short: "Premium suede lace-up sneakers",
-    description: `
-      Size: 7, 8, 9, 10, 11<br>
-      Fit: Regular Fit<br>
-      Care Instruction: Wipe with dry cloth<br>
-      Material: Genuine Suede Leather<br><br>
-      Crafted for everyday elegance with a premium suede finish and durable sole.
-    `,
-    search: "mens brown suede sneakers leather lace up"
-  },
+/* ===================== SHOES ===================== */
 
-  {
-    id: "shoe-2",
-    category: "shoe",
-    title: "Men’s Black Leather Sneakers",
-    price: "₹3,499",
-    images: ["shoe2-1.jpg", "shoe2-2.jpg"],
-    outOfStock: true,
-    short: "Classic black leather sneakers",
-    description: `
-      Size: 7, 8, 9, 10, 11<br>
-      Fit: Regular Fit<br>
-      Care Instruction: Wipe clean<br>
-      Material: Premium Leather
-    `,
-    search: "mens black leather sneakers premium"
-  },
+{
+  id: "shoe-1",
+  category: "shoes",
+  title: "Men’s Brown Suede Sneakers",
+  price: "₹2,999",
+  images: [
+    "shoe1-1.jpg",
+    "shoe1-2.jpg",
+    "shoe1-3.jpg"
+  ],
+  stock: false,
+  search: "mens brown suede sneakers leather lace up",
+  description: `
+Size : 7, 8, 9, 10, 11
+
+Upper Material: Premium Suede Leather
+
+Sole: Rubber Outsole
+
+Closure: Lace-Up
+
+Care Instruction: Wipe with a clean, dry cloth
+
+Designed for everyday versatility, these brown suede sneakers combine comfort with understated elegance. The soft suede upper ensures a premium feel, while the durable rubber sole provides excellent grip for daily wear.
+
+Country Of Origin: India
+`
+},
+
+{
+  id: "shoe-2",
+  category: "shoes",
+  title: "Men’s Black Leather Sneakers",
+  price: "₹3,499",
+  images: [
+    "shoe2-1.jpg",
+    "shoe2-2.jpg"
+  ],
+  stock: false,
+  search: "mens black leather sneakers premium",
+  description: `
+Size : 7, 8, 9, 10, 11
+
+Upper Material: Genuine Leather
+
+Sole: Rubber
+
+Closure: Lace-Up
+
+Care Instruction: Clean with a soft damp cloth
+
+Crafted from premium leather, these black sneakers offer a sleek, modern profile suitable for both casual and smart-casual looks. Built for durability, comfort, and long-lasting wear.
+
+Country Of Origin: India
+`
+}
 
   /* ===================== SHIRTS ===================== */
 
