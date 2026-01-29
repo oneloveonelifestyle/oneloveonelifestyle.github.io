@@ -114,75 +114,9 @@ header {
 
 <div class="products-grid" id="vaultProducts"></div>
 
+<!-- SCRIPTS -->
 <script src="products.js"></script>
-<script>
-const vaultProducts = document.getElementById("vaultProducts");
-let vault = JSON.parse(localStorage.getItem("vault")) || [];
-
-function renderVault() {
-  vaultProducts.innerHTML = "";
-  let rendered = 0;
-
-  vault.forEach(id => {
-    const product = PRODUCTS.find(p => p.id === id);
-    if (!product) return;
-
-    rendered++;
-
-    const card = document.createElement("div");
-    card.className = "product-card";
-
-    /* ✅ THIS IS THE CRITICAL FIX */
-    card.addEventListener("click", () => {
-      localStorage.setItem("openProduct", id);
-      window.location.href =
-        product.category === "clothing"
-          ? "clothing.html"
-          : "shoes.html";
-    });
-
-    card.innerHTML = `
-      <div class="slider">
-        ${product.images.map(img => `<img src="${img}">`).join("")}
-      </div>
-
-      <div class="details">
-        <h3>${product.title}</h3>
-        <div class="actions">
-          <button class="remove-btn">Remove</button>
-          <a class="order-btn"
-             href="https://www.instagram.com/oneloveonelifestyle/"
-             target="_blank">Buy via Instagram</a>
-        </div>
-      </div>
-    `;
-
-    card.querySelector(".remove-btn").addEventListener("click", e => {
-      e.stopPropagation();
-      vault = vault.filter(v => v !== id);
-      localStorage.setItem("vault", JSON.stringify(vault));
-      renderVault();
-    });
-
-    card.querySelector(".order-btn").addEventListener("click", e => {
-      e.stopPropagation();
-    });
-
-    vaultProducts.appendChild(card);
-  });
-
-  if (rendered === 0) {
-    vaultProducts.innerHTML = `
-      <div class="empty-vault">
-        <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here anytime.</p>
-      </div>
-    `;
-  }
-}
-
-renderVault();
-</script>
+<script src="vault.js"></script>
 
 </body>
 </html>
