@@ -1,15 +1,30 @@
 const container = document.getElementById("vaultContainer");
 
+/* ===============================
+   LOAD VAULT IDS
+================================ */
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* EMPTY VAULT */
-if (vault.length === 0) {
-  container.innerHTML = `<div class="empty-vault">Your vault is empty</div>`;
+/* ===============================
+   EMPTY VAULT STATE
+================================ */
+if (!vault.length) {
+  container.innerHTML = `
+    <div class="empty-vault">
+      Your vault is empty.<br>
+      Save products to view them here.
+    </div>
+  `;
+  return;
 }
 
-/* RENDER VAULT PRODUCTS */
+/* ===============================
+   RENDER VAULT PRODUCTS
+================================ */
 vault.forEach(id => {
   const product = PRODUCTS.find(p => p.id === id);
+
+  /* SAFETY CHECK */
   if (!product) return;
 
   const card = document.createElement("div");
@@ -24,34 +39,58 @@ vault.forEach(id => {
     <div class="details">
       <h3>${product.title}</h3>
 
-      <div class="price ${product.stock === false ? 'out-of-stock' : ''}">
-        ${product.stock === false ? "Out of Stock" : product.price}
+      <div class="price ${product.outOfStock ? 'out-of-stock' : ''}">
+        ${product.outOfStock ? "Currently Out of Stock" : product.price}
       </div>
 
-      <button class="vault-btn remove">
-        ✕ Remove from Vault
-      </button>
+      <button class="vault-btn remove">✕ Remove from Vault</button>
 
-      <a
-        class="order-btn"
-        href="https://www.instagram.com/oneloveonelifestyle/"
-        target="_blank"
-      >
-        Buy via Instagram
-      </a>
+      ${
+        product.outOfStock
+          ? `<div class="order-btn out-of-stock-btn">Out of Stock</div>`
+          : `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+               Buy via Instagram
+             </a>`
+      }
     </div>
   `;
 
-  /* REMOVE FROM VAULT */
-  card.querySelector(".vault-btn").addEventListener("click", e => {
+  /* ===============================
+     REMOVE FROM VAULT
+  ================================ */
+  const removeBtn = card.querySelector(".vault-btn");
+  removeBtn.addEventListener("click", e => {
     e.stopPropagation();
 
     vault = vault.filter(v => v !== product.id);
     localStorage.setItem("vault", JSON.stringify(vault));
     card.remove();
 
-    if (vault.length === 0) {
-      container.innerHTML = `<div class="empty-vault">Your vault is empty</div>`;
+    if (!vault.length) {
+      container.innerHTML = `
+        <div class="empty-vault">
+          Your vault is empty.<br>
+          Save products to view them here.
+        </div>
+      `;
+    }
+  });
+
+  /* ===============================
+     OPEN PRODUCT ON CLICK
+  ================================ */
+  card.addEventListener("click", e => {
+    if (
+      e.target.closest(".vault-btn") ||
+      e.target.closest(".order-btn")
+    ) return;
+
+    localStorage.setItem("openProduct", product.id);
+
+    if (product.category === "shoe") {
+      window.location.href = "shoes.html";
+    } else {
+      window.location.href = "clothing.html";
     }
   });
 
