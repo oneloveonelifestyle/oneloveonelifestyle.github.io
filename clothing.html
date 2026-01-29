@@ -61,10 +61,11 @@ header{background:#000;color:#fff;padding:15px;text-align:center;position:relati
 <script src="products.js"></script>
 <script>
 const grid = document.getElementById("products");
-let vault = JSON.parse(localStorage.getItem("vault")) || [];
 const vaultCount = document.getElementById("vaultCount");
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
+/* ---------- RENDER PRODUCTS ---------- */
 PRODUCTS.filter(p => p.category === "clothing").forEach(p => {
   const card = document.createElement("div");
   card.className = "product-card";
@@ -72,9 +73,7 @@ PRODUCTS.filter(p => p.category === "clothing").forEach(p => {
   card.dataset.search = p.search;
 
   card.innerHTML = `
-    <div class="slider">
-      ${p.images.map(i => `<img src="${i}">`).join("")}
-    </div>
+    <div class="slider">${p.images.map(i=>`<img src="${i}">`).join("")}</div>
     <div class="details">
       <h2>${p.title}</h2>
       <div class="price">${p.price}</div>
@@ -89,17 +88,15 @@ PRODUCTS.filter(p => p.category === "clothing").forEach(p => {
 
   const vaultBtn = card.querySelector(".vault-btn");
 
-  function updateVaultBtn() {
-    if (vault.includes(p.id)) {
-      vaultBtn.textContent = "✕ Remove from Vault";
-    } else {
-      vaultBtn.textContent = "♡ Save to Vault";
-    }
+  function syncVaultBtn() {
+    vaultBtn.textContent = vault.includes(p.id)
+      ? "✕ Remove from Vault"
+      : "♡ Save to Vault";
     vaultCount.textContent = vault.length;
   }
+  syncVaultBtn();
 
-  updateVaultBtn();
-
+  /* EXPAND CARD */
   card.addEventListener("click", e => {
     if (e.target.closest("button") || e.target.closest("a")) return;
 
@@ -109,25 +106,34 @@ PRODUCTS.filter(p => p.category === "clothing").forEach(p => {
     card.classList.add("big-product");
     grid.prepend(card);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    history.pushState({ expanded:true }, "", "#product");
   });
 
+  /* VAULT ACTION */
   vaultBtn.addEventListener("click", e => {
     e.stopPropagation();
-
-    if (vault.includes(p.id)) {
-      vault = vault.filter(v => v !== p.id);
-    } else {
-      vault.push(p.id);
-    }
+    vault.includes(p.id)
+      ? vault = vault.filter(v => v !== p.id)
+      : vault.push(p.id);
 
     localStorage.setItem("vault", JSON.stringify(vault));
-    updateVaultBtn(); // ✅ NO RELOAD → stays BIG
+    syncVaultBtn();
   });
 
   grid.appendChild(card);
 });
 
-/* Open from vault as BIG */
+/* ---------- BACK BUTTON HANDLING ---------- */
+window.addEventListener("popstate", () => {
+  const expanded = document.querySelector(".big-product");
+  if (expanded) {
+    expanded.classList.remove("big-product");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
+
+/* ---------- OPEN FROM VAULT ---------- */
 const openProduct = localStorage.getItem("openProduct");
 if (openProduct) {
   const target = document.querySelector(`[data-id="${openProduct}"]`);
@@ -135,6 +141,7 @@ if (openProduct) {
   localStorage.removeItem("openProduct");
 }
 
+/* ---------- SEARCH ---------- */
 function searchProducts() {
   const q = searchInput.value.toLowerCase();
   document.querySelectorAll(".product-card").forEach(c => {
