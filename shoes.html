@@ -266,7 +266,7 @@ cards.forEach(card => {
       btn.classList.remove("remove");
       btn.textContent = "♡ Save to Vault";
     } else {
-      vault.push(id);
+      vault.push({ id, page: "shoes.html" });
       btn.classList.add("remove");
       btn.textContent = "✕ Remove from Vault";
     }
