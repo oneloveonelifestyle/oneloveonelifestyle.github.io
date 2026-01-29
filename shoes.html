@@ -190,7 +190,6 @@ header{
 
 <div class="products-grid" id="products"></div>
 
-<!-- LOAD PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -211,7 +210,7 @@ function renderProducts(list){
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
-    card.dataset.search = product.search;
+    card.dataset.search = product.search.toLowerCase();
 
     card.innerHTML = `
       <div class="slider">
@@ -225,7 +224,7 @@ function renderProducts(list){
         ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
         <div class="full-description">
-          Premium quality footwear crafted for everyday comfort.
+          ${product.description}
         </div>
 
         <button class="vault-btn">
@@ -240,7 +239,7 @@ function renderProducts(list){
       </div>
     `;
 
-    /* CARD CLICK — FIXED */
+    /* CARD CLICK */
     card.addEventListener("click", e=>{
       if (
         e.target.closest(".vault-btn") ||
@@ -253,10 +252,11 @@ function renderProducts(list){
       window.scrollTo({top:0, behavior:"smooth"});
     });
 
-    /* VAULT */
+    /* VAULT — FIXED */
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
-      e.stopPropagation();
+      e.preventDefault();
+      e.stopImmediatePropagation();
 
       if(vault.includes(product.id)){
         vault = vault.filter(v=>v!==product.id);
