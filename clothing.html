@@ -285,6 +285,27 @@ if (openId) {
   }
   localStorage.removeItem("openProduct");
 }
+
+/* ================= BACK BUTTON HANDLING ================= */
+
+let expandedCard = null;
+
+document.addEventListener("click", function (e) {
+  const card = e.target.closest(".product-card");
+  if (!card) return;
+
+  if (card.classList.contains("big-product")) {
+    expandedCard = card;
+    history.pushState({ expanded: true }, "");
+  }
+});
+
+window.addEventListener("popstate", function () {
+  if (expandedCard) {
+    expandedCard.classList.remove("big-product");
+    expandedCard = null;
+  }
+});
 </script>
 
 </body>
