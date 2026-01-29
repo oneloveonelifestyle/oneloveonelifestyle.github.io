@@ -1,47 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Shoes | One Love One Lifestyle</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-<header>
-  <a href="index.html" class="home-btn">← Home</a>
-  <h2>Shoes</h2>
-  <div class="vault-icon" onclick="openVault()">♡ <span id="vaultCount">0</span></div>
-</header>
-
-<div class="products-grid" id="products"></div>
-
 <script src="products.js"></script>
 <script>
 const container = document.getElementById("products");
+const vaultCount = document.getElementById("vaultCount");
+
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
-document.getElementById("vaultCount").textContent = vault.length;
+vaultCount.textContent = vault.length;
 
-Object.entries(PRODUCTS).forEach(([id,p])=>{
-  if(p.page!=="shoes") return;
+PRODUCTS.filter(p => p.category === "shoes").forEach(product => {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.dataset.id = product.id;
 
-  container.innerHTML+=`
-  <div class="product-card" data-id="${id}">
+  card.innerHTML = `
     <div class="slider">
-      ${p.images.map(i=>`<img src="${i}">`).join("")}
+      ${product.images.map(i => `<img src="${i}">`).join("")}
     </div>
     <div class="details">
-      <h2>${p.title}</h2>
-      <div class="price">${p.price?`₹${p.price}`:"Currently Out of Stock"}</div>
-      <div class="full-description">${p.description}</div>
+      <h2>${product.title}</h2>
+      <div class="price">${product.price}</div>
+      <div class="full-description">${product.description}</div>
       <button class="vault-btn">♡ Save to Vault</button>
-      <a class="order-btn">${p.stock==="out"?"Out of Stock":"Order Now"}</a>
+      <a class="order-btn">${product.price}</a>
     </div>
-  </div>`;
+  `;
+
+  setup(card, product.id);
+  container.appendChild(card);
 });
 
-initVault();
+function setup(card, id) {
+  const btn = card.querySelector(".vault-btn");
+
+  if (vault.includes(id)) {
+    btn.textContent = "✕ Remove from Vault";
+    btn.classList.add("remove");
+  }
+
+  card.addEventListener("click", e => {
+    if (e.target.closest(".vault-btn")) return;
+    document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+  });
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    if (vault.includes(id)) {
+      vault = vault.filter(v => v !== id);
+      btn.textContent = "♡ Save to Vault";
+      btn.classList.remove("remove");
+    } else {
+      vault.push(id);
+      btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
+    }
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
+}
 </script>
-<script src="vault.js"></script>
-</body>
-</html>
