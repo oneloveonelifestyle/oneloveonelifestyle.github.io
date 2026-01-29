@@ -57,6 +57,7 @@ header {
 
 .slider img {
   width: 100%;
+  display: block;
 }
 
 .details {
@@ -68,40 +69,12 @@ header {
   font-size: 16px;
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.remove-btn {
-  padding: 8px 10px;
-  font-size: 13px;
-  background: #eee;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.order-btn {
-  flex: 1;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  border-radius: 6px;
-  text-decoration: none;
+.price {
   font-weight: bold;
 }
 
-.out-stock {
-  flex: 1;
-  background: #ccc;
-  color: #666;
-  text-align: center;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
+.out-of-stock {
+  color: #b00020;
 }
 
 .empty-vault {
@@ -122,110 +95,13 @@ header {
   <a href="index.html" class="continue-btn">← Continue Shopping</a>
 </div>
 
-<div class="products-grid" id="vaultProducts"></div>
+<div class="products-grid" id="vaultContainer"></div>
 
-<script>
-const vaultProducts = document.getElementById("vaultProducts");
-let vault = JSON.parse(localStorage.getItem("vault")) || [];
+<!-- LOAD MASTER PRODUCTS -->
+<script src="products.js"></script>
 
-const PRODUCTS = {
-  "jacket-1": {
-    page: "clothing.html",
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"],
-    outOfStock: false
-  },
-  "jacket-2": {
-    page: "clothing.html",
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"],
-    outOfStock: true
-  },
-  "jacket-4": {
-    page: "clothing.html",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
-    outOfStock: false
-  },
-  "shirt-1": {
-    page: "clothing.html",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    images: ["shirt1-1.jpg","shirt1-2.jpg"],
-    outOfStock: false
-  },
-  "shoe-1": {
-    page: "shoes.html",
-    title: "Men’s Brown Suede Sneakers",
-    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
-    outOfStock: true
-  }
-};
-
-function renderVault() {
-  vaultProducts.innerHTML = "";
-  let rendered = 0;
-
-  vault.forEach(id => {
-    const product = PRODUCTS[id];
-    if (!product) return;
-
-    rendered++;
-
-    const card = document.createElement("div");
-    card.className = "product-card";
-
-    card.addEventListener("click", () => {
-      localStorage.setItem("openProduct", id);
-      window.location.href = product.page;
-    });
-
-    card.innerHTML = `
-      <div class="slider">
-        ${product.images.map(img => `<img src="${img}">`).join("")}
-      </div>
-
-      <div class="details">
-        <h3>${product.title}</h3>
-        <div class="actions">
-          <button class="remove-btn">Remove</button>
-          ${
-            product.outOfStock
-              ? `<div class="out-stock">Out of Stock</div>`
-              : `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
-          }
-        </div>
-      </div>
-    `;
-
-    card.querySelector(".remove-btn").addEventListener("click", e => {
-      e.stopPropagation();
-      vault = vault.filter(v => v !== id);
-      localStorage.setItem("vault", JSON.stringify(vault));
-      renderVault();
-    });
-
-    const orderBtn = card.querySelector(".order-btn");
-    if (orderBtn) {
-      orderBtn.addEventListener("click", e => {
-        e.stopPropagation();
-      });
-    }
-
-    vaultProducts.appendChild(card);
-  });
-
-  if (rendered === 0) {
-    vaultProducts.innerHTML = `
-      <div class="empty-vault">
-        <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here anytime.</p>
-      </div>
-    `;
-  }
-}
-
-renderVault();
-</script>
+<!-- LOAD VAULT LOGIC -->
+<script src="vault.js"></script>
 
 </body>
 </html>
