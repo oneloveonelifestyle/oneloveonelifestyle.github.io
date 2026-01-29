@@ -2,104 +2,155 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Shoes | Vault</title>
+<title>Shoes | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #fff;
+  background: #f4f4f4;
 }
 
+/* HEADER */
 header {
+  background: #000;
+  color: #fff;
   padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: #fff;
+  text-decoration: none;
   font-weight: bold;
 }
 
-#products {
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+/* SEARCH */
+.search-bar {
+  background: #fff;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+/* GRID */
+.products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   padding: 15px;
 }
 
 .product-card {
-  border: 1px solid #eee;
-  padding: 10px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
 }
 
-.product-card img {
-  width: 100%;
-  display: block;
-}
-
-.details h3 {
-  font-size: 14px;
-  margin: 8px 0 4px;
-}
-
-.short {
-  font-size: 12px;
-  color: #555;
-}
-
-.price {
-  font-size: 13px;
-  margin: 6px 0;
-}
-
-.out-of-stock {
-  color: #b00020;
-  font-weight: bold;
-}
-
-.full-description {
-  display: none;
-  font-size: 13px;
-  margin-top: 10px;
-}
-
-.vault-btn,
-.order-btn {
-  display: block;
-  margin-top: 8px;
-  padding: 8px;
-  font-size: 12px;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-}
-
-.vault-btn {
-  background: #eee;
-}
-
-.vault-btn.remove {
-  background: #000;
-  color: #fff;
-}
-
-.order-btn {
-  background: #000;
-  color: #fff;
-  text-decoration: none;
-}
-
-.out-of-stock-btn {
-  background: #000;
-  opacity: 0.6;
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
-/* BIG CARD */
 .big-product {
   grid-column: 1 / -1;
 }
 
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+}
+
+.details {
+  padding: 12px;
+}
+
+.price {
+  font-weight: bold;
+  color: #b00020;
+}
+
+.full-description {
+  display: none;
+  font-size: 14px;
+}
+
 .big-product .full-description {
+  display: block;
+}
+
+/* BUTTONS */
+.vault-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.vault-btn.remove {
+  background: #f5f5f5;
+}
+
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ✅ ONLY ADDITION — DO NOT TOUCH ANYTHING ELSE */
+.product-card .vault-btn {
+  display: none;
+}
+
+.big-product .vault-btn {
   display: block;
 }
 </style>
@@ -108,16 +159,96 @@ header {
 <body>
 
 <header>
-  Shoes
-  <span style="float:right;">Vault (<span id="vaultCount">0</span>)</span>
+  <a href="index.html" class="home-btn">← Home</a>
+  <h2>Shoes</h2>
+  <div class="vault-icon" onclick="openVault()">♡ <span class="vault-count" id="vaultCount">0</span></div>
 </header>
 
-<div id="products"></div>
+<div class="search-bar">
+  <input class="search-input" id="searchInput" placeholder="Search shoes...">
+  <button class="search-btn" onclick="searchProducts()">🔍</button>
+</div>
 
-<script src="products.js"></script>
-<script src="render-products.js"></script>
+<div class="products-grid" id="products">
+
+<div class="product-card" data-id="shoe-1" data-search="mens brown suede sneakers leather">
+  <div class="slider">
+    <img src="shoe1-1.jpg">
+    <img src="shoe1-2.jpg">
+    <img src="shoe1-3.jpg">
+  </div>
+
+  <div class="details">
+    <h2>Men’s Brown Suede Sneakers</h2>
+    <div class="price">Currently Out of Stock</div>
+
+    <div class="full-description">
+      <b>Size:</b> 6,7,8,9,10<br>
+      <b>Material:</b> Leather
+    </div>
+
+    <button class="vault-btn">♡ Save to Vault</button>
+    <a class="order-btn">Out of Stock</a>
+  </div>
+</div>
+
+</div>
+
 <script>
-  renderProducts("shoes");
+const container = document.getElementById("products");
+const cards = document.querySelectorAll(".product-card");
+const vaultCount = document.getElementById("vaultCount");
+
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+vaultCount.textContent = vault.length;
+
+cards.forEach(card => {
+  const btn = card.querySelector(".vault-btn");
+  const id = card.dataset.id;
+
+  if (vault.includes(id)) {
+    btn.classList.add("remove");
+    btn.textContent = "✕ Remove from Vault";
+  }
+
+  card.addEventListener("click", e => {
+    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+    cards.forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+  });
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+
+    if (vault.includes(id)) {
+      vault = vault.filter(v => v !== id);
+      btn.textContent = "♡ Save to Vault";
+      btn.classList.remove("remove");
+    } else {
+      vault.push(id);
+      btn.textContent = "✕ Remove from Vault";
+      btn.classList.add("remove");
+    }
+
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
+});
+
+function openVault() {
+  window.location.href = "vault.html";
+}
+
+const openProduct = localStorage.getItem("openProduct");
+if (openProduct) {
+  const target = document.querySelector(`[data-id="${openProduct}"]`);
+  if (target) {
+    target.classList.add("big-product");
+    container.prepend(target);
+  }
+  localStorage.removeItem("openProduct");
+}
 </script>
 
 </body>
