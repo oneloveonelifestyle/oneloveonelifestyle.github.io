@@ -1,37 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Vault</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="products.js"></script>
-</head>
-
-<body>
-
-<h2>My Vault</h2>
-<div id="vaultProducts"></div>
 
 <script>
-const vaultIds = JSON.parse(localStorage.getItem("vault")) || [];
-const container = document.getElementById("vaultProducts");
+const vaultProducts = document.getElementById("vaultProducts");
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-const vaultProducts = PRODUCTS.filter(p => vaultIds.includes(p.id));
+function renderVault() {
+  vaultProducts.innerHTML = "";
+  let rendered = 0;
 
-if (vaultProducts.length === 0) {
-  container.innerHTML = "<p>Your vault is empty</p>";
+  vault.forEach(id => {
+    const product = PRODUCTS.find(p => p.id === id);
+    if (!product) return;
+
+    rendered++;
+
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.addEventListener("click", () => {
+      localStorage.setItem("openProduct", id);
+      window.location.href =
+        product.category === "shoe" ? "shoes.html" : "clothing.html";
+    });
+
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(img => `<img src="${img}">`).join("")}
+      </div>
+
+      <div class="details">
+        <h3>${product.title}</h3>
+
+        <div class="actions">
+          <button class="remove-btn">Remove</button>
+
+          ${
+            product.stock
+              ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+                   Buy via Instagram
+                 </a>`
+              : `<div class="out-stock">Out of Stock</div>`
+          }
+        </div>
+      </div>
+    `;
+
+    card.querySelector(".remove-btn").addEventListener("click", e => {
+      e.stopPropagation();
+      vault = vault.filter(v => v !== id);
+      localStorage.setItem("vault", JSON.stringify(vault));
+      renderVault();
+    });
+
+    vaultProducts.appendChild(card);
+  });
+
+  if (rendered === 0) {
+    vaultProducts.innerHTML = `
+      <div class="empty-vault">
+        <h3>Your vault is empty</h3>
+        <p>Save products you love and find them here anytime.</p>
+      </div>
+    `;
+  }
 }
 
-vaultProducts.forEach(product => {
-  const div = document.createElement("div");
-  div.innerHTML = `
-    <h3>${product.title}</h3>
-    <strong>${product.price}</strong><br>
-    <img src="${product.images[0]}" width="150"><br><br>
-  `;
-  container.appendChild(div);
-});
+renderVault();
 </script>
-
-</body>
-</html>
