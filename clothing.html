@@ -282,45 +282,5 @@ if (openId) {
 }
 </script>
 
-<!-- ALL YOUR ORIGINAL clothing.html CODE ABOVE REMAINS EXACTLY SAME -->
-
-<script>
-/* ---- EXISTING SCRIPT (UNCHANGED) ---- */
-
-/* ===============================
-   ADDITION: SEARCH PRIORITY
-================================ */
-const searchQuery = localStorage.getItem("searchQuery");
-
-if (searchQuery) {
-  let matched = [];
-  let others = [];
-
-  document.querySelectorAll(".product-card").forEach(card => {
-    const text = card.dataset.search;
-    if (text && text.includes(searchQuery)) {
-      matched.push(card);
-    } else {
-      others.push(card);
-    }
-  });
-
-  container.innerHTML = "";
-
-  if (matched.length === 0) {
-    const msg = document.createElement("div");
-    msg.style.padding = "15px";
-    msg.style.fontSize = "14px";
-    msg.style.color = "#555";
-    msg.textContent =
-      `No exact matches found for “${searchQuery}”. Showing all products.`;
-    container.appendChild(msg);
-  }
-
-  [...matched, ...others].forEach(card => container.appendChild(card));
-  localStorage.removeItem("searchQuery");
-}
-</script>
-
 </body>
 </html>
