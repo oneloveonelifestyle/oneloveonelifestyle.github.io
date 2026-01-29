@@ -20,7 +20,6 @@ const PRODUCTS = [
     stock: false,
     search: "mens brown suede sneakers leather lace up",
     description: `
-Price: ₹2999
 Style: Lace-Up Sneakers
 Upper Material: Suede
 Occasion: Casual Wear
@@ -40,7 +39,6 @@ Care Instruction: Wipe with dry cloth
     stock: false,
     search: "mens black leather sneakers premium",
     description: `
-Price: ₹3499
 Style: Lace-Up Sneakers
 Upper Material: Leather
 Occasion: Casual Wear
@@ -63,7 +61,6 @@ Care Instruction: Wipe with dry cloth
     stock: true,
     search: "campus sutra bomber jacket zip front",
     description: `
-Price: ₹1999
 Size: S, M, L, XL
 Fit: Regular Fit
 Care Instruction: Machine Wash
@@ -83,7 +80,6 @@ Care Instruction: Machine Wash
     stock: true,
     search: "nuon brown relaxed fit jacket",
     description: `
-Price: ₹2999
 Size: XS, S, M, L, XL
 Fit: Relaxed Fit
 Care Instruction: Machine Wash
@@ -110,7 +106,6 @@ Country Of Origin: India
     stock: true,
     search: "studiofit dark brown hooded jacket relaxed",
     description: `
-Price: ₹2199
 Size: XS, S, M, L
 Fit: Relaxed Fit
 Care Instruction: Machine Wash
@@ -138,7 +133,6 @@ Country Of Origin: India
     stock: true,
     search: "eta brown textured cotton shirt relaxed",
     description: `
-Price: ₹1799
 Size: XS, S, M, L
 Fit: Relaxed Fit
 Care Instruction: Machine Wash
