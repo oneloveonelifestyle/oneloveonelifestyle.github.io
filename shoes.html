@@ -145,6 +145,7 @@ header{
 /* BUTTONS */
 .vault-btn{
   display:none;
+  width:100%;
   margin-top:8px;
   padding:8px;
   border-radius:6px;
@@ -158,18 +159,18 @@ header{
   display:block;
 }
 
-/* BUY BUTTON — SAME AS CLOTHING */
+/* BUY BUTTON — EXACT SAME AS ACCESSORIES */
 .order-btn{
-  display:inline-block;
+  display:block;
   margin-top:8px;
   background:#000;
   color:#fff;
   text-align:center;
-  padding:8px 10px;
+  padding:8px;
   border-radius:6px;
   text-decoration:none;
   font-weight:600;
-  font-size:12px;
+  font-size:13px;
 }
 
 .order-btn.disabled{
@@ -226,9 +227,7 @@ function collapseBigProduct(){
   if(active){
     active.classList.remove("big-product");
     history.replaceState(null,"",location.pathname);
-    return true;
   }
-  return false;
 }
 
 window.addEventListener("popstate", collapseBigProduct);
@@ -269,15 +268,12 @@ function renderProducts(list){
     card.addEventListener("click", e=>{
       if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
 
-      const isBig = card.classList.contains("big-product");
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
 
-      if(!isBig){
-        card.classList.add("big-product");
-        container.prepend(card);
-        history.pushState({expanded:true},"");
-        window.scrollTo({top:0, behavior:"smooth"});
-      }
+      card.classList.add("big-product");
+      container.prepend(card);
+      history.pushState({expanded:true},"");
+      window.scrollTo({top:0, behavior:"smooth"});
     });
 
     const vaultBtn = card.querySelector(".vault-btn");
@@ -300,28 +296,6 @@ function renderProducts(list){
 
 renderProducts(shoeProducts);
 
-const openProductId = localStorage.getItem("openProduct");
-
-if (openProductId) {
-  setTimeout(() => {
-    const card = document.querySelector(
-      `.product-card[data-id="${openProductId}"]`
-    );
-
-    if (card) {
-      document.querySelectorAll(".product-card")
-        .forEach(c => c.classList.remove("big-product"));
-
-      card.classList.add("big-product");
-      container.prepend(card);
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    localStorage.removeItem("openProduct");
-  }, 100);
-}
-  
 function searchProducts(){
   const q = searchInput.value.toLowerCase().trim();
   renderProducts(
