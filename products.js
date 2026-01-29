@@ -99,4 +99,13 @@ const PRODUCTS = [
     description: "Comfort-focused cotton shirt with textured finish."
   }
 
+{
+  id: "watch-1",
+  title: "Men’s Chronograph Stainless Steel Watch",
+  price: "₹3999",
+  images: ["watch1.jpg"],
+  category: "accessory",
+  stock: true
+ }
+
 ];
