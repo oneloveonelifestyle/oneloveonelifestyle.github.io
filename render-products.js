@@ -1,13 +1,44 @@
-const container = document.getElementById("productsContainer");
+/* =========================================================
+   PRODUCT RENDER ENGINE
+   READS FROM PRODUCTS.JS ONLY
+   ========================================================= */
 
-if (!container || typeof PRODUCTS === "undefined") {
-  console.error("Products container or PRODUCTS not found");
-}
+(function () {
 
-container.innerHTML = PRODUCTS
-  .filter(p => p.category === "clothing")
-  .map(product => `
-    <div class="product-card" onclick="toggleExpand('${product.id}')">
+  const container = document.getElementById("productsContainer");
+
+  if (!container) {
+    console.error("productsContainer not found in HTML");
+    return;
+  }
+
+  if (typeof PRODUCTS === "undefined") {
+    console.error("PRODUCTS not loaded. Check products.js");
+    return;
+  }
+
+  const category = container.dataset.category;
+
+  if (!category) {
+    console.error("data-category attribute missing on productsContainer");
+    return;
+  }
+
+  const filteredProducts = PRODUCTS.filter(
+    product => product.category === category
+  );
+
+  if (filteredProducts.length === 0) {
+    container.innerHTML = `
+      <p style="padding:20px;text-align:center;">
+        No products found
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = filteredProducts.map(product => `
+    <div class="product-card" data-id="${product.id}">
 
       <div class="slider">
         ${product.images.map(img => `
@@ -18,27 +49,18 @@ container.innerHTML = PRODUCTS
       <div class="details">
         <h3>${product.title}</h3>
 
-        <!-- SMALL CARD CAPTION -->
-        <p class="short-desc">${product.shortDesc || ""}</p>
+        <div class="price">${product.price}</div>
 
-        <!-- PRICE (ONLY ONCE) -->
-        <div class="price">₹${product.price}</div>
+        ${!product.stock ? `
+          <div class="unavailable">Out of Stock</div>
+        ` : ``}
 
-        <!-- EXPANDED DETAILS -->
-        <div class="full-details" id="details-${product.id}">
-          <pre>${product.details || ""}</pre>
+        <div class="full-description">
+          ${product.description}
         </div>
-
-        <button class="buy-btn">Buy via Instagram</button>
       </div>
+
     </div>
-  `)
-  .join("");
+  `).join("");
 
-/* EXPAND / COLLAPSE */
-function toggleExpand(id) {
-  const details = document.getElementById(`details-${id}`);
-  if (!details) return;
-
-  details.classList.toggle("show");
-}
+})();
