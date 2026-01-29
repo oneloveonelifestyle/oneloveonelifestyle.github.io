@@ -150,13 +150,17 @@ function renderVault() {
     const card = document.createElement("div");
     card.className = "product-card";
 
-    card.addEventListener("click", () => {
-      localStorage.setItem("openProduct", id);
-      window.location.href =
-        product.category === "shoe"
-          ? "shoes.html"
-          : "clothing.html";
-    });
+  card.addEventListener("click", () => {
+  localStorage.setItem("openProduct", id);
+
+  if (product.category === "clothing") {
+    window.location.href = "clothing.html";
+  } else if (product.category === "shoe") {
+    window.location.href = "shoes.html";
+  } else if (product.category === "accessories") {
+    window.location.href = "accessories.html";
+  }
+});
 
     card.innerHTML = `
       <div class="slider">
