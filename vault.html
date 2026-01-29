@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* TOP ACTION */
 .top-action {
   background: #fff;
   padding: 12px;
@@ -37,7 +35,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,7 +42,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -54,7 +50,6 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
@@ -65,7 +60,6 @@ header {
   display: block;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -77,52 +71,16 @@ header {
 
 .price {
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .out-of-stock {
   color: #b00020;
 }
 
-/* BUTTONS */
-.vault-btn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #fff;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.vault-btn.remove {
-  background: #f5f5f5;
-}
-
-.order-btn {
-  display: block;
-  margin-top: 10px;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.out-of-stock-btn {
-  background: #999;
-  pointer-events: none;
-}
-
-/* EMPTY */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
   color: #555;
-  font-size: 15px;
 }
 </style>
 </head>
@@ -139,10 +97,10 @@ header {
 
 <div class="products-grid" id="vaultContainer"></div>
 
-<!-- MASTER PRODUCTS -->
+<!-- LOAD MASTER PRODUCTS -->
 <script src="products.js"></script>
 
-<!-- VAULT LOGIC -->
+<!-- LOAD VAULT LOGIC -->
 <script src="vault.js"></script>
 
 </body>
