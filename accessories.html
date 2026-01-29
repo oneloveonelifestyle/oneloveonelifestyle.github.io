@@ -157,7 +157,6 @@ header{
   display:block;
 }
 
-/* BUY BUTTON – SMALL & PROFESSIONAL */
 .order-btn{
   display:block;
   margin-top:8px;
@@ -176,7 +175,7 @@ header{
   pointer-events:none;
 }
 
-/* SMALL CARD TEXT COMPRESSION */
+/* SMALL CARD TEXT */
 .product-card:not(.big-product) .details h2{
   font-size:12px;
 }
@@ -260,9 +259,12 @@ function renderProducts(list){
 
     card.addEventListener("click", e=>{
       if(e.target.closest(".vault-btn")) return;
+
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
+
+      history.pushState({ expanded:true }, "");
       window.scrollTo({top:0, behavior:"smooth"});
     });
 
@@ -283,6 +285,10 @@ function renderProducts(list){
     container.appendChild(card);
   });
 }
+
+window.addEventListener("popstate", ()=>{
+  document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
+});
 
 renderProducts(accessoryProducts);
 
