@@ -25,15 +25,15 @@ const PRODUCTS = [
   },
 
   {
-    id: "shoe-3",
-    category: "shoe",
-    title: "Navy Knit Textured",
-    price: "₹1,199",
-    images: ["shoe-navy-1.jpg","shoe-navy-2.jpg","shoe-navy-3.jpg"],
-    stock: true,
-    search: "navy knit textured shoes men casual breathable",
-    description: "Lightweight navy knit textured shoes designed for everyday comfort and breathability."
- },
+  id: "shoe-3",
+  category: "shoe",
+  title: "Navy Knit Textured",
+  price: "₹1,199",
+  images: ["shoe-navy-1.jpg", "shoe-navy-2.jpg", "shoe-navy-3.jpg"],
+  stock: true,
+  search: "navy knit textured shoes men casual breathable",
+  description: "Lightweight navy knit textured shoes designed for everyday comfort and breathability."
+},
 
   /* ===================== CLOTHING ===================== */
 
