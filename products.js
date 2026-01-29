@@ -108,7 +108,7 @@ const PRODUCTS = [
       "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
       "Country Of Origin: India"
   },
-  {
+{
   id: "shirt-2",
   category: "clothing",
   title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
@@ -116,7 +116,7 @@ const PRODUCTS = [
   images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
   stock: true,
   search: "wild orchid pink corduroy boxy fit crop shirt women",
-  description: "Wild orchid pink corduroy boxy fit crop shirt available in sizes L, XL, and XXL. Designed for a modern, relaxed look with premium corduroy fabric."
+  description: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt\n\nSize : L, XL, XXL\n\nFit : Boxy Fit\n\nCare Instruction : Machine Wash\n\nFabric Composition : Corduroy Cotton\n\nThis wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits.\n\nCountry Of Origin : India"
 },
 
   /* ===================== ACCESSORIES ===================== */
