@@ -94,6 +94,16 @@ header {
   font-weight: bold;
 }
 
+.out-stock {
+  flex: 1;
+  background: #ccc;
+  color: #666;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
 .empty-vault {
   text-align: center;
   margin-top: 80px;
@@ -114,19 +124,49 @@ header {
 
 <div class="products-grid" id="vaultProducts"></div>
 
-<!-- MUST LOAD PRODUCT DATA -->
-<script src="Product.js"></script>
-
 <script>
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
+
+const PRODUCTS = {
+  "jacket-1": {
+    page: "clothing.html",
+    title: "Campus Sutra Zip-Front Bomber Jacket",
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"],
+    outOfStock: false
+  },
+  "jacket-2": {
+    page: "clothing.html",
+    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"],
+    outOfStock: true
+  },
+  "jacket-4": {
+    page: "clothing.html",
+    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
+    outOfStock: false
+  },
+  "shirt-1": {
+    page: "clothing.html",
+    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+    images: ["shirt1-1.jpg","shirt1-2.jpg"],
+    outOfStock: false
+  },
+  "shoe-1": {
+    page: "shoes.html",
+    title: "Men’s Brown Suede Sneakers",
+    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
+    outOfStock: true
+  }
+};
 
 function renderVault() {
   vaultProducts.innerHTML = "";
   let rendered = 0;
 
   vault.forEach(id => {
-    const product = PRODUCTS.find(p => p.id === id);
+    const product = PRODUCTS[id];
     if (!product) return;
 
     rendered++;
@@ -136,10 +176,7 @@ function renderVault() {
 
     card.addEventListener("click", () => {
       localStorage.setItem("openProduct", id);
-      window.location.href =
-        product.category === "clothing"
-          ? "clothing.html"
-          : "shoes.html";
+      window.location.href = product.page;
     });
 
     card.innerHTML = `
@@ -151,9 +188,11 @@ function renderVault() {
         <h3>${product.title}</h3>
         <div class="actions">
           <button class="remove-btn">Remove</button>
-          <a class="order-btn"
-             href="https://www.instagram.com/oneloveonelifestyle/"
-             target="_blank">Buy via Instagram</a>
+          ${
+            product.outOfStock
+              ? `<div class="out-stock">Out of Stock</div>`
+              : `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+          }
         </div>
       </div>
     `;
@@ -165,9 +204,12 @@ function renderVault() {
       renderVault();
     });
 
-    card.querySelector(".order-btn").addEventListener("click", e => {
-      e.stopPropagation();
-    });
+    const orderBtn = card.querySelector(".order-btn");
+    if (orderBtn) {
+      orderBtn.addEventListener("click", e => {
+        e.stopPropagation();
+      });
+    }
 
     vaultProducts.appendChild(card);
   });
