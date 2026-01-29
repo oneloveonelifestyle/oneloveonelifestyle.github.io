@@ -8,122 +8,107 @@
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f4f4f4;
 }
 
-/* HEADER */
 header{
   background:#000;
   color:#fff;
-  padding:14px;
+  padding:15px;
   text-align:center;
 }
 
-/* SEARCH */
 .search-box{
   padding:12px;
   background:#fff;
 }
+
 .search-box input{
   width:100%;
   padding:10px;
   border-radius:8px;
   border:1px solid #ccc;
+  font-size:14px;
 }
 
-/* GRID */
-.products-grid{
+.products{
   padding:15px;
   display:grid;
   grid-template-columns:1fr;
-  gap:16px;
+  gap:15px;
 }
 
-/* CARD */
 .product-card{
   background:#fff;
   border-radius:12px;
   overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
   cursor:pointer;
 }
 
-/* BIG CARD */
 .product-card.big-product{
-  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  position:relative;
 }
 
-/* SLIDER */
 .slider{
   display:flex;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
 }
+
 .slider img{
   width:100%;
   scroll-snap-align:center;
 }
 
-/* DETAILS */
 .details{
   padding:12px;
 }
+
 .details h3{
   margin:0 0 6px;
   font-size:16px;
 }
+
 .price{
   font-weight:bold;
   margin-bottom:6px;
 }
 
-/* STOCK */
-.stock-badge{
-  display:inline-block;
-  padding:4px 8px;
-  font-size:12px;
-  border-radius:6px;
-  background:#eee;
-  color:#333;
-}
-.stock-badge.out{
-  background:#fbeaea;
-  color:#b00020;
-}
-
-/* DESCRIPTION */
 .unavailable{
-  color:#b00020;
+  color:#c00;
   font-size:13px;
-  margin-top:6px;
+  font-weight:bold;
 }
 
-/* ACTIONS */
 .actions{
-  display:flex;
-  gap:10px;
-  margin-top:12px;
+  margin-top:10px;
 }
+
 .vault-btn{
-  padding:8px 10px;
-  border:none;
-  border-radius:6px;
   background:#eee;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:6px;
+  font-weight:bold;
   cursor:pointer;
 }
+
 .order-btn{
-  flex:1;
+  display:block;
+  text-align:center;
   background:#000;
   color:#fff;
-  text-align:center;
   padding:10px;
   border-radius:6px;
   text-decoration:none;
   font-weight:bold;
 }
+
 .order-btn.disabled{
-  background:#ccc;
+  background:#999;
   pointer-events:none;
 }
 </style>
@@ -136,10 +121,10 @@ header{
 </header>
 
 <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Search shoes">
+  <input type="text" id="searchInput" placeholder="Search shoes...">
 </div>
 
-<div class="products-grid" id="products"></div>
+<div class="products" id="products"></div>
 
 <script src="products.js"></script>
 
@@ -149,78 +134,93 @@ const searchInput = document.getElementById("searchInput");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* LOAD SHOES ONLY */
-function loadShoes(filter=""){
-  container.innerHTML="";
+function renderShoes(list){
+  container.innerHTML = "";
 
-  PRODUCTS
-    .filter(p => p.category === "shoe")
-    .filter(p => p.search.toLowerCase().includes(filter))
-    .forEach(product => {
+  list.forEach(product=>{
+    if(product.category !== "shoe") return;
 
-      const card = document.createElement("div");
-      card.className = "product-card";
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.setAttribute("data-id", product.id);
 
-      card.innerHTML = `
-        <div class="slider">
-          ${product.images.map(i=>`<img src="${i}">`).join("")}
-        </div>
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(i=>`<img src="${i}">`).join("")}
+      </div>
 
-        <div class="details">
-          <h3>${product.title}</h3>
-          <div class="price">${product.price}</div>
+      <div class="details">
+        <h3>${product.title}</h3>
+        <div class="price">${product.price}</div>
+
+        ${
+          !product.stock
+          ? `<div class="unavailable">Currently unavailable</div>`
+          : ``
+        }
+
+        <div class="actions">
+          <button class="vault-btn">♡ Save to Vault</button>
 
           ${
             product.stock
-            ? `<span class="stock-badge">In Stock</span>`
-            : `<span class="stock-badge out">Out of Stock</span>
-               <div class="unavailable">Currently unavailable</div>`
+            ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+            : `<div class="order-btn disabled">Out of Stock</div>`
           }
-
-          <div class="actions">
-            <button class="vault-btn">♡ Save to Vault</button>
-            ${
-              product.stock
-              ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
-              : `<div class="order-btn disabled">Unavailable</div>`
-            }
-          </div>
         </div>
-      `;
+      </div>
+    `;
 
-      /* EXPAND CARD — SAME AS CLOTHING */
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".product-card").forEach(c =>
-          c.classList.remove("big-product")
-        );
-        card.classList.add("big-product");
-        container.prepend(card);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    card.addEventListener("click", e=>{
+      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+
+      document.querySelectorAll(".product-card").forEach(c=>{
+        c.classList.remove("big-product");
       });
 
-      /* VAULT */
-      card.querySelector(".vault-btn").addEventListener("click", e => {
-        e.stopPropagation();
-        if(!vault.includes(product.id)){
-          vault.push(product.id);
-          localStorage.setItem("vault", JSON.stringify(vault));
-        }
-      });
-
-      /* STOP BUTTON CLICKS */
-      card.querySelectorAll("a, .order-btn").forEach(btn=>{
-        btn.addEventListener("click", e=>e.stopPropagation());
-      });
-
-      container.appendChild(card);
+      card.classList.add("big-product");
+      container.prepend(card);
+      window.scrollTo({top:0,behavior:"smooth"});
     });
+
+    card.querySelector(".vault-btn").addEventListener("click", e=>{
+      e.stopPropagation();
+      if(!vault.includes(product.id)){
+        vault.push(product.id);
+        localStorage.setItem("vault",JSON.stringify(vault));
+      }
+    });
+
+    container.appendChild(card);
+  });
 }
 
-searchInput.addEventListener("input", e=>{
-  loadShoes(e.target.value.toLowerCase());
+renderShoes(PRODUCTS);
+
+searchInput.addEventListener("input",()=>{
+  const val = searchInput.value.toLowerCase();
+  renderShoes(PRODUCTS.filter(p=>
+    p.search.toLowerCase().includes(val)
+  ));
 });
 
-loadShoes();
+/* ===============================
+   OPEN FROM VAULT (DO NOT TOUCH)
+================================ */
+const openProductId = localStorage.getItem("openProduct");
+
+if(openProductId){
+  setTimeout(()=>{
+    const card = document.querySelector(`.product-card[data-id="${openProductId}"]`);
+    if(card){
+      document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    localStorage.removeItem("openProduct");
+  },200);
+}
 </script>
 
 </body>
