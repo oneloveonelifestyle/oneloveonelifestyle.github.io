@@ -5,8 +5,6 @@
 <title>Shoes | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
 <style>
 body{
   margin:0;
@@ -36,7 +34,6 @@ header{
   position:absolute;
   right:15px;
   top:15px;
-  font-size:22px;
   cursor:pointer;
 }
 
@@ -62,7 +59,6 @@ header{
 .search-input{
   flex:1;
   padding:12px;
-  font-size:15px;
   border-radius:8px;
   border:1px solid #ccc;
 }
@@ -73,7 +69,6 @@ header{
   border:none;
   padding:12px 14px;
   border-radius:8px;
-  cursor:pointer;
 }
 
 /* GRID */
@@ -107,20 +102,18 @@ header{
   padding:12px;
 }
 
-.details h2{
-  font-size:16px;
+.details h3{
+  font-size:15px;
   margin:0 0 6px;
 }
 
 .price{
   font-weight:bold;
-  color:#000;
+  margin-bottom:6px;
 }
 
-.unavailable{
+.out-of-stock{
   color:#b00020;
-  font-size:14px;
-  margin-top:6px;
 }
 
 .big-product{
@@ -147,11 +140,14 @@ header{
   border-radius:8px;
   border:1px solid #ddd;
   background:#fff;
-  cursor:pointer;
 }
 
 .big-product .vault-btn{
   display:block;
+}
+
+.vault-btn.remove{
+  background:#f5f5f5;
 }
 
 .order-btn{
@@ -163,7 +159,6 @@ header{
   padding:12px;
   border-radius:8px;
   text-decoration:none;
-  font-weight:bold;
 }
 
 .order-btn.disabled{
@@ -178,19 +173,18 @@ header{
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Shoes</h2>
-  <div class="vault-icon" onclick="openVault()">♡
-    <span class="vault-count" id="vaultCount">0</span>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search shoes...">
+  <input id="searchInput" class="search-input" placeholder="Search shoes...">
   <button class="search-btn" onclick="searchProducts()">🔍</button>
 </div>
 
 <div class="products-grid" id="products"></div>
 
-<!-- LOAD PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -201,7 +195,6 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* ================= LOAD SHOES ================= */
 const shoeProducts = PRODUCTS.filter(p => p.category === "shoe");
 
 function renderProducts(list){
@@ -211,7 +204,9 @@ function renderProducts(list){
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
-    card.dataset.search = product.search;
+    card.dataset.search = product.search.toLowerCase();
+
+    const saved = vault.includes(product.id);
 
     card.innerHTML = `
       <div class="slider">
@@ -219,17 +214,18 @@ function renderProducts(list){
       </div>
 
       <div class="details">
-        <h2>${product.title}</h2>
-        <div class="price">${product.price}</div>
+        <h3>${product.title}</h3>
 
-        ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
-
-        <div class="full-description">
-          Premium quality footwear crafted for everyday comfort.
+        <div class="price ${!product.stock ? 'out-of-stock' : ''}">
+          ${!product.stock ? "Currently Out of Stock" : product.price}
         </div>
 
-        <button class="vault-btn">
-          ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
+        <div class="full-description">
+          ${product.description}
+        </div>
+
+        <button class="vault-btn ${saved ? 'remove' : ''}">
+          ${saved ? "✕ Remove from Vault" : "♡ Save to Vault"}
         </button>
 
         ${
@@ -240,9 +236,10 @@ function renderProducts(list){
       </div>
     `;
 
-    /* CARD CLICK */
+    /* EXPAND */
     card.addEventListener("click", e=>{
-      if(e.target.closest(".vault-btn")) return;
+      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
@@ -250,16 +247,20 @@ function renderProducts(list){
     });
 
     /* VAULT */
-    const vaultBtn = card.querySelector(".vault-btn");
-    vaultBtn.addEventListener("click", e=>{
+    const btn = card.querySelector(".vault-btn");
+    btn.addEventListener("click", e=>{
       e.stopPropagation();
+
       if(vault.includes(product.id)){
         vault = vault.filter(v=>v!==product.id);
-        vaultBtn.textContent = "♡ Save to Vault";
+        btn.textContent = "♡ Save to Vault";
+        btn.classList.remove("remove");
       }else{
         vault.push(product.id);
-        vaultBtn.textContent = "✕ Remove from Vault";
+        btn.textContent = "✕ Remove from Vault";
+        btn.classList.add("remove");
       }
+
       localStorage.setItem("vault", JSON.stringify(vault));
       vaultCount.textContent = vault.length;
     });
@@ -270,24 +271,25 @@ function renderProducts(list){
 
 renderProducts(shoeProducts);
 
-/* ================= SEARCH ================= */
+/* SEARCH */
 function searchProducts(){
-  const q = searchInput.value.toLowerCase();
-  const filtered = shoeProducts.filter(p=>p.search.includes(q));
-  renderProducts(filtered);
+  const q = searchInput.value.toLowerCase().trim();
+  renderProducts(
+    shoeProducts.filter(p => p.search.includes(q))
+  );
 }
 
-/* ================= VAULT OPEN ================= */
+/* VAULT OPEN */
 function openVault(){
   window.location.href = "vault.html";
 }
 
-/* ================= OPEN FROM VAULT ================= */
+/* OPEN FROM VAULT */
 const openId = localStorage.getItem("openProduct");
 if(openId){
-  const card = document.querySelector(`[data-id="${openId}"]`);
-  if(card){
-    card.click();
+  const target = document.querySelector(`[data-id="${openId}"]`);
+  if(target){
+    target.click();
   }
   localStorage.removeItem("openProduct");
 }
