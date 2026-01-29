@@ -206,6 +206,12 @@ function renderVault() {
 }
 
 renderVault();
+
+/* ONLY ADDITION — BACK BUTTON NORMALIZES CARD */
+window.addEventListener("popstate", () => {
+  const cards = document.querySelectorAll(".product-card");
+  cards.forEach(c => c.classList.remove("big-product"));
+});
 </script>
 
 </body>
