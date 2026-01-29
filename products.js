@@ -115,24 +115,10 @@ const PRODUCTS = [
   price: "₹1,399",
   images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
   stock: true,
-  search: "wild orchid pink corduroy boxy fit crop shirt women",
-  description: `
-Wild Orchid Pink Corduroy Boxy Fit Crop Shirt
-
-Size : L, XL, XXL
-
-Fit : Boxy Fit
-
-Care Instruction : Machine Wash
-
-Fabric Composition : Corduroy Cotton
-
-This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits.
-
-Country Of Origin : India
-`
+  search: "wild orchid pink corduroy boxy fit crop shirt corduroy",
+  description: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt\n\nSize : L, XL, XXL\n\nFit : Boxy Fit\n\nCare Instruction : Machine Wash\n\nFabric Composition : Corduroy Cotton\n\nThis wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits.\n\nCountry Of Origin : India"
 },
-
+ 
   /* ===================== ACCESSORIES ===================== */
 
   {
