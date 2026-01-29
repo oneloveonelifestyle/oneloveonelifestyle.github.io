@@ -5,8 +5,6 @@
 <title>Accessories | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
 <style>
 body{
   margin:0;
@@ -169,6 +167,24 @@ header{
   background:#999;
   pointer-events:none;
 }
+
+/* =====================================================
+   ONLY CHANGE — SHORT CAPTION FOR SMALL CARDS
+   (EXACT SAME AS shoes.html)
+   ===================================================== */
+
+.product-card:not(.big-product) .details h2{
+  font-size:12px;
+  line-height:1.25;
+}
+
+.product-card:not(.big-product) .price{
+  font-size:12px;
+}
+
+.product-card:not(.big-product) .details{
+  padding:10px;
+}
 </style>
 </head>
 
@@ -189,7 +205,6 @@ header{
 
 <div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -200,7 +215,6 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* LOAD ACCESSORIES ONLY */
 const accessoryProducts = PRODUCTS.filter(
   p => p.category === "accessories"
 );
@@ -241,18 +255,14 @@ function renderProducts(list){
       </div>
     `;
 
-    /* EXPAND CARD */
     card.addEventListener("click", e=>{
       if(e.target.closest(".vault-btn")) return;
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
       window.scrollTo({top:0, behavior:"smooth"});
-      history.pushState({ expanded:true }, "");
-      expandedCard = card;
     });
 
-    /* VAULT */
     const vaultBtn = card.querySelector(".vault-btn");
     vaultBtn.addEventListener("click", e=>{
       e.stopPropagation();
@@ -273,36 +283,15 @@ function renderProducts(list){
 
 renderProducts(accessoryProducts);
 
-/* SEARCH */
 function searchProducts(){
   const q = searchInput.value.toLowerCase();
   const filtered = accessoryProducts.filter(p=>p.search.includes(q));
   renderProducts(filtered);
 }
 
-/* OPEN VAULT */
 function openVault(){
   window.location.href = "vault.html";
 }
-
-/* OPEN FROM VAULT */
-const openId = localStorage.getItem("openProduct");
-if(openId){
-  const card = document.querySelector(`[data-id="${openId}"]`);
-  if(card) card.click();
-  localStorage.removeItem("openProduct");
-}
-
-/* ===== BACK BUTTON COLLAPSE ONLY ===== */
-
-let expandedCard = null;
-
-window.addEventListener("popstate", function(){
-  if(expandedCard){
-    expandedCard.classList.remove("big-product");
-    expandedCard = null;
-  }
-});
 </script>
 
 </body>
