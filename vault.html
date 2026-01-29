@@ -12,7 +12,6 @@ body {
   background: #f4f4f4;
 }
 
-/* HEADER */
 header {
   background: #000;
   color: #fff;
@@ -20,7 +19,6 @@ header {
   text-align: center;
 }
 
-/* TOP ACTION */
 .top-action {
   background: #fff;
   padding: 12px;
@@ -37,7 +35,6 @@ header {
   font-weight: bold;
 }
 
-/* GRID */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,7 +42,6 @@ header {
   padding: 15px;
 }
 
-/* CARD */
 .product-card {
   background: #fff;
   border-radius: 12px;
@@ -54,19 +50,15 @@ header {
   cursor: pointer;
 }
 
-/* SLIDER */
 .slider {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
 }
 
 .slider img {
   width: 100%;
-  scroll-snap-align: center;
 }
 
-/* DETAILS */
 .details {
   padding: 12px;
 }
@@ -76,7 +68,6 @@ header {
   font-size: 16px;
 }
 
-/* ACTIONS */
 .actions {
   display: flex;
   gap: 10px;
@@ -103,7 +94,6 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY STATE */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
@@ -126,7 +116,7 @@ header {
 
 <script>
 /* ===============================
-   VAULT DATA
+   LOAD VAULT
 ================================ */
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
@@ -137,91 +127,89 @@ let vault = JSON.parse(localStorage.getItem("vault")) || [];
 const PRODUCTS = {
   "jacket-1": {
     title: "Campus Sutra Zip-Front Bomber Jacket",
-    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"]
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"],
+    page: "clothing.html"
   },
   "jacket-2": {
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"]
+    title: "Nuon Brown Relaxed-Fit Cotton Jacket",
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"],
+    page: "clothing.html"
   },
-  "jacket-3": {
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"]
+  "jacket-4": {
+    title: "Studiofit Dark Brown Hooded Jacket",
+    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
+    page: "clothing.html"
   },
   "shirt-1": {
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    images: ["shirt1-1.jpg","shirt1-2.jpg"]
+    title: "ETA Brown Relaxed-Fit Shirt",
+    images: ["shirt1-1.jpg","shirt1-2.jpg"],
+    page: "clothing.html"
   },
   "shoe-1": {
     title: "Men’s Brown Suede Sneakers",
-    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"]
+    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
+    page: "shoes.html"
   }
 };
 
 /* ===============================
-   RENDER VAULT (FIXED)
+   RENDER VAULT
 ================================ */
 function renderVault() {
   vaultProducts.innerHTML = "";
-  let renderedCount = 0;
 
-  vault.forEach(item => {
-    const product = PRODUCTS[item.id];
+  if (vault.length === 0) {
+    vaultProducts.innerHTML = `
+      <div class="empty-vault">
+        <h3>Your vault is empty</h3>
+        <p>Save products you love and find them here.</p>
+      </div>
+    `;
+    return;
+  }
+
+  vault.forEach(id => {
+    const product = PRODUCTS[id];
     if (!product) return;
-
-    renderedCount++;
 
     const card = document.createElement("div");
     card.className = "product-card";
-
-    /* OPEN ORIGINAL PAGE + BIG VIEW */
-    card.addEventListener("click", () => {
-      localStorage.setItem("openProduct", item.id);
-      window.location.href = item.page;
-    });
 
     card.innerHTML = `
       <div class="slider">
         ${product.images.map(img => `<img src="${img}">`).join("")}
       </div>
-
       <div class="details">
         <h3>${product.title}</h3>
-
         <div class="actions">
           <button class="remove-btn">Remove</button>
-          <a class="order-btn"
-             href="https://www.instagram.com/oneloveonelifestyle/"
-             target="_blank">
-             Buy via Instagram
+          <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+            Buy via Instagram
           </a>
         </div>
       </div>
     `;
 
+    /* OPEN ORIGINAL PRODUCT BIG */
+    card.addEventListener("click", () => {
+      localStorage.setItem("openProduct", id);
+      window.location.href = product.page;
+    });
+
     /* REMOVE */
     card.querySelector(".remove-btn").addEventListener("click", e => {
       e.stopPropagation();
-      vault = vault.filter(v => v.id !== item.id);
+      vault = vault.filter(v => v !== id);
       localStorage.setItem("vault", JSON.stringify(vault));
       renderVault();
     });
 
-    /* PREVENT CARD CLICK */
     card.querySelector(".order-btn").addEventListener("click", e => {
       e.stopPropagation();
     });
 
     vaultProducts.appendChild(card);
   });
-
-  if (renderedCount === 0) {
-    vaultProducts.innerHTML = `
-      <div class="empty-vault">
-        <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here anytime.</p>
-      </div>
-    `;
-  }
 }
 
 renderVault();
