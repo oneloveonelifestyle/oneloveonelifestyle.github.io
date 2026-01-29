@@ -19,12 +19,12 @@ const PRODUCTS = [
     ],
     stock: false,
     search: "mens brown suede sneakers leather lace up",
-    details: `
-Price : ₹2,999
-Style : Lace-Up Sneakers
-Upper Material : Suede
-Sole Material : Rubber
-Care Instruction : Wipe with clean dry cloth
+    description: `
+Price: ₹2999
+Style: Lace-Up Sneakers
+Upper Material: Suede
+Occasion: Casual Wear
+Care Instruction: Wipe with dry cloth
 `
   },
 
@@ -39,12 +39,12 @@ Care Instruction : Wipe with clean dry cloth
     ],
     stock: false,
     search: "mens black leather sneakers premium",
-    details: `
-Price : ₹3,499
-Style : Premium Sneakers
-Upper Material : Leather
-Sole Material : Rubber
-Care Instruction : Wipe with clean dry cloth
+    description: `
+Price: ₹3499
+Style: Lace-Up Sneakers
+Upper Material: Leather
+Occasion: Casual Wear
+Care Instruction: Wipe with dry cloth
 `
   },
 
@@ -62,13 +62,11 @@ Care Instruction : Wipe with clean dry cloth
     ],
     stock: true,
     search: "campus sutra bomber jacket zip front",
-    details: `
-Price : ₹1,999
-Size : S, M, L, XL
-Fit : Regular Fit
-Care Instruction : Machine Wash
-
-Campus Sutra Zip-Front Bomber Jacket designed for everyday casual wear with a modern silhouette.
+    description: `
+Price: ₹1999
+Size: S, M, L, XL
+Fit: Regular Fit
+Care Instruction: Machine Wash
 `
   },
 
@@ -76,7 +74,7 @@ Campus Sutra Zip-Front Bomber Jacket designed for everyday casual wear with a mo
     id: "jacket-2",
     category: "clothing",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    price: "₹2,999",
+    price: "₹2,299",
     images: [
       "jacket2-1.jpg",
       "jacket2-2.jpg",
@@ -84,19 +82,18 @@ Campus Sutra Zip-Front Bomber Jacket designed for everyday casual wear with a mo
     ],
     stock: true,
     search: "nuon brown relaxed fit jacket",
-    details: `
-Price : ₹2,999
-Size : XS, S, M, L, XL
-Fit : Relaxed Fit
-Care Instruction : Machine Wash
-Fabric Composition : 100% Cotton
+    description: `
+Price: ₹2999
+Size: XS, S, M, L, XL
+Fit: Relaxed Fit
+Care Instruction: Machine Wash
+Fabric Composition: 100% Cotton
 
 Manufactured and Marketed By:
-Trent Limited, Bombay House,
-24, Homi Mody Street, Fort,
-Mumbai – 400001
+Trent Limited, Bombay House, 24, Homi Mody Street,
+Fort, Mumbai – 400001
 
-Country Of Origin : India
+Country Of Origin: India
 `
   },
 
@@ -112,19 +109,18 @@ Country Of Origin : India
     ],
     stock: true,
     search: "studiofit dark brown hooded jacket relaxed",
-    details: `
-Price : ₹2,199
-Size : XS, S, M, L
-Fit : Relaxed Fit
-Care Instruction : Machine Wash
-Fabric Composition : 79% Polyester, 18% Viscose, 3% Elastane
+    description: `
+Price: ₹2199
+Size: XS, S, M, L
+Fit: Relaxed Fit
+Care Instruction: Machine Wash
+Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane
 
 Manufactured and Marketed By:
-Trent Limited, Bombay House,
-24, Homi Mody Street, Fort,
-Mumbai – 400001
+Trent Limited, Bombay House, 24, Homi Mody Street,
+Fort, Mumbai – 400001
 
-Country Of Origin : India
+Country Of Origin: India
 `
   },
 
@@ -141,16 +137,19 @@ Country Of Origin : India
     ],
     stock: true,
     search: "eta brown textured cotton shirt relaxed",
-    details: `
-Price : ₹1,799
-Size : XS, S, M, L
-Fit : Relaxed Fit
-Care Instruction : Machine Wash
-Fabric Composition : 100% Cotton
+    description: `
+Price: ₹1799
+Size: XS, S, M, L
+Fit: Relaxed Fit
+Care Instruction: Machine Wash
+Fabric Composition: 100% Cotton
 
-ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.
+ETA redefines everyday comfort with this brown shirt,
+crafted from cotton-rich fabric for a soft, natural feel.
+Designed with a spread collar, full sleeves and
+a classic button-up front.
 
-Country Of Origin : India
+Country Of Origin: India
 `
   }
 
