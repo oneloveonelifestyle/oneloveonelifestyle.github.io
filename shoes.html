@@ -16,15 +16,15 @@ body{
 header{
   background:#000;
   color:#fff;
-  padding:15px;
+  padding:12px;
   text-align:center;
   position:relative;
 }
 
 .home-btn{
   position:absolute;
-  left:15px;
-  top:15px;
+  left:12px;
+  top:12px;
   color:#fff;
   text-decoration:none;
   font-weight:bold;
@@ -32,8 +32,8 @@ header{
 
 .vault-icon{
   position:absolute;
-  right:15px;
-  top:15px;
+  right:12px;
+  top:12px;
   font-size:22px;
   cursor:pointer;
 }
@@ -41,27 +41,27 @@ header{
 .vault-count{
   background:red;
   color:#fff;
-  font-size:12px;
+  font-size:11px;
   border-radius:50%;
-  padding:2px 6px;
+  padding:1px 5px;
   position:absolute;
-  top:-8px;
-  right:-10px;
+  top:-6px;
+  right:-8px;
 }
 
 /* SEARCH */
 .search-bar{
   background:#fff;
-  padding:12px;
+  padding:10px;
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 
 .search-input{
   flex:1;
-  padding:12px;
-  font-size:15px;
-  border-radius:8px;
+  padding:10px;
+  font-size:14px;
+  border-radius:6px;
   border:1px solid #ccc;
 }
 
@@ -69,8 +69,8 @@ header{
   background:#000;
   color:#fff;
   border:none;
-  padding:12px 14px;
-  border-radius:8px;
+  padding:10px 12px;
+  border-radius:6px;
   cursor:pointer;
 }
 
@@ -78,16 +78,18 @@ header{
 .products-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  padding:15px;
+  gap:12px;
+  padding:12px;
 }
 
 .product-card{
   background:#fff;
-  border-radius:12px;
+  border-radius:10px;
   overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
   cursor:pointer;
+  display:flex;
+  flex-direction:column;
 }
 
 /* SLIDER */
@@ -98,27 +100,31 @@ header{
 
 .slider img{
   width:100%;
+  display:block;
+  object-fit:cover;
 }
 
 /* DETAILS */
 .details{
-  padding:12px;
+  padding:8px 10px;
 }
 
 .details h2{
-  font-size:16px;
-  margin:0 0 6px;
+  font-size:14px;
+  margin:0 0 4px;
+  line-height:1.25;
 }
 
 .price{
+  font-size:13px;
   font-weight:bold;
   color:#000;
 }
 
 .unavailable{
   color:#b00020;
-  font-size:14px;
-  margin-top:6px;
+  font-size:12px;
+  margin-top:4px;
 }
 
 .big-product{
@@ -127,9 +133,9 @@ header{
 
 .full-description{
   display:none;
-  font-size:14px;
-  margin-top:10px;
-  line-height:1.6;
+  font-size:13px;
+  margin-top:8px;
+  line-height:1.5;
 }
 
 .big-product .full-description{
@@ -139,29 +145,31 @@ header{
 /* BUTTONS */
 .vault-btn{
   display:none;
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border-radius:8px;
+  margin-top:8px;
+  padding:8px;
+  border-radius:6px;
   border:1px solid #ddd;
   background:#fff;
   cursor:pointer;
+  font-size:13px;
 }
 
 .big-product .vault-btn{
   display:block;
 }
 
+/* BUY BUTTON — SAME AS CLOTHING */
 .order-btn{
-  display:block;
-  margin-top:10px;
+  display:inline-block;
+  margin-top:8px;
   background:#000;
   color:#fff;
   text-align:center;
-  padding:12px;
-  border-radius:8px;
+  padding:8px 10px;
+  border-radius:6px;
   text-decoration:none;
-  font-weight:bold;
+  font-weight:600;
+  font-size:12px;
 }
 
 .order-btn.disabled{
@@ -169,21 +177,17 @@ header{
   pointer-events:none;
 }
 
-/* =====================================================
-   ONLY CHANGE — SHORT CAPTION FOR SMALL CARDS
-   ===================================================== */
+/* SMALL CARD TIGHT STYLE */
+.product-card:not(.big-product) .details{
+  padding:8px;
+}
 
-.product-card:not(.big-product) .details h2{
-  font-size:12px;
-  line-height:1.25;
+.product-card:not(.big-product) h2{
+  font-size:13px;
 }
 
 .product-card:not(.big-product) .price{
   font-size:12px;
-}
-
-.product-card:not(.big-product) .details{
-  padding:10px;
 }
 </style>
 </head>
@@ -217,6 +221,18 @@ vaultCount.textContent = vault.length;
 
 const shoeProducts = PRODUCTS.filter(p => p.category === "shoe");
 
+function collapseBigProduct(){
+  const active = document.querySelector(".product-card.big-product");
+  if(active){
+    active.classList.remove("big-product");
+    history.replaceState(null,"",location.pathname);
+    return true;
+  }
+  return false;
+}
+
+window.addEventListener("popstate", collapseBigProduct);
+
 function renderProducts(list){
   container.innerHTML = "";
 
@@ -236,9 +252,7 @@ function renderProducts(list){
 
         ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
-        <div class="full-description">
-          ${product.description || ""}
-        </div>
+        <div class="full-description">${product.description || ""}</div>
 
         <button class="vault-btn">
           ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
@@ -253,11 +267,17 @@ function renderProducts(list){
     `;
 
     card.addEventListener("click", e=>{
-      if(e.target.closest(".vault-btn")) return;
+      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+
+      const isBig = card.classList.contains("big-product");
       document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
-      card.classList.add("big-product");
-      container.prepend(card);
-      window.scrollTo({top:0, behavior:"smooth"});
+
+      if(!isBig){
+        card.classList.add("big-product");
+        container.prepend(card);
+        history.pushState({expanded:true},"");
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
     });
 
     const vaultBtn = card.querySelector(".vault-btn");
@@ -281,7 +301,7 @@ function renderProducts(list){
 renderProducts(shoeProducts);
 
 function searchProducts(){
-  const q = searchInput.value.toLowerCase();
+  const q = searchInput.value.toLowerCase().trim();
   renderProducts(
     shoeProducts.filter(p => p.title.toLowerCase().includes(q))
   );
