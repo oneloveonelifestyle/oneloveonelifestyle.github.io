@@ -1,58 +1,35 @@
-const vaultContainer = document.getElementById("vault");
+const vaultContainer = document.getElementById("vaultContainer");
+const emptyVault = document.getElementById("emptyVault");
+
 const vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 if (vault.length === 0) {
-  vaultContainer.innerHTML = `<div class="empty">Your vault is empty</div>`;
+  emptyVault.style.display = "block";
 }
 
-/*
-MAP EACH PRODUCT ID TO:
-- page
-- image
-- title
-*/
-const PRODUCTS = {
-  // CLOTHING
-  "cloth-1": {
-    page: "clothing.html",
-    image: "cloth1-1.jpg",
-    title: "Classic Black Tee"
-  },
-  "cloth-2": {
-    page: "clothing.html",
-    image: "cloth2-1.jpg",
-    title: "Oversized White Tee"
-  },
-
-  // SHOES
-  "shoe-1": {
-    page: "shoes.html",
-    image: "shoe1-1.jpg",
-    title: "Men’s Brown Suede Sneakers"
-  },
-  "shoe-2": {
-    page: "shoes.html",
-    image: "shoe2-1.jpg",
-    title: "Men’s Olive Suede Sneakers"
-  }
-};
-
 vault.forEach(id => {
-  const product = PRODUCTS[id];
+  const product = PRODUCTS.find(p => p.id === id);
   if (!product) return;
 
   const card = document.createElement("div");
   card.className = "vault-card";
+
   card.innerHTML = `
-    <img src="${product.image}">
-    <div class="details">
-      <h3>${product.title}</h3>
+    <img src="${product.images[0]}">
+    <div class="vault-details">
+      <h4>${product.title}</h4>
+      <div class="price">${product.price}</div>
     </div>
   `;
 
   card.onclick = () => {
-    localStorage.setItem("openProduct", id);
-    window.location.href = product.page;
+    localStorage.setItem("openProduct", product.id);
+
+    if (product.category === "clothing") {
+      window.location.href = "clothing.html";
+    } else if (product.category === "shoes") {
+      window.location.href = "shoes.html";
+    }
   };
 
   vaultContainer.appendChild(card);
