@@ -2,7 +2,9 @@ const vaultContainer = document.getElementById("vaultContainer");
 
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* EMPTY VAULT */
+/* ===============================
+   EMPTY VAULT
+================================ */
 if (vault.length === 0) {
   vaultContainer.innerHTML = `
     <div class="empty-vault">
@@ -10,6 +12,7 @@ if (vault.length === 0) {
     </div>
   `;
 } else {
+
   vault.forEach(id => {
     const product = PRODUCTS.find(p => p.id === id);
     if (!product) return;
@@ -24,19 +27,22 @@ if (vault.length === 0) {
 
       <div class="details">
         <h3>${product.title}</h3>
-        <div class="short">${product.short}</div>
-        <div class="price ${product.outOfStock ? 'out-of-stock' : ''}">
-          ${product.outOfStock ? "Currently Out of Stock" : product.price}
+
+        <div class="price ${product.stock === false ? 'out-of-stock' : ''}">
+          ${product.stock === false ? "Currently Out of Stock" : product.price}
         </div>
       </div>
     `;
 
+    /* ===============================
+       OPEN PRODUCT FROM VAULT
+    ================================ */
     card.addEventListener("click", () => {
       localStorage.setItem("openProduct", product.id);
 
       if (product.category === "clothing") {
         window.location.href = "clothing.html";
-      } else if (product.category === "shoes") {
+      } else if (product.category === "shoe") {
         window.location.href = "shoes.html";
       }
     });
