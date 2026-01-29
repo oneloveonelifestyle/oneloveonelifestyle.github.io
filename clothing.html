@@ -186,8 +186,7 @@ header {
   flex-direction:column;
   height:100%;
 }
-
-/* PROFESSIONAL CARD ALIGNMENT – TIGHT & CLEAN */
+/* PROFESSIONAL CARD ALIGNMENT */
 .product-card{
   display:flex;
   flex-direction:column;
@@ -199,16 +198,20 @@ header {
   height:100%;
 }
 
-/* controlled spacing instead of auto push */
+/* price stays just above order button */
 .product-card .price{
-  margin-top:12px;
+  margin-top:auto;
 }
 
-/* button sits at bottom with normal gap */
+/* order button always at bottom */
 .product-card .order-btn{
-  margin-top:auto;
-  padding:6px 0;
-  font-size:13px;
+  margin-top:8px;
+}
+
+  /* slightly larger product image */
+.product-card img{
+  height:190px;
+  object-fit:cover;
 }
 </style>
 </head>
