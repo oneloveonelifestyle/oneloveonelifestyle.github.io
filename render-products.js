@@ -1,90 +1,155 @@
+/* ===================== BASIC SAFETY ===================== */
+if (typeof PRODUCTS === "undefined") {
+  console.error("PRODUCTS not found");
+}
+
+/* ===================== CONTAINER ===================== */
 const container = document.getElementById("productsContainer");
-if (!container) return;
+if (!container) {
+  console.warn("productsContainer not found on this page");
+}
 
-// detect page category
-const isClothingPage = location.pathname.includes("clothing");
-const isShoesPage = location.pathname.includes("shoes");
-
-const pageCategory = isClothingPage
-  ? "clothing"
-  : isShoesPage
-  ? "shoes"
-  : null;
-
-if (!pageCategory) return;
-
-// vault
+/* ===================== VAULT ===================== */
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-// filter products
-const pageProducts = PRODUCTS.filter(p => p.category === pageCategory);
+/* ===================== HELPERS ===================== */
+function isInVault(id) {
+  return vault.includes(id);
+}
 
-// render
-pageProducts.forEach(product => {
-  const card = document.createElement("div");
-  card.className = "product-card";
-  card.setAttribute("data-id", product.id);
+function saveVault() {
+  localStorage.setItem("vault", JSON.stringify(vault));
+}
 
-  // price / stock
-  const outOfStock = product.outOfStock === true;
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-  card.innerHTML = `
-    <div class="slider">
-      ${product.images
-        .map(img => `<img src="${img}" alt="${product.title}">`)
-        .join("")}
-    </div>
+/* ===================== RENDER ===================== */
+function renderProducts(category) {
+  if (!container) return;
 
-    <div class="product-info">
-      <h4>${product.title}</h4>
+  container.innerHTML = "";
 
-      ${
-        outOfStock
-          ? `<div class="price out-of-stock">Currently Out of Stock</div>`
-          : `<div class="price">${product.price}</div>`
+  PRODUCTS
+    .filter(p => p.category === category)
+    .forEach(product => {
+
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.dataset.id = product.id;
+
+      /* ---------- IMAGE SLIDER ---------- */
+      const slider = document.createElement("div");
+      slider.className = "slider";
+
+      product.images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        slider.appendChild(img);
+      });
+
+      /* ---------- DETAILS ---------- */
+      const details = document.createElement("div");
+      details.className = "details";
+
+      const title = document.createElement("h3");
+      title.textContent = product.title;
+
+      const short = document.createElement("div");
+      short.className = "short";
+      short.textContent = product.short;
+
+      const price = document.createElement("div");
+      price.className = "price";
+      price.textContent = product.price;
+
+      if (product.outOfStock) {
+        price.classList.add("out-of-stock");
       }
 
-      <div class="actions">
-        ${
-          outOfStock
-            ? `<a class="order-btn out-of-stock-btn">Out of Stock</a>`
-            : `<a class="order-btn" href="#">Order via Instagram</a>`
+      const full = document.createElement("div");
+      full.className = "full-description";
+      full.innerHTML = product.description || "";
+
+      /* ---------- VAULT BUTTON ---------- */
+      const vaultBtn = document.createElement("button");
+      vaultBtn.className = "vault-btn";
+
+      if (isInVault(product.id)) {
+        vaultBtn.textContent = "✕ Remove from Vault";
+        vaultBtn.classList.add("remove");
+      } else {
+        vaultBtn.textContent = "♡ Save to Vault";
+      }
+
+      vaultBtn.addEventListener("click", e => {
+        e.stopPropagation();
+
+        if (isInVault(product.id)) {
+          vault = vault.filter(v => v !== product.id);
+          vaultBtn.textContent = "♡ Save to Vault";
+          vaultBtn.classList.remove("remove");
+        } else {
+          vault.push(product.id);
+          vaultBtn.textContent = "✕ Remove from Vault";
+          vaultBtn.classList.add("remove");
         }
 
-        <button class="vault-btn">
-          ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
-        </button>
-      </div>
-    </div>
-  `;
+        saveVault();
+      });
 
-  // expand card
-  card.addEventListener("click", e => {
-    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      /* ---------- ORDER BUTTON ---------- */
+      const orderBtn = document.createElement("a");
+      orderBtn.className = "order-btn";
 
-    document
-      .querySelectorAll(".product-card.big-product")
-      .forEach(c => c.classList.remove("big-product"));
+      if (product.outOfStock) {
+        orderBtn.textContent = "Out of Stock";
+        orderBtn.classList.add("out-of-stock-btn");
+      } else {
+        orderBtn.textContent = "Order via Instagram";
+        orderBtn.href = "#";
+      }
 
+      /* ---------- APPEND ---------- */
+      details.appendChild(title);
+      details.appendChild(short);
+      details.appendChild(price);
+      details.appendChild(full);
+      details.appendChild(vaultBtn);
+      details.appendChild(orderBtn);
+
+      card.appendChild(slider);
+      card.appendChild(details);
+
+      /* ---------- BIG CARD OPEN ---------- */
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".product-card").forEach(c => {
+          c.classList.remove("big-product");
+        });
+
+        card.classList.add("big-product");
+        container.prepend(card);
+        scrollToTop();
+      });
+
+      container.appendChild(card);
+    });
+
+  restoreBigCard();
+}
+
+/* ===================== RESTORE FROM VAULT ===================== */
+function restoreBigCard() {
+  const openId = localStorage.getItem("openProduct");
+  if (!openId) return;
+
+  const card = document.querySelector(`[data-id="${openId}"]`);
+  if (card) {
     card.classList.add("big-product");
-    card.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+    container.prepend(card);
+    scrollToTop();
+  }
 
-  // vault toggle
-  const vaultBtn = card.querySelector(".vault-btn");
-  vaultBtn.addEventListener("click", e => {
-    e.stopPropagation();
-
-    if (vault.includes(product.id)) {
-      vault = vault.filter(id => id !== product.id);
-      vaultBtn.textContent = "♡ Save to Vault";
-    } else {
-      vault.push(product.id);
-      vaultBtn.textContent = "✕ Remove from Vault";
-    }
-
-    localStorage.setItem("vault", JSON.stringify(vault));
-  });
-
-  container.appendChild(card);
-});
+  localStorage.removeItem("openProduct");
+                            }
