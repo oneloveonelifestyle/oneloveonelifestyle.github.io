@@ -1,86 +1,90 @@
-const PRODUCTS = [
+/* products.js */
+/* SINGLE SOURCE OF TRUTH – ALL PAGES MUST RENDER ONLY FROM HERE */
+
+const products = [
+  /* ================= CLOTHING ================= */
   {
-    id: "eta-shirt",
+    id: "clothing_001",
     category: "clothing",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    shortDesc: "Relaxed-fit cotton shirt",
-    price: 1799,
+    name: "Men’s Black Oversized T-Shirt",
+    price: "₹999",
+    description: "Premium cotton oversized t-shirt with a relaxed fit. Soft, breathable, and perfect for everyday wear.",
     images: [
-      "jacket1-1.jpg",
-      "jacket1-2.jpg",
-      "jacket1-3.jpg"
+      "images/clothing/black-oversized-1.jpg",
+      "images/clothing/black-oversized-2.jpg",
+      "images/clothing/black-oversized-3.jpg"
     ],
-    details: `
-ETA Brown Textured Relaxed-Fit Cotton Shirt
-
-Size : XS, S, M, L
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 100% Cotton
-
-Country Of Origin: India
-    `
+    inStock: true
+  },
+  {
+    id: "clothing_002",
+    category: "clothing",
+    name: "Men’s White Classic T-Shirt",
+    price: "₹799",
+    description: "Classic white t-shirt made with high-quality cotton. Durable, minimal, and timeless.",
+    images: [
+      "images/clothing/white-classic-1.jpg",
+      "images/clothing/white-classic-2.jpg"
+    ],
+    inStock: true
+  },
+  {
+    id: "clothing_003",
+    category: "clothing",
+    name: "Men’s Black Hoodie",
+    price: "₹1,999",
+    description: "Heavyweight black hoodie with premium stitching and long-lasting fabric.",
+    images: [
+      "images/clothing/black-hoodie-1.jpg",
+      "images/clothing/black-hoodie-2.jpg"
+    ],
+    inStock: true
   },
 
+  /* ================= SHOES ================= */
   {
-    id: "campus-bomber",
-    category: "clothing",
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    shortDesc: "Zip-front bomber jacket",
-    price: 1999,
+    id: "shoes_001",
+    category: "shoes",
+    name: "Men’s Black Leather Sneakers",
+    price: "₹3,999",
+    description: "Premium black leather sneakers crafted for comfort, durability, and everyday luxury.",
     images: [
-      "jacket2-1.jpg",
-      "jacket2-2.jpg",
-      "jacket2-3.jpg"
+      "images/shoes/black-leather-1.jpg",
+      "images/shoes/black-leather-2.jpg",
+      "images/shoes/black-leather-3.jpg"
     ],
-    details: `
-Campus Sutra Zip-Front Bomber Jacket
-
-Size : S, M, L, XL
-Fit: Regular Fit
-Care Instruction: Machine Wash
-    `
+    inStock: true
+  },
+  {
+    id: "shoes_002",
+    category: "shoes",
+    name: "Men’s White Casual Sneakers",
+    price: "₹2,999",
+    description: "Lightweight white sneakers designed for daily wear with a clean, modern look.",
+    images: [
+      "images/shoes/white-sneakers-1.jpg",
+      "images/shoes/white-sneakers-2.jpg"
+    ],
+    inStock: true
   },
 
+  /* ================= ACCESSORIES ================= */
   {
-    id: "nuon-jacket",
-    category: "clothing",
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    shortDesc: "Relaxed-fit cotton jacket",
-    price: 2999,
+    id: "accessories_001",
+    category: "accessories",
+    name: "Unisex Black Cap",
+    price: "₹499",
+    description: "Minimal black cap with adjustable strap. Perfect for daily styling.",
     images: [
-      "jacket1-1.jpg"
+      "images/accessories/black-cap-1.jpg",
+      "images/accessories/black-cap-2.jpg"
     ],
-    details: `
-Nuon Brown Text Design Relaxed-Fit Cotton Jacket
-
-Size : XS, S, M, L, XL
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 100% Cotton
-
-Country Of Origin: India
-    `
-  },
-
-  {
-    id: "studiofit-hooded",
-    category: "clothing",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    shortDesc: "Relaxed-fit hooded jacket",
-    price: 2199,
-    images: [
-      "jacket2-1.jpg"
-    ],
-    details: `
-Studiofit Dark Brown Relaxed-Fit Hooded Jacket
-
-Size : XS, S, M, L
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane
-
-Country Of Origin: India
-    `
+    inStock: true
   }
 ];
+
+/* ================= VAULT HELPERS ================= */
+
+function getProductById(productId) {
+  return products.find(p => p.id === productId);
+}
