@@ -1,114 +1,290 @@
-const PRODUCTS = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Products | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-/* =========================
-   CLOTHING PRODUCTS
-========================= */
-
-{
-  id: "cloth-eta-brown-shirt",
-  category: "clothing",
-  title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-  price: "₹1999",
-  stock: true,
-  search: "eta brown cotton shirt relaxed fit",
-  images: [
-    "images/eta-shirt-1.jpg"
-  ],
-  description: `
-    <strong>Product Details</strong><br><br>
-
-    <strong>Size:</strong> XS, S, M, L<br>
-    <strong>Fit:</strong> Relaxed Fit<br>
-    <strong>Care Instructions:</strong> Machine Wash<br>
-    <strong>Fabric Composition:</strong> 100% Cotton<br><br>
-
-    ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric for a soft, natural feel throughout the day.
-    Designed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front,
-    making it ideal for both casual and smart styling.<br><br>
-
-    <strong>Country of Origin:</strong> India
-  `
-},
-
-{
-  id: "cloth-campus-bomber-jacket",
-  category: "clothing",
-  title: "Campus Sutra Zip-Front Bomber Jacket",
-  price: "₹2999",
-  stock: true,
-  search: "campus sutra bomber jacket zip front",
-  images: [
-    "images/campus-bomber-1.jpg"
-  ],
-  description: `
-    <strong>Product Details</strong><br><br>
-
-    <strong>Size:</strong> S, M, L, XL<br>
-    <strong>Fit:</strong> Regular Fit<br>
-    <strong>Care Instructions:</strong> Machine Wash<br><br>
-
-    Elevate your outerwear collection with this zip-front bomber jacket from Campus Sutra.
-    Designed for everyday versatility, it features a clean silhouette, easy zip closure,
-    and a comfortable regular fit that layers effortlessly over casual outfits.
-  `
-},
-
-{
-  id: "cloth-nuon-brown-jacket",
-  category: "clothing",
-  title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-  price: "₹3499",
-  stock: true,
-  search: "nuon brown cotton jacket relaxed fit",
-  images: [
-    "images/nuon-jacket-1.jpg"
-  ],
-  description: `
-    <strong>Product Details</strong><br><br>
-
-    <strong>Size:</strong> XS, S, M, L, XL<br>
-    <strong>Fit:</strong> Relaxed Fit<br>
-    <strong>Care Instructions:</strong> Machine Wash<br>
-    <strong>Fabric Composition:</strong> 100% Cotton<br><br>
-
-    Crafted from pure cotton, this brown jacket by Nuon features a contemporary text design
-    and a relaxed fit for all-day comfort. Ideal for layering during transitional weather,
-    it blends modern style with functional ease.<br><br>
-
-    <strong>Manufactured and Marketed By:</strong><br>
-    Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-
-    <strong>Country of Origin:</strong> India
-  `
-},
-
-{
-  id: "cloth-studiofit-hooded-jacket",
-  category: "clothing",
-  title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-  price: "₹3999",
-  stock: true,
-  search: "studiofit dark brown hooded jacket relaxed fit",
-  images: [
-    "images/studiofit-hooded-1.jpg"
-  ],
-  description: `
-    <strong>Product Details</strong><br><br>
-
-    <strong>Size:</strong> XS, S, M, L<br>
-    <strong>Fit:</strong> Relaxed Fit<br>
-    <strong>Care Instructions:</strong> Machine Wash<br>
-    <strong>Fabric Composition:</strong> 79% Polyester, 18% Viscose, 3% Elastane<br><br>
-
-    Designed for contemporary comfort, this dark brown hooded jacket from Studiofit
-    features a relaxed fit and a soft stretch fabric blend. Ideal for casual wear,
-    it offers warmth without compromising on style.<br><br>
-
-    <strong>Manufactured and Marketed By:</strong><br>
-    Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
-
-    <strong>Country of Origin:</strong> India
-  `
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
 }
 
-];
+/* HEADER */
+header{
+  background:#000;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  position:relative;
+}
+
+.home-btn{
+  position:absolute;
+  left:15px;
+  top:15px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.vault-icon{
+  position:absolute;
+  right:15px;
+  top:15px;
+  cursor:pointer;
+}
+
+.vault-count{
+  background:red;
+  color:#fff;
+  font-size:12px;
+  border-radius:50%;
+  padding:2px 6px;
+  position:absolute;
+  top:-8px;
+  right:-10px;
+}
+
+/* SEARCH */
+.search-bar{
+  background:#fff;
+  padding:12px;
+  display:flex;
+  gap:10px;
+}
+
+.search-input{
+  flex:1;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.search-btn{
+  background:#000;
+  color:#fff;
+  border:none;
+  padding:12px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* GRID */
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  padding:15px;
+}
+
+.product-card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  cursor:pointer;
+}
+
+/* SLIDER */
+.slider{
+  display:flex;
+  overflow-x:auto;
+}
+
+.slider img{
+  width:100%;
+}
+
+/* DETAILS */
+.details{
+  padding:12px;
+}
+
+.details h2{
+  font-size:16px;
+  margin:0 0 6px;
+}
+
+.price{
+  font-weight:bold;
+}
+
+.unavailable{
+  color:#b00020;
+  font-size:14px;
+  margin-top:6px;
+}
+
+.big-product{
+  grid-column:1 / -1;
+}
+
+.full-description{
+  display:none;
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.big-product .full-description{
+  display:block;
+}
+
+/* BUTTONS */
+.vault-btn{
+  display:none;
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+}
+
+.big-product .vault-btn{
+  display:block;
+}
+
+.order-btn{
+  display:block;
+  margin-top:10px;
+  background:#000;
+  color:#fff;
+  padding:12px;
+  text-align:center;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.order-btn.disabled{
+  background:#999;
+  pointer-events:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="home-btn">← Home</a>
+  <h2>All Products</h2>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
+  </div>
+</header>
+
+<div class="search-bar">
+  <input id="searchInput" class="search-input" placeholder="Search products...">
+  <button class="search-btn" onclick="searchProducts()">🔍</button>
+</div>
+
+<div class="products-grid" id="products"></div>
+
+<!-- PRODUCTS DATABASE -->
+<script src="products.js"></script>
+
+<script>
+const container = document.getElementById("products");
+const vaultCount = document.getElementById("vaultCount");
+const searchInput = document.getElementById("searchInput");
+
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+vaultCount.textContent = vault.length;
+
+/* LOAD ALL PRODUCTS */
+function renderProducts(list){
+  container.innerHTML = "";
+
+  list.forEach(product=>{
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.dataset.id = product.id;
+
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(img=>`<img src="${img}">`).join("")}
+      </div>
+
+      <div class="details">
+        <h2>${product.title}</h2>
+        <div class="price">${product.price}</div>
+
+        ${product.stock === false ? `<div class="unavailable">Currently unavailable</div>` : ``}
+
+        <div class="full-description">
+          ${product.description || ""}
+        </div>
+
+        <button class="vault-btn">
+          ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
+        </button>
+
+        ${
+          product.stock
+            ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+            : `<div class="order-btn disabled">Out of Stock</div>`
+        }
+      </div>
+    `;
+
+    card.addEventListener("click", e=>{
+      if(e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+      document.querySelectorAll(".product-card").forEach(c=>c.classList.remove("big-product"));
+      card.classList.add("big-product");
+      container.prepend(card);
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    const vaultBtn = card.querySelector(".vault-btn");
+    vaultBtn.addEventListener("click", e=>{
+      e.stopPropagation();
+      if(vault.includes(product.id)){
+        vault = vault.filter(v=>v!==product.id);
+        vaultBtn.textContent = "♡ Save to Vault";
+      }else{
+        vault.push(product.id);
+        vaultBtn.textContent = "✕ Remove from Vault";
+      }
+      localStorage.setItem("vault", JSON.stringify(vault));
+      vaultCount.textContent = vault.length;
+    });
+
+    container.appendChild(card);
+  });
+}
+
+renderProducts(PRODUCTS);
+
+/* SEARCH */
+function searchProducts(){
+  const q = searchInput.value.toLowerCase().trim();
+  renderProducts(
+    PRODUCTS.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      (p.search && p.search.toLowerCase().includes(q))
+    )
+  );
+}
+
+function openVault(){
+  window.location.href = "vault.html";
+}
+
+/* OPEN FROM VAULT */
+const openId = localStorage.getItem("openProduct");
+if(openId){
+  const card = document.querySelector(`[data-id="${openId}"]`);
+  if(card){
+    card.click();
+  }
+  localStorage.removeItem("openProduct");
+}
+</script>
+
+</body>
+</html>
