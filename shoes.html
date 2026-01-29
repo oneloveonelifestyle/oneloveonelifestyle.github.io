@@ -6,28 +6,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{margin:0;font-family:Arial;background:#f4f4f4}
-header{background:#000;color:#fff;padding:15px;text-align:center;position:relative}
-.home-btn{position:absolute;left:15px;top:15px;color:#fff;text-decoration:none;font-weight:bold}
-.vault-icon{position:absolute;right:15px;top:15px;cursor:pointer}
-.vault-count{background:red;color:#fff;font-size:12px;border-radius:50%;padding:2px 6px;margin-left:4px}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
 
-.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:15px}
-.product-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);cursor:pointer}
-.slider{display:flex;overflow-x:auto}
-.slider img{width:100%}
-.details{padding:12px}
-.details h2{font-size:15px;margin:0 0 6px}
-.price{font-weight:bold;color:#b00020}
-.short{font-size:13px;color:#555}
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
 
-.stock-out{color:#999;font-weight:bold;font-size:14px;margin-top:6px}
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-.vault-btn{width:100%;margin-top:8px;padding:10px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer}
-.vault-btn.remove{background:#eee}
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
 
-.order-btn{margin-top:8px;display:block;text-align:center;padding:10px;border-radius:8px;background:#000;color:#fff;text-decoration:none;font-weight:bold}
-.order-btn.disabled{background:#ccc;pointer-events:none}
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+/* SEARCH */
+.search-bar {
+  background: #fff;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* GRID */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+/* SLIDER */
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
+  width: 100%;
+}
+
+/* DETAILS */
+.details {
+  padding: 12px;
+}
+
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #b00020;
+}
+
+.short {
+  font-size: 13px;
+  color: #555;
+}
+
+/* BIG CARD */
+.big-product {
+  grid-column: 1 / -1;
+}
+
+.full-description {
+  display: none;
+  font-size: 14px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.big-product .full-description {
+  display: block;
+}
+
+/* BUTTONS */
+.vault-btn {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.big-product .vault-btn {
+  display: block;
+}
+
+.vault-btn.remove {
+  background: #f5f5f5;
+}
+
+/* OUT OF STOCK */
+.stock-out {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #888;
+}
 </style>
 </head>
 
@@ -36,68 +161,95 @@ header{background:#000;color:#fff;padding:15px;text-align:center;position:relati
 <header>
   <a href="index.html" class="home-btn">← Home</a>
   <h2>Shoes</h2>
-  <div class="vault-icon" onclick="location.href='vault.html'">
+  <div class="vault-icon" onclick="openVault()">
     ♡ <span class="vault-count" id="vaultCount">0</span>
   </div>
 </header>
 
-<div class="products-grid" id="shoeGrid"></div>
+<div class="search-bar">
+  <input type="text" id="searchInput" class="search-input"
+         placeholder="Search shoes...">
+</div>
 
-<!-- LOAD PRODUCTS -->
-<script src="products.js"></script>
+<div class="products-grid" id="products">
+
+<!-- SHOE 1 -->
+<div class="product-card"
+     data-id="shoe-1"
+     data-search="mens brown suede sneakers leather">
+
+  <div class="slider">
+    <img src="shoe1-1.jpg">
+    <img src="shoe1-2.jpg">
+    <img src="shoe1-3.jpg">
+  </div>
+
+  <div class="details">
+    <h2>Men’s Brown Suede Sneakers</h2>
+    <div class="price">Currently Unavailable</div>
+    <div class="short">Premium Suede · Lace-Up</div>
+
+    <div class="full-description">
+      <b>Size :</b> 6, 7, 8, 9, 10<br><br>
+      <b>Material :</b> Leather<br>
+      <b>Closure :</b> Lace-Up
+    </div>
+
+    <div class="stock-out">Out of stock</div>
+    <button class="vault-btn">♡ Save to Vault</button>
+  </div>
+</div>
+
+</div>
 
 <script>
-const grid = document.getElementById("shoeGrid");
+const container = document.getElementById("products");
+const cards = document.querySelectorAll(".product-card");
+const vaultCount = document.getElementById("vaultCount");
+
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
-document.getElementById("vaultCount").textContent = vault.length;
+vaultCount.textContent = vault.length;
 
-/* ===============================
-   LOAD SHOES ONLY
-================================ */
-PRODUCTS.filter(p => p.category === "shoes").forEach(product => {
-  const card = document.createElement("div");
-  card.className = "product-card";
+cards.forEach(card => {
+  const btn = card.querySelector(".vault-btn");
+  const id = card.dataset.id;
 
-  const inVault = vault.includes(product.id);
+  if (vault.includes(id)) {
+    btn.classList.add("remove");
+    btn.textContent = "✕ Remove from Vault";
+  }
 
-  card.innerHTML = `
-    <div class="slider">
-      ${product.images.map(i=>`<img src="${i}">`).join("")}
-    </div>
+  /* EXPAND CARD */
+  card.addEventListener("click", () => {
+    cards.forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-    <div class="details">
-      <h2>${product.title}</h2>
-      <div class="price">${product.inStock ? product.price : "Out of Stock"}</div>
-      <div class="short">${product.short}</div>
-
-      ${!product.inStock ? `<div class="stock-out">Currently unavailable</div>` : ""}
-
-      <button class="vault-btn ${inVault ? "remove":""}">
-        ${inVault ? "✕ Remove from Vault" : "♡ Save to Vault"}
-      </button>
-
-      <a class="order-btn ${!product.inStock ? "disabled":""}"
-         ${product.inStock ? `href="https://www.instagram.com/oneloveonelifestyle/" target="_blank"` : ""}>
-        ${product.inStock ? "Buy via Instagram" : "Not Available"}
-      </a>
-    </div>
-  `;
-
-  /* VAULT LOGIC */
-  card.querySelector(".vault-btn").onclick = e => {
+  /* VAULT BUTTON */
+  btn.addEventListener("click", e => {
     e.stopPropagation();
-    if (vault.includes(product.id)) {
-      vault = vault.filter(v => v !== product.id);
-    } else {
-      vault.push(product.id);
-    }
-    localStorage.setItem("vault", JSON.stringify(vault));
-    location.reload();
-  };
 
-  grid.appendChild(card);
+    if (vault.includes(id)) {
+      vault = vault.filter(v => v !== id);
+      btn.classList.remove("remove");
+      btn.textContent = "♡ Save to Vault";
+    } else {
+      vault.push(id);
+      btn.classList.add("remove");
+      btn.textContent = "✕ Remove from Vault";
+    }
+
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
 });
+
+function openVault() {
+  window.location.href = "vault.html";
+}
 </script>
 
 </body>
-</html>
+                                        </html>
