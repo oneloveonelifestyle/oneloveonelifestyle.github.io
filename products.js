@@ -5,7 +5,7 @@ const PRODUCTS = [
     category: "clothing",
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
     price: "₹1,499",
-    images: ["eta1.jpg", "eta2.jpg"],
+    images: ["eta1.jpg"],
     stock: true,
     search: "eta brown textured relaxed fit cotton shirt",
     description: `
@@ -22,7 +22,7 @@ Fabric Composition: 100% Cotton<br><br>
 ETA redefines everyday comfort with this brown shirt, crafted from cotton-rich fabric, for a soft, natural feel throughout the day. Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.<br><br>
 
 Country Of Origin: India
-    `
+`
   },
 
   {
@@ -30,7 +30,7 @@ Country Of Origin: India
     category: "clothing",
     title: "Campus Sutra Zip-Front Bomber Jacket",
     price: "₹1,999",
-    images: ["cs1.jpg", "cs2.jpg"],
+    images: ["campus1.jpg"],
     stock: true,
     search: "campus sutra zip front bomber jacket",
     description: `
@@ -42,7 +42,7 @@ Size : S, M, L, XL<br><br>
 Fit: Regular Fit<br><br>
 
 Care Instruction: Machine Wash
-    `
+`
   },
 
   {
@@ -50,7 +50,7 @@ Care Instruction: Machine Wash
     category: "clothing",
     title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
     price: "₹2,299",
-    images: ["nuon1.jpg", "nuon2.jpg"],
+    images: ["nuon1.jpg"],
     stock: true,
     search: "nuon brown text design relaxed fit cotton jacket",
     description: `
@@ -68,7 +68,7 @@ Manufactured and Marketed By:<br>
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
 
 Country Of Origin: India
-    `
+`
   },
 
   {
@@ -76,7 +76,7 @@ Country Of Origin: India
     category: "clothing",
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
     price: "₹2,199",
-    images: ["studio1.jpg", "studio2.jpg"],
+    images: ["studio1.jpg"],
     stock: true,
     search: "studiofit dark brown relaxed fit hooded jacket",
     description: `
@@ -94,7 +94,7 @@ Manufactured and Marketed By:<br>
 Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>
 
 Country Of Origin: India
-    `
+`
   }
 
 ];
