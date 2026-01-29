@@ -282,18 +282,22 @@ function renderProducts(list) {
     `;
 
     card.addEventListener("click", e => {
-      if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+  if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
 
-      const isBig = card.classList.contains("big-product");
-      document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+  // 🚫 If already big, do nothing
+  if (card.classList.contains("big-product")) return;
 
-      if (!isBig) {
-        card.classList.add("big-product");
-        container.prepend(card);
-        history.pushState({ expanded: true }, "");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
+  // ✅ Collapse others
+  document.querySelectorAll(".product-card")
+    .forEach(c => c.classList.remove("big-product"));
+
+  // ✅ Expand only once
+  card.classList.add("big-product");
+  container.prepend(card);
+
+  history.pushState({ expanded: true }, "");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
     const btn = card.querySelector(".vault-btn");
     btn.addEventListener("click", e => {
