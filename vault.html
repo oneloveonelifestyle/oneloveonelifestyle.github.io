@@ -17,57 +17,87 @@ header {
   color: #fff;
   padding: 15px;
   text-align: center;
-  position: relative;
 }
 
-.home-btn {
-  position: absolute;
-  left: 15px;
-  top: 15px;
+.top-action {
+  background: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.continue-btn {
+  background: #000;
   color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
   text-decoration: none;
+  font-size: 14px;
   font-weight: bold;
 }
 
-.vault-grid {
+.products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 15px;
   padding: 15px;
 }
 
-.vault-card {
+.product-card {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
 }
 
-.vault-card img {
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
+
+.slider img {
   width: 100%;
-  display: block;
 }
 
-.vault-details {
-  padding: 10px;
+.details {
+  padding: 12px;
 }
 
-.vault-details h4 {
-  margin: 0;
-  font-size: 14px;
+.details h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
 }
 
-.vault-details .price {
-  color: #b00020;
-  font-weight: bold;
-  margin-top: 4px;
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.empty {
+.remove-btn {
+  padding: 8px 10px;
+  font-size: 13px;
+  background: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.order-btn {
+  flex: 1;
+  background: #000;
+  color: #fff;
   text-align: center;
-  padding: 50px;
-  color: #777;
+  padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.empty-vault {
+  text-align: center;
+  margin-top: 80px;
+  color: #555;
 }
 </style>
 </head>
@@ -75,16 +105,108 @@ header {
 <body>
 
 <header>
-  <a href="index.html" class="home-btn">← Home</a>
-  <h2>Your Vault</h2>
+  <h2>My Vault</h2>
 </header>
 
-<div id="vaultContainer" class="vault-grid"></div>
-<div id="emptyVault" class="empty" style="display:none;">
-  Your vault is empty 🤍
+<div class="top-action">
+  <a href="index.html" class="continue-btn">← Continue Shopping</a>
 </div>
 
-<script src="products.js"></script>
-<script src="vault.js"></script>
+<div class="products-grid" id="vaultProducts"></div>
+
+<script>
+const vaultProducts = document.getElementById("vaultProducts");
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+
+const PRODUCTS = {
+  "jacket-1": {
+    page: "clothing.html",
+    title: "Campus Sutra Zip-Front Bomber Jacket",
+    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"]
+  },
+  "jacket-2": {
+    page: "clothing.html",
+    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
+    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"]
+  },
+  "jacket-4": {
+    page: "clothing.html",
+    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"]
+  },
+  "shirt-1": {
+    page: "clothing.html",
+    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
+    images: ["shirt1-1.jpg","shirt1-2.jpg"]
+  },
+  "shoe-1": {
+    page: "shoes.html",
+    title: "Men’s Brown Suede Sneakers",
+    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"]
+  }
+};
+
+function renderVault() {
+  vaultProducts.innerHTML = "";
+  let rendered = 0;
+
+  vault.forEach(id => {
+    const product = PRODUCTS[id];
+    if (!product) return;
+
+    rendered++;
+
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.addEventListener("click", () => {
+      localStorage.setItem("openProduct", id);
+      window.location.href = product.page;
+    });
+
+    card.innerHTML = `
+      <div class="slider">
+        ${product.images.map(img => `<img src="${img}">`).join("")}
+      </div>
+
+      <div class="details">
+        <h3>${product.title}</h3>
+        <div class="actions">
+          <button class="remove-btn">Remove</button>
+          <a class="order-btn"
+             href="https://www.instagram.com/oneloveonelifestyle/"
+             target="_blank">Buy via Instagram</a>
+        </div>
+      </div>
+    `;
+
+    card.querySelector(".remove-btn").addEventListener("click", e => {
+      e.stopPropagation();
+      vault = vault.filter(v => v !== id);
+      localStorage.setItem("vault", JSON.stringify(vault));
+      renderVault();
+    });
+
+    card.querySelector(".order-btn").addEventListener("click", e => {
+      e.stopPropagation();
+    });
+
+    vaultProducts.appendChild(card);
+  });
+
+  /* ✅ EMPTY STATE — NOW 100% RELIABLE */
+  if (rendered === 0) {
+    vaultProducts.innerHTML = `
+      <div class="empty-vault">
+        <h3>Your vault is empty</h3>
+        <p>Save products you love and find them here anytime.</p>
+      </div>
+    `;
+  }
+}
+
+renderVault();
+</script>
+
 </body>
 </html>
