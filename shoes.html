@@ -52,7 +52,6 @@ header{
   padding:15px;
 }
 
-/* CARD */
 .product-card{
   background:#fff;
   border-radius:12px;
@@ -88,7 +87,6 @@ header{
 .price{
   font-size:16px;
   font-weight:bold;
-  color:#b00020;
 }
 
 .unavailable{
@@ -98,6 +96,7 @@ header{
   margin-top:4px;
 }
 
+/* DESCRIPTION */
 .full-description{
   display:none;
   margin-top:12px;
@@ -110,13 +109,27 @@ header{
 }
 
 /* BUTTONS */
+.vault-btn{
+  display:none;
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+  background:#fff;
+  border:1px solid #ccc;
+  cursor:pointer;
+}
+
+.big-product .vault-btn{
+  display:block;
+}
+
 .order-btn{
   margin-top:10px;
   display:block;
   text-align:center;
   padding:12px;
   border-radius:8px;
-  text-decoration:none;
   font-weight:bold;
   background:#ccc;
   color:#666;
@@ -138,14 +151,13 @@ header{
 
 <div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
 const container = document.getElementById("products");
 const searchInput = document.getElementById("searchInput");
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* LOAD SHOES ONLY */
 function renderShoes(list){
   container.innerHTML = "";
 
@@ -154,7 +166,10 @@ function renderShoes(list){
 
     const card = document.createElement("div");
     card.className = "product-card";
+    card.dataset.id = product.id;
     card.dataset.search = product.search.toLowerCase();
+
+    const saved = vault.includes(product.id);
 
     card.innerHTML = `
       <div class="slider">
@@ -165,25 +180,40 @@ function renderShoes(list){
         <h2>${product.title}</h2>
         <div class="price">${product.price}</div>
 
-        ${!product.stock ? `<div class="unavailable">Currently unavailable</div>` : ""}
+        <div class="unavailable">Currently unavailable</div>
 
         <div class="full-description">
-          ${!product.stock ? `<p class="unavailable">Out of Stock</p>` : ""}
+          Premium craftsmanship with refined materials designed for everyday comfort and durability.
         </div>
+
+        <button class="vault-btn">
+          ${saved ? "✕ Remove from Vault" : "♡ Save to Vault"}
+        </button>
 
         <a class="order-btn">Out of Stock</a>
       </div>
     `;
 
-    /* CARD CLICK → BIG + TOP */
+    /* CARD CLICK */
     card.addEventListener("click",()=>{
       document.querySelectorAll(".product-card")
         .forEach(c=>c.classList.remove("big-product"));
 
       card.classList.add("big-product");
       container.prepend(card);
-
       window.scrollTo({ top:0, behavior:"smooth" });
+    });
+
+    /* VAULT BUTTON */
+    card.querySelector(".vault-btn").addEventListener("click",e=>{
+      e.stopPropagation();
+      if(vault.includes(product.id)){
+        vault = vault.filter(v=>v!==product.id);
+      }else{
+        vault.push(product.id);
+      }
+      localStorage.setItem("vault",JSON.stringify(vault));
+      renderShoes(PRODUCTS);
     });
 
     container.appendChild(card);
@@ -192,14 +222,13 @@ function renderShoes(list){
 
 /* SEARCH */
 searchInput.addEventListener("input",()=>{
-  const q = searchInput.value.toLowerCase().trim();
+  const q = searchInput.value.toLowerCase();
   document.querySelectorAll(".product-card").forEach(card=>{
     card.style.display =
       !q || card.dataset.search.includes(q) ? "block" : "none";
   });
 });
 
-/* INITIAL LOAD */
 renderShoes(PRODUCTS);
 </script>
 
