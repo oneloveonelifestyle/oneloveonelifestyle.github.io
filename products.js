@@ -1,156 +1,287 @@
-/* =========================================================
-   MASTER PRODUCTS DATABASE
-   This file is the ONLY place where products are defined
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Clothing | One Love One Lifestyle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-const PRODUCTS = [
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
 
-  /* ===================== SHOES ===================== */
+/* HEADER */
+header {
+  background: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
 
-  {
-    id: "shoe-1",
-    category: "shoe",
-    title: "Men’s Brown Suede Sneakers",
-    price: "₹2,999",
-    images: [
-      "shoe1-1.jpg",
-      "shoe1-2.jpg",
-      "shoe1-3.jpg"
-    ],
-    stock: false,
-    search: "mens brown suede sneakers leather lace up",
-    description: `
-Price: ₹2999
-Style: Lace-Up Sneakers
-Upper Material: Suede
-Occasion: Casual Wear
-Care Instruction: Wipe with dry cloth
-`
-  },
+.home-btn {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-  {
-    id: "shoe-2",
-    category: "shoe",
-    title: "Men’s Black Leather Sneakers",
-    price: "₹3,499",
-    images: [
-      "shoe2-1.jpg",
-      "shoe2-2.jpg"
-    ],
-    stock: false,
-    search: "mens black leather sneakers premium",
-    description: `
-Price: ₹3499
-Style: Lace-Up Sneakers
-Upper Material: Leather
-Occasion: Casual Wear
-Care Instruction: Wipe with dry cloth
-`
-  },
+.vault-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
 
-  /* ===================== JACKETS ===================== */
+.vault-count {
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
 
-  {
-    id: "jacket-1",
-    category: "clothing",
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    price: "₹1,999",
-    images: [
-      "jacket1-1.jpg",
-      "jacket1-2.jpg",
-      "jacket1-3.jpg"
-    ],
-    stock: true,
-    search: "campus sutra bomber jacket zip front",
-    description: `
-Price: ₹1999
-Size: S, M, L, XL
-Fit: Regular Fit
-Care Instruction: Machine Wash
-`
-  },
+/* SEARCH */
+.search-bar {
+  background: #fff;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+}
 
-  {
-    id: "jacket-2",
-    category: "clothing",
-    title: "Nuon Brown Text Design Relaxed-Fit Cotton Jacket",
-    price: "₹2,299",
-    images: [
-      "jacket2-1.jpg",
-      "jacket2-2.jpg",
-      "jacket2-3.jpg"
-    ],
-    stock: true,
-    search: "nuon brown relaxed fit jacket",
-    description: `
-Price: ₹2999
-Size: XS, S, M, L, XL
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 100% Cotton
+.search-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-Manufactured and Marketed By:
-Trent Limited, Bombay House, 24, Homi Mody Street,
-Fort, Mumbai – 400001
+.search-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
 
-Country Of Origin: India
-`
-  },
+/* GRID */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
+}
 
-  {
-    id: "jacket-3",
-    category: "clothing",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    price: "₹2,199",
-    images: [
-      "jacket3-1.jpg",
-      "jacket3-2.jpg",
-      "jacket3-3.jpg"
-    ],
-    stock: true,
-    search: "studiofit dark brown hooded jacket relaxed",
-    description: `
-Price: ₹2199
-Size: XS, S, M, L
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 79% Polyester, 18% Viscose, 3% Elastane
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
 
-Manufactured and Marketed By:
-Trent Limited, Bombay House, 24, Homi Mody Street,
-Fort, Mumbai – 400001
+/* SLIDER */
+.slider {
+  display: flex;
+  overflow-x: auto;
+}
 
-Country Of Origin: India
-`
-  },
+.slider img {
+  width: 100%;
+}
 
-  /* ===================== SHIRTS ===================== */
+/* DETAILS */
+.details {
+  padding: 12px;
+}
 
-  {
-    id: "shirt-1",
-    category: "clothing",
-    title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
-    price: "₹1,499",
-    images: [
-      "shirt1-1.jpg",
-      "shirt1-2.jpg"
-    ],
-    stock: true,
-    search: "eta brown textured cotton shirt relaxed",
-    description: `
-Price: ₹1799
-Size: XS, S, M, L
-Fit: Relaxed Fit
-Care Instruction: Machine Wash
-Fabric Composition: 100% Cotton
+.details h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
 
-ETA redefines everyday comfort with this brown shirt,
-crafted from cotton-rich fabric for a soft, natural feel.
-Designed with a spread collar, full sleeves and
-a classic button-up front.
+.price {
+  font-weight: bold;
+}
 
-Country Of Origin: India
-`
+.short {
+  font-size: 13px;
+  color: #555;
+}
+
+/* BIG CARD */
+.big-product {
+  grid-column: 1 / -1;
+}
+
+.full-description {
+  display: none;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.big-product .full-description {
+  display: block;
+}
+
+/* BUTTONS */
+.vault-btn {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.big-product .vault-btn {
+  display: block;
+}
+
+.order-btn {
+  display: block;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="home-btn">← Home</a>
+  <h2>Clothing</h2>
+  <div class="vault-icon" onclick="openVault()">
+    ♡ <span class="vault-count" id="vaultCount">0</span>
+  </div>
+</header>
+
+<div class="search-bar">
+  <input id="searchInput" class="search-input" placeholder="Search jackets, shirts...">
+  <button class="search-btn" onclick="searchProducts()">🔍</button>
+</div>
+
+<div class="products-grid" id="products"></div>
+
+<script src="products.js"></script>
+
+<script>
+const container = document.getElementById("products");
+const vaultCount = document.getElementById("vaultCount");
+const searchInput = document.getElementById("searchInput");
+
+let vault = JSON.parse(localStorage.getItem("vault")) || [];
+vaultCount.textContent = vault.length;
+
+/* AMAZON-STYLE SHORT CAPTIONS (SMALL CARD ONLY) */
+const SHORT_CAPTIONS = {
+  "shirt-1": "Relaxed-fit cotton shirt with textured finish",
+  "jacket-1": "Zip-front bomber jacket with regular fit",
+  "jacket-2": "Cotton jacket with relaxed fit and text design",
+  "jacket-3": "Hooded jacket with relaxed fit and stretch fabric"
+};
+
+/* LOAD CLOTHING */
+PRODUCTS.forEach(product => {
+  if (product.category !== "clothing") return;
+
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.dataset.id = product.id;
+  card.dataset.search = product.search.toLowerCase();
+
+  card.innerHTML = `
+    <div class="slider">
+      ${product.images.map(img => `<img src="${img}">`).join("")}
+    </div>
+
+    <div class="details">
+      <h2>${product.title}</h2>
+      <div class="price">${product.price}</div>
+
+      <!-- SMALL CARD CAPTION -->
+      <div class="short">${SHORT_CAPTIONS[product.id] || ""}</div>
+
+      <!-- BIG CARD FULL DETAILS -->
+      <div class="full-description">
+        ${product.description || ""}
+      </div>
+
+      <button class="vault-btn">♡ Save to Vault</button>
+      <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
+        Buy via Instagram
+      </a>
+    </div>
+  `;
+
+  const btn = card.querySelector(".vault-btn");
+
+  if (vault.includes(product.id)) {
+    btn.textContent = "✕ Remove from Vault";
   }
 
-];
+  card.addEventListener("click", e => {
+    if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
+    document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
+    card.classList.add("big-product");
+    container.prepend(card);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  btn.addEventListener("click", e => {
+    e.stopPropagation();
+    if (vault.includes(product.id)) {
+      vault = vault.filter(v => v !== product.id);
+      btn.textContent = "♡ Save to Vault";
+    } else {
+      vault.push(product.id);
+      btn.textContent = "✕ Remove from Vault";
+    }
+    localStorage.setItem("vault", JSON.stringify(vault));
+    vaultCount.textContent = vault.length;
+  });
+
+  container.appendChild(card);
+});
+
+/* SEARCH */
+function searchProducts() {
+  const q = searchInput.value.toLowerCase().trim();
+  document.querySelectorAll(".product-card").forEach(card => {
+    card.style.display = !q || card.dataset.search.includes(q) ? "block" : "none";
+    card.classList.remove("big-product");
+  });
+}
+
+function openVault() {
+  window.location.href = "vault.html";
+}
+
+/* OPEN FROM VAULT */
+const openId = localStorage.getItem("openProduct");
+if (openId) {
+  const target = document.querySelector(`[data-id="${openId}"]`);
+  if (target) {
+    target.classList.add("big-product");
+    container.prepend(target);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  localStorage.removeItem("openProduct");
+}
+</script>
+
+</body>
+</html>
