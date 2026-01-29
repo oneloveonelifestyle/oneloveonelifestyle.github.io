@@ -204,7 +204,7 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* LOAD SHOES */
+/* LOAD SHOES ONLY */
 PRODUCTS.forEach(product => {
   if (product.category !== "shoe") return;
 
