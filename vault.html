@@ -58,12 +58,10 @@ header {
 .slider {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
 }
 
 .slider img {
   width: 100%;
-  scroll-snap-align: center;
 }
 
 /* DETAILS */
@@ -103,7 +101,7 @@ header {
   font-weight: bold;
 }
 
-/* EMPTY STATE */
+/* EMPTY */
 .empty-vault {
   text-align: center;
   margin-top: 80px;
@@ -119,7 +117,7 @@ header {
 </header>
 
 <div class="top-action">
-  <a href="clothing.html" class="continue-btn">← Continue Shopping</a>
+  <a href="index.html" class="continue-btn">← Continue Shopping</a>
 </div>
 
 <div class="products-grid" id="vaultProducts"></div>
@@ -133,7 +131,7 @@ let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
 /* ===============================
    MASTER PRODUCT DATABASE
-   (IDs MUST MATCH SAVE BUTTON IDs)
+   IDs MUST MATCH PRODUCT PAGES
 ================================ */
 const PRODUCTS = {
   "jacket-1": {
@@ -148,11 +146,6 @@ const PRODUCTS = {
   },
   "jacket-3": {
     title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
-    images: ["shirt1-1.jpg","shirt1-2.jpg"],
-    page: "clothing.html"
-  },
-  "jacket-4": {
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
     images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
     page: "clothing.html"
   },
@@ -160,6 +153,11 @@ const PRODUCTS = {
     title: "ETA Brown Textured Relaxed-Fit Cotton Shirt",
     images: ["shirt1-1.jpg","shirt1-2.jpg"],
     page: "clothing.html"
+  },
+  "shoe-1": {
+    title: "Men’s Brown Suede Sneakers",
+    images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
+    page: "shoes.html"
   }
 };
 
@@ -169,28 +167,27 @@ const PRODUCTS = {
 function renderVault() {
   vaultProducts.innerHTML = "";
 
-  const validItems = vault.filter(id => PRODUCTS[id]);
-
-  if (validItems.length === 0) {
+  if (vault.length === 0) {
     vaultProducts.innerHTML = `
       <div class="empty-vault">
         <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here anytime.</p>
+        <p>Save products you love ❤️</p>
       </div>
     `;
     return;
   }
 
-  validItems.forEach(id => {
+  vault.forEach(id => {
     const product = PRODUCTS[id];
+    if (!product) return;
 
     const card = document.createElement("div");
     card.className = "product-card";
 
-    card.addEventListener("click", () => {
+    card.onclick = () => {
       localStorage.setItem("openProduct", id);
       window.location.href = product.page;
-    });
+    };
 
     card.innerHTML = `
       <div class="slider">
@@ -204,7 +201,7 @@ function renderVault() {
           <button class="remove-btn">Remove</button>
           <a class="order-btn"
              href="https://www.instagram.com/oneloveonelifestyle/"
-             target="_blank">Buy via Instagram</a>
+             target="_blank">Buy</a>
         </div>
       </div>
     `;
@@ -216,9 +213,7 @@ function renderVault() {
       renderVault();
     };
 
-    card.querySelector(".order-btn").onclick = e => {
-      e.stopPropagation();
-    };
+    card.querySelector(".order-btn").onclick = e => e.stopPropagation();
 
     vaultProducts.appendChild(card);
   });
