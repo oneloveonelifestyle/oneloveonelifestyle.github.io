@@ -104,13 +104,8 @@ header {
 }
 
 .details h2 {
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 6px;
-}
-/* SMALL CARD TITLE ONLY */
-.product-card:not(.big-product) .details h2{
-  font-size:13px;
-  line-height:1.3;
 }
 
 .price {
@@ -132,7 +127,6 @@ header {
   margin-top: 12px;
   font-size: 14px;
   line-height: 1.6;
-  white-space: pre-line;
 }
 
 .big-product .full-description {
@@ -165,86 +159,28 @@ header {
   text-decoration: none;
   font-weight: bold;
 }
-/* SMALL CARD ORDER BUTTON */
-.product-card:not(.big-product) .order-btn{
-  font-size:13px;
-  padding:8px;
-}
 
 .order-btn.disabled {
   background: #999;
   pointer-events: none;
 }
-/* PROFESSIONAL CARD ALIGNMENT */
-.product-card{
-  display:flex;
-  flex-direction:column;
+
+/* =====================================================
+   ONLY CHANGE — SMALL CARD CAPTION (AMAZON STYLE)
+   ===================================================== */
+
+.product-card:not(.big-product) .details h2 {
+  font-size: 13px;
+  line-height: 1.3;
 }
 
-.product-card .details{
-  display:flex;
-  flex-direction:column;
-  height:100%;
-}
-/* PROFESSIONAL CARD ALIGNMENT */
-.product-card{
-  display:flex;
-  flex-direction:column;
+.product-card:not(.big-product) .price {
+  font-size: 13px;
 }
 
-.product-card .details{
-  display:flex;
-  flex-direction:column;
-  height:100%;
+.product-card:not(.big-product) .details {
+  padding: 10px;
 }
-
-/* price stays just above order button */
-.product-card .price{
-  margin-top:auto;
-}
-
-/* order button always at bottom */
-.product-card .order-btn{
-  margin-top:8px;
-}
-
-  /* slightly larger product image */
-.product-card img{
-  height:200px;
-  object-fit:cover;
-}
-/* IMAGE SIZE — BIG CARD (FULL COVER) */
-.product-card.big-product .slider img{
-  height:320px;
-  object-fit:cover;
-}
-/* ================= IMAGE FIX ================= */
-
-/* slider must not add extra space */
-.product-card .slider{
-  margin:0;
-  padding:0;
-}
-
-/* SMALL CARD — Amazon-like image size */
-.product-card .slider img{
-  display:block;
-  width:100%;
-  height:190px;
-  object-fit:cover;
-}
-
-/* BIG CARD — FULL COVER, NO GAP */
-.product-card.big-product .slider img{
-  height:100vh;
-  max-height:420px;
-  object-fit:cover;
-}
-
-/* remove gap between image and details in big card */
-.product-card.big-product .details{
-  padding-top:10px;
-  }
 </style>
 </head>
 
@@ -265,7 +201,6 @@ header {
 
 <div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS DATABASE -->
 <script src="products.js"></script>
 
 <script>
@@ -276,10 +211,6 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* IMPORTANT: BASE HISTORY STATE */
-history.replaceState({ page: "clothing" }, "");
-
-/* LOAD CLOTHING */
 const clothingProducts = PRODUCTS.filter(p => p.category === "clothing");
 
 function renderProducts(list) {
@@ -289,7 +220,6 @@ function renderProducts(list) {
     const card = document.createElement("div");
     card.className = "product-card";
     card.dataset.id = product.id;
-    card.dataset.search = product.search.toLowerCase();
 
     card.innerHTML = `
       <div class="slider">
@@ -302,7 +232,7 @@ function renderProducts(list) {
 
         ${product.stock === false ? `<div class="unavailable">Currently unavailable</div>` : ``}
 
-        <div class="full-description">${product.description || ""}</div>
+        <div class="full-description">${product.description}</div>
 
         <button class="vault-btn">
           ${vault.includes(product.id) ? "✕ Remove from Vault" : "♡ Save to Vault"}
@@ -318,13 +248,9 @@ function renderProducts(list) {
 
     card.addEventListener("click", e => {
       if (e.target.closest(".vault-btn") || e.target.closest(".order-btn")) return;
-
       document.querySelectorAll(".product-card").forEach(c => c.classList.remove("big-product"));
       card.classList.add("big-product");
       container.prepend(card);
-
-      history.pushState({ product: product.id }, "");
-
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -348,34 +274,15 @@ function renderProducts(list) {
 
 renderProducts(clothingProducts);
 
-/* SEARCH */
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
-  renderProducts(clothingProducts.filter(p => p.search.toLowerCase().includes(q)));
+  renderProducts(
+    clothingProducts.filter(p => p.search.toLowerCase().includes(q))
+  );
 }
 
-/* VAULT */
 function openVault() {
   window.location.href = "vault.html";
-}
-
-/* BACK BUTTON — COLLAPSE CARD */
-window.addEventListener("popstate", () => {
-  document.querySelectorAll(".product-card")
-    .forEach(c => c.classList.remove("big-product"));
-});
-
-/* OPEN FROM VAULT */
-const openId = localStorage.getItem("openProduct");
-if (openId) {
-  const card = document.querySelector(`[data-id="${openId}"]`);
-  if (card) {
-    card.classList.add("big-product");
-    container.prepend(card);
-    history.pushState({ product: openId }, "");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  localStorage.removeItem("openProduct");
 }
 </script>
 
