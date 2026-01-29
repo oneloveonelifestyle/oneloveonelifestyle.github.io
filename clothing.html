@@ -232,6 +232,7 @@ PRODUCTS.forEach(product => {
     card.classList.add("big-product");
     container.prepend(card);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    history.pushState({ expanded:true }, "", location.href);
   });
 
   btn.addEventListener("click", e => {
@@ -280,6 +281,10 @@ if (openId) {
   }
   localStorage.removeItem("openProduct");
 }
+  window.addEventListener("popstate", ()=>{
+  document.querySelectorAll(".product-card")
+    .forEach(c=>c.classList.remove("big-product"));
+});
 </script>
 
 </body>
