@@ -178,7 +178,6 @@ header {
 
 <div class="products-grid" id="products"></div>
 
-<!-- PRODUCTS SOURCE -->
 <script src="products.js"></script>
 
 <script>
@@ -189,9 +188,7 @@ const searchInput = document.getElementById("searchInput");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 vaultCount.textContent = vault.length;
 
-/* ===============================
-   LOAD CLOTHING PRODUCTS
-================================ */
+/* LOAD CLOTHING PRODUCTS */
 PRODUCTS.forEach(product => {
   if (product.category !== "clothing") return;
 
@@ -253,9 +250,7 @@ PRODUCTS.forEach(product => {
   container.appendChild(card);
 });
 
-/* ===============================
-   SEARCH
-================================ */
+/* SEARCH */
 function searchProducts() {
   const q = searchInput.value.toLowerCase().trim();
   document.querySelectorAll(".product-card").forEach(card => {
@@ -268,9 +263,7 @@ function openVault() {
   window.location.href = "vault.html";
 }
 
-/* ===============================
-   OPEN FROM VAULT
-================================ */
+/* OPEN FROM VAULT */
 const openId = localStorage.getItem("openProduct");
 if (openId) {
   const target = document.querySelector(`[data-id="${openId}"]`);
@@ -281,9 +274,11 @@ if (openId) {
   }
   localStorage.removeItem("openProduct");
 }
-  window.addEventListener("popstate", ()=>{
+
+/* BACK BUTTON HANDLING */
+window.addEventListener("popstate", () => {
   document.querySelectorAll(".product-card")
-    .forEach(c=>c.classList.remove("big-product"));
+    .forEach(c => c.classList.remove("big-product"));
 });
 </script>
 
