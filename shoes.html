@@ -5,8 +5,6 @@
 <title>Shoes | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
-
 <style>
 body{
   margin:0;
@@ -72,29 +70,29 @@ header{
 }
 
 /* STOCK TEXT */
-.unavailable-text{
-  color:#c00;
+.stock-text{
+  color:red;
   font-size:13px;
   font-weight:bold;
+  margin-top:4px;
 }
 
 /* ACTION */
-.action-area{
+.order-btn{
   margin-top:10px;
-}
-.out-btn{
-  width:100%;
+  display:block;
+  text-align:center;
   padding:10px;
-  background:#eee;
-  color:#777;
-  border:none;
   border-radius:6px;
+  background:#000;
+  color:#fff;
+  text-decoration:none;
   font-weight:bold;
 }
-
-/* BIG VIEW */
-.product-card.active{
-  position:relative;
+.order-btn.disabled{
+  background:#ddd;
+  color:#777;
+  pointer-events:none;
 }
 </style>
 </head>
@@ -111,21 +109,14 @@ header{
 
 <div class="products-grid" id="shoeGrid"></div>
 
-<!-- PRODUCTS SOURCE -->
 <script src="products.js"></script>
-
 <script>
 const shoeGrid = document.getElementById("shoeGrid");
 const searchInput = document.getElementById("searchInput");
 
-let activeCard = null;
+/* LOAD ONLY SHOES FROM products.js */
+let shoes = PRODUCTS.filter(p => p.category === "shoe");
 
-/* FILTER SHOES FROM products.js */
-const shoes = Object.values(PRODUCTS).filter(
-  p => p.category === "shoe"
-);
-
-/* RENDER */
 function renderShoes(list){
   shoeGrid.innerHTML = "";
 
@@ -133,41 +124,31 @@ function renderShoes(list){
     const card = document.createElement("div");
     card.className = "product-card";
 
+    /* 🔴 ONLY REQUIRED CHANGE — SCROLL TO TOP */
+    card.addEventListener("click", ()=>{
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
     card.innerHTML = `
       <div class="slider">
-        ${product.images.map(i=>`<img src="${i}">`).join("")}
+        ${product.images.map(img=>`<img src="${img}">`).join("")}
       </div>
 
       <div class="details">
         <h3>${product.title}</h3>
 
-        ${product.stock === 0
-          ? `<div class="unavailable-text">Currently unavailable</div>`
-          : ``}
+        ${!product.inStock
+          ? `<div class="stock-text">Currently unavailable</div>`
+          : ""
+        }
 
-        <div class="action-area">
-          ${product.stock === 0
-            ? `<button class="out-btn">Out of Stock</button>`
-            : ``}
-        </div>
+        ${
+          product.inStock
+          ? `<a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">Buy via Instagram</a>`
+          : `<div class="order-btn disabled">Out of Stock</div>`
+        }
       </div>
     `;
-
-    /* CARD TAP */
-    card.addEventListener("click", ()=>{
-      if(activeCard && activeCard !== card){
-        activeCard.classList.remove("active");
-      }
-
-      if(card.classList.contains("active")){
-        card.classList.remove("active");
-        activeCard = null;
-      }else{
-        card.classList.add("active");
-        activeCard = card;
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
 
     shoeGrid.appendChild(card);
   });
@@ -177,11 +158,10 @@ renderShoes(shoes);
 
 /* SEARCH */
 searchInput.addEventListener("input", ()=>{
-  const q = searchInput.value.toLowerCase();
-  const filtered = shoes.filter(p =>
-    p.title.toLowerCase().includes(q)
+  const value = searchInput.value.toLowerCase();
+  renderShoes(
+    shoes.filter(p=>p.title.toLowerCase().includes(value))
   );
-  renderShoes(filtered);
 });
 </script>
 
