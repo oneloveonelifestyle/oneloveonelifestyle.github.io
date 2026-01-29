@@ -8,7 +8,7 @@ const PRODUCTS = [
     title: "Men’s Brown Suede Sneakers",
     price: "₹2,999",
     images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
-    stock: true,
+    stock: false,
     search: "mens brown suede sneakers leather lace up",
     description: "Premium suede sneakers for everyday comfort."
   },
@@ -19,20 +19,9 @@ const PRODUCTS = [
     title: "Men’s Black Leather Sneakers",
     price: "₹3,499",
     images: ["shoe2-1.jpg","shoe2-2.jpg"],
-    stock: true,
+    stock: false,
     search: "mens black leather sneakers premium",
     description: "Classic black leather sneakers with premium finish."
-  },
-
-  {
-    id: "shoe-3",
-    category: "shoe",
-    title: "Navy Knit Textured",
-    price: "₹1,199",
-    images: ["shoe-navy-1.jpg", "shoe-navy-2.jpg", "shoe-navy-3.jpg"],
-    stock: true,
-    search: "navy knit textured shoes men casual breathable",
-    description: "Lightweight navy knit textured shoes designed for everyday comfort and breathability."
   },
 
   /* ===================== CLOTHING ===================== */
@@ -109,24 +98,6 @@ const PRODUCTS = [
       "Country Of Origin: India"
   },
 
-  {
-    id: "shirt-orchid-1",
-    category: "clothing",
-    title: "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt",
-    price: "₹1,399",
-    images: ["shirt-orchid-1.jpg", "shirt-orchid-2.jpg"],
-    stock: true,
-    search: "wild orchid pink corduroy boxy fit crop shirt corduroy",
-    description:
-      "Wild Orchid Pink Corduroy Boxy Fit Crop Shirt<br><br>" +
-      "Size : L, XL, XXL<br><br>" +
-      "Fit : Boxy Fit<br><br>" +
-      "Care Instruction : Machine Wash<br><br>" +
-      "Fabric Composition : Corduroy Cotton<br><br>" +
-      "This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits<br><br>" +
-      "Country Of Origin : India"
-  },
-
   /* ===================== ACCESSORIES ===================== */
 
   {
@@ -143,5 +114,3 @@ const PRODUCTS = [
   }
 
 ];
-
-export default PRODUCTS;
