@@ -6,145 +6,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-}
-
-header {
-  background: #000;
-  color: #fff;
-  padding: 15px;
-  text-align: center;
-}
-
-.top-action {
-  background: #fff;
-  padding: 12px;
-  text-align: center;
-}
-
-.continue-btn {
-  background: #000;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  padding: 15px;
-}
-
-.product-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
-}
-
-.slider {
-  display: flex;
-  overflow-x: auto;
-}
-
-.slider img {
-  width: 100%;
-}
-
-.details {
-  padding: 12px;
-}
-
-.details h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.remove-btn {
-  padding: 8px 10px;
-  font-size: 13px;
-  background: #eee;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.order-btn {
-  flex: 1;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.empty-vault {
-  text-align: center;
-  margin-top: 80px;
-  color: #555;
-}
+body { margin:0; font-family:Arial; background:#f4f4f4; }
+header { background:#000; color:#fff; padding:15px; text-align:center; }
+.products-grid { padding:15px; display:grid; gap:15px; }
+.product-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,.1); cursor:pointer; }
+.slider { display:flex; overflow-x:auto; }
+.slider img { width:100%; }
+.details { padding:12px; }
+.actions { display:flex; gap:10px; margin-top:10px; }
+.remove-btn { padding:8px; border:none; background:#eee; border-radius:6px; }
+.order-btn { flex:1; background:#000; color:#fff; text-align:center; padding:8px; border-radius:6px; text-decoration:none; }
+.empty-vault { text-align:center; margin-top:80px; color:#555; }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h2>My Vault</h2>
-</header>
-
-<div class="top-action">
-  <a href="index.html" class="continue-btn">← Continue Shopping</a>
-</div>
+<header><h2>My Vault</h2></header>
 
 <div class="products-grid" id="vaultProducts"></div>
 
 <script>
-/* ===============================
-   LOAD VAULT
-================================ */
 const vaultProducts = document.getElementById("vaultProducts");
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 
-/* ===============================
-   MASTER PRODUCT MAP
-================================ */
 const PRODUCTS = {
-  "jacket-1": {
-    title: "Campus Sutra Zip-Front Bomber Jacket",
-    images: ["jacket1-1.jpg","jacket1-2.jpg","jacket1-3.jpg"],
-    page: "clothing.html"
-  },
-  "jacket-2": {
-    title: "Nuon Brown Relaxed-Fit Cotton Jacket",
-    images: ["shirt1-3.jpg","shirt1-4.jpg","shirt1-5.jpg"],
-    page: "clothing.html"
-  },
-  "jacket-4": {
-    title: "Studiofit Dark Brown Hooded Jacket",
-    images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
-    page: "clothing.html"
-  },
-  "shirt-1": {
-    title: "ETA Brown Relaxed-Fit Shirt",
-    images: ["shirt1-1.jpg","shirt1-2.jpg"],
-    page: "clothing.html"
-  },
   "shoe-1": {
     title: "Men’s Brown Suede Sneakers",
     images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
@@ -152,61 +38,43 @@ const PRODUCTS = {
   }
 };
 
-/* ===============================
-   RENDER VAULT
-================================ */
 function renderVault() {
   vaultProducts.innerHTML = "";
 
-  if (vault.length === 0) {
-    vaultProducts.innerHTML = `
-      <div class="empty-vault">
-        <h3>Your vault is empty</h3>
-        <p>Save products you love and find them here.</p>
-      </div>
-    `;
+  if (!vault.length) {
+    vaultProducts.innerHTML = `<div class="empty-vault"><h3>Your vault is empty</h3></div>`;
     return;
   }
 
   vault.forEach(id => {
-    const product = PRODUCTS[id];
-    if (!product) return;
+    const p = PRODUCTS[id];
+    if (!p) return;
 
     const card = document.createElement("div");
     card.className = "product-card";
 
+    card.addEventListener("click", () => {
+      localStorage.setItem("openProduct", id);
+      window.location.href = p.page;
+    });
+
     card.innerHTML = `
-      <div class="slider">
-        ${product.images.map(img => `<img src="${img}">`).join("")}
-      </div>
+      <div class="slider">${p.images.map(i=>`<img src="${i}">`).join("")}</div>
       <div class="details">
-        <h3>${product.title}</h3>
+        <h3>${p.title}</h3>
         <div class="actions">
           <button class="remove-btn">Remove</button>
-          <a class="order-btn" href="https://www.instagram.com/oneloveonelifestyle/" target="_blank">
-            Buy via Instagram
-          </a>
+          <a class="order-btn" target="_blank" href="https://www.instagram.com/oneloveonelifestyle/">Buy</a>
         </div>
       </div>
     `;
 
-    /* OPEN ORIGINAL PRODUCT BIG */
-    card.addEventListener("click", () => {
-      localStorage.setItem("openProduct", id);
-      window.location.href = product.page;
-    });
-
-    /* REMOVE */
-    card.querySelector(".remove-btn").addEventListener("click", e => {
+    card.querySelector(".remove-btn").onclick = e => {
       e.stopPropagation();
       vault = vault.filter(v => v !== id);
       localStorage.setItem("vault", JSON.stringify(vault));
       renderVault();
-    });
-
-    card.querySelector(".order-btn").addEventListener("click", e => {
-      e.stopPropagation();
-    });
+    };
 
     vaultProducts.appendChild(card);
   });
