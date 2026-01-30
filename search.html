@@ -140,7 +140,8 @@ document.querySelector(".search-wrap input").addEventListener("keydown", functio
 });
 
 const params = new URLSearchParams(window.location.search);
-const keyword = (params.get("q") || "").toLowerCase().trim();
+const rawKeyword = (params.get("q") || "").toLowerCase().trim();
+const keyword = rawKeyword.endsWith("s") ? rawKeyword.slice(0, -1) : rawKeyword;
 const container = document.getElementById("content");
 
 function scoreProduct(p){
@@ -149,10 +150,10 @@ function scoreProduct(p){
   const search = (p.search || "").toLowerCase();
   const category = (p.category || "").toLowerCase();
 
-  if(title === keyword) score += 100;
-  if(title.includes(keyword)) score += 60;
-  if(search.includes(keyword)) score += 30;
-  if(category === keyword) score += 50;
+  if(title === keyword || title === rawKeyword) score += 100;
+  if(title.includes(keyword) || title.includes(rawKeyword)) score += 60;
+  if(search.includes(keyword) || search.includes(rawKeyword)) score += 30;
+  if(category === keyword || category === rawKeyword) score += 50;
 
   return score;
 }
