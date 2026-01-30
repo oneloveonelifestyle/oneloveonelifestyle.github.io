@@ -148,6 +148,28 @@ const PRODUCTS = [
     "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
     "Country Of Origin : India"
   },
+  {
+  id: "shirt-ascot-offwhite-1",
+  category: "clothing",
+  title: "Ascot Off-White Striped Relaxed-Fit Linen Shirt",
+  price: "₹2,499",
+  images: [
+    "ascot-offwhite-1.jpg",
+    "ascot-offwhite-2.jpg",
+    "ascot-offwhite-3.jpg"
+  ],
+  stock: true,
+  search: "ascot off white striped relaxed fit linen shirt",
+  description:
+    "Ascot Off-White Striped Relaxed-Fit Linen Shirt<br><br>" +
+    "Size : XS, S, M, L, XL<br><br>" +
+    "Fit : Relaxed Fit<br><br>" +
+    "Care Instruction : Machine Wash<br><br>" +
+    "Fabric Composition : 100% Linen<br><br>" +
+    "Manufactured and Marketed By:<br>" +
+    "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
+    "Country Of Origin : India"
+},
 
   /* ===================== ACCESSORIES ===================== */
 
