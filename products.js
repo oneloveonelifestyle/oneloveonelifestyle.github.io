@@ -127,23 +127,26 @@ const PRODUCTS = [
       "Country Of Origin : India"
   },
   {
-  id: "clothing-wes-sage-shirt",
+  id: "shirt-wes-sage-1",
   category: "clothing",
   title: "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt",
   price: "₹2,499",
   images: [
-    "wes-sage-shirt-1.jpg",
-    "wes-sage-shirt-2.jpg",
-    "wes-sage-shirt-3.jpg"
+    "wes-sage-1.jpg",
+    "wes-sage-2.jpg",
+    "wes-sage-3.jpg"
   ],
   stock: true,
-  size: ["S", "M", "L", "XL"],
-  fit: "Relaxed Fit",
-  care: "Machine Wash",
-  fabric: "100% Cotton",
-  manufacturer: "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001",
-  origin: "India",
-  search: "wes casuals sage solid relaxed fit cotton shirt men"
+  search: "wes casuals sage solid relaxed fit cotton shirt",
+  description:
+    "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt<br><br>" +
+    "Size : S, M, L, XL<br><br>" +
+    "Fit : Relaxed Fit<br><br>" +
+    "Care Instruction : Machine Wash<br><br>" +
+    "Fabric Composition : 100% Cotton<br><br>" +
+    "Manufactured and Marketed By:<br>" +
+    "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
+    "Country Of Origin : India"
 },
 
   /* ===================== ACCESSORIES ===================== */
