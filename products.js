@@ -126,6 +126,25 @@ const PRODUCTS = [
       "This wild orchid pink crop shirt is crafted from soft corduroy fabric for a structured yet comfortable feel. Designed with a modern boxy silhouette, it offers a relaxed fit that pairs effortlessly with everyday outfits<br><br>" +
       "Country Of Origin : India"
   },
+  {
+  id: "clothing-wes-sage-shirt",
+  category: "clothing",
+  title: "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt",
+  price: "₹2,499",
+  images: [
+    "wes-sage-shirt-1.jpg",
+    "wes-sage-shirt-2.jpg",
+    "wes-sage-shirt-3.jpg"
+  ],
+  stock: true,
+  size: ["S", "M", "L", "XL"],
+  fit: "Relaxed Fit",
+  care: "Machine Wash",
+  fabric: "100% Cotton",
+  manufacturer: "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001",
+  origin: "India",
+  search: "wes casuals sage solid relaxed fit cotton shirt men"
+},
 
   /* ===================== ACCESSORIES ===================== */
 
