@@ -12,53 +12,65 @@ body{
   background:#f4f4f4;
 }
 
+header{
+  background:#000;
+  color:#fff;
+  padding:14px;
+  text-align:center;
+}
+
 .container{
-  max-width:1240px;
-  margin:auto;
   padding:20px;
 }
 
 h2{
-  margin-bottom:10px;
+  margin-bottom:14px;
 }
 
-.notice{
-  background:#fff3cd;
-  color:#856404;
-  padding:14px 18px;
-  border-radius:8px;
-  margin-bottom:20px;
-  font-size:14px;
-}
-
-.products{
+.results{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:15px;
 }
 
-.product-card{
+.card{
   background:#fff;
   border-radius:14px;
   padding:12px;
   box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
-.product-img{
-  height:130px;
-  background:#eaeaea;
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
   border-radius:10px;
   margin-bottom:8px;
+}
+
+.price{
+  font-weight:bold;
+}
+
+.no-result{
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+  margin-bottom:30px;
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <h1>Search Results</h1>
+</header>
+
 <div class="container">
-  <h2 id="resultTitle"></h2>
-  <div id="noticeBox"></div>
-  <div class="products" id="productList"></div>
+  <h2 id="title"></h2>
+  <div id="results" class="results"></div>
 </div>
 
 <script src="products.js"></script>
@@ -66,43 +78,45 @@ h2{
 const params = new URLSearchParams(window.location.search);
 const query = params.get("q")?.toLowerCase() || "";
 
-const productList = document.getElementById("productList");
-const noticeBox = document.getElementById("noticeBox");
-const resultTitle = document.getElementById("resultTitle");
+document.getElementById("title").innerText =
+  query ? `Results for "${query}"` : "All Products";
 
-let matched = [];
-let others = [];
+const resultsBox = document.getElementById("results");
 
-products.forEach(p => {
-  if (p.name.toLowerCase().includes(query)) {
-    matched.push(p);
-  } else {
-    others.push(p);
-  }
-});
-
-if (matched.length > 0) {
-  resultTitle.innerText = `Results for "${query}"`;
-  renderProducts(matched);
-  renderProducts(others);
+if (!query) {
+  renderProducts(products);
 } else {
-  resultTitle.innerText = `No results for "${query}"`;
-  noticeBox.innerHTML = `
-    <div class="notice">
-      We couldn’t find an exact match.  
-      Explore our available collections below.
-    </div>`;
-  renderProducts(others);
+  const matched = products.filter(p =>
+    p.name.toLowerCase().includes(query)
+  );
+
+  const others = products.filter(p =>
+    !p.name.toLowerCase().includes(query)
+  );
+
+  if (matched.length === 0) {
+    resultsBox.innerHTML = `
+      <div class="no-result">
+        <h3>No products found</h3>
+        <p>Try different keywords or explore our popular items below</p>
+      </div>
+    `;
+    renderProducts(others);
+  } else {
+    renderProducts(matched.concat(others));
+  }
 }
 
 function renderProducts(list){
-  list.forEach(p => {
-    productList.innerHTML += `
-      <div class="product-card">
-        <div class="product-img"></div>
-        ${p.name}<br><b>₹${p.price}</b>
-      </div>
+  list.forEach(p=>{
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="${p.image}">
+      <div>${p.name}</div>
+      <div class="price">₹${p.price}</div>
     `;
+    resultsBox.appendChild(div);
   });
 }
 </script>
