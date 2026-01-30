@@ -11,71 +11,44 @@ body{
   font-family:Arial, sans-serif;
   background:#f4f4f4;
 }
-
 header{
   background:#000;
   color:#fff;
   padding:15px;
   text-align:center;
-  font-size:16px;
   font-weight:bold;
 }
-
-.container{
-  padding:20px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
+.container{ padding:20px; }
 .message{
   background:#fff;
   padding:20px;
   border-radius:12px;
-  margin-bottom:25px;
+  margin-bottom:20px;
   font-size:14px;
-  color:#333;
 }
-
-.product-grid{
+.grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
-
-.product-card{
+.card{
   background:#fff;
-  border-radius:14px;
   padding:12px;
+  border-radius:14px;
   box-shadow:0 6px 16px rgba(0,0,0,.08);
   text-align:center;
 }
-
-.product-card img{
+.card img{
   width:100%;
   height:140px;
   object-fit:cover;
   border-radius:10px;
-  margin-bottom:8px;
 }
-
-.product-card h4{
-  font-size:14px;
-  margin:5px 0;
-}
-
-.product-card p{
-  font-size:13px;
-  font-weight:bold;
-}
+.card h4{ font-size:14px; margin:8px 0 4px; }
+.card p{ font-size:13px; font-weight:bold; }
 
 @media(min-width:768px){
-  .product-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
+  .grid{ grid-template-columns:repeat(4,1fr); }
 }
 </style>
 </head>
@@ -85,74 +58,71 @@ header{
 <header>Search Results</header>
 
 <div class="container">
-
-  <div id="resultMessage"></div>
-
-  <div id="results" class="product-grid"></div>
-
-  <div id="suggestionsSection" style="display:none">
-    <div class="section-title">You may also like</div>
-    <div id="suggestions" class="product-grid"></div>
-  </div>
-
+  <div id="status"></div>
+  <div id="results" class="grid"></div>
 </div>
 
-<!-- ✅ USE YOUR EXISTING PRODUCTS FILE -->
+<!-- LOAD YOUR EXISTING FILE -->
 <script src="products.js"></script>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const searchQuery = params.get("q")?.toLowerCase() || "";
+/* 🔒 SAFE GUARDS */
+try{
 
-const resultsDiv = document.getElementById("results");
-const messageDiv = document.getElementById("resultMessage");
-const suggestionsDiv = document.getElementById("suggestions");
-const suggestionsSection = document.getElementById("suggestionsSection");
+  const params = new URLSearchParams(window.location.search);
+  const query = (params.get("q") || "").toLowerCase();
 
-const matchedProducts = products.filter(p =>
-  p.name.toLowerCase().includes(searchQuery) ||
-  (p.category && p.category.toLowerCase().includes(searchQuery))
-);
+  /* 🔍 AUTO-DETECT PRODUCT ARRAY */
+  const data =
+    window.products ||
+    window.allProducts ||
+    window.productList ||
+    [];
 
-function renderProducts(list, container){
-  container.innerHTML = "";
-  list.forEach(p => {
-    container.innerHTML += `
-      <div class="product-card">
-        <img src="${p.image}" alt="${p.name}">
-        <h4>${p.name}</h4>
-        <p>₹${p.price}</p>
-      </div>
-    `;
-  });
-}
-
-/* MATCH FOUND */
-if(matchedProducts.length > 0){
-  messageDiv.innerHTML = `
-    <div class="section-title">
-      Results for “${searchQuery}”
-    </div>
-  `;
-  renderProducts(matchedProducts, resultsDiv);
-
-  const otherProducts = products.filter(p => !matchedProducts.includes(p));
-  if(otherProducts.length){
-    suggestionsSection.style.display = "block";
-    renderProducts(otherProducts.slice(0,4), suggestionsDiv);
+  if(!Array.isArray(data)){
+    throw "Product data not found";
   }
-}
 
-/* NO MATCH */
-else{
-  messageDiv.innerHTML = `
-    <div class="message">
-      <b>No results found for “${searchQuery}”.</b><br><br>
-      Try checking your spelling or explore our best-selling products below.
+  const matches = data.filter(p =>
+    JSON.stringify(p).toLowerCase().includes(query)
+  );
+
+  const status = document.getElementById("status");
+  const results = document.getElementById("results");
+
+  function render(list){
+    results.innerHTML = "";
+    list.forEach(p=>{
+      results.innerHTML += `
+        <div class="card">
+          <img src="${p.image || p.img || 'placeholder.jpg'}">
+          <h4>${p.name || p.title || 'Product'}</h4>
+          <p>₹${p.price || ''}</p>
+        </div>
+      `;
+    });
+  }
+
+  if(matches.length){
+    status.innerHTML = `<div class="message">
+      Showing results for "<b>${query}</b>"
+    </div>`;
+    render(matches);
+  }else{
+    status.innerHTML = `<div class="message">
+      <b>No results found for "${query}"</b><br><br>
+      Explore our popular products below.
+    </div>`;
+    render(data.slice(0,6));
+  }
+
+}catch(e){
+  document.body.innerHTML = `
+    <div style="padding:30px;font-family:Arial">
+      <b>Search temporarily unavailable.</b><br>
+      Please try again later.
     </div>
   `;
-  suggestionsSection.style.display = "block";
-  renderProducts(products.slice(0,6), suggestionsDiv);
 }
 </script>
 
