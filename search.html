@@ -2,51 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Search Results</title>
+<title>Search Results | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root{
+  --black:#000;
+  --dark:#111;
+  --gray:#f4f4f4;
+  --soft:#eaeaea;
+  --accent:#f3b23a;
+}
+
+*{ box-sizing:border-box; }
+
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f5f5f5;
+  background:var(--gray);
+  overflow-x:hidden;
 }
 
-header{
-  background:#000;
-  color:#fff;
-  padding:14px;
-  text-align:center;
-  position:relative;
-}
+/* HEADER */
+header{ background:#000; color:#fff; }
+.top-header{ display:flex; align-items:center; gap:12px; padding:12px; }
+.brand{ display:flex; align-items:center; gap:8px; }
+.brand img{ width:40px; border-radius:50%; }
+.brand span{ font-weight:bold; font-size:14px; }
 
-header a{
-  position:absolute;
-  left:14px;
-  top:14px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
+.search-wrap{
+  flex:1; display:flex; max-width:520px;
+  background:#fff; border-radius:6px; overflow:hidden;
 }
+.search-wrap input{ flex:1; border:none; padding:10px; }
+.search-wrap button{ border:none; background:var(--accent); padding:0 14px; }
 
+/* NAV */
+.navbar{
+  display:flex; gap:16px; padding:10px 14px;
+  background:#1b1b1b; overflow-x:auto;
+}
+.navbar a{ color:#fff; text-decoration:none; white-space:nowrap; }
+
+/* SEARCH RESULTS */
 .section-title{
-  padding:14px 14px 6px;
+  font-size:18px;
   font-weight:bold;
-  font-size:14px;
+  margin:20px 20px 10px;
 }
 
 .products-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
-  padding:12px;
+  padding:0 12px 30px;
 }
 
 .product-card{
   background:#fff;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
   cursor:pointer;
 }
 
@@ -58,15 +74,12 @@ header a{
 .slider img{
   width:100%;
   display:block;
-}
-
-.details{
-  padding:10px;
+  border-radius:10px;
 }
 
 .details h3{
   font-size:13px;
-  margin:0 0 4px;
+  margin:8px 0 4px;
 }
 
 .price{
@@ -84,16 +97,48 @@ header a{
 
 <body>
 
+<!-- ✅ SAME HEADER AS HOME PAGE -->
 <header>
-  <a href="index.html">← Home</a>
-  <h2>Search Results</h2>
+  <div class="top-header">
+    <div class="brand">
+      <img src="logo.jpg">
+      <span>One Love One Lifestyle</span>
+    </div>
+    <div class="search-wrap">
+      <input placeholder="Search products">
+      <button onclick="handleSearch()">🔍</button>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <a href="clothing.html">Clothing</a>
+    <a href="shoes.html">Shoes</a>
+    <a href="accessories.html">Accessories</a>
+    <a href="#">Gifts</a>
+    <a href="#">Vault</a>
+  </div>
 </header>
 
+<!-- ✅ SEARCH RESULTS START -->
 <div id="content"></div>
 
 <script src="products.js"></script>
 
 <script>
+function handleSearch(){
+  const input = document.querySelector(".search-wrap input");
+  const q = input.value.trim();
+  if(!q) return;
+  window.location.href = "search.html?q=" + encodeURIComponent(q);
+}
+
+document.querySelector(".search-wrap input").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    handleSearch();
+  }
+});
+
 const params = new URLSearchParams(window.location.search);
 const keyword = (params.get("q") || "").toLowerCase().trim();
 const container = document.getElementById("content");
@@ -102,10 +147,12 @@ function scoreProduct(p){
   let score = 0;
   const title = p.title.toLowerCase();
   const search = (p.search || "").toLowerCase();
+  const category = (p.category || "").toLowerCase();
 
-  if(title === keyword) score += 100;              // exact title match
-  if(title.includes(keyword)) score += 60;         // title contains
-  if(search.includes(keyword)) score += 30;        // tag/search match
+  if(title === keyword) score += 100;
+  if(title.includes(keyword)) score += 60;
+  if(search.includes(keyword)) score += 30;
+  if(category === keyword) score += 50;
 
   return score;
 }
@@ -142,13 +189,8 @@ function renderProducts(list){
 }
 
 if(!keyword){
-  container.innerHTML = `
-    <div class="no-results">
-      <h2>Please enter a search term</h2>
-    </div>
-  `;
+  container.innerHTML = `<div class="no-results"><h2>Please enter a search term</h2></div>`;
 }else{
-
   const ranked = PRODUCTS
     .map(p=>({ product:p, score:scoreProduct(p) }))
     .sort((a,b)=>b.score - a.score);
@@ -159,15 +201,15 @@ if(!keyword){
   if(matches.length === 0){
     container.innerHTML = `
       <div class="no-results">
-        <h2>No results for “${keyword}”</h2>
-        <p>Check your spelling or explore similar products below.</p>
+        <h2>No results for "${keyword}"</h2>
+        <p>Try different keywords or explore suggestions below.</p>
       </div>
     `;
     renderProducts(suggestions);
   }else{
     const title = document.createElement("div");
     title.className = "section-title";
-    title.textContent = "Results for \"" + keyword + "\"";
+    title.textContent = `Results for "${keyword}"`;
     container.appendChild(title);
 
     renderProducts(matches);
