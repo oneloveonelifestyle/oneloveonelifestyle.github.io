@@ -55,30 +55,24 @@ const PRODUCTS = [
       "Framed in a relaxed silhouette, it features a spread collar, full-length sleeves and a classic button-up front.<br><br>" +
       "Country Of Origin: India"
   },
-  {
-  id: "wes-sage-relaxed-cotton-shirt",
-  title: "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt",
-  price: "₹1,499",
+{
+  id: "wes-casuals-sage-relaxed-fit-cotton-shirt",
   category: "clothing",
-  search: "shirt shirts casual cotton wes sage relaxed fit solid",
-  images: [
-    "images/wes-sage-shirt-1.jpg",
-    "images/wes-sage-shirt-2.jpg",
-    "images/wes-sage-shirt-3.jpg"
-  ],
-  description: `
-    Size: XS, S, M, L, XL
-    Fit: Relaxed Fit
-    Care Instruction: Machine Wash
-    Fabric Composition: 100% Cotton
-
-    Manufactured and Marketed By:
-    Trent Limited, Bombay House, 24, Homi Mody Street,
-    Fort, Mumbai – 400001
-
-    Country Of Origin: India
-  `
-  }
+  title: "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt",
+  price: "₹1,799",
+  images: ["wes-sage-shirt-1.jpg","wes-sage-shirt-2.jpg","wes-sage-shirt-3.jpg"],
+  stock: true,
+  search: "wes casuals sage solid relaxed fit cotton shirt shirts",
+  description:
+    "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt<br><br>" +
+    "Size : XS, S, M, L, XL<br><br>" +
+    "Fit: Relaxed Fit<br><br>" +
+    "Care Instruction: Machine Wash<br><br>" +
+    "Fabric Composition: 100% Cotton<br><br>" +
+    "Manufactured and Marketed By:<br>" +
+    "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
+    "Country Of Origin: India"
+},
 
   {
     id: "jacket-1",
