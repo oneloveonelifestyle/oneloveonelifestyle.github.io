@@ -141,6 +141,11 @@ document.querySelector(".search-wrap input").addEventListener("keydown", functio
 
 const params = new URLSearchParams(window.location.search);
 const rawKeyword = (params.get("q") || "").toLowerCase().trim();
+const keyword = rawKeyword.endsWith("es")
+  ? rawKeyword.slice(0, -2)
+  : rawKeyword.endsWith("s")
+    ? rawKeyword.slice(0, -1)
+    : rawKeyword;
 const keyword = rawKeyword.endsWith("s") ? rawKeyword.slice(0, -1) : rawKeyword;
 const container = document.getElementById("content");
 
