@@ -239,8 +239,8 @@ footer{
       <span>One Love One Lifestyle</span>
     </div>
     <div class="search-wrap">
-      <input placeholder="Search products">
-      <button>🔍</button>
+  <input id="searchInput" placeholder="Search products">
+  <button id="searchBtn">🔍</button>
     </div>
   </div>
 
@@ -371,6 +371,25 @@ document.querySelectorAll('.category-card')[0]
   .addEventListener('click', () => {
     window.location.href = 'clothing.html';
   });
+  <script>
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+function doSearch() {
+  const query = searchInput.value.trim();
+  if (query !== "") {
+    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+  }
+}
+
+searchBtn.addEventListener("click", doSearch);
+
+searchInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    doSearch();
+  }
+});
+</script>
 </script>
 
 </body>
