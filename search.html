@@ -15,109 +15,144 @@ body{
 header{
   background:#000;
   color:#fff;
-  padding:14px;
+  padding:15px;
   text-align:center;
+  font-size:16px;
+  font-weight:bold;
 }
 
 .container{
   padding:20px;
 }
 
-h2{
-  margin-bottom:14px;
+.section-title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
 }
 
-.results{
+.message{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:25px;
+  font-size:14px;
+  color:#333;
+}
+
+.product-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
-.card{
+.product-card{
   background:#fff;
   border-radius:14px;
   padding:12px;
   box-shadow:0 6px 16px rgba(0,0,0,.08);
+  text-align:center;
 }
 
-.card img{
+.product-card img{
   width:100%;
-  height:150px;
+  height:140px;
   object-fit:cover;
   border-radius:10px;
   margin-bottom:8px;
 }
 
-.price{
+.product-card h4{
+  font-size:14px;
+  margin:5px 0;
+}
+
+.product-card p{
+  font-size:13px;
   font-weight:bold;
 }
 
-.no-result{
-  background:#fff;
-  padding:30px;
-  border-radius:16px;
-  text-align:center;
-  margin-bottom:30px;
+@media(min-width:768px){
+  .product-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Search Results</h1>
-</header>
+<header>Search Results</header>
 
 <div class="container">
-  <h2 id="title"></h2>
-  <div id="results" class="results"></div>
+
+  <div id="resultMessage"></div>
+
+  <div id="results" class="product-grid"></div>
+
+  <div id="suggestionsSection" style="display:none">
+    <div class="section-title">You may also like</div>
+    <div id="suggestions" class="product-grid"></div>
+  </div>
+
 </div>
 
-<script src="js/products.js"></script>
+<!-- ✅ USE YOUR EXISTING PRODUCTS FILE -->
+<script src="products.js"></script>
+
 <script>
 const params = new URLSearchParams(window.location.search);
-const query = params.get("q")?.toLowerCase() || "";
+const searchQuery = params.get("q")?.toLowerCase() || "";
 
-document.getElementById("title").innerText =
-  query ? `Results for "${query}"` : "All Products";
+const resultsDiv = document.getElementById("results");
+const messageDiv = document.getElementById("resultMessage");
+const suggestionsDiv = document.getElementById("suggestions");
+const suggestionsSection = document.getElementById("suggestionsSection");
 
-const resultsBox = document.getElementById("results");
+const matchedProducts = products.filter(p =>
+  p.name.toLowerCase().includes(searchQuery) ||
+  (p.category && p.category.toLowerCase().includes(searchQuery))
+);
 
-if (!query) {
-  renderProducts(products);
-} else {
-  const matched = products.filter(p =>
-    p.name.toLowerCase().includes(query)
-  );
-
-  const others = products.filter(p =>
-    !p.name.toLowerCase().includes(query)
-  );
-
-  if (matched.length === 0) {
-    resultsBox.innerHTML = `
-      <div class="no-result">
-        <h3>No products found</h3>
-        <p>Try different keywords or explore our popular items below</p>
+function renderProducts(list, container){
+  container.innerHTML = "";
+  list.forEach(p => {
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${p.image}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <p>₹${p.price}</p>
       </div>
     `;
-    renderProducts(others);
-  } else {
-    renderProducts(matched.concat(others));
+  });
+}
+
+/* MATCH FOUND */
+if(matchedProducts.length > 0){
+  messageDiv.innerHTML = `
+    <div class="section-title">
+      Results for “${searchQuery}”
+    </div>
+  `;
+  renderProducts(matchedProducts, resultsDiv);
+
+  const otherProducts = products.filter(p => !matchedProducts.includes(p));
+  if(otherProducts.length){
+    suggestionsSection.style.display = "block";
+    renderProducts(otherProducts.slice(0,4), suggestionsDiv);
   }
 }
 
-function renderProducts(list){
-  list.forEach(p=>{
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <img src="${p.image}">
-      <div>${p.name}</div>
-      <div class="price">₹${p.price}</div>
-    `;
-    resultsBox.appendChild(div);
-  });
+/* NO MATCH */
+else{
+  messageDiv.innerHTML = `
+    <div class="message">
+      <b>No results found for “${searchQuery}”.</b><br><br>
+      Try checking your spelling or explore our best-selling products below.
+    </div>
+  `;
+  suggestionsSection.style.display = "block";
+  renderProducts(products.slice(0,6), suggestionsDiv);
 }
 </script>
 
