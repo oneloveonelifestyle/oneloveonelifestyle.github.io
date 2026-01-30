@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Search Results</title>
+<title>Search Results | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -12,54 +12,73 @@ body{
   background:#f4f4f4;
 }
 
+/* HEADER */
 header{
   background:#000;
   color:#fff;
-  padding:20px;
+  padding:14px;
   text-align:center;
+  position:relative;
 }
 
-.container{
-  padding:20px;
-}
-
-.result-title{
-  font-size:18px;
+.home-btn{
+  position:absolute;
+  left:14px;
+  top:14px;
+  color:#fff;
+  text-decoration:none;
   font-weight:bold;
-  margin-bottom:20px;
 }
 
-.product-grid{
+/* GRID */
+.products-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  gap:12px;
+  padding:12px;
 }
 
 .product-card{
   background:#fff;
-  border-radius:14px;
-  padding:12px;
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
-
-.product-img{
-  height:130px;
-  background:#eaeaea;
   border-radius:10px;
-  margin-bottom:8px;
+  overflow:hidden;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  cursor:pointer;
 }
 
-.no-results{
-  background:#fff;
-  padding:30px;
-  border-radius:14px;
-  text-align:center;
-  margin-bottom:30px;
+.slider{
+  display:flex;
+  overflow-x:auto;
 }
 
-.suggest-title{
-  margin:30px 0 15px;
+.slider img{
+  width:100%;
+  display:block;
+}
+
+.details{
+  padding:10px;
+}
+
+.details h3{
+  font-size:13px;
+  margin:0 0 4px;
+}
+
+.price{
   font-weight:bold;
+  font-size:13px;
+}
+
+/* NO RESULTS */
+.no-results{
+  padding:40px 20px;
+  text-align:center;
+  color:#444;
+}
+
+.no-results h2{
+  margin-bottom:8px;
 }
 </style>
 </head>
@@ -67,75 +86,82 @@ header{
 <body>
 
 <header>
-  <h1>Search Results</h1>
+  <a href="index.html" class="home-btn">← Home</a>
+  <h2>Search Results</h2>
 </header>
 
-<div class="container">
-  <div id="resultsInfo" class="result-title"></div>
-  <div id="results" class="product-grid"></div>
-  <div id="suggestions"></div>
-</div>
+<div id="results" class="products-grid"></div>
 
-<!-- ✅ IMPORTANT: LOAD PRODUCTS -->
 <script src="products.js"></script>
 
 <script>
-/* SAFETY CHECK */
-if (typeof products === "undefined") {
-  document.getElementById("resultsInfo").innerText =
-    "Products data not loaded.";
-  throw new Error("products.js not loaded or variable name mismatch");
-}
-
-/* GET SEARCH QUERY */
 const params = new URLSearchParams(window.location.search);
-const query = (params.get("q") || "").toLowerCase();
+const query = (params.get("q") || "").toLowerCase().trim();
 
-document.getElementById("resultsInfo").innerText =
-  `Results for "${query}"`;
+const container = document.getElementById("results");
 
-/* MATCH PRODUCTS */
-const matched = products.filter(p =>
-  p.name.toLowerCase().includes(query)
-);
+if(!query){
+  container.innerHTML =
+    "<div class='no-results'><h2>No search keyword entered</h2></div>";
+}else{
 
-/* RENDER FUNCTION */
-function renderProducts(list, containerId){
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
+  const matched = [];
+  const suggested = [];
 
-  list.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "product-card";
-    div.innerHTML = `
-      <div class="product-img"></div>
-      <div><b>${p.name}</b></div>
-      <div>₹${p.price}</div>
-    `;
-    container.appendChild(div);
+  PRODUCTS.forEach(p=>{
+    if(p.search && p.search.includes(query)){
+      matched.push(p);
+    }else{
+      suggested.push(p);
+    }
   });
-}
 
-/* RESULTS LOGIC */
-if (matched.length > 0) {
-  renderProducts(matched, "results");
-} else {
-  document.getElementById("results").innerHTML = `
-    <div class="no-results">
-      <h3>No results found</h3>
-      <p>We couldn’t find any products matching "<b>${query}</b>".</p>
-      <p>Check the spelling or explore similar items below.</p>
-    </div>
-  `;
-}
+  if(matched.length === 0){
+    container.innerHTML = `
+      <div class="no-results">
+        <h2>No results for “${query}”</h2>
+        <p>Try using different keywords or explore our suggestions below.</p>
+      </div>
+    `;
+  }
 
-/* SUGGEST OTHER PRODUCTS */
-const suggestions = products.slice(0, 4);
-document.getElementById("suggestions").innerHTML = `
-  <div class="suggest-title">You may also like</div>
-  <div class="product-grid" id="suggestGrid"></div>
-`;
-renderProducts(suggestions, "suggestGrid");
+  function render(list){
+    list.forEach(product=>{
+      const card = document.createElement("div");
+      card.className = "product-card";
+
+      card.innerHTML = `
+        <div class="slider">
+          ${product.images.map(img=>`<img src="${img}">`).join("")}
+        </div>
+        <div class="details">
+          <h3>${product.title}</h3>
+          <div class="price">${product.price}</div>
+        </div>
+      `;
+
+      card.onclick = () => {
+        localStorage.setItem("openProduct", product.id);
+
+        if(product.category === "clothing"){
+          location.href = "clothing.html";
+        }else if(product.category === "shoe"){
+          location.href = "shoes.html";
+        }else{
+          location.href = "accessories.html";
+        }
+      };
+
+      container.appendChild(card);
+    });
+  }
+
+  /* MATCHING PRODUCTS FIRST */
+  render(matched);
+
+  /* NON-MATCHING AS SUGGESTIONS */
+  render(suggested);
+}
 </script>
 
 </body>
