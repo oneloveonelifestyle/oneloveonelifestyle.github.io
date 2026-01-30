@@ -2,59 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Search Results | One Love</title>
+<title>Search Results | One Love One Lifestyle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
-  color: #111;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
 }
 
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 20px;
+.container{
+  max-width:1240px;
+  margin:auto;
+  padding:20px;
 }
 
-h1 {
-  font-size: 20px;
-  margin-bottom: 16px;
+h2{
+  margin-bottom:10px;
 }
 
-.section-title {
-  margin: 30px 0 12px;
-  font-size: 16px;
-  font-weight: bold;
+.notice{
+  background:#fff3cd;
+  color:#856404;
+  padding:14px 18px;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-size:14px;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
 }
 
-.product {
-  border: 1px solid #eee;
-  padding: 10px;
+.product-card{
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
-.product img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.product-name {
-  font-size: 14px;
-  margin: 8px 0 4px;
-}
-
-.product-price {
-  font-size: 13px;
-  font-weight: bold;
+.product-img{
+  height:130px;
+  background:#eaeaea;
+  border-radius:10px;
+  margin-bottom:8px;
 }
 </style>
 </head>
@@ -62,82 +56,55 @@ h1 {
 <body>
 
 <div class="container">
-  <h1 id="resultTitle"></h1>
-
-  <div id="matchedSection">
-    <div class="products" id="matchedProducts"></div>
-  </div>
-
-  <div id="suggestedSection">
-    <div class="section-title">Suggested Products</div>
-    <div class="products" id="otherProducts"></div>
-  </div>
+  <h2 id="resultTitle"></h2>
+  <div id="noticeBox"></div>
+  <div class="products" id="productList"></div>
 </div>
 
-<!-- LOAD PRODUCTS -->
 <script src="products.js"></script>
-
 <script>
-(function () {
+const params = new URLSearchParams(window.location.search);
+const query = params.get("q")?.toLowerCase() || "";
 
-  const params = new URLSearchParams(window.location.search);
-  const query = (params.get("q") || "").toLowerCase().trim();
+const productList = document.getElementById("productList");
+const noticeBox = document.getElementById("noticeBox");
+const resultTitle = document.getElementById("resultTitle");
 
-  document.getElementById("resultTitle").textContent =
-    query ? `Search results for "${query}"` : "All Products";
+let matched = [];
+let others = [];
 
-  if (!Array.isArray(PRODUCTS)) {
-    console.error("PRODUCTS array not found in products.js");
-    return;
+products.forEach(p => {
+  if (p.name.toLowerCase().includes(query)) {
+    matched.push(p);
+  } else {
+    others.push(p);
   }
+});
 
-  const normalizedQuery = query.endsWith("s")
-    ? query.slice(0, -1)
-    : query;
+if (matched.length > 0) {
+  resultTitle.innerText = `Results for "${query}"`;
+  renderProducts(matched);
+  renderProducts(others);
+} else {
+  resultTitle.innerText = `No results for "${query}"`;
+  noticeBox.innerHTML = `
+    <div class="notice">
+      We couldn’t find an exact match.  
+      Explore our available collections below.
+    </div>`;
+  renderProducts(others);
+}
 
-  const matched = [];
-  const others = [];
-
-  PRODUCTS.forEach(p => {
-    const name =
-      (p.title || p.name || "").toLowerCase();
-
-    const keywords =
-      (p.search || "").toLowerCase();
-
-    if (
-      name.includes(query) ||
-      name.includes(normalizedQuery) ||
-      keywords.includes(query)
-    ) {
-      matched.push(p);
-    } else {
-      others.push(p);
-    }
+function renderProducts(list){
+  list.forEach(p => {
+    productList.innerHTML += `
+      <div class="product-card">
+        <div class="product-img"></div>
+        ${p.name}<br><b>₹${p.price}</b>
+      </div>
+    `;
   });
-
-  renderProducts(matched, "matchedProducts");
-  renderProducts(others, "otherProducts");
-
-  function renderProducts(list, targetId) {
-    const container = document.getElementById(targetId);
-    container.innerHTML = "";
-
-    list.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "product";
-
-      div.innerHTML = `
-        <img src="${p.image}" alt="">
-        <div class="product-name">${p.title || p.name}</div>
-        <div class="product-price">${p.price || ""}</div>
-      `;
-
-      container.appendChild(div);
-    });
-  }
-
-})();
+}
 </script>
 
 </body>
