@@ -240,7 +240,7 @@ footer{
     </div>
     <div class="search-wrap">
       <input placeholder="Search products">
-      <button>🔍</button>
+      <button onclick="handleSearch()">🔍</button>
     </div>
   </div>
 
@@ -371,6 +371,14 @@ document.querySelectorAll('.category-card')[0]
   .addEventListener('click', () => {
     window.location.href = 'clothing.html';
   });
+  function handleSearch(){
+  const input = document.querySelector(".search-wrap input");
+  const q = input.value.trim();
+
+  if(!q) return;
+
+  window.location.href = "search.html?q=" + encodeURIComponent(q);
+  }
 </script>
 
 </body>
