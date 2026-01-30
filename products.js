@@ -203,14 +203,14 @@ const PRODUCTS = [
       "Men’s Chronograph Stainless Steel Watch<br><br>" +
       "A bold, precision-engineered timepiece crafted for modern sophistication."
   },
-  {
-  id: "watch-2",
+{
+  id: "watch-chronograph-black-head",
   category: "accessories",
-  title: "Men’s Chronograph Stainless Steel Watch",
+  title: "Men’s Black Dial Chronograph Watch",
   price: "₹3,199",
   images: ["watch-white-1.jpg"],
   stock: true,
-  search: "mens chronograph stainless steel watch white",
+  search: "mens black dial chronograph stainless steel watch watches",
   description:
     "Men’s Chronograph Stainless Steel Watch<br><br>" +
     "A bold, precision-engineered timepiece crafted for modern sophistication."
