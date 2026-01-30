@@ -238,10 +238,15 @@ footer{
       <img src="logo.jpg">
       <span>One Love One Lifestyle</span>
     </div>
-    <div class="search-wrap">
-  <input id="searchInput" placeholder="Search products">
-  <button id="searchBtn">🔍</button>
-    </div>
+    <form class="search-wrap" action="search.html" method="GET">
+  <input
+    type="search"
+    name="q"
+    placeholder="Search products"
+    required
+  >
+  <button type="submit">🔍</button>
+</form>
   </div>
 
   <div class="navbar">
