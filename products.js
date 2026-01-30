@@ -131,11 +131,7 @@ const PRODUCTS = [
   category: "clothing",
   title: "WES Casuals Sage Solid Relaxed-Fit Cotton Shirt",
   price: "₹2,499",
-  images: [
-    "wes-sage-1.jpg",
-    "wes-sage-2.jpg",
-    "wes-sage-3.jpg"
-  ],
+  images: ["wes-sage-1.jpg","wes-sage-2.jpg","wes-sage-3.jpg"],
   stock: true,
   search: "wes casuals sage solid relaxed fit cotton shirt",
   description:
