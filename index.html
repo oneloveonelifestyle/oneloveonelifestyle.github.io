@@ -379,6 +379,12 @@ document.querySelectorAll('.category-card')[0]
 
   window.location.href = "search.html?q=" + encodeURIComponent(q);
   }
+  document.querySelector(".search-wrap input").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    handleSearch();
+  }
+});
 </script>
 
 </body>
