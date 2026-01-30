@@ -169,7 +169,7 @@ const PRODUCTS = [
     "Manufactured and Marketed By:<br>" +
     "Trent Limited, Bombay House, 24, Homi Mody Street, Fort, Mumbai – 400001<br><br>" +
     "Country Of Origin : India"
-},
+  },
 
   /* ===================== ACCESSORIES ===================== */
 
