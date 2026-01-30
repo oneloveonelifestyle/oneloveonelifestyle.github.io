@@ -202,19 +202,19 @@ const PRODUCTS = [
     description:
       "Men’s Chronograph Stainless Steel Watch<br><br>" +
       "A bold, precision-engineered timepiece crafted for modern sophistication."
-  }
- {
-  id: "chronograph-watch",
+  },
+  {
+  id: "watch-2",
   category: "accessories",
   title: "Men’s Chronograph Stainless Steel Watch",
   price: "₹3,199",
-  images: ["chronograph-watch-1.jpg"],
+  images: ["watch-white-1.jpg"],
   stock: true,
-  search: "mens chronograph stainless steel watch",
+  search: "mens chronograph stainless steel watch white",
   description:
     "Men’s Chronograph Stainless Steel Watch<br><br>" +
-    "A bold, precision-engineered timepiece crafted for modern sophistication.<br><br>" +
-    "🚚 Free Shipping All Over India"
-}
+    "A bold, precision-engineered timepiece crafted for modern sophistication."
+},
+ 
 
 ];
