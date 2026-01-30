@@ -214,7 +214,6 @@ const PRODUCTS = [
   description:
     "Men’s Chronograph Stainless Steel Watch<br><br>" +
     "A bold, precision-engineered timepiece crafted for modern sophistication."
-},
+}
  
-
 ];
