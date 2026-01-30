@@ -93,7 +93,7 @@ const PRODUCTS = [
   {
     id: "jacket-3",
     category: "clothing",
-    title: "Studiofit Dark Brown Relaxed-Fit Hooded Jacket",
+    title: "Studiofit Dark Brown Hooded Jacket",
     price: "₹2,199",
     images: ["jacket3-1.jpg","jacket3-2.jpg","jacket3-3.jpg"],
     stock: true,
