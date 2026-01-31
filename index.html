@@ -392,22 +392,6 @@ document.querySelectorAll('.category-card')[0]
     e.preventDefault();
     handleSearch();
   }
-const styleVideo = document.getElementById("styleVideo");
-
-if(styleVideo){
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        styleVideo.muted = false;
-        styleVideo.play();
-      } else {
-        styleVideo.muted = true;
-      }
-    });
-  }, { threshold: 0.6 });
-
-  observer.observe(styleVideo);
-}
 });
 </script>
 
