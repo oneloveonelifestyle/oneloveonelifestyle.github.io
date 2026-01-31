@@ -423,7 +423,71 @@ soundBtn.addEventListener("click", async () => {
     soundBtn.textContent = "🔇";
   }
 });
-  const featuredProduct = products.find(p => p.id === "watch-1");
+  <script src="product.js"></script>
+
+<script>
+let index = 0;
+const slider = document.getElementById("heroSlider");
+const totalSlides = 3;
+
+setInterval(() => {
+  index = (index + 1) % totalSlides;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+}, 4000);
+
+let startX = 0;
+let endX = 0;
+
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend", e => {
+  endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) {
+    index = (index + 1) % totalSlides;
+  } else if (endX - startX > 50) {
+    index = (index - 1 + totalSlides) % totalSlides;
+  }
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+});
+
+document.querySelectorAll('.category-card')[0]
+  .addEventListener('click', () => {
+    window.location.href = 'clothing.html';
+  });
+
+function handleSearch(){
+  const input = document.querySelector(".search-wrap input");
+  const q = input.value.trim();
+  if(!q) return;
+  window.location.href = "search.html?q=" + encodeURIComponent(q);
+}
+
+document.querySelector(".search-wrap input")
+  .addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+      e.preventDefault();
+      handleSearch();
+    }
+  });
+
+const styleVideo = document.getElementById("styleVideo");
+const soundBtn = document.getElementById("videoSoundBtn");
+
+soundBtn.addEventListener("click", async () => {
+  if (styleVideo.muted) {
+    styleVideo.muted = false;
+    await styleVideo.play();
+    soundBtn.textContent = "🔊";
+  } else {
+    styleVideo.muted = true;
+    soundBtn.textContent = "🔇";
+  }
+});
+
+/* ✅ FEATURED PRODUCT (WORKING) */
+const featuredProduct = products.find(p => p.id === "watch-1");
 
 if (featuredProduct) {
   document.getElementById("featuredProduct").innerHTML = `
@@ -436,6 +500,5 @@ if (featuredProduct) {
   `;
 }
 </script>
-
 </body>
 </html>
