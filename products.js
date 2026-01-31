@@ -230,7 +230,7 @@ const PRODUCTS = [
   id: "watch-chronograph-black-head",
   category: "accessories",
   title: "Men’s Black Dial Chronograph Watch",
-  price: "₹3,199",
+  price: "₹3,199.00",
   images: ["watch-white-1.jpg"],
   stock: true,
   search: "mens black dial chronograph stainless steel watch watches",
