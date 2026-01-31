@@ -296,7 +296,7 @@ footer{
   <div class="section-title">Trending Now</div>
   <div class="product-slider">
     <div class="product-card" id="featuredWatch"></div>
-    <div class="product-card"><div class="product-img"></div>Hoodie<br><b>₹1499</b></div>
+    <div class="product-card" id="featuredShirt"></div>
     <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
   </div>
 
@@ -458,6 +458,29 @@ if (watch) {
   card.addEventListener("click", () => {
     localStorage.setItem("openProduct", "watch-1");
     window.location.href = "accessories.html";
+  });
+}
+</script>
+<script>
+const shirt = PRODUCTS.find(
+  p => p.id === "wes-casuals-sage-relaxed-fit-cotton-shirt"
+);
+
+if (shirt) {
+  const card = document.getElementById("featuredShirt");
+
+  card.innerHTML = `
+    <div class="product-img">
+      <img src="${shirt.images[0]}"
+        style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+    </div>
+    ${shirt.title}<br>
+    <b>${shirt.price}</b>
+  `;
+
+  card.addEventListener("click", () => {
+    localStorage.setItem("openProduct", shirt.id);
+    window.location.href = "clothing.html";
   });
 }
 </script>
