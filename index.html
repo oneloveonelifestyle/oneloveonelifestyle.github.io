@@ -305,19 +305,10 @@ footer{
   </div>
 
   <div class="style-banner">
-  <video
-    id="styleVideo"
-    src="style-video.mp4"
-    muted
-    autoplay
-    loop
-    playsinline
-    preload="auto">
-  </video>
-
-  <button id="videoSoundBtn">🔇</button>
+    <h3>Style That Fits Your Lifestyle</h3>
+    <p>Minimal designs crafted for everyday confidence</p>
   </div>
-    
+
   <div class="popular-strip">
     <div class="section-title">Popular Picks</div>
     <div class="product-slider">
@@ -388,24 +379,13 @@ document.querySelectorAll('.category-card')[0]
 
   window.location.href = "search.html?q=" + encodeURIComponent(q);
   }
-  document.querySelector(".search-wrap input")
-  .addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
-      e.preventDefault();
-      handleSearch();
-    }
-  });
-
-/* STYLE VIDEO AUDIO ON SCROLL */
-<script>
-const styleVideo = document.getElementById("styleVideo");
-const soundBtn = document.getElementById("videoSoundBtn");
-
-soundBtn.addEventListener("click", () => {
-  styleVideo.muted = !styleVideo.muted;
-  soundBtn.textContent = styleVideo.muted ? "🔇" : "🔊";
-  styleVideo.play();
+  document.querySelector(".search-wrap input").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault();
+    handleSearch();
+  }
 });
 </script>
+
 </body>
-</html>
+                                                           </html>
