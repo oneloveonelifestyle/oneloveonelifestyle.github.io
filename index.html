@@ -304,9 +304,34 @@ footer{
     <div>Easy Returns</div>
   </div>
 
-  <div class="style-banner">
-    <h3>Style That Fits Your Lifestyle</h3>
-    <p>Minimal designs crafted for everyday confidence</p>
+  <div class="style-banner" style="position:relative; padding:0;">
+  <video
+    id="styleVideo"
+    src="style-video.mp4"
+    muted
+    autoplay
+    loop
+    playsinline
+    preload="auto"
+    style="width:100%; border-radius:22px; display:block;">
+  </video>
+
+  <button id="videoSoundBtn"
+    style="
+      position:absolute;
+      bottom:14px;
+      right:14px;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:none;
+      background:rgba(0,0,0,0.55);
+      color:#fff;
+      font-size:18px;
+      cursor:pointer;
+    ">
+    🔇
+  </button>
   </div>
 
   <div class="popular-strip">
@@ -367,25 +392,68 @@ slider.addEventListener("touchend", e => {
 });
 
 /* ✅ ONLY ADDITION: MAKE CLOTHING CATEGORY WORK */
-document.querySelectorAll('.category-card')[0]
-  .addEventListener('click', () => {
-    window.location.href = 'clothing.html';
-  });
-  function handleSearch(){
+<script>
+/* HERO SLIDER */
+let index = 0;
+const slider = document.getElementById("heroSlider");
+const totalSlides = 3;
+
+setInterval(() => {
+  index = (index + 1) % totalSlides;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+}, 4000);
+
+/* TOUCH / SWIPE */
+let startX = 0;
+let endX = 0;
+
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend", e => {
+  endX = e.changedTouches[0].clientX;
+
+  if (startX - endX > 50) {
+    index = (index + 1) % totalSlides;
+  } else if (endX - startX > 50) {
+    index = (index - 1 + totalSlides) % totalSlides;
+  }
+
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+});
+
+/* CATEGORY CLICK */
+document.querySelectorAll('.category-card')[0].addEventListener('click', () => {
+  window.location.href = 'clothing.html';
+});
+
+/* SEARCH */
+function handleSearch() {
   const input = document.querySelector(".search-wrap input");
   const q = input.value.trim();
 
-  if(!q) return;
+  if (!q) return;
 
   window.location.href = "search.html?q=" + encodeURIComponent(q);
-  }
-  document.querySelector(".search-wrap input").addEventListener("keydown", function(e){
-  if(e.key === "Enter"){
+}
+
+document.querySelector(".search-wrap input").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
     e.preventDefault();
     handleSearch();
   }
 });
-</script>
 
-</body>
-  </html>
+/* VIDEO MUTE / UNMUTE */
+const styleVideo = document.getElementById("styleVideo");
+const soundBtn = document.getElementById("videoSoundBtn");
+
+if (styleVideo && soundBtn) {
+  soundBtn.addEventListener("click", () => {
+    styleVideo.muted = !styleVideo.muted;
+    soundBtn.textContent = styleVideo.muted ? "🔇" : "🔊";
+    styleVideo.play();
+  });
+}
+</script>
