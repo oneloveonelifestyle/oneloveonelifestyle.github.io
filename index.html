@@ -470,7 +470,7 @@ soundBtn.addEventListener("click", async () => {
 <script src="products.js"></script>
 
 <script>
-const watch = PRODUCTS.find(p => p.id === "watch-2");
+const watch = PRODUCTS.find(p => p.id === "watch-1");
 
 if (watch) {
   const card = document.getElementById("featuredWatch");
@@ -484,7 +484,7 @@ if (watch) {
   `;
 
   card.addEventListener("click", () => {
-    localStorage.setItem("openProduct", "watch-2");
+    localStorage.setItem("openProduct", "watch-1");
     window.location.href = "accessories.html";
   });
 }
