@@ -304,7 +304,7 @@ footer{
     <div>Easy Returns</div>
   </div>
 
-  <div class="style-banner">
+  <<div class="style-banner">
   <video
     id="styleVideo"
     src="style-video.mp4"
@@ -312,9 +312,10 @@ footer{
     muted
     loop
     playsinline
-    style="width:100%; border-radius:16px;">
+    style="width:100%; border-radius:16px; background:#000;">
   </video>
   </div>
+    
   <div class="popular-strip">
     <div class="section-title">Popular Picks</div>
     <div class="product-slider">
@@ -396,22 +397,18 @@ document.querySelectorAll('.category-card')[0]
 /* STYLE VIDEO AUDIO ON SCROLL */
 const styleVideo = document.getElementById("styleVideo");
 
-if (styleVideo) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          styleVideo.muted = false;
-          styleVideo.play();
-        } else {
-          styleVideo.muted = true;
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      styleVideo.muted = false;
+      styleVideo.play();
+    } else {
+      styleVideo.muted = true;
+    }
+  });
+}, { threshold: 0.6 });
 
-  observer.observe(styleVideo);
+observer.observe(styleVideo);
 }
 </script>
 
