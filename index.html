@@ -486,8 +486,11 @@ soundBtn.addEventListener("click", async () => {
   }
 });
 
-/* ✅ FEATURED PRODUCT (WORKING) */
-const featuredProduct = products.find(p => p.id === "watch-1");
+<script src="products.js"></script>
+
+<script>
+/* FEATURED PRODUCT — WATCH 1 ONLY */
+const featuredProduct = PRODUCTS.find(p => p.id === "watch-1");
 
 if (featuredProduct) {
   document.getElementById("featuredProduct").innerHTML = `
