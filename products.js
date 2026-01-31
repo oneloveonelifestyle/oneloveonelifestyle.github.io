@@ -212,7 +212,7 @@ const PRODUCTS = [
   stock: true,
   search: "mens automatic watch open heart stainless steel premium japanese movement",
   description:
-    "Men’s Gentleman Powermatic 80 Automatic Watch<br><br>" +
+    "Men’s Powermatic Automatic Watch<br><br>" +
     "Collection: 7AA Premium<br><br>" +
     "Movement: 100% Premium Automatic Japanese Machinery<br><br>" +
     "Display: 3-Hand Watch with Open Heart Dial<br><br>" +
