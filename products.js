@@ -230,6 +230,22 @@ const PRODUCTS = [
     "Crown: Tissot Branding<br><br>" +
     "Needles: Radium-Enabled for Low-Light Visibility"
 },
+  {
+  id: "necklace-silver-heart-chain",
+  category: "accessories",
+  title: "Silver Heart and Textured Chain Necklace",
+  price: "₹499",
+  images: ["silver-heart-1.jpg", "silver-heart-2.jpg"],
+  stock: true,
+  search: "silver heart textured chain necklace accessories",
+  description:
+    "Silver Heart and Textured Chain Necklace<br><br>" +
+    "Material: Alloy with Silver Finish<br><br>" +
+    "Style: Heart Pendant with Textured Chain<br><br>" +
+    "Care Instruction: Keep away from water and perfumes<br><br>" +
+    "Occasion: Casual & Party Wear<br><br>" +
+    "Country Of Origin: India"
+},
 {
   id: "watch-chronograph-black-head",
   category: "accessories",
