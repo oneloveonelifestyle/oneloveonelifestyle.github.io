@@ -305,21 +305,8 @@ footer{
   </div>
 
   <div class="style-banner">
-  <video
-    id="styleVideo"
-    src="style-video.mp4"
-    muted
-    autoplay
-    loop
-    playsinline
-    preload="auto"
-    style="width:100%; border-radius:16px;">
-  </video>
-
-  <button id="videoSoundBtn"
-    style="margin-top:12px; padding:8px 14px; border:none; border-radius:8px;">
-    🔇
-  </button>
+    <h3>Style That Fits Your Lifestyle</h3>
+    <p>Minimal designs crafted for everyday confidence</p>
   </div>
 
   <div class="popular-strip">
@@ -397,15 +384,8 @@ document.querySelectorAll('.category-card')[0]
     e.preventDefault();
     handleSearch();
   }
-    const styleVideo = document.getElementById("styleVideo");
-const soundBtn = document.getElementById("videoSoundBtn");
-
-soundBtn.addEventListener("click", () => {
-  styleVideo.muted = !styleVideo.muted;
-  soundBtn.textContent = styleVideo.muted ? "🔇" : "🔊";
-  styleVideo.play();
 });
 </script>
 
 </body>
-                                                           </html>
+  </html>
