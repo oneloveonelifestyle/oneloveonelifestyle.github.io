@@ -204,7 +204,7 @@ const PRODUCTS = [
       "A bold, precision-engineered timepiece crafted for modern sophistication."
   },
   {
-  id: "watch-1",
+  id: "watch-2",
   category: "accessories",
   title: "Men’s Powermatic Automatic Watch",
   price: "₹3,199",
