@@ -413,10 +413,15 @@ document.querySelectorAll('.category-card')[0]
   const styleVideo = document.getElementById("styleVideo");
 const soundBtn = document.getElementById("videoSoundBtn");
 
-soundBtn.addEventListener("click", () => {
-  styleVideo.muted = !styleVideo.muted;
-  soundBtn.textContent = styleVideo.muted ? "🔇" : "🔊";
-  styleVideo.play();
+soundBtn.addEventListener("click", async () => {
+  if (styleVideo.muted) {
+    styleVideo.muted = false;
+    await styleVideo.play();   // 👈 REQUIRED for audio
+    soundBtn.textContent = "🔊";
+  } else {
+    styleVideo.muted = true;
+    soundBtn.textContent = "🔇";
+  }
 });
 </script>
 
