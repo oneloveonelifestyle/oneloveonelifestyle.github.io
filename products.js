@@ -240,7 +240,6 @@ const PRODUCTS = [
   search: "silver heart textured chain necklace accessories",
   description:
     "Silver Heart and Textured Chain Necklace<br><br>" +
-    "Material: Alloy with Silver Finish<br><br>" +
     "Style: Heart Pendant with Textured Chain<br><br>" +
     "Care Instruction: Keep away from water and perfumes<br><br>" +
     "Occasion: Casual & Party Wear<br><br>" +
