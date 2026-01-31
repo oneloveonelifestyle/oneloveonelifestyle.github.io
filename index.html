@@ -311,7 +311,7 @@ footer{
   <div class="product-slider">
     <div class="product-card" id="featuredWatch"></div>
     <div class="product-card" id="featuredShirt"></div>
-    <div class="product-card"><div class="product-img"></div>Jacket<br><b>₹2199</b></div>
+    <div class="product-card" id="featuredSneaker"></div>
   </div>
 
   <div class="offer-zone">
@@ -495,6 +495,27 @@ if (shirt) {
   card.addEventListener("click", () => {
     localStorage.setItem("openProduct", shirt.id);
     window.location.href = "clothing.html";
+  });
+}
+</script>
+<script>
+const sneaker = PRODUCTS.find(p => p.id === "shoe-2");
+
+if (sneaker) {
+  const card = document.getElementById("featuredSneaker");
+
+  card.innerHTML = `
+    <div class="product-img">
+      <img src="${sneaker.images[0]}"
+        style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+    </div>
+    ${sneaker.title}<br>
+    <b>${sneaker.price}</b>
+  `;
+
+  card.addEventListener("click", () => {
+    localStorage.setItem("openProduct", sneaker.id);
+    window.location.href = "shoes.html";
   });
 }
 </script>
