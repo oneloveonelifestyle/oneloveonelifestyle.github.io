@@ -203,6 +203,29 @@ const PRODUCTS = [
       "Men’s Chronograph Stainless Steel Watch<br><br>" +
       "A bold, precision-engineered timepiece crafted for modern sophistication."
   },
+  {
+  id: "watch-1",
+  category: "accessories",
+  title: "Men’s Gentleman Powermatic 80 Automatic Watch",
+  price: "₹3,199",
+  images: ["style-video.jpg"],
+  stock: true,
+  search: "mens automatic watch open heart stainless steel premium japanese movement",
+  description:
+    "Men’s Gentleman Powermatic 80 Automatic Watch<br><br>" +
+    "Collection: 7AA Premium<br><br>" +
+    "Movement: 100% Premium Automatic Japanese Machinery<br><br>" +
+    "Display: 3-Hand Watch with Open Heart Dial<br><br>" +
+    "Case Size: 41mm<br><br>" +
+    "Weight: 126g<br><br>" +
+    "Glass: Mineral Crystal<br><br>" +
+    "Bracelet: Stainless Steel 3-Pink Bracelet<br><br>" +
+    "Clasp: Butterfly Clasp<br><br>" +
+    "Back Case: Open Transparent Mechanical View<br><br>" +
+    "Coating: IGP Colour Coating (No Fading, No Rusting)<br><br>" +
+    "Crown: Tissot Branding<br><br>" +
+    "Needles: Radium-Enabled for Low-Light Visibility"
+},
 {
   id: "watch-chronograph-black-head",
   category: "accessories",
