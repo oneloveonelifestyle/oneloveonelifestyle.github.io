@@ -234,7 +234,7 @@ const PRODUCTS = [
   id: "necklace-silver-heart-chain",
   category: "accessories",
   title: "Silver Heart and Textured Chain Necklace",
-  price: "₹499",
+  price: "₹499.00",
   images: ["silver-heart-1.jpg", "silver-heart-2.jpg"],
   stock: true,
   search: "silver heart textured chain necklace accessories",
