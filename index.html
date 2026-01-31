@@ -312,6 +312,7 @@ footer{
     muted
     loop
     playsinline
+    controls
     style="width:100%; border-radius:16px; background:#000;">
   </video>
   </div>
@@ -395,6 +396,7 @@ document.querySelectorAll('.category-card')[0]
   });
 
 /* STYLE VIDEO AUDIO ON SCROLL */
+<script>
 const styleVideo = document.getElementById("styleVideo");
 
 const observer = new IntersectionObserver(entries => {
@@ -409,7 +411,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 observer.observe(styleVideo);
-}
 </script>
 
 </body>
