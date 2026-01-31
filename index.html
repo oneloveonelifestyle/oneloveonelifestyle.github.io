@@ -431,13 +431,20 @@ soundBtn.addEventListener("click", async () => {
 const watch = PRODUCTS.find(p => p.id === "watch-1");
 
 if (watch) {
-  document.getElementById("featuredWatch").innerHTML = `
+  const card = document.getElementById("featuredWatch");
+
+  card.innerHTML = `
     <div class="product-img">
       <img src="${watch.images[0]}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
     </div>
     ${watch.title}<br>
     <b>${watch.price}</b>
   `;
+
+  card.addEventListener("click", () => {
+    localStorage.setItem("openProduct", "watch-1");
+    window.location.href = "accessories.html";
+  });
 }
 </script>
   
