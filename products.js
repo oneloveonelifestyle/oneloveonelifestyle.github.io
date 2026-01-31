@@ -10,7 +10,11 @@ const PRODUCTS = [
     images: ["shoe1-1.jpg","shoe1-2.jpg","shoe1-3.jpg"],
     stock: true,
     search: "mens brown suede sneakers leather lace up",
-    description: "Premium suede sneakers for everyday comfort."
+    description: "Men’s Brown Suede Sneakers<br><br>" +
+      "Size: 6, 7, 8, 9, 10<br><br>" +
+      "Material : Leather<br><br>" +
+      "Weight : 2kg<br><br>" +
+      "Lace-up."
   },
 
   {
