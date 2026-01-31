@@ -423,18 +423,18 @@ soundBtn.addEventListener("click", async () => {
     soundBtn.textContent = "🔇";
   }
 });
-  const featuredProduct = PRODUCTS.find(item => item.id === "watch-1");
+  const featuredProduct = products.find(p => p.id === "watch-1");
 
 if (featuredProduct) {
   document.getElementById("featuredProduct").innerHTML = `
     <div class="product-img">
-      <img src="${featuredProduct.images[0]}" 
-           style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+      <img src="${featuredProduct.images[0]}"
+        style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
     </div>
     ${featuredProduct.title}<br>
     <b>${featuredProduct.price}</b>
   `;
-  }
+}
 </script>
 
 </body>
