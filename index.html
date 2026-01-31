@@ -306,12 +306,16 @@ footer{
 
   <div class="style-banner">
   <video
-  id="styleVideo"
-  src="style-video.mp4"
-  muted
-  playsinline
-  controlslist="nodownload noplaybackrate nofullscreen">
+    id="styleVideo"
+    src="style-video.mp4"
+    muted
+    autoplay
+    loop
+    playsinline
+    preload="auto">
   </video>
+
+  <button id="videoSoundBtn">🔇</button>
   </div>
     
   <div class="popular-strip">
@@ -395,20 +399,13 @@ document.querySelectorAll('.category-card')[0]
 /* STYLE VIDEO AUDIO ON SCROLL */
 <script>
 const styleVideo = document.getElementById("styleVideo");
+const soundBtn = document.getElementById("videoSoundBtn");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      styleVideo.muted = false;
-      styleVideo.play();
-    } else {
-      styleVideo.muted = true;
-    }
-  });
-}, { threshold: 0.6 });
-
-observer.observe(styleVideo);
+soundBtn.addEventListener("click", () => {
+  styleVideo.muted = !styleVideo.muted;
+  soundBtn.textContent = styleVideo.muted ? "🔇" : "🔊";
+  styleVideo.play();
+});
 </script>
-
 </body>
 </html>
