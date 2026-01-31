@@ -206,13 +206,13 @@ const PRODUCTS = [
   {
   id: "watch-1",
   category: "accessories",
-  title: "Men’s Gentleman Powermatic 80 Automatic Watch",
+  title: "Men’s Powermatic Automatic Watch",
   price: "₹3,199",
   images: ["style-video.jpg"],
   stock: true,
   search: "mens automatic watch open heart stainless steel premium japanese movement",
   description:
-    "Men’s Powermatic Automatic Watch<br><br>" +
+    "Men’s Gentleman Powermatic 80 Automatic Watch<br><br>" +
     "Collection: 7AA Premium<br><br>" +
     "Movement: 100% Premium Automatic Japanese Machinery<br><br>" +
     "Display: 3-Hand Watch with Open Heart Dial<br><br>" +
